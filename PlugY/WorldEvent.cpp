@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	World Event Management.
 
@@ -231,40 +232,44 @@ void Install_WorldEvent()
 	log_msg("Patch D2Game for active World Event. (WorldEvent)\n");
 
 	// spawn DClone
-	mem_seek R7(D2Game, 0000, 0000, 3F720, 4BCB1, ECF10, 41570, 25280);
+	mem_seek R7(D2Game, 0000, 0000, 3F720, 4BCB1, ECF10, 41570, 25280, CFBD0);
 	MEMC_REF4( V2SpawnMonster , version_D2Game >= V111b ? (DWORD)caller_spawnDClone_111b : version_D2Game == V111 ? (DWORD)caller_spawnDClone_111 : (DWORD)spawnDClone);
 	//6FC6F71F  |. E8 FCFAFFFF    CALL D2Game.6FC6F220
 	//01FCBCB0  |. E8 2BEFFFFF    CALL D2Game.01FCABE0                     ; \D2Game.01FCABE0
 	//0205CF0F  |. E8 CCF8FFFF    CALL D2Game.0205C7E0                     ; \D2Game.0205C7E0
 	//6FC6156F  |. E8 1CF6FFFF    CALL D2Game.6FC60B90                     ; \D2Game.6FC60B90
 	//6FC4527F  |. E8 CCF6FFFF    CALL D2Game.6FC44950                     ; \D2Game.6FC44950
+	//6FCEFBCF  |. E8 4CE2FFFF    CALL D2Game.6FCEDE20                     ; \D2Game.6FCEDE20
 
 	// verify if the item sold is a trigger of WE
-	mem_seek R7(D2Game, 0000, 0000, 977D0, 8E799, 92859, 84499, BFB29);
+	mem_seek R7(D2Game, 0000, 0000, 977D0, 8E799, 92859, 84499, BFB29, 72BE9);
 	MEMJ_REF4( D2TestFlags , verifIfWEItem);
 	//6FCC77CF  |. E8 32400500    CALL <JMP.&D2Common.#10707>
 	//0200E798  |. E8 E9BDF7FF    CALL <JMP.&D2Common.#10911>
 	//02002858  |. E8 E57DF7FF    CALL <JMP.&D2Common.#10303>
 	//6FCA4498  |. E8 3B62F8FF    CALL <JMP.&D2Common.#10989>
 	//6FCDFB28  |. E8 77ADF4FF    CALL <JMP.&D2Common.#10202>
+	//6FC92BE8  |. E8 DD7AF9FF    CALL <JMP.&D2Common.#10458>
 
 	// management of the WorldEvent
-	mem_seek R7(D2Game, 0000, 0000, 3CE0, 51F01, C5681, EBF41, 4A791);
+	mem_seek R7(D2Game, 0000, 0000, 3CE0, 51F01, C5681, EBF41, 4A791, E5F51);
 	MEMC_REF4( V2GetGameByClientID , version_D2Game >= V111 ? (DWORD)WEManagement : (DWORD)caller_WEManagement_1XX);
 	//6FC33CDF   . E8 FC570000    CALL D2Game.6FC394E0
 	//01FD1F00  |. E8 1BE60800    CALL D2Game.02060520
 	//02035680  |. E8 1BF30100    CALL D2Game.020549A0
 	//6FD0BF40  |. E8 1BA4FBFF    CALL D2Game.6FCC6360
 	//6FC6A790  |. E8 4B03FEFF    CALL D2Game.6FC4AAE0
+	//6FD05F50  |. E8 AB67FDFF    CALL D2Game.6FCDC700
 
 	// add client for the WorldEvent
-	mem_seek R7(D2Game, 0000, 0000, 1AEF, 3786A, 7055A, 6265F, CB0BF);
+	mem_seek R7(D2Game, 0000, 0000, 1AEF, 3786A, 7055A, 6265F, CB0BF, D556F);
 	MEMC_REF4( D2AddClient , version_D2Game >= V111 ? caller_addClientForWE_111 : caller_addClientForWE);
 	//6FC31AEE  |. E8 6D510000    CALL D2Game.6FC36C60
 	//01FB7869  |. E8 32C50A00    CALL D2Game.02063DA0
 	//01FE0559  |. E8 B27C0700    CALL D2Game.02058210
 	//6FC8265E  |. E8 FD890800    CALL D2Game.6FD0B060
 	//6FCEB0BE  |. E8 6DE8F7FF    CALL D2Game.6FC69930
+	//6FCF556E  |. E8 FDFA0000    CALL D2Game.6FD05070
 
 	log_msg("\n");
 

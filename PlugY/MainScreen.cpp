@@ -1,5 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
+
 
   Add "plugY v1.00" on screen.
 
@@ -46,7 +48,7 @@ void Install_PrintPlugYVersion()
 	log_msg("Patch D2Launch to print PlugY version. (PrintPlugYVersion)\n");
 
 	// Print PlugY version.
-	mem_seek R7(D2Launch, 7F5D, 7F7D, 9639, 117C7, 178A7, 16AF7, 18061);
+	mem_seek R7(D2Launch, 7F5D, 7F7D, 9639, 117C7, 178A7, 16AF7, 18061, 10A11);
 	MEMJ_REF4( D2CreateTextBox, caller_printPlugYVersion);
 	//6FA19638  |. E8 1BED0000    CALL <JMP.&D2Win.#10017>
 	//6FA517C6  |. E8 6F81FFFF    CALL <JMP.&D2Win.#10147>
@@ -54,6 +56,7 @@ void Install_PrintPlugYVersion()
 	//6FA56B1F  |. E8 1A2EFFFF    CALL <JMP.&D2Win.#10098>
 	//6FA56AF6  |. E8 432EFFFF    CALL <JMP.&D2Win.#10098>
 	//6FA58060  |. E8 ED18FFFF    CALL <JMP.&D2Win.#10098>
+	//6FA50A10  |. E8 218FFFFF    CALL <JMP.&D2Win.#10164>
 
 
 	log_msg("\n");
@@ -91,7 +94,7 @@ void Install_VersionChange()// BUG WITH 2MOD if D2Mod started before PlugY ????
 	// Print LoD/Mod version.
 	if (version_D2Launch >= V110)
 	{
-		mem_seek R7(D2Launch, 00000, 00000, 9723, 1189B, 1797B, 16BCB, 18134);//6FA19721-6FA10000
+		mem_seek R7(D2Launch, 00000, 00000, 9723, 1189B, 1797B, 16BCB, 18134, 10AE4);//6FA19721-6FA10000
 		memt_byte( 0x8D, 0xE8 );	// CALL
 		MEMT_REF4( 0x8B102454 , caller_VersionChange_10);
 		memt_byte( 0xCF, 0x90 );	// NOP
@@ -105,14 +108,17 @@ void Install_VersionChange()// BUG WITH 2MOD if D2Mod started before PlugY ????
 		//6FA56BCF  |. 8BCF           MOV ECX,EDI
 		//6FA58134  |. 8D5424 10      LEA EDX,DWORD PTR SS:[ESP+10]
 		//6FA58138  |. 8BCF           MOV ECX,EDI
+		//6FA50AE4  |. 8D5424 10      LEA EDX,DWORD PTR SS:[ESP+10]
+		//6FA50AE8  |. 8BCF           MOV ECX,EDI
 	} else {
-		mem_seek R7(D2Launch, 801B, 803B, 972A, 118A2, 17982, 16BD2, 1813B);
+		mem_seek R7(D2Launch, 801B, 803B, 972A, 118A2, 17982, 16BD2, 1813B, 10AEB);
 		MEMJ_REF4( D2PrintLineOnTextBox, versionChange);
 		//6FA19729  |. E8 88EB0000    CALL <JMP.&D2Win.#10046>
 		//6FA518A1  |. E8 267FFFFF    CALL <JMP.&D2Win.#10061>
 		//6FA57981  |. E8 781EFFFF    CALL <JMP.&D2Win.#10075>
 		//6FA56BD1  |. E8 EA2CFFFF    CALL <JMP.&D2Win.#10015>
 		//6FA5813A  |. E8 8F17FFFF    CALL <JMP.&D2Win.#10022>
+		//6FA50AEA  |. E8 DF8CFFFF    CALL <JMP.&D2Win.#10051>
 	}
 	log_msg("\n");
 

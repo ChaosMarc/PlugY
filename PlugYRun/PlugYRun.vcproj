@@ -174,7 +174,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(TargetPath) &quot;..\PlugYInstaller\PlugY.exe&quot;"
+				CommandLine="copy $(TargetPath) &quot;..\PlugYInstaller\PlugY.exe&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;D:\Games\Diablo II\Mod PlugY\PlugY.exe&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -189,6 +189,14 @@
 				RelativePath="PlugYRun.cpp"
 				>
 			</File>
+			<Filter
+				Name="Commons"
+				>
+				<File
+					RelativePath="..\Commons\VersionInfo.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -198,6 +206,14 @@
 				RelativePath="resource.h"
 				>
 			</File>
+			<Filter
+				Name="Commons"
+				>
+				<File
+					RelativePath="..\Commons\VersionInfo.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

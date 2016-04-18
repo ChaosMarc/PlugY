@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	More little options.
 
@@ -26,7 +27,9 @@ void STDCALL displayItemlevel(LPWSTR popup, Unit* ptItem)
 {
 	if (onRealm && (selectModParam==MOD_NO)) return;
 	WCHAR text[0x50];
-	swprintf(text, L"Item Level: %u\n", D2GetItemLevel(ptItem));
+	//swprintf(text, L"Item Level: %u\n", D2GetItemLevel(ptItem));
+	swprintf(text, getTranslatedString(STR_ITEM_LEVEL), D2GetItemLevel(ptItem));
+	wcscat(text,L"\n");
 	D2SetColorPopup(text,WHITE);
 	wcscat(popup,text);
 }
@@ -139,17 +142,18 @@ void Install_DisplayItemLevel()
 	log_msg("Patch D2Client for display item popup. (DisplayPopup)\n");
 
 	// print the text in the final buffer
-	mem_seek R7(D2Client,	3D47C,	3D47C,	438A1, ADD0A, 789DA, AE0AA, 941C0);
+	mem_seek R7(D2Client,	3D47C,	3D47C,	438A1, ADD0A, 789DA, AE0AA, 941C0, 98590);
 	memt_byte( 0x68 , 0xE8);
-	MEMT_REF4( 0x100, version_D2Client >= V113 ? caller_displayItemlevel_113 : version_D2Client >= V111 ? caller_displayItemlevel_111 : version_D2Client == V110 ? caller_displayItemlevel : caller_displayItemlevel_9);
+	MEMT_REF4( 0x100, version_D2Client >= V113c ? caller_displayItemlevel_113 : version_D2Client >= V111 ? caller_displayItemlevel_111 : version_D2Client == V110 ? caller_displayItemlevel : caller_displayItemlevel_9);
 	//6FAE38A1   . 68 00010000        PUSH 100
 	//6FB5DD0A  |. 68 00010000        PUSH 100
 	//6FB289DA  |. 68 00010000	      PUSH 100
 	//6FB5E0AA  |. 68 00010000    PUSH 100
 	//6FB441C0  |. 68 00010000    PUSH 100
+	//6FB48590  |. 68 00010000    PUSH 100
 
 	// print the text in the final buffer (for set items)
-	mem_seek R7(D2Client,	3C452,	3C452,	427BE, AC773, 77773, ACEB3, 92FE3);
+	mem_seek R7(D2Client,	3C452,	3C452,	427BE, AC773, 77773, ACEB3, 92FE3, 973B3);
 	memt_byte( 0x68 , 0xE8);
 	MEMT_REF4( 0x100, version_D2Client >= V111  ? caller_displayItemlevelSet_111 : version_D2Client == V110 ? caller_displayItemlevelSet : caller_displayItemlevelSet_9);
 	//6FAE27BE   . 68 00010000        PUSH 100
@@ -157,6 +161,7 @@ void Install_DisplayItemLevel()
 	//6FB27773  |. 68 00010000        PUSH 100
 	//6FB5CEB3  |. 68 00010000    PUSH 100
 	//6FB42FE3  |. 68 00010000    PUSH 100
+	//6FB473B3  |. 68 00010000    PUSH 100
 
 	log_msg("\n");
 
@@ -208,12 +213,12 @@ void Install_SendPlayersCommand()
 
 	log_msg("Patch D2Client for init default nb /players. (SendPlayersCommand)\n");
 
-	infoEnabledSendPlayersCommand = (DWORD*)R7(D2Client, 111D60, 110BC0, 107960, 11BFBC, 11C2AC, 11BFF8, 11C394);
+	infoEnabledSendPlayersCommand = (DWORD*)R7(D2Client, 111D60, 110BC0, 107960, 11BFBC, 11C2AC, 11BFF8, 11C394, 11D1DC);
 	if ( version_D2Client >= V110 )
-		msgNBPlayersString = (char*)R7(D2Client, 0000, 0000, D8448, D06A8, D4748, D4680, D4E00);
+		msgNBPlayersString = (char*)R7(D2Client, 0000, 0000, D8448, D06A8, D4748, D4680, D4E00, D470C);
 
 	// Set nb Player to default
-	mem_seek R7(D2Client,	8723B, 865BB, 81B8B, A3602, 66A02, 90162, C39F2);//6FB1C7B7-6FAA0000
+	mem_seek R7(D2Client,	8723B, 865BB, 81B8B, A3602, 66A02, 90162, C39F2, 1D3F2);//6FB1C7B7-6FAA0000
 	MEMJ_REF4( D2GetResolution , caller_SendPlayersCommand);
 	//6FB2723A  |. E8 7D8E0300    CALL <JMP.&D2gfx.#10005>
 	//6FB265BA  |. E8 7D8E0300    CALL <JMP.&D2gfx.#10005>
@@ -222,6 +227,7 @@ void Install_SendPlayersCommand()
 	//6FB16A01  |. E8 AA65FAFF    CALL <JMP.&D2gfx.#10063>
 	//6FB40161  |. E8 1ECFF7FF    CALL <JMP.&D2gfx.#10043>
 	//6FB739F1  |. E8 B896F4FF    CALL <JMP.&D2gfx.#10031>
+	//6FACD3F1  |. E8 EAFBFEFF    CALL <JMP.&D2gfx.#10012>
 
 	log_msg("\n");
 
@@ -239,13 +245,14 @@ void Install_AlwaysRegenMapInSP()
 	log_msg("Patch D2Game for always regenerate maps in Single player. (AlwaysRegenMapInSP)\n");
 
 	// Always regenerate maps in Single player
-	mem_seek R7(D2Game,	517ED,	51BFA,	5DE88, 6235D, 2966D, 1E1FE, ED3BE);
+	mem_seek R7(D2Game,	517ED,	51BFA,	5DE88, 6235D, 2966D, 1E1FE, ED3BE, 26D7E);
 	memt_byte( 0x74 , 0xEB);		// JMP SHORT D2Game.01FE2368
 	//6FC8DE88  |. 74 09          JE SHORT D2Game.6FC8DE93
 	//01FE235D  |. 74 09		  JE SHORT D2Game.01FE2368
 	//01F9966D  |. 74 09          JE SHORT D2Game.01F99678
 	//6FC3E1FE  |. 74 09          JE SHORT D2Game.6FC3E209
 	//6FD0D3BE  |. 74 09          JE SHORT D2Game.6FD0D3C9
+	//6FC46D7E  |. 74 09          JE SHORT D2Game.6FC46D89
 
 	log_msg("\n");
 
@@ -262,11 +269,12 @@ void Install_RunLODs()
 	log_msg("Patch D2gfx for launch any number of Diablo II game in the same computer. (RunLODs)\n");
 
 	// execute if it's our packet else continue
-	mem_seek R7(D2gfx, 447C, 447C, 446A, 84CF, 84AF, 894F, 85BF);
+	mem_seek R7(D2gfx, 447C, 447C, 446A, 84CF, 84AF, 894F, 85BF, B6B0);
 	memt_byte( 0x74, 0xEB );	// JMP SHORT D2gfx.6FA884F6
 	//6FA884AF  |. 74 45          JE SHORT D2gfx.6FA884F6
 	//6FA8894F  |. 74 45          JE SHORT D2gfx.6FA88996
 	//6FA885BF  |. 74 45          JE SHORT D2gfx.6FA88606
+	//6FA8B6B0  |. 74 45          JE SHORT D2gfx.6FA8B6F7
 
 	log_msg("\n");
 
@@ -381,9 +389,9 @@ void Install_AlwaysDisplayLifeMana()
 
 	log_msg("Patch D2Client for always display life and mana. (ALwaysPrintLifeMana)\n");
 
-	if ( version_D2Client >= V113 )
+	if ( version_D2Client >= V113c )
 	{
-		mem_seek R7(D2Client, 0000, 0000, 0000, 0000, 0000, 0000, 2764A);
+		mem_seek R7(D2Client, 0000, 0000, 0000, 0000, 0000, 0000, 2764A, 6D6FA);
 		memt_byte( 0x0F , 0x90);
 		memt_byte( 0x8C , 0xE8);
 		MEMT_REF4( 0x000000BC, caller_AlwaysDisplayLife_113);
@@ -393,10 +401,13 @@ void Install_AlwaysDisplayLifeMana()
 		//6FAD7659  |. A1 4CBCB86F    MOV EAX,DWORD PTR DS:[6FB8BC4C]
 
 		//6FAD7667  |. 0F8C A4000000  JL D2Client.6FAD7711
+		//--
+		//6FB1D717  |. 0F8C A4000000  JL D2Client.6FB1D7C1
+
 
 	} else {
 		// Always display life.
-		mem_seek R7(D2Client, 58B32, 58B32, 5F102, 2D713, B5DF3, 81733, 0000);
+		mem_seek R7(D2Client, 58B32, 58B32, 5F102, 2D713, B5DF3, 81733, 0000, 0000);
 		memt_byte( 0xA1 , 0xE8);
 		MEMT_REF4( ptResolutionY , version_D2Client >= V111 ? caller_AlwaysDisplayLife_111 : caller_AlwaysDisplayLife);
 		//6FADD713  |. A1 605CBA6F    MOV EAX,DWORD PTR DS:[6FBA5C60]
@@ -406,13 +417,13 @@ void Install_AlwaysDisplayLifeMana()
 
 
 	// Always display mana.
-	if ( version_D2Client >= V113 )
+	if ( version_D2Client >= V113c )
 	{
 		//mem_seek R7(D2Client, 0000, 0000, 0000, 0000, 0000, 0000, 27711);
 		//memt_byte( 0x8B , 0x90);
 		//memt_byte( 0x0D , 0xE8);
 		//MEMT_REF4( offset_D2Client + 0x11C4B4 , caller_AlwaysDisplayMana_113);
-		mem_seek R7(D2Client, 0000, 0000, 0000, 0000, 0000, 0000, 2770C);
+		mem_seek R7(D2Client, 0000, 0000, 0000, 0000, 0000, 0000, 2770C, 6D7BC);
 		memt_byte( 0xA1 , 0xE8);
 		MEMT_REF4( ptResolutionY , caller_AlwaysDisplayMana_113);
 		//6FAD770C  |> A1 4CBCB86F    MOV EAX,DWORD PTR DS:[6FB8BC4C]
@@ -426,10 +437,12 @@ void Install_AlwaysDisplayLifeMana()
 		//6FAD77CA  |. 5B             POP EBX
 		//6FAD77CB  |. 81C4 28030000  ADD ESP,328
 		//6FAD77D1  \. C3             RETN
+		//--
+		//6FB1D7BC  |> A1 3870BA6F    MOV EAX,DWORD PTR DS:[6FB8BC4C]
 	}
 	else if ( version_D2Client >= V110 )
 	{
-		mem_seek R7(D2Client, 0000, 0000, 5F1E6, 2D7FB, B5EDB, 8181B, 0000);
+		mem_seek R7(D2Client, 0000, 0000, 5F1E6, 2D7FB, B5EDB, 8181B, 0000, 0000);
 		memt_byte( 0x5F , 0xE8);
 		MEMT_REF4( 0x815B5D5E , caller_AlwaysDisplayMana);
 		memt_byte( 0xC4 , 0x90);	// NOP
@@ -454,7 +467,7 @@ void Install_AlwaysDisplayLifeMana()
 		//6FB3181F  |. 81C4 5C020000  ADD ESP,25C
 		//6FB31825  |. C3             RETN
 	} else {
-		mem_seek R7(D2Client, 58C09, 58C09, 0000, 0000, 0000, 0000, 0000);
+		mem_seek R7(D2Client, 58C09, 58C09, 0000, 0000, 0000, 0000, 0000, 0000);
 		memt_byte( 0xE9 , 0xE8);
 		MEMT_REF4( 0x000000C2 , caller_AlwaysDisplayMana_9);
 		//6FAF8C09   . E9 C2000000    JMP D2Client.6FAF8CD0
@@ -539,23 +552,25 @@ void Install_DisplayBaseStatsValue()
 	log_msg("Patch D2Client for display base stats value. (DisplayBaseStatsValue)\n");
 
 	// Always print stat button images.
-	mem_seek R7(D2Client, 29B12, 29B02, 30073, 82BBA, 8963A, 6B59A, BD1B5);
+	mem_seek R7(D2Client, 29B12, 29B02, 30073, 82BBA, 8963A, 6B59A, BD1B5, BF955);
 	memt_byte( 0x8B, 0xEB );	// JMP SHORT D2Client.6FAD0088
-	memt_byte( 0x4C, V7(D2Client, 12, 12, 13, 13, 13, 13, 13) );
+	memt_byte( 0x4C, V7(D2Client, 12, 12, 13, 13, 13, 13, 13, 13) );
 	memt_byte( 0x24, 0x90 );	// NOP
-	memt_byte( V7(D2Client, 20, 20, 14, 1C, 1C, 1C, 1C), 0x90 );			// NOP (V109d:0x20 , V110:0x14
+	memt_byte( V7(D2Client, 20, 20, 14, 1C, 1C, 1C, 1C, 1C), 0x90 );			// NOP (V109d:0x20 , V110:0x14
 	//6FAD0073     8B4C24 14         MOV ECX,DWORD PTR SS:[ESP+14]
 	//6FB32BBA   > 8B4C24 1C         MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB3963A   > 8B4C24 1C         MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB1B59A   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB6D1B5  |> 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
+	//6FB6F955  |> 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 
-	mem_seek R7(D2Client, 29B9D, 29B8D, 300FD, 82C54, 896D4, 6B637, BD23E);
+	mem_seek R7(D2Client, 29B9D, 29B8D, 300FD, 82C54, 896D4, 6B637, BD23E, BF9DE);
 	MEMJ_REF4( D2PrintImage, caller_displayBaseStatsValue);
 	//6FB32C53   . E8 82A3F8FF    CALL <JMP.&D2gfx.#10047>
 	//6FB396D3   . E8 D238F8FF    CALL <JMP.&D2gfx.#10044>
 	//6FB1B636   . E8 431AFAFF    CALL <JMP.&D2gfx.#10024>
 	//6FB6D23D  |. E8 54FEF4FF    |CALL <JMP.&D2gfx.#10041>
+	//6FB6F9DD  |. E8 54FEF4FF    |CALL <JMP.&D2gfx.#10042>
 
 	log_msg("\n");
 
@@ -583,13 +598,14 @@ void Install_LadderRunewords()
 
 	log_msg("Patch D2Common for enabled the ladder only runewords. (LadderRunewords)\n");
 
-	mem_seek R7(D2Common, 0000, 0000, 1E965, 61762, 43A72, 5D492, 724B2);
+	mem_seek R7(D2Common, 0000, 0000, 1E965, 61762, 43A72, 5D492, 724B2, 63782);
 	MEMC_REF4( D2CompileTxtFile, compileRunesTxt);
 	//01B6E964  |. E8 0714FFFF    CALL D2Common.#10578                     ; \#10578
 	//6FDB1761  |. E8 FAA8FCFF    CALL D2Common.#10653                     ; \#10653
 	//6FD93A71  |. E8 EAADFCFF    CALL D2Common.#10496                     ; \#10496
 	//6FDAD491  |. E8 BA49FEFF    CALL D2Common.#10244                     ; \#10244
 	//6FDC24B1  |. E8 8ACAFEFF    CALL D2Common.#10849                     ; \#10849
+	//6FDB3781  |. E8 5A93FAFF    CALL D2Common.#10037                     ; \#10037
 
 	log_msg("\n");
 
@@ -607,7 +623,7 @@ void Install_EnabledCowPortalWhenCowKingWasKill()
 
 	log_msg("Patch D2Game for enabled the opening of Cow Portal when player have already kill the cow king in that difficulty. (EnabledCowPortalWhenCowKingWasKill)\n");
 
-	mem_seek R7(D2Game, 5DFF7, 5E457, 6C5E7 , B1278, 5DB68, 75C68, 67508);
+	mem_seek R7(D2Game, 5DFF7, 5E457, 6C5E7 , B1278, 5DB68, 75C68, 67508, EBE8);
 	memt_byte( 0x85 , 0x33); // XOR EAX,EAX
 	//6FC8DFF7   . 85C0           TEST EAX,EAX
 	//6FC8E457   . 85C0           TEST EAX,EAX
@@ -616,6 +632,7 @@ void Install_EnabledCowPortalWhenCowKingWasKill()
 	//01FEDB68  |. 85C0           TEST EAX,EAX
 	//6FC95C68  |. 85C0           TEST EAX,EAX
 	//6FC87508  |. 85C0           TEST EAX,EAX
+	//6FC2EBE8  |. 85C0           TEST EAX,EAX
 
 	log_msg("\n");
 

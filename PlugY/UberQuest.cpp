@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Uber Quest Management.
 
@@ -327,42 +328,45 @@ void Install_UberQuest()
 	DWORD oldProtection;
 
 	// open Red Portal
-	VirtualProtect((LPVOID)R7(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0), 8, PAGE_EXECUTE_READWRITE, &oldProtection);
-	mem_seek R7(D2Game, 0000, 0000, 0000, FA480, FA7B8, FA228, FA5F0);
+	VirtualProtect((LPVOID)R7(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0, FA2C4), 8, PAGE_EXECUTE_READWRITE, &oldProtection);
+	mem_seek R7(D2Game, 0000, 0000, 0000, FA480, FA7B8, FA228, FA5F0, FA2C4);
 	MEMT_DWORD( D2OpenPandPortal , openPandPortal);
 	MEMT_DWORD( D2OpenPandFinalPortal , openPandFinalPortal);
 	//0201E357  |. FFD0           |CALL EAX
 	//01FA77E7  |. FFD0           |CALL EAX
 	//6FCF3CC7  |. FFD0           |CALL EAX
 	//6FC92437  |. FFD0           |CALL EAX
-	VirtualProtect((LPVOID)R7(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0), 8, oldProtection, &oldProtection);
+	//6FCB7127  |. FFD0           |CALL EAX
+	VirtualProtect((LPVOID)R7(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0, FA2C4), 8, oldProtection, &oldProtection);
 
 
 	// manage uberIA (fct table at 0209E7E8)
-	VirtualProtect((LPVOID)(R7(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788) + 145*0x10), 0x30, PAGE_EXECUTE_READWRITE, &oldProtection);
-	mem_seek R7(D2Game, 0000, 0000, 0000, 10F100, 10F5E8, 10F870, 10F0A0);
+	VirtualProtect((LPVOID)(R7(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788, 10ED00) + 145*0x10), 0x30, PAGE_EXECUTE_READWRITE, &oldProtection);
+	mem_seek R7(D2Game, 0000, 0000, 0000, 10F100, 10F5E8, 10F870, 10F0A0, 10F618);
 	MEMT_DWORD( D2UberBaalIA , uberBaalIA);
-	mem_seek R7(D2Game, 0000, 0000, 0000, 10F110, 10F5F8, 10F880, 10F0B0);
+	mem_seek R7(D2Game, 0000, 0000, 0000, 10F110, 10F5F8, 10F880, 10F0B0, 10F628);
 	MEMT_DWORD( D2UberMephIA , uberMephIA);
-	mem_seek R7(D2Game, 0000, 0000, 0000, 10F120, 10F608, 10F890, 10F0C0);
+	mem_seek R7(D2Game, 0000, 0000, 0000, 10F120, 10F608, 10F890, 10F0C0, 10F638);
 	MEMT_DWORD( D2UberDiabloIA , uberDiabloIA);
-	VirtualProtect((LPVOID)(R7(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788) + 145*0x10), 0x30, oldProtection, &oldProtection);
+	VirtualProtect((LPVOID)(R7(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788, 10ED00) + 145*0x10), 0x30, oldProtection, &oldProtection);
 	//0202ADA7  |> B8 E8E70902    MOV EAX,D2Game.0209E7E8
 	//01FD2BE7  |> B8 D0EC0702    MOV EAX,D2Game.0207ECD0
 	//6FC3B597  |> B8 58EFD26F    MOV EAX,D2Game.6FD2EF58
 	//6FCBD157  |> B8 88E7D26F    MOV EAX,D2Game.6FD2E788
+	//6FC5C617  |> B8 00EDD26F    MOV EAX,D2Game.6FD2ED00
 
 	// spawn Uber
 //	mem_seek R7(D2Game, 0000, 0000, 0000, 98DAD, 0000, 0000, 0000);
 //	MEMJ_REF4( D2WarpPlayer , spawnUber);
 	//02028DAC  |. E8 491CF7FF    CALL <JMP.&D2Common.#10872>
 
-	mem_seek R7(D2Game, 0000, 0000, 0000, E26E2, E6B52, A850B, 2CCAB);
+	mem_seek R7(D2Game, 0000, 0000, 0000, E26E2, E6B52, A850B, 2CCAB, BE9AB);
 	MEMC_REF4( D2Game235C0 , spawnUber);
 	//020726E1  |. E8 2A46FFFF    ||CALL D2Game.02066D10
 	//02056B51  |. E8 6ACAF3FF    ||CALL D2Game.01F935C0
 	//6FCC850A  |. E8 014FF6FF    ||CALL D2Game.6FC2D410
 	//6FC4CCAA  |. E8 3134FFFF    ||CALL D2Game.6FC400E0
+	//6FCDE9AA  |. E8 D1AFF9FF    ||CALL D2Game.6FC79980
 
 	log_msg("\n");
 

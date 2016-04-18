@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Updating server.
 
@@ -100,7 +101,7 @@ void Install_UpdateServer()
 	log_msg("Patch D2Game for received button click message. (UpdateServer)\n");
 
 	// manage button click message from Client.
-	mem_seek R7(D2Game, 4A702, 4AAC2, 56EA2, 54AE3, 2C773, 975C3, CC983);
+	mem_seek R7(D2Game, 4A702, 4AAC2, 56EA2, 54AE3, 2C773, 975C3, CC983, 676C3);
 	if (version_D2Game >= V111) {
 		memt_byte( 0xC1, 0x57 );	// PUSH EDI
 		memt_byte( 0xEE, 0xE8 );	// CALL caller_handleServerUpdate

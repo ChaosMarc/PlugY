@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Changing the current save path.
 
@@ -123,7 +124,7 @@ void Install_ChangingSavePath()
 	if (version_Fog >= V111)
 	{
 		// Appel de notre fct d'ajout d'un sous-répertoire
-		mem_seek R7(Fog, 000, 000, 000, 185F6, 1C106, 1F086, 17F86);
+		mem_seek R7(Fog, 000, 000, 000, 185F6, 1C106, 1F086, 17F86, 1E146);
 		memt_byte( 0x83 ,0xE8);				// CALL changeSavePath
 		MEMT_REF4( 0x0575FFF8, changeSavePath_111);
 		//6FF685F6   . 83F8 FF        CMP EAX,-1
@@ -134,18 +135,21 @@ void Install_ChangingSavePath()
 		//6FF6F089   . 75 05          JNZ SHORT Fog.6FF6F090
 		//6FF67F86   . 83F8 FF        CMP EAX,-1
 		//6FF67F89   . 75 05          JNZ SHORT Fog.6FF67F90
+		//6FF6E146   . 83F8 FF        CMP EAX,-1
+		//6FF6E149   . 75 05          JNZ SHORT Fog.6FF50F64
 
 		// Pour créer le bon chemin de sauvegarde
-		mem_seek R7(Fog, 000, 000, 000, 18616, 1C126, 1F0A6, 17FA6);
+		mem_seek R7(Fog, 000, 000, 000, 18616, 1C126, 1F0A6, 17FA6, 1E166);
 		MEMJ_REF4( D2Storm503, forCreateSavePath);
 		//6FF68615   . E8 A246FFFF    CALL <JMP.&Storm.#503>
 		//6FF6C125   . E8 C20BFFFF    CALL <JMP.&Storm.#503>
 		//6FF6F0A5   . E8 34DDFEFF    CALL <JMP.&Storm.#503>
 		//6FF67FA5   . E8 504EFFFF    CALL <JMP.&Storm.#503>
+		//6FF6E165   . E8 6AEBFEFF    CALL <JMP.&Storm.#503>
 
 
 		// Remove registry update
-		mem_seek R7(Fog, 000, 000, 000, 1861A, 1C12A, 1F0AA, 17FAA);
+		mem_seek R7(Fog, 000, 000, 000, 1861A, 1C12A, 1F0AA, 17FAA, 1E16A);
 		memt_byte( 0x56 ,0xEB); 			// JMP SHORT fog.6FF6862C
 		memt_byte( 0x6A ,0x10);				//
 		memt_byte( 0x00 ,0x90);				// NOP
@@ -166,6 +170,8 @@ void Install_ChangingSavePath()
 		//6FF6F0B7   . E8 58DDFEFF    CALL <JMP.&Storm.#425>
 		//6FF67FAA   . 56             PUSH ESI
 		//6FF67FAB   . 6A 00          PUSH 0
+		//6FF6E16A   . 56             PUSH ESI
+		//6FF6E16B   . 6A 00          PUSH 0
 
 	} else {
 

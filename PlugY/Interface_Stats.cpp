@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Interface functions
 
@@ -48,17 +49,17 @@ void STDCALL printStatsPageBtns()
 
 	sDrawImageInfo data;
 	ZeroMemory(&data,sizeof(data));
-
+	
 	if (printBackgroundOnMainPage && D2GetResolution())
-	{
+	{ 
 		setImage(&data, statsBackgroundImages);
-		setFrame(&data, 1);
+		setFrame(&data, 1); 
 		D2PrintImage(&data, getXPreviousPageBtn()-7, getYPreviousPageBtn()+8, -1, 5, 0);
 	}
-
+	
 	setImage(&data, D2LoadBuySelBtn());
 	if (D2GetResolution())
-	{
+	{ 
 		setFrame(&data, 12 + isDownBtn.previousPage);
 		D2PrintImage(&data, getXPreviousPageBtn(), getYPreviousPageBtn(), -1, 5, 0);
 	}
@@ -67,12 +68,12 @@ void STDCALL printStatsPageBtns()
 
 	D2SetFont(1);
 	if (D2GetResolution() && isOnPreviousPageBtn(mx,my))	//print popup "previous page"
-	{
+	{ 
 		lpText = getTranslatedString(STR_PREVIOUS_PAGE);
 		D2PrintPopup(lpText, getXPreviousPageBtn()+getLPreviousPageBtn()/2, getYPreviousPageBtn()-getHPreviousPageBtn(), WHITE, 1);
 	}
 	else if ( isOnNextPageBtn(mx,my))
-	{
+	{ 
 		lpText = getTranslatedString(STR_NEXT_PAGE);
 		D2PrintPopup(lpText, getXNextPageBtn()+getLNextPageBtn()/2, getYNextPageBtn()-getHNextPageBtn(), WHITE, 1);
 	}
@@ -245,7 +246,7 @@ void Install_InterfaceStats()
 	log_msg("Patch D2Client for stats interface. (InterfaceStats)\n");
 
 	// Print new buttons images
-	mem_seek R7(D2Client, 2A7BE, 2A7AE, 30F86, 83636, 8A0B6, 6C016, BDC16);
+	mem_seek R7(D2Client, 2A7BE, 2A7AE, 30F86, 83636, 8A0B6, 6C016, BDC16, C03B6);
 	memt_byte( 0x5F, 0xE9 );	// JMP
 	MEMT_REF4( 0x815B5D5E, version_D2Client >= V111 ? caller_printStatsPageBtns_111: version_D2Client == V110 ? caller_printStatsPageBtns : caller_printStatsPageBtns_9);
 	//6FAD0F86   . 5F                   POP EDI
@@ -278,34 +279,41 @@ void Install_InterfaceStats()
 	//6FB6DC19  |. 5B             POP EBX
 	//6FB6DC1A  |. 81C4 70030000  ADD ESP,370
 	//6FB6DC20  \. C3             RETN
-
+	//6FB703B6  |. 5F             POP EDI
+	//6FB703B7  |. 5E             POP ESI
+	//6FB703B8  |. 5D             POP EBP
+	//6FB703B9  |. 5B             POP EBX
+	//6FB703BA  |. 81C4 70030000  ADD ESP,370
+	//6FB703Ñ0  \. C3             RETN
 	if ( version_D2Client >= V111 )
 	{
 		// Manage mouse down (Play sound)
-		mem_seek R7(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, BCDC8);
+		mem_seek R7(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, BCDC8, BF568);
 		memt_byte( 0xA1, 0xE8 );
 		MEMT_REF4( ptptClientChar, caller_statsPageMouseDown);
 		//6FB327C8   . A1 F0C4BC6F    MOV EAX,DWORD PTR DS:[6FBCC4F0]
 		//6FB39248   . A1 E0C1BC6F    MOV EAX,DWORD PTR DS:[6FBCC1E0]
 		//6FB1B1A8   . A1 D0C3BC6F    MOV EAX,DWORD PTR DS:[6FBCC3D0]
 		//6FB6CDC8   . A1 FCBBBC6F    MOV EAX,DWORD PTR DS:[6FBCBBFC]
+		//6FB6F568   . A1 50D0BC6F    MOV EAX,DWORD PTR DS:[6FBCD050]
 
 		// Manage mouse up
-		mem_seek R7(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, BDE33);
+		mem_seek R7(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, BDE33, C05D3);
 		memt_byte( 0xA1, 0xE8 );
 		MEMT_REF4( ptptClientChar, caller_statsPageMouseUp);
 		//6FB33853   . A1 F0C4BC6F    MOV EAX,DWORD PTR DS:[6FBCC4F0]
 		//6FB3A2D3   . A1 E0C1BC6F    MOV EAX,DWORD PTR DS:[6FBCC1E0]
 		//6FB1C233   . A1 D0C3BC6F    MOV EAX,DWORD PTR DS:[6FBCC3D0]
 		//6FB6DE33   . A1 FCBBBC6F    MOV EAX,DWORD PTR DS:[6FBCBBFC]
+		//6FB705D3   . A1 50D0BC6F    MOV EAX,DWORD PTR DS:[6FBCD050]
 	} else {
 		// Manage mouse down (Play sound)
-		mem_seek R7(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, 0000);
+		mem_seek R7(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, 0000, 0000);
 		MEMC_REF4( D2GetClientPlayer, caller_statsPageMouseDown);
 		//6FAD133C   . E8 8F700500    CALL D2Client.6FB283D0
 
 		// Manage mouse up
-		mem_seek R7(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, 0000);
+		mem_seek R7(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, 0000, 0000);
 		MEMC_REF4( D2GetClientPlayer, version_D2Client == V110 ? caller_statsPageMouseUp : caller_statsPageMouseUp_9);//0x00056EB2
 		//6FAD1519   . E8 B26E0500    CALL D2Client.6FB283D0
 	}

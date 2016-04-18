@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Updating server.
 
@@ -101,7 +102,7 @@ void Install_VariableOnRealm()
 	log_msg("Patch D2Launch for set not on realm variable. (VariableonRealm)\n");
 
 	// click on Battle.net button
-	mem_seek R7(D2Launch, 8195, 81A5, 9915, 129E5, 18AA5, 17D15, 19295);
+	mem_seek R7(D2Launch, 8195, 81A5, 9915, 129E5, 18AA5, 17D15, 19295, 11C65);
 	memt_byte( 0x81, 0xE8 );	// CALL
 	MEMT_REF4( 0x000400EC, caller_BnetBtnPress);
 	memt_byte( 0x00, 0x90 );	// NOP
@@ -114,7 +115,7 @@ void Install_VariableOnRealm()
 	//6FA1EFFC   . B8 01000000    MOV EAX,1
 
 	// click on TCP/IP button
-	mem_seek R7(D2Launch, 87B9, 87C9, 9F99, 11329, 17409, 16659, 17B8E);
+	mem_seek R7(D2Launch, 87B9, 87C9, 9F99, 11329, 17409, 16659, 17B8E, 1053E);
 	if (version_D2Launch == V109b || version_D2Launch == V109d || version_D2Launch == V110)
 	{
 		memt_byte( 0xBD, 0xE8 );	// CALL
@@ -126,7 +127,7 @@ void Install_VariableOnRealm()
 	}
 
 	// click on SinglePlayer button
-	mem_seek R7(D2Launch, D1F6, D1E6, EC16, B726, 117E6, 10A56, 11F36);
+	mem_seek R7(D2Launch, D1F6, D1E6, EC16, B726, 117E6, 10A56, 11F36, A906);
 	memt_byte( 0xBA, 0xE8 );	// CALL
 	MEMT_REF4( 0x00000400, caller_SinglePlayerBtnPress);
 	//6FA4B726   . BA 00040000    MOV EDX,400
@@ -135,7 +136,7 @@ void Install_VariableOnRealm()
 	{
 		log_msg("\nPatch D2Game for fixing ptClient removing bug. (VariableonRealm)\n");
 		//Bug crash ptClient search fix (for Megalixir Mod).
-		mem_seek R7(D2Game, 0000, 0000, 2B97, 0000, 0000, 0000, 0000);
+		mem_seek R7(D2Game, 0000, 0000, 2B97, 0000, 0000, 0000, 0000, 0000);
 		memt_byte( 0x39 ,0xE8);
 		MEMT_REF4( 0x8B0C7429 , caller_fixClientRemovingBug);
 		memt_byte( 0xC1 ,0x90);

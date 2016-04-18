@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Use a more big stash
 
@@ -78,16 +79,17 @@ void Install_BigStash()
 	log_msg("Patch D2Common & D2Client for make 10x10 squares in the stash. (BigStash)\n");
 
 	// modification of stash grid
-	mem_seek R7(D2Common, C9F3, CA03, 14ED3, 5FCB5, 2A505, 1BDB5, 82CA5);
+	mem_seek R7(D2Common, C9F3, CA03, 14ED3, 5FCB5, 2A505, 1BDB5, 82CA5, 6CC25);
 	MEMC_REF4( D2CompileTxtFile, caller_modifStashGrid);
 	//01B64ED2  |. E8 99AEFFFF    CALL D2Common.#10578
 	//6FDAFCB4  |. E8 A7C3FCFF    CALL D2Common.#10653
 	//6FD7A504  |. E8 5743FEFF    CALL D2Common.#10496                     ; \#10496
 	//6FD6BDB4  |. E8 97600200    CALL D2Common.#10244                     ; \#10244
 	//6FDD2CA4  |. E8 97C2FDFF    CALL D2Common.#10849                     ; \#10849
+	//6FDBCC24  |. E8 B7FEF9FF    CALL D2Common.#10037                     ; \#10037
 
 	// modification of stash background
-	mem_seek R7(D2Client, 45B1C, 45B1C, 4C61C, A643C, 749BC, A9D7C, 8CC1C);
+	mem_seek R7(D2Client, 45B1C, 45B1C, 4C61C, A643C, 749BC, A9D7C, 8CC1C, 943FC);
 	memt_byte( 0x68, 0xE8 );	// CALL caller_changeTradeStash
 	MEMT_REF4( 0x00000104, caller_changeTradeStash);
 	//6FAEC61C  |. 68 04010000    PUSH 104
@@ -95,6 +97,7 @@ void Install_BigStash()
 	//6FB249BC  |. 68 04010000    PUSH 104
 	//6FB59D7C  |. 68 04010000    PUSH 104
 	//6FB3CC1C  |. 68 04010000    PUSH 104
+	//6FB443FC  |. 68 04010000    PUSH 104
 
 	log_msg("\n");
 

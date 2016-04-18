@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Updating server.
 
@@ -14,6 +15,7 @@
 #include "newInterfaces.h"
 #include "newInterface_CubeListing.h"
 #include "extraOptions.h"
+
 
 bool active_Commands=true;
 
@@ -140,13 +142,15 @@ void updateSharedGold(DWORD goldAmount)
 
 int STDCALL commands (char* ptText)
 {
+	//return 0;
 	Unit* ptChar = D2GetClientPlayer();
-
+	//return 0;
 	char command[MAX_CMD_SIZE];
 	ZeroMemory(command,MAX_CMD_SIZE);
+	//return 0;
 	strncpy(command,ptText,MAX_CMD_SIZE-1);
-	strlwr(command);
-
+	//return 0;
+	strlwr(command);	
 	if (!strncmp(command,CMD_RENAME,strlen(CMD_RENAME)))
 	{
 		if (!active_multiPageStash) return 1;
@@ -220,7 +224,6 @@ int STDCALL commands (char* ptText)
 		active_AlwaysDisplayLifeMana = !active_AlwaysDisplayLifeMana;
 		return 0;
 	}
-
 	return 1;
 }
 
@@ -248,6 +251,19 @@ MANAGESOUNDCHAOSDEBUG:
 	RETN 8
 }}
 
+FCT_ASM ( caller_Commands_113d )
+	TEST EAX,EAX
+	JE MANAGESOUNDCHAOSDEBUG
+	PUSH EDI
+	CALL commands
+	TEST EAX,EAX
+	JNZ MANAGESOUNDCHAOSDEBUG
+	ADD DWORD PTR SS:[ESP],7
+MANAGESOUNDCHAOSDEBUG:
+	RETN 8
+}}
+
+
 void Install_Commands()
 {
 	static int isInstalled = false;
@@ -261,9 +277,9 @@ void Install_Commands()
 	active_savegame = version_D2Common >= V111;
 
 	// Run custom commmand
-	mem_seek R7(D2Client, 2C120, 2C110, 32BDD, C1EE6, 91C16, 86926, 70AE6);
-	memt_byte( 0x83, 0xE8 );	// CALL
-	MEMT_REF4( 0xC08508C4 , version_D2Client >= V111 ? caller_Commands_111 : caller_Commands);
+	mem_seek R7(D2Client, 2C120, 2C110, 32BDD, C1EE6, 91C16, 86926, 70AE6, B1FD6);
+	memt_byte( 0x83, 0xE8 );	// CALL	
+	MEMT_REF4( 0xC08508C4 , version_D2Client == V113d ? caller_Commands_113d : version_D2Client >= V111 ? caller_Commands_111 : caller_Commands);
 	//6FB71EE6   . 83C4 08        ADD ESP,8
 	//6FB71EE7   . 85C0           TEST EAX,EAX
 	//6FB41C16  |. 83C4 08        ADD ESP,8
@@ -272,9 +288,9 @@ void Install_Commands()
 	//6FB36929  |. 85C0           TEST EAX,EAX
 	//6FB20AE6  |. 83C4 08        ADD ESP,8
 	//6FB20AE9  |. 85C0           TEST EAX,EAX
-	//6FB20AE6  |. 83C4 08        ADD ESP,8
-	//6FB20AE9  |. 85C0           TEST EAX,EAX
 
+	//6FB61FD6  |. 83C4 08        ADD ESP,8
+	//6FB61FD9  |. 85C0           TEST EAX,EAX
 	log_msg("\n");
 
 	isInstalled = true;

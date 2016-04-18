@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Adding custom data.
 	Save and load infinity & shared Stash
@@ -88,7 +89,7 @@ void Install_PlugYFiles()
 	log_msg("Patch Storm to found custom file. (PlugYFiles)\n");
 
 	// Try in Diablo II\PlugY\ if file not found
-	mem_seek R7(Storm,	192C6, 19296, 18677, 2CC69, 14259, 121E9, 28D89);//( (DWORD)D2Storm268 + V7(Storm, 01A8, 01A8, 01AB, 0429, 0429, 0429, 0000) );
+	mem_seek R7(Storm,	192C6, 19296, 18677, 2CC69, 14259, 121E9, 28D89, 2DA79);//( (DWORD)D2Storm268 + V7(Storm, 01A8, 01A8, 01AB, 0429, 0429, 0429, 0000) );
 	memt_byte( 0xFF ,0x90); // NOP
 	memt_byte( 0x15 ,0xE8); // CALL
 	MEMD_REF4( LeaveCriticalSection, version_Storm >= V111 ? caller_isModFile_111 : caller_isModFile);
@@ -97,6 +98,7 @@ void Install_PlugYFiles()
 	//6FC04259  |. FF15 3832C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
 	//6FC021E9  |. FF15 4432C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
 	//6FC18D89  |. FF15 5832C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
+	//6FC1DA79  |. FF15 3C32C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
 
 
 	log_msg("\n" );
@@ -170,7 +172,7 @@ void Install_PlugYImagesFiles()
 	log_msg("Patch D2Client to load/free custom images. (PlugYImagesFiles)\n");
 
 	// Load custom images
-	mem_seek R7(D2Client, 57E21, 57E21, 5E4B1, 2E101, B67E1, 82761, 27EAE);
+	mem_seek R7(D2Client, 57E21, 57E21, 5E4B1, 2E101, B67E1, 82761, 27EAE, 6E0BE);
 	memt_byte( 0xB9 ,0xE8);
 	MEMT_REF4( 0x0000000C , caller_loadCustomImages);
 	//6FAFE4B1  |. B9 0C000000    MOV ECX,0C
@@ -178,9 +180,10 @@ void Install_PlugYImagesFiles()
 	//6FB667E1  |. B9 0C000000    MOV ECX,0C
 	//6FB32761  |. B9 0C000000    MOV ECX,0C
 	//6FAD7EAE  |. B9 0C000000    MOV ECX,0C
+	//6FB1E0BE  |. B9 0C000000    MOV ECX,0C
 
 	// Free custom images
-	mem_seek R7(D2Client, 57FA9, 57FA9, 5E639, 2D12D, B580D, 8158D, 26F8D);
+	mem_seek R7(D2Client, 57FA9, 57FA9, 5E639, 2D12D, B580D, 8158D, 26F8D, 6D07D);
 	memt_byte( 0xB9 ,0xE8);
 	MEMT_REF4( 0x0000000C , caller_freeCustomImages);
 	//6FAFE639  |> B9 0C000000    MOV ECX,0C
@@ -188,6 +191,7 @@ void Install_PlugYImagesFiles()
 	//6FB6580D  |> B9 0C000000    MOV ECX,0C
 	//6FB3158D  |> B9 0C000000    MOV ECX,0C
 	//6FAD6F8D  |> B9 0C000000    MOV ECX,0C
+	//6FB1D07D  |> B9 0C000000    MOV ECX,0C
 
 	log_msg("\n" );
 
@@ -243,7 +247,7 @@ void Install_PlugYTxtFiles()
 //	lookupItemStatCost =  (void*)R7(D2Common, A1D70, A1D70, AA1D8, 0000, 0000, 0000, 0000);
 
 	// Load custom txt files
-	mem_seek R7(D2Common, 7F4B, 7F4B, 2F7D7, 76854, 37444, 81C44, 5D6E4);
+	mem_seek R7(D2Common, 7F4B, 7F4B, 2F7D7, 76854, 37444, 81C44, 5D6E4, 855E4);
 	MEMC_REF4( D2LoadSuperuniques, version_D2Common >= V111 ? caller_loadTxtFiles_111 : caller_loadTxtFiles );
 	//6FD47F4A  |. E8 B1750100    CALL D2Common.6FD5F500
 	//6FD47F4A  |. E8 C1750100    CALL D2Common.6FD5F510
@@ -252,9 +256,10 @@ void Install_PlugYTxtFiles()
 	//6FD87443  |. E8 58B6FFFF    CALL D2Common.6FD82AA0                   ; \D2Common.6FD82AA0
 	//6FDD1C43  |. E8 58B6FFFF    CALL D2Common.6FDCD2A0                   ; \D2Common.6FDCD2A0
 	//6FDAD6E3  |. E8 88C1FFFF    CALL D2Common.6FDA9870                   ; \D2Common.6FDA9870
+	//6FDD55E3  |. E8 58B6FFFF    CALL D2Common.6FDD0C40                   ; \D2Common.6FDD0C40
 
 	// Free custom txt files
-	mem_seek R7(D2Common, 79EC, 79EC, 10186, 332B3, 15AB3, 44E13, 5E8B3);
+	mem_seek R7(D2Common, 79EC, 79EC, 10186, 332B3, 15AB3, 44E13, 5E8B3, FAA3);
 	MEMJ_REF4( D2Fog10212, caller_freeTxtFiles );
 	//6FD479EB   . E8 C8C00600    CALL <JMP.&Fog.#10212>
 	//6FD479EB   . E8 C8C00600    CALL <JMP.&Fog.#10212>
@@ -263,6 +268,7 @@ void Install_PlugYTxtFiles()
 	//6FD65AB2  |. E8 B537FFFF    CALL <JMP.&Fog.#10212>
 	//6FD94E12  |. E8 1744FCFF    CALL <JMP.&Fog.#10212>
 	//6FDAE8B2  |. E8 8FA9FAFF    CALL <JMP.&Fog.#10212>
+	//6FD5FAA2  |. E8 5FB4FFFF    CALL <JMP.&Fog.#10212>
 
 	log_msg("\n" );
 
