@@ -1,0 +1,705 @@
+;--------------------------------------------------------------------------------------;
+;                                                                                      ;
+;                               "PlugY, The Survival Kit"                              ;
+;                                                                                      ;
+;                                  par Yohann Nicolas                                  ;
+;                                                                                      ;
+;                                     version 10.00                                    ;
+;                                                                                      ;
+;--------------------------------------------------------------------------------------;
+
+
+Site officiel : http://plugy.free.fr
+Vous pouvez y faire un don si vous le souhaitez.
+
+
+******** ATTENTION ********
+- Ce plugin fonctionne sur LoD version 1.09 à 1.13c et sur leurs mods.
+- Ce plugin ne fonctionne pas sur les royaumes (Battle.net ou privé).
+- Tous les fichiers ont changés depuis les versions précédentes, donc déinstaller toutes les versions précédentes.
+- S'il vous plait, utilisé le D2gfx.dll non modifié avant de rapporter une erreur.
+- PlugY.ini a été modifié depuis les versions précédentes, utiliser celui fourni dans cette archive.
+- Ne pas oubliez de lire la partie nommée "COMMENTAIRES SUR LE FICHIER DE CONFIGURATION".
+- Les moddeurs devraient lire la version anglaise de ce readme.
+- N'oubliez pas de lire les forums :
+    http://forum.judgehype.com/judgehype/ModsetModding/liste_sujet-1.htm
+    http://phrozenkeep.planetdiablo.gamespy.com/forum/viewforum.php?f=133 (anglais)
+
+
+******** CARACTERISTIQUES ********
+- Désactive l'accès à Battle.net
+- Espace de stockage infini dans le coffre (jusqu'à 4 294 967 296 pages personnelles!)
+- Espace de stockage partagé dans le coffre (jusqu'à 4 294 967 296 pages partagées aussi!)
+- Active les mots runiques du ladder en dehors des royaumes.
+- World Event et Uber Quest en Local pour le monojoueur et le multijoueur hors royaumes !
+- Permet d'ouvrir le portail vers le Cow Level même quand on a tuer le Cow King dans cette difficulté.
+- Désalloue les points de capacités(skills) et de statistiques précédemment allouées.
+- Change la langue du jeu.
+- Régénère toujours la carte en monojoueur comme en multijoueur.
+- Exécute automatiquement la comande /players X au lancement d'une partie.
+- Ajoute des pages supplémentaires pour l'affichage de plus de statistiques du perso comme le %MF.
+- Affiche le niveau de l'objet dans son popup.
+- Permet de lancer autant de fois que l'on veut Diablo II sur le même ordinateur.
+- Le coffre contient 10x10 cases.
+- Change le répertoire de sauvegarde.
+- Affiche toujours les valeurs numériques de mana et de vie au-dessus des globes correspondants.
+- D2 peut charger tout les fichiers, même ceux ouvert par Microsoft Excel (désactivé par defaut).
+- Affiche la valeur courante des caracs (sans les bonus magiques).
+- Localisé en français, anglais, allemand, italien, espagnol et polonais.
+
+
+Changements apportés par la v10.00 :
+- Désactive l'accès à Battle.net par le bouton du menu principal.
+- PlugY fonctionne aussi la version 1.13c de LOD.
+- Corrige le raccourci dans le menu démarrer.
+
+
+Changements apportés par la v9.00 :
+- PlugY fonctionne aussi la version 1.12 de LOD.
+- Corrige différents bugs.
+- Ajout d'une option pour le déassignement des skill dans les mods.
+
+
+Changements apportés par la v8.00 :
+- Installation plus aisée : Nouvel installeur.
+- Permet d'ouvrir le portail vers le Cow Level même quand on a tuer le Cow King dans cette difficulté.
+- Affiche la version courante de LoD avec la lettre de sous-version (1.11b, 1.09d) dans le menu principal.
+- Ajout de la possibilité de déplacer le boutton de skills comme les boutons du stash. (pour moddeurs)
+- Corrige le crash quand le joueur rencontrait un monstre superunique avec LoD 1.11.
+- Corrige la perte de points de skills quand on les désassign dans un mod qui contient des skills spéciaux?
+- Multiplayer : Sauvegarde les fichiers du stash (avec les données du client comme avec les versions d'avant 5.00) quand il y a une déconnection ou une erreur apparait durant la procédure de sauvegarde.
+- Remove the "check load memory failed" message when D2gfx.dll was patched.
+
+
+Changements apportés par la v7.02 :
+- Corrige la perte de points de skills quand on les désalloue dans les mods contenant des skills spéciaux.
+
+
+Changements apportés par la v7.01b :
+- Corrige l'activation des mots runiques du ladder dans les versions 1.11 and 1.10 de LoD.
+- Corrige les caractères étranges de quelques texts.
+
+
+Changements apportés par la v7.01 :
+- Active les mots runiques du ladder en dehors des royaumes.
+- Corrige le bug avec l'IA de Uber Baal.
+- Retire les options de paramètres mis par defaut dans PlugY.ini (comme le mode fenêtré)
+- Affiche la valeur courante des caracs (sans les bonus magiques) même quand la désallocation des caracs est désactivée. 
+- Ajout d'un exécutable pour lancer Plugy (plus aucun fichier de LoD modifié). (RAPPEL)
+- Traduction en espagnol et polonais.
+
+
+Changements apportés par la v7.00 :
+- PlugY fonctionne aussi la version 1.11b de LOD.
+- Ajout d'un exécutable pour lancer Plugy (plus aucun fichier de LoD modifié).
+- Ajout des valeurs de base des caracs sur les bouttons d'allocations.
+- Corrige le bug des caracs infinie durant la désallocation.
+- Corrige les fonctions qui restais active sur Battle.net.
+- Traduction en italien.
+
+
+Changements apportés par la v6.01b :
+- Correction d'un bug avec l'affichage du popup sur les bouttons d'assignement des points de stats.
+
+
+Changements apportés par la v6.01 :
+- Corrige le bug qui cause la disparition des items "carry1" du stash quand ils sont cubbés dans LoD 1.10
+- Clés et organes des uber ne sont plus détruit quant on essaie d'ouvrir le portail en dehors d'Harrogath.
+- Corrige le conflit avec D2Mod pour l'affichage de la version.
+
+
+Changements apportés par la v6.00 :
+- PlugY fonctionne aussi la version 1.11 de LOD.
+- Active la Uber Quest hors des Royaumes. (uniquement LoD 1.11).
+- Corrige le crash au lancement de PlugY si l'installation de LoD n'est pas clean.
+- Corrige quelques bugs mineurs et ajoute des améliorations mineurs.
+- Ajoute la commande "/save" pour sauvegarder la partie sans quitter (uniquement LoD 1.11).
+
+
+Changements apportés par la v5.06 :
+- Ajoute des bouttons pour le partage de l'or.
+- Active l'or partagé en multijoueur.
+- La commande "/DisplayLifeMana" est remplacée par "/dlm".
+- Corrige quelques bugs.
+
+
+Changements apportés par la v5.05 :
+- Corrige les couleurs par défauts dans l'interface des stats.
+- Ajoute de l'or partagée via des commandes.
+- La commande "/DisplayLifeAndMana" deviens "/DisplayLifeMana".
+- Possiblité d'afficher ou non les nom des objets de set dans le popup quand ceux-ci sont dans le coffre partagée.
+- Correction des bugs du multiplayer (réécriture de ces fonctions).
+
+
+Changements apportés par la v5.04 :
+- Corrige Stat/Skill points par levelup
+- Corrige des bugs en Multiplayer.
+- PlugY/PlugYDefault.ini completé.
+
+
+Changements apportés par la v5.03 :
+- Corrige le bug qui échange quelques fois les coffres partagés Hardcore et Softcore.
+- Ajoute de la couleur sur les nouvelles pages de stats.
+- Change les valeurs par défaut des nouvelles pages de stats.
+- Mets EnabledTXTFilesWhenMSExcelOpenIt=1 dans le fichier PlugY.ini.
+
+
+Changements apportés par la v5.02 :
+- Corrige la correction d'un bug précédent qui engendre la disparition d'objets.
+
+
+Changements apportés par la v5.01 :
+- Corrige les bugs importants dans la gestion du stash.
+- Remets ActiveLogFile=0 par défaut dans le fichier PlugY.ini.
+- Corrige : Bug quand le stash partagé est désactivé.
+
+
+Changements apportés par la v5.00 :
+- PlugY fonctionne sur les mods des versions 1.09, 1.09b, 1.09d et 1.10 de LOD.
+- PlugY peut lancer D2Mod.dll.
+- D2 peut ouvrir tous les fichiers même quand ils sont déjà ouverts dans Microsoft Excel.
+- Le monstre du World Event peut être changé.
+- Plusieurs trucs pour les moddeurs.
+- Importante Correction en Multijoueur : fingerprints à 0, objets non identifié buggé, etc.
+- Correction d'une erreur de syntaxe dans PlugY.ini (Commands).
+- Les commandes ne sont plus dépendantes de la casse des caractères.
+- Corrige le bug dans la sélection automatique de la principale page de stats.
+- Remplace l'affichage de "Coup critique/Coup mortel" par Coup mortel uniquement.
+- Corrige la génération de DiabloClone au démarrage d'une nouvelle partie.
+- Corrige plusieurs autres bugs.
+
+
+Changements apportés par la v4.04 :
+- Corrige le bug d'affichage quand statPerLevelUp est activé
+- Corrige le bug de sauvegarde quand le disque dur est plein.
+- Nouveau système de configuration pour les moddeurs.
+- Affiche toujours les valeurs numériques de mana et de vie au-dessus des globes correspondants.
+
+
+Changements apportés par la v4.03 :
+- Corrige le bug des objets uniques carry1 (charme unique) quand on drop le cube.
+- Possibilité d'aller directement à la première ou dernière page du coffre (shift + clic sur précédent/suivant).
+- Utilisation d'un second index dans le coffre (shift + clic sur boutons d'index)
+- Ajouts d'infos sur les pages de stats supplémentaires (2 pages maintenant).
+- Ajoute un bouton "page précédente" sur la principale page de stats (uniquement en 800x600).
+- Déplace les boutons des pages de stats supplémentaire aux même emplacements que ceux de la page principale (uniquement en 800x600).
+- Possibilité de choisir si la page affichée quand on ouvre la page des stats est la page principale ou celle sélectionnée précédemment.
+
+
+Changements apportés par la v4.02b :
+- Les fonctionnalités restent activées sur Battle.net ouvert.
+
+
+Changements apportés par la v4.02 :
+- Corrige le conflit avec Battle.net (BigStash désactivé sur les royaumes)
+- Corrige l'oublie du "d" de "SeparateHardcoreStash=1" de PlugY.ini
+- Corrige la valeur par défaut dans PlugY.ini, du changement de langage.
+- Corrige l'activation de l'affichage de l'item level pour toutes les configurations de PlugY.
+- Ajouts d'infos sur la 2ème page de stats.
+
+
+Changements apportés par la v4.01 :
+- Corrige le bug du MSVCR70.dll non trouvé.
+- Ajouts d'infos sur la 2ème page de stats.
+
+
+Changements apportés par la v4.00b :
+- Corrige le bug du MSVCR70.dll non trouvé.
+
+
+Changements apportés par la v4.00 :
+- Meilleure optimisation du code.
+- Ajoute des pages supplémentaires pour l'affichage de plus de statistiques du perso comme le %MF.
+- Change la langue du jeu (et pour les modders: les langues accessibles et la langue par défaut).
+- Régénère toujours la carte en Monojoueur comme en Multijoueur.
+- Exécute automatiquement la commande /players X au lancement d'une partie.
+- Affiche le niveau de l'objet dans son popup.
+- Sépare le coffre partagé des persos Hardcore et Softcore.
+- Change la méthode d'installation (peut être installé directement sur linux maintenant)
+- Les objets qui déclenche le WorldEvent peut-être changé.
+- Plusieurs objets "carry1" (comme l'Annihilus) peuvent être mis dans le coffre.
+- Corrige : Impossibilité de mettre plusieurs même objets "carry1" dans d'autre page que le coffre.
+- Corrige : Le bug d'affiche des objets sertis dans le coffre.
+- Corrige : Le bug des espaces dans PlugY.ini.
+- Corrige : Diablo Clone ne peut pas apparaître en mode normal et cauchemar.
+- Corrige : Détruit les minions(par exemple les squelettes) en trop près la désallocation si on a un bonus +x dans cette skill.
+
+
+Changements apportés par la v3.02 :
+- Corrige : le changement du nombre de points de Stats reçus à chaque gain de niveau.
+- Corrige : Quand le coffre partagé est désactivé vous pouvez charger vos persos.
+- Corrige : Vous pouvez changer les paramètres du World Event sans activer les skill reçus à chaque gain de niveau.
+
+
+Changements apportés par la v3.01 :
+- Change le nombre de points de Stats reçus à chaque gain de niveau.
+- Corrige les bugs qui donnent des points supplémentaires quand on désallouent les skills.
+- Ajoutent les paramètres du WorldEvent dans le fichier de configuration.
+- Par défaut, Le WorldEvent AFFICHE "X SOJ vendu" uniquement dans la difficulté enfer.
+
+
+Changements apportés par la v3.00 :
+- World Event en Local pour le monojoueur et le multijoueur hors royaumes !
+- Désalloue les points de capacités(skills) précédemment allouées.
+- Nouvelle image de fond pour le coffre.
+- On peut changer le nom du fichier de sauvegarde.
+- L'affichage du numero de page pour le coffre partagé est en rouge maintenant.
+
+
+Changements apportés par la v2.05 :
+- Correction importante : Le bug qui faisais que D2 ne démarrais est définitivement corrigé.
+
+Changements apportés par la v2.04 :
+- La désallocation des points de stats, les points de skills gagnés à chaque niveau
+    sont quand on se connecte à un royaume automatiquement désactivés (comme le stash).
+- Ouvre un message d'erreur quand PlugY.dll n'est pas trouvé.
+- Corrige plusieurs bugs dans l'installation de PlugY.
+- Corrige le bug d'affichage des boutons.
+- Corrige la sauvegarde sous win95/98/Me.
+
+Changements apportés par la v2.03b :
+- Affiche la version de PlugY uniquement à l'écran principal.
+
+Changements apportés par la v2.03 :
+- Correction importante : Les fonctions de sauvegardes sont plus sécurisées et débuggées.
+- Le serveur ne plante plus quand un personnage refusé tente de joindre la partie.
+- Les boutons de désallocation ne deviennent plus gris quand les points de stats de base dépassent 255.
+- Change l'affichage des versions sur le menu principal (changement des couleurs + la version de PlugY à droite).
+- Les personnages sans PlugY peuvent joindre les parties avec PlugY activé.
+
+
+******** CONTENU ********
+19 fichiers, 1 répertoire :
+- PlugY_The_Survival_Kit_-_Readme.txt
+- PlugY_The_Survival_Kit_-_LisezMoi.txt
+- PlugY_The_Survival_Kit_-_Liesmich.txt
+- PlugY.exe
+- PlugY.dll (in Diablo II directory)
+- PlugY.ini
+- PlugY\PlugYFixed.ini
+- PlugY\PlugYDefault.ini
+- PlugY\EmptyPage.dc6
+- PlugY\SharedGoldBtns.dc6
+- PlugY\StashBtns.dc6
+- PlugY\TradeStash.dc6
+- PlugY\StatsBackground.dc6
+- PlugY\UnassignSkillsBtns.dc6
+- PlugY\UnassignStatsBtns.dc6
+- PlugY\statsinterface.txt
+- PlugY Uninstaller.exe (avec l'option dé-installeur)
+- PatchD2gfxDll.exe (dans le répertoire de Diablo II avec l'option Patcheur D2gfxDll)
+- RestoreD2gfxDll.exe (dans le répertoire de Diablo II avec l'option Patcheur D2gfxDll)
+
+
+
+******** INSTALLATION ********
+Les sites de téléchargement officiel sont :
+http://djaftal.chez-alice.fr/
+http://phrozenkeep.18v.biz/dload.php?action=category&cat_id=128
+http://diablo2.judgehype.com/index.php?page=telechargements
+
+
+Installation normale :
+- Suivre les directives de l'installeur.
+
+note : Vous pouvez choisir le répertoire de "Diablo II" comme répertoire d'installation.
+
+Installation dans un autre mod 
+- Copier PlugY.ini, PlugY.exe er PlugY folder (+son sontenu) dans le répertoire du mod ciblé.
+- Editer PlugY.ini pour configurer les options (voir section plus bas).
+- Lancer le jeu PlugY.exe et amusez-vous :)
+
+note : Vous pouvez déplacer le répertoire "PlugY" dans celui de "Diablo II" et il sera vu par toutes les installation.
+
+
+Exemple :
+Si vous avez installé Lord of Destruction ici : C:\Jeux\Diablo II\Diablo II.exe
+Et que le mod ciblé se trouve là : D:\D2Mod\MyMod\
+Et que un second mod se trouve là : D:\D2Mod\MyMod2\
+Alors la configuration classique est ceci :
+   C:\Jeux\Diablo II\PlugY.dll
+   D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
+   D:\D2Mod\MyMod\PlugY\PlugYFixed.ini
+   D:\D2Mod\MyMod\PlugY\PlugYDefault.ini
+   D:\D2Mod\MyMod\PlugY\EmptyPage.dc6
+   D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
+   D:\D2Mod\MyMod\PlugY\StashBtns.dc6
+   D:\D2Mod\MyMod\PlugY\TradeStash.dc6
+   D:\D2Mod\MyMod\PlugY\StatsBackground.dc6
+   D:\D2Mod\MyMod\PlugY\UnassignSkillsBtns.dc6
+   D:\D2Mod\MyMod\PlugY\UnassignStatsBtns.dc6
+   D:\D2Mod\MyMod\PlugY\statsinterface.txt
+   D:\D2Mod\MyMod\PlugY.ini
+   D:\D2Mod\MyMod\PlugY.exe
+   D:\D2Mod\MyMod2\PlugY\SharedGoldBtns.dc6
+   D:\D2Mod\MyMod2\PlugY\PlugYFixed.ini
+   D:\D2Mod\MyMod2\PlugY\PlugYDefault.ini
+   D:\D2Mod\MyMod2\PlugY\EmptyPage.dc6
+   D:\D2Mod\MyMod2\PlugY\SharedGoldBtns.dc6
+   D:\D2Mod\MyMod2\PlugY\StashBtns.dc6
+   D:\D2Mod\MyMod2\PlugY\TradeStash.dc6
+   D:\D2Mod\MyMod2\PlugY\StatsBackground.dc6
+   D:\D2Mod\MyMod2\PlugY\UnassignSkillsBtns.dc6
+   D:\D2Mod\MyMod2\PlugY\UnassignStatsBtns.dc6
+   D:\D2Mod\MyMod2\PlugY\statsinterface.txt
+   D:\D2Mod\MyMod2\PlugY.ini
+   D:\D2Mod\MyMod2\PlugY.exe
+
+
+Désinstallation : Run uninstaller ou si vous n'avez pas activé cette options, supprimer semplement tous les fichiers de PlugY.
+NOTE : Vous pouvez aussi déplacer PlugY.dll dans le répertoire du mod mais vous devez le supprimer du répertoire de D2.
+Note : Le répertoire "PlugY" et son contenu peut être placé dans un mpq.
+
+------- D2gfx Patcher :
+
+If you have problem when you run PlugY.exe then use PatchD2gfxDll.exe. (It happend sometimes with Windows 2000)
+- Go in Diablo II directory.
+- Do a backup of D2gfx.dll (in the case, you remove PlugY before restore it)
+- Run PatchD2gfxDll.exe (which patches D2gfx.dll for launch PlugY, you can backup this file before)
+- Create a shortcut : Enter target mod directory in "start in" field of properties->shortcut. (unless you install PlugY in Diablo II directory)
+- Launch with the shorcut !!
+
+Before uninstall PlugY Restore your D2gfx.dll with your backup file or run RestoreD2gfxDll.exe.
+
+
+Si vous avez des problème pour éxécuter PlugY.exe alors utiliser PatchD2gfxDll.exe. (Ca arrive quelque fois avec Windows 2000)
+- Aller dans le répertoire de Diablo II.
+- Faîtes un une sauvegarde du fichier D2gfx.dll (dans le cas, où vous supprimiez PlugY avant de le restaurer).
+- Lancer PatchD2gfxDll.exe (qui patchera D2gfx.dll pour lancer PlugY)
+- Créer un raccourci de Diablo II.exe, entrer le répertoire du mod voulu dans "démarrer dans" de propriété->raccourci. (sauf si vous avez installé PlugY dans le répertoire de Diablo II)
+- Lancer Diablo II !
+
+
+
+******************** FAQ ******************
+
+=> Je ne troue pas le fichier PlugY.ini, où est-il ? 
+De kingpin (traduit de l'anglais):
+Microsoft a dans Windows caché les extensions des fichiers connu. Ceci pour être
+sûr que les nouveaux utilisateurs ne supprime pas ces fichiers par accidents. Vous
+pouvez bien sûr le désactiver en ouvrant votre l'explorateur Windows, aller dans
+outils->Options des dossiers->affichage, Décocher "Masquer les extensions des
+fichiers dont le type est connu". Alors, vous verrez le fichier sûrement le fichier ini.
+
+
+=> Comment jouer sur Battle.net avec PlugY installé ?
+PlugY automatiquement désactive tous quand on va en fermé.
+Mais il est recommandé de toujours retirer tous les programmes tiers quand on a va sur les royaumes.
+Note : Quand bigStash est activé, vous devez redémarrer D2 pour jouer en solo/multi/ouvert après avoir jouer en fermé (et vice versa).
+Astuce : Créer un raccourci et ajouter -skiptobnet à la fin du champ "cible" pour aller directement sur Battle.net.
+
+
+=> Que faire si j'ai une erreur comme "Bad Generic File" au chargement d'un nouveau joueur ?
+Ceci peut apparaître quand vous avez de mauvais objets dans le fichier du coffre partagé.
+Une cause possible est l'utilisation du même répertoire de sauvegarde pour des mods différents,
+il suffit alors de changer ce répertoire dans PlugY.ini.
+
+
+=> Je vois "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" dans D2YYMMDD.txt, que dois-je faire ? 
+Ceci est juste un avertissement sans conséquence sur le jeu, ne vous inquiéter pas.
+
+
+=> J'ai un autre bug, que dois-je faire ?
+1) Aller sur les forums de Phrozen-keep et Judgehype et lire les forums.
+
+2) Faîtes des recherche sur google, demander à des amis, etc. mais ne me demander pas, je n'ai plus le temps pour faire le support de PlugY.
+Si un jour, j'ai assez de temps, (comme pour la version 8.00) je lirai les forums pour connaitre les problèmes les plus communs.
+
+
+
+******** CONFIGURATION ********
+
+Configuration pour un mod précis :
+- Copier PlugY.ini dans le répertoire du mod choisi (le répertoire d'où vous le lancez le mod, voir dans propriétés du raccourci).
+- Dans la plupart dans cas changer le répertoire de sauvegarde.
+- Ajouter toutes les dll supplémentaires dans PlugY.ini si besoin est.
+- Finalement activer ou désactiver les options que vous souhaitez comme MultiPageStash, SharedStash, etc.
+- Maintenant vous pouvez lancez le mod de manière classique.
+
+D2Mod configuration :
+Ajouter simplement le nom de la dll dans PlugY.ini, par exemple : "DllToLoad=D2Mod.dll"
+
+Notes:
+- Les objets dans le Cube sont toujours sauvegardés dans le personnage, si vous voulez les partager vous devez les retirer du cube.
+
+Attention :
+- Ne pas éditer le fichier de configuration après avoir utilisé le mod.
+- Dans des parties Multiplayers, vérifier qu'il y a la même configuration sur le serveur et les clients.
+- Rappel : PlugY ne fonctionne pas sur les royaumes.
+
+
+Lire le readme pour les moddeurs.
+
+
+******** COMMENTAIRES SUR LE FICHIER DE CONFIGURATION ********
+
+Toutes les valeurs par Défaut signifie que si on supprime cette ligne, PlugY utilise cette valeur.
+Les valeurs dans PlugY.ini (inclus dans le zip) est un exemple de configuration, pas les valeurs par défaut.
+
+[LAUNCHING]
+Cette section contient les informations de PlugY.exe et ne fonctionne pas dans les fichiers PlugYDefault.ini et PlugYFixed.ini.
+
+Ajoute les paramètres transmis à LoD par sa ligne de commande.
+Les paramètres passé à PlugY.exe sont aussi transmis à LoD par sa ligne de commande.
+Par défaut aucun paramèters ne sont transmis.
+Les paramètres les plus courant sont (sans les guillemets) :
+"-w" lance la LoD en version fenêtrée.
+"-direct" utilise les fichiers du répertoire à la place des mpq.
+"-txt" recompile les fichiers .txt avant d'antrée dans une partie.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+Param=				{-direct -txt -w: Ces 3 commandes sont passés à LoD par la ligne de commande}
+
+
+Sélectionne la dll à charger.
+Le répertoire courant est celui utilisé par D2 (comme modifier le champ "démarrer dans" d'un raccourci).
+Si auncune dll n'est spécifié, LoD est chargé sans PlugY.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+Library=			{PlugY.dll: Charger PlugY.dll}
+
+
+[GENERAL]
+Active ou désactive PlugY
+Les dll des champs "DllToLoad" ne sont plus chargés quand ActivePlugin=0. 
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActivePlugin=0		{0:Charge aucunes fonctions; 1:Plugin activé}
+
+Active ou désactive l'accès à BattleNet.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- DisableBattleNet=1		{0:accès à Battle.net activé; 1:accès à Battle.net désctivé}
+
+Enregistre le log dans le fichier "The PlugY.log" dans le répertoire courant.
+Cette fonction peut ralentir le jeu.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveLogFile=0 		{0:Désactivé, aucune information n'est écrite pendant le jeu; 1:toujours activé}
+
+Charge les dll supplémentaires du mod pour les utiliser en même temps que PlugY.
+Séparer chaque dll par le caractère pipe (|)
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- DllToLoad=			{(vide): rien à charger; D2extra.dll|myDll.dll: Charge D2extra.dll et myDll.dll}
+- DllToLoad2=			{(vide): Même chose que DlltoLoad}
+
+Active les nouvelles commandes de PlugY.
+"/dlm" alterne l'état de AlwaysDisplayLifeAndManaValues (AlwaysDisplayLifeAndManaValues>0)
+"/page x" Aller à la page x dans les pages de stats supplémentaires.
+"/save" Sauvegarde la partie sans la quitter (uniquement LoD 1.11 et 1.11b).
+- ActiveCommands=0 		{0:Désactivé; 1:Activé}
+
+Quitte D2, si PlugY if PlugY échoue lors de l'installation de toutes les fonctions.
+Désactivez-le seulement si vous savez ce que vous faites.
+- ActiveCheckMemory=1 		{0:Désactivé; 1:Activé}
+
+Active les fonctions cachés ou non finis. (ne pas utiliser)
+- ActiveAllOthersFeatures=0 	{0:Désactivé; 1:Activé}
+
+
+[LANGUAGE]
+Change la langue du jeu.
+Vous devez avoir les fichiers de langue choisi.
+Toutes les versions de D2 et LOD contiennent les fichiers en anglais (sauf les voix).
+Toutes les langues possibles : ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS
+- ActiveChangeLanguage=0	{0:Désactivé; 1:Activé}
+- SelectedLanguage=ENG		{FRA: Français sélectionné}
+
+Pour les moddeurs qui veulent limités les languages accessibles etle language par défauts :
+- ActiveLanguageManagement=0	{0:Désactivé; 1:Activé}
+- DefaultLanguage=ENG		{empty:Langue par défault de D2; FRA: Le français est la langue par défaut}
+- AvailableLanguages=ENG|FRA	{ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS}
+
+
+[SAVEPATH]
+Mettez dans cette variable le chemin d'accès des fichiers de sauvegarde.
+Vous pouvez aussi bien utiliser un chemin absolu ou relatif.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveSavePathChange=0	{0:Désactivé; 1=Activé, vous devez initialiser "SavePath"}
+- SavePath=Save\		{Save\MyMod\  ou D:\Save Games\diablo II\Current Mod\}
+
+
+[MAIN SCREEN]
+Change le texte affiché dans le menu principal (premier menu) (à la place de "v 1.10")
+Les couleurs sont des entiers faisant référence aux couleurs définies de D2.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveVersionTextChange=0	{0:Désactivé; 1=Activé}
+- VersionText=       		{Vide: Affiche la version courante de LoD avec la lettre de sous-version (1.11b, 1.09d) ; Nom du Mod:Texte avec une longueur maximale d'environ 23 caractères (ex : v 1.11b)}
+- ColorOfVersionText=0      	{0:blanc; 1:rouge; 4:or; etc.}
+- ActivePrintPlugYVersion=1 	{0:Désactivé; 1=Activé)
+- ColorOfPlugYVersion=4     	{0:blanc; 1:rouge; 4:or; etc.}
+
+
+[STASH]
+Ajuste le coffre pour avoir 10x10 cases.
+Quand bigStash est activé, vou devez redémarrer D2 pour jouer en solo/multi/ouvert après avoir jouer en fermé (et vice versa).
+Utilise PlugY\TradeStash.dc6 pour changer l'image de fond.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveBigStash=0			{0:Taille du coffre par défaut utilisé; 1:Activé, coffre utilise 10x10 cases}
+
+Utilisez cette fonction pour partager et garder tous vos objets. :)
+Il y a 2 coffres à pages multiples possibles :
+- un personnel accessible uniquement par le personnage;
+- un partagé entre tous vos personnages.
+Utilisez le bouton "Voir coffre..." pour changer de coffre.
+Utilisez les boutons fléchés (et le bouton shift) pour passer d'une page à l'autre.
+Définition : La dernière page est la dernière page qui contient un objet.
+Ces coffres à pages multiples ne fonctionne pas avec des personnages Diablo II classiques ou sur les royaumes.
+Vous pouvez changez le nom du fichier partagé.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveMultiPageStash=0	{0:Désactivé; 1:Activé}
+- NbPagesPerIndex=10		{10: Les pages indexées sont 1,10,20,30,...,max}
+- NbPagesPerIndex2=100		{50: Les pages indexées (+shift) sont 1,50,100,150,...,max}
+- MaxPersonnalPages=0 		{0:Nombre de pages personnelles illimitées; 1000: Maximum de 1000 pages personnelles}
+- ActiveSharedStash=0		{0:Désactivé; 1:Activé si ActiveMultiPageStash=1}
+- SeparateHardcoreStash=1	{0:Même coffre partagé en HC et SC; 1:utilise 2 coffres différents}
+- SharedStashFilename=SharedStashSave	{xxx : Le nom du fichier sera _LOD_xxx.sss}
+- displaySharedSetItemNameInGreen=1 	{0:Désactivé; 1:Activé, Les noms des objets de sets dans le stash sont affichés en vert sur les autres objets de sets.}
+- MaxSharedPages=0		{0:Nombre de pages partagées illimitées; 5000: Maximum de 5000 pages partagées )
+- ActiveSharedGold=1		{0:Désactivé; 1:Activé, utiliser les commands pour y ajouter ou retirer de l'or (voir Command section)}
+- PosXPreviousBtn=-1		{-1: Position par défaut, 50: Déplace le bouton à la position 50 en abscisse}
+Idem pour PosYPreviousBtn, PosXNextBtn, PosYNextBtn, PosXSharedBtn, PosYSharedBtn, PosXPreviousIndexBtn, PosYPreviousIndexBtn, PosXNextIndexBtn, PosYNextIndexBtn, PosXPutGoldBtn, PosYPutGoldBtn, PosXTakeGoldBtn, PosYTakeGoldBtn.
+
+
+[STATS POINTS]
+Utiles pour réparer des erreurs dans l'allocation de points de caractéristiques.
+Par exemple 30 points d'énergie pour un barbare !
+Sur la page des statistiques, appuyer sur la touche sélectionnée et cliquer sur le bouton "moins".
+Sélectionner une touche en changeant la valeur de KeyUsed (devriez choisi 17 ou 18)
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveStatsUnassignment=0		{0:Désactivé; 1:Activé, appuyer sur la touche sélectionnée en cliquant}
+- KeyUsed=18					{17:touche Contrôle sélectionnée; 18:touche Alt sélecttionnée}
+
+Utilisez la touche shift pour allouer/désallouer tous les points possibles en un click.
+Vous pouvez limiter le nombre de points alloué/désalloué.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveShiftCkickLimit=0		{0:Désactivé; 1:Activé}
+- LimitValueToShiftClick=5		(10: Alloue ou désalloue les points de stats 10 par 10}
+
+
+[STAT ON LEVEL UP]
+Change le nombre de points de Stats reçus lors d'un gain de niveau.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveStatPerLevelUp=0		{0:Désactivé; 1:Activé}
+- StatPerLevelUp=5			{0:aucun points gagnés;  11:onze points gagnés}
+
+
+[SKILLS POINTS]
+Utiles pour réparer des erreurs dans l'allocation de points de skills.
+Cliquer sur le bouton de la page des skills pour désallouer tous les points de skills.
+note : Prends le coût réel de chaque skills (qui peut être plus grand que 1 dans les mods).
+Attention : Il y a peux de place où mettre se boutton sans bugs.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveSkillsUnassignment=0 	{0:Désactivé; 1:Activé}
+- ActiveSkillsUnassignmentOneForOne=0	{0:Normal; 1:Force la déassignation 1 for 1 (pour mod spécifique).}
+- PosXUnassignSkillBtn=-1 		{-1: Position par défaut, 50: Déplace le bouton à la position 50 en X}
+- PosYUnassignSkillBtn=-1 		{-1: Position par défaut, 50: Déplace le bouton à la position 50 en Y}
+
+
+[SKILL ON LEVEL UP]
+Change le nombre de points de skills reçus lors d'un gain de niveau.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveSkillPerLevelUp=0		{0:Désactivé; 1:Activé}
+- SkillPerLevelUp=1				{0:aucun points gagnés;  3:trois points gagnés)
+
+
+[WORLD EVENT]
+Active le World Event en local.
+Le World Event peut se déclencher uniquement en difficulté enfer et seulement une fois par partie.
+Si le WorldEvent se déclenche et qu'on n'est pas dans une partie, on le perd.
+A partir du lancement de D2, le prochain WorldEvent peut s'enclencher entre  quelques secondes et 41:40 heures après.
+Gardez en mémoire avant d'éditer ces variables que le World Event devrait toujours être rare.
+L'objet à vendre peut être changé, la valeur attendu est la même que les entrées du cube.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveWorldEvent=0			{0:Désactivé; 1:Activé}
+- ShowCounterInAllDifficulty=0		{0:Affiche le message "SOJ vendu" seulement en mode enfer; 1:L'affiche dans tous les modes}
+- ItemsToSell=The Stone of Jordan	{r01: rune EL;  cap,rar,upg: N'importe quel Capuchon de mailles/Capuchon de guerre/shako rare}
+- MonsterID=333				{333: DiabloClone sélectionné}
+- OwnSOJSoldChargeFor=100		{100: Quand on vend une SOJ ,le compteur de SOJ est augmenté de 100}
+- InititalSOJSoldMin=200		{200: Le compteur de SOJ est initialisé a au moins 20 au lancement de D2}
+- InititalSOJSoldMax=3000		{3000: Le compteur de SOJ est initialisé a au plus 3000 au lancement de D2}
+- TriggerAtEachSOJSoldMin=75		{75: Obligation d'avoir au moins 75 SOJ vendu entre 2 World Event}
+- TriggerAtEachSOJSoldMax=125		{125: Obligation d'avoir au plus 125 SOJ vendu entre 2 World Event}
+- ActiveActiveAutoSell=1		{0:Désactivé; 1:Le compteur de SOJ est automatiquement incrémenté de 1}
+- TimeBeforeAutoSellMin=0		{50: Obligation d'avoir au moins 50 secondes entre 2 auto-incrémentation}
+- TimeBeforeAutoSellMin=1200		{1200: Obligation d'avoir au plus 20 minutes (1200 secondes) entre 2 auto-incrémentation}
+
+
+[UBER QUEST]
+Active la Uber Quest en local.
+Fonctionne uniquement en Hell.
+Vous devez cuber les 3 clés puis les 3 organs à Harrogath.
+Note : Cette quête sera mise à jour plustard pour ressembler plus à celle des royaumes.
+ActiveUberQuest=0				{0:Disabled; 1:Enabled}
+
+
+[INTERFACE]
+Ajoute des pages supplémentaires pour l'affichage de plus de stats du perso.
+Possibilité de choisir si la page affichée quand on ouvre la page des stats est la page principale ou celle sélectionnée précédemment.
+Possibilité de changer l'affichage des stats via le fichier PlugY\statsinterface.txt (à ouvrir avec MS Excel).
+Il n'y a pas de limite pour le nombre de page.
+Possibilité de ne pas afficher l'arrière plan des boutons (à utiliser si un mod le change déjà).
+- ActiveNewStatsInterface=0			{0:Désactivé; 1:Activé}
+- SelectMainPageOnOpenning=1			{0:Précédente page sélectionnée affichée; 1:Page principale affichée}
+- PrintButtonsBackgroundOnMainStatsPage=1	{0:N'affiche pas l'arrière plan; 1:L'affiche}
+
+
+[EXTRA]
+Vous pouvez lancer plusieurs parties Diablo II sur un seul ordinateur.
+Par exemple, les moddeurs peuvent tester leurs mod avec des parties multijoueurs.
+Attention :
+  Ne pas lancer des parties avec le même chemin de sauvegarde quand vous utiliser le coffre partagé.
+  Ne pas utiliser le même personnage en même temps bien sûr !
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
+- ActiveLaunchAnyNumberOfLOD=0 		{0:Désactivé; 1:Activé}
+
+Régénère la carte à chaque nouvelle partie (comme en multijoueur).
+- AlwaysRegenMapInSP=0			{0:Désactivé; 1:Activé}
+
+Change le nombre de joueurs émulés (comme /players x) à chaque début de nouvelle partie.
+- NBPlayersByDefault=0			{0:Désactivé; 1:1 joueur émulé (normal); 8: 8 joueurs émulés (maximum)}
+
+Affiche toujours le niveau des items.
+- ActiveDisplayItemLevel=0		{0:Désactivé; 1:Activé}
+
+Affiche toujours les valeurs numériques de mana et de vie au-dessus des globes correspondants.
+- AlwaysDisplayLifeAndManaValues=0	{0:Désactivé; 1:Activé; 2:Désactivé mais peut être activé par commande}
+
+Corrige le bug qui bloque l'ouverture des fichiers .txt quand ils sont ouverts dans Microsoft Excel.
+- EnabledTXTFilesWhenMSExcelOpenIt=0	{0:Désactivé; 1:Activé}
+
+Affiche la valeur courante des caracs (sans les bonus magiques) quand la souris passse sur le bouton d'assignation.
+- ActiveDisplayBaseStatsValue=0		{0:Désactivé; 1:Activé}
+
+Active les mots runiques du ladder en dehors des royaumes.
+Ceci est fait par la mise à 0 de la colonne "server" du fichier runes.txt.
+Donc n'utilisez pas cette colonne dans votre mod en même temps que cette fonction !
+- ActiveLadderRunewords=0		{0:Désactivé; 1:Activé}
+
+Active la capacit" d'ouvrir l portail vers le Cow Level dans la difficulté où le joueur à déjà tuer le Cow King.
+- ActiveCowPortalWhenCowKingWasKilled=0 {0:Désactivé; 1:Activé}
+
+
+Plus d'options dans de futures versions... :)
+
+
+Mon mail à ynicolas@worldonline.fr.
+Mais je ne fais plus le support de PlugY donc n'attendez pas de l'aide de ma part si vous avez des problèmes. A la place faites des recherches sur les forums.
+
+
+PS : Désolé pour les fôtes mais je n'ai pas envie de corriger ;)
+
+******** THANKS TO ********
+- Blizzard pour avoir fait Diablo II et Lord of Destruction.
+- Kingpin, Afj666, Joel, SVR, Myrdinn pour leurs aides.
+- Pralinor pour son aide dans la convertion en 1.12.
+- ChaosEnergY pour ses beta tests et sa traduction en allemand.
+- Char & Darque pour avoir corrigé mon anglais.
+- Shaitane, K&V, themastercaster, raspa et onyx pour leurs tests.
+- Golvmopp, Dark Spot in the Corner, Megalixir et Athara pour leurs aides.
+- ItalianPlayer pour la traduction en italien.
+- Tous les membres du Chat de ProzenKeep.
+- PhrozenKeep pour tout ce qu'ils partagent pour nous (y-compris le mien ;)
+- Traduction :
+	* Anglais : Yohann, Jurica.
+	* Français : Yohann
+	* Allemand : ChaosEnergy, TheMasterCaster.
+	* Italien : ItalianPlayer
+	* Espagnol : Acrerune
+	* Polonais : Serdel
+                                         ~~~~~~~~~~~~
