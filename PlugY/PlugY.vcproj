@@ -152,6 +152,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="opends60.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="false"
 				SubSystem="2"
@@ -182,7 +183,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy $(TargetPath) &quot;..\PlugYInstaller\PlugY.dll&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;D:\Jeux\Blizzard\Diablo II\PlugY.dll&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;D:\www\PlugY.dll&quot;&#x0D;&#x0A;"
+				CommandLine="copy $(TargetPath) &quot;..\PlugYInstaller\PlugY.dll&quot;&#x0D;&#x0A;copy $(TargetPath) &quot;D:\Games\Diablo II\PlugY.dll&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -361,6 +362,14 @@
 				RelativePath="WorldEvent.cpp"
 				>
 			</File>
+			<Filter
+				Name="Coomons"
+				>
+				<File
+					RelativePath="..\Commons\VersionInfo.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -436,6 +445,10 @@
 			</File>
 			<File
 				RelativePath="loadPlayerData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LocaleStrings.h"
 				>
 			</File>
 			<File
@@ -559,6 +572,10 @@
 				</File>
 				<File
 					RelativePath="..\Commons\updatingConst.h"
+					>
+				</File>
+				<File
+					RelativePath="..\Commons\VersionInfo.h"
 					>
 				</File>
 			</Filter>

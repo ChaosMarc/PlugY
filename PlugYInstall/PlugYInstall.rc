@@ -65,8 +65,8 @@ LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,4,0
- PRODUCTVERSION 1,0,4,0
+ FILEVERSION 1,0,5,0
+ PRODUCTVERSION 1,0,5,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -81,10 +81,10 @@ BEGIN
     BEGIN
         BLOCK "040c04b0"
         BEGIN
-            VALUE "FileVersion", "1.04"
+            VALUE "FileVersion", "1.05"
             VALUE "OriginalFilename", "PlugY_Install.exe"
             VALUE "ProductName", "PlugY Installation"
-            VALUE "ProductVersion", "1.04"
+            VALUE "ProductVersion", "1.05"
         END
     END
     BLOCK "VarFileInfo"

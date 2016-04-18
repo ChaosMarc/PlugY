@@ -3,8 +3,8 @@
 ;                              "PlugY, The Survival Kit"                               ;
 ;                                                                                      ;
 ;                                  von Yohann Nicolas                                  ;
-;                                                                                      ;
-;                                     version 10.00                                    ;
+;                             (Modifizierung durch L'Autour)                           ;
+;                                     version 11.00                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -13,15 +13,13 @@ You can make a donation if you want.
 
 
 WARNUNG:
-- Dieses Plug-In ist NUR für LOD 1.09 zu 1.13c !
+- Dieses Plug-In ist NUR für LOD 1.09 zu 1.13d !
 - Dieses Plug-In ist NICHT das closed Battle.net!
 - Alle Dateien können sich seit der letzten Version verändert haben, benutzt keine alten Dateien!
 - Bitte benutzt eine neue D2gfx.dll bevor ihr das PlugY benutzt (Kann man auf http://d2mods.com downloaden)
 - PlugY.ini wurde stark verändert, bitte nehmt die Neue!
 - Vergesst nicht den Teil: "Kommentare zur Konfigurations-Datei" zu lesen.
-- Bitte lest im PlugY-Forum: 
-	http://phrozenkeep.planetdiablo.gamespy.com/forum/viewforum.php?f=133
-
+- Bitte lest im PlugY-Forum: http://d2mods.info/forum/viewforum.php?f=133
 
 ******** ALLE FUNKTIONEN ********
 - Disable access to Battle.net via main menu button.
@@ -42,7 +40,13 @@ WARNUNG:
 - Man kann das "SAVE" Verzeichnis ändern.
 - Man kann die Versionsanzeige im Hauptbildschirm anpassen.
 - Diablo kann nun auf Text-Dateien laden die von Microsoft Excel geöffnet sind.
-- Lokalisiert in Englisch, Französisch, Deutsch, Italienisch, Spanisch, Polnisch.
+- Lokalisiert in Englisch, Franzosisch, Deutsch, Italienisch, Spanisch, Polnisch, *Portugiesisch, Japanisch, Koreanisch, Chinesisch, Polnisch, *Russisch.
+  (* - hat informelle Lokalisierung des Spiels verlangt.)
+
+
+v11.00 Änderungen :
+- PlugY funktioniert nun auch mit LoD 1.13d Versionen.
+- Voller support fur verschiedene sprachen im spiel.
 
 
 v10.00 Änderungen :
@@ -323,6 +327,8 @@ v1.00 Funktionen (es können alle einfach ein- und ausgeschaltet werden) :
 - PlugY.exe
 - PlugY.dll (in Diablo II directory)
 - PlugY.ini
+- Plugy\PlugYLocal.dll
+- Plugy\PlugYLocal.ini
 - PlugY\PlugYFixed.ini
 - PlugY\PlugYDefault.ini
 - PlugY\EmptyPage.dc6
@@ -342,7 +348,7 @@ v1.00 Funktionen (es können alle einfach ein- und ausgeschaltet werden) :
 ******** INSTALLATION ********
 - The officials sites are :
 http://djaftal.chez-alice.fr/
-http://phrozenkeep.18v.biz/dload.php?action=category&cat_id=128
+http://d2mods.info/forum/viewforum.php?f=133
 http://diablo2.judgehype.com/index.php?page=telechargements
 
 Installation : 
@@ -356,6 +362,8 @@ Du hast LoD in folgendem Verzeichnis installiert :  C:\Games\Diablo II\
 Der Mod und PlugY befindet sich hier : D:\D2Mod\MyMod\ 
 Dann müssen die Einstellungen wie folgt lauten : 
    C:\Games\Diablo II\PlugY.dll
+   C:\Games\Diablo II\PlugY\PlugYLocal.dll
+   C:\Games\Diablo II\PlugY\PlugYLocal.ini
    C:\Games\Diablo II\PlugY\EmptyPage.dc6
    C:\Games\Diablo II\PlugY\SharedGoldBtns.dc6
    C:\Games\Diablo II\PlugY\StashBtns.dc6
@@ -751,6 +759,10 @@ Zur Korrektur der deutschen Übersetzung bitte eine eMail an ChaosEnergy@planetdi
 	* Deutch : ChaosEnergy, TheMasterCaster.
 	* Italienisch : ItalianPlayer
 	* Spanish : Acrerune
-	* Polnisch : Serdel
-
-         ~~~~~~~~~~~~
+	* Polnisch : Serdel + https://translate.google.com
+                                        * Russisch: L'Autour.
+                                        * Portugiesisch: https://translate.google.com
+                                        * Japanisch: https://translate.google.com
+                                        * Koreanisch: https://translate.google.com
+                                        * Chinesisch: https://translate.google.com
+                                         ~~~~~~~~~~~~.

@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
     @file D2wrapper.cpp
     @brief Main Diablo II extra DLL handler.
@@ -31,26 +32,27 @@
 #include "uberQuest.h"			// Install_UberQuest()
 #include "extraOptions.h"		// Install_AlwaysRegenMapInSP()
 #include "language.h"			// Install_LanguageManagement()
+#include "../Commons/VersionInfo.h"
 
-
-int version_SmackW32=V113;
-int version_D2Common=V113;
-int version_ijl11=V113;
-int version_D2Gdi=V113;
-int version_D2Win=V113;
-int version_D2sound=V113;
-int version_D2MCPCLI=V113;
-int version_D2Launch=V113;
-int version_D2gfx=V113;
-int version_D2Client=V113;
-int version_D2Net=V113;
-int version_D2Lang=V113;
-int version_D2Game=V113;
-int version_D2CMP=V113;
-int version_Bnclient=V113;
-int version_Fog=V113;
-int version_Storm=V113;
-
+//-------------------------
+int version_SmackW32=V113d;
+int version_D2Common=V113d;
+int version_ijl11=V113d;
+int version_D2Gdi=V113d;
+int version_D2Win=V113d;
+int version_D2sound=V113d;
+int version_D2MCPCLI=V113d;
+int version_D2Launch=V113d;
+int version_D2gfx=V113d;
+int version_D2Client=V113d;
+int version_D2Net=V113d;
+int version_D2Lang=V113d;
+int version_D2Game=V113d;
+int version_D2CMP=V113d;
+int version_Bnclient=V113d;
+int version_Fog=V113d;
+int version_Storm=V113d;
+//-------------------------
 
 DWORD	offset_SmackW32=NULL;
 DWORD	offset_D2Common=NULL;
@@ -375,6 +377,7 @@ bool initD2version()
 }
 */
 
+/*
 void getVersion(DWORD addr, int* ver, DWORD v109b, DWORD v109d, DWORD v110, DWORD v111, DWORD v111b, DWORD v112, DWORD v113, const char * filename)
 {
 	log_msg("version of %s\t",filename);
@@ -432,6 +435,47 @@ bool initD2version()
 	log_msg("\n\n");
 	return true;
 }
+*/
+
+const char sD2Ver[8][7] = {{"v1.09b"},{"v1.09d"},{"v1.10 "},{"v1.11 "},{"v1.11b"},{"v1.12 "},{"v1.13c"},{"v1.13d"}};
+
+bool initD2version()
+{
+	char currentpath[MAX_PATH];
+	if (! GetD2Path(currentpath, MAX_PATH))
+	{
+		log_msg("Path to Game.exe not found");
+		return false;
+	}	
+	log_msg("***** Get Game.exe version *****\n");
+		
+	int ver = GetD2Version(currentpath);
+	if (ver == -1) return false;
+	//--------------------
+	version_SmackW32=ver;
+	version_D2Common=ver;
+	version_ijl11=ver;
+	version_D2Gdi=ver;
+	version_D2Win=ver;
+	version_D2sound=ver;
+	version_D2MCPCLI=ver;
+	version_D2Launch=ver;
+	version_D2gfx=ver;
+	version_D2Client=ver;
+	version_D2Net=ver;
+	version_D2Lang=ver;
+	version_D2Game=ver;
+	version_D2CMP=ver;
+	version_Bnclient=ver;
+	version_Fog=ver;
+	version_Storm=ver;
+	//-------------------
+	log_msg("version Game.exe - ");	
+	log_msg(sD2Ver[ver]);
+	log_msg("\n");
+
+	return true;
+}
 //////////////////////////////////// EXPORTS FUNCTIONS ////////////////////////////////////
 
 extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
@@ -445,7 +489,12 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	loadD2Libraries();
 
-	if (!initD2version()) return NULL;
+	if (!initD2version()) 
+	{
+		log_msg("wrong G	ame.exe version\n");
+		return NULL;
+	}
+		
 
 	if (!initD2functions()) return NULL;
 
@@ -539,6 +588,10 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	unhookLibraries();
 
+	log_msg("\n*****Loading locale strings.*****\n");
+	initLocaleStrings();
+	log_msg("\n\n\n");
+
 	initCustomLibraries();
 
 	log_msg("***** ENTERING DIABLO II *****\n\n" );
@@ -555,6 +608,7 @@ extern "C" __declspec(dllexport) bool __stdcall Release()
 	log_msg("\n***** ENDING DIABLO II *****\n\n" );
 
 	freeCustomLibraries();
+	freeLocaleStrings();
 	freeD2Libraries();
 	return true;
 }

@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Patch D2gfx.dll to install PlugY.
 
@@ -7,41 +8,46 @@
 
 #include <windows.h>
 #include <stdio.h>
+#include "../Commons/VersionInfo.h"
 
 const char* boxNameInstall = "Installation of PlugY, The Survival Kit Installation";
 const char* boxNameUnInstall = "Uninstall PlugY, The Survival Kit ";
 
-int CALL_LOAD[7] = {0x389B,0x389B,0x3870,0x8B23,0xB423,0x8F63,0xB423};
-BYTE callNewLoad[7][6]={{0xE8,0x60,0x85,0x00,0x00,0x90},// JMP  6FA7BE00-6FA738A0 ;install loadlibrary
+int CALL_LOAD[8] = {0x389B,0x389B,0x3870,0x8B23,0xB423,0x8F63,0xB423,0xAA03};
+BYTE callNewLoad[8][6]={{0xE8,0x60,0x85,0x00,0x00,0x90},// JMP  6FA7BE00-6FA738A0 ;install loadlibrary
 						{0xE8,0x60,0x85,0x00,0x00,0x90},// JMP  6FA7BE00-6FA738A0 ;install loadlibrary
 						{0xE8,0x8B,0x85,0x00,0x00,0x90},// JMP  6FA7BE00-6FA73875 ;install loadlibrary
 						{0xE8,0xD8,0x42,0x00,0x00,0x90},// JMP  6FA8CE00-6FA88B28 ;install loadlibrary
 						{0xE8,0xD8,0x19,0x00,0x00,0x90},// JMP  6FA8CE00-6FA8B428 ;install loadlibrary
 						{0xE8,0x98,0x3E,0x00,0x00,0x90},// JMP  6FA8CE00-6FA88F68 ;install loadlibrary
-						{0xE8,0xD8,0x19,0x00,0x00,0x90}};// JMP  6FA8CE00-6FA8B428 ;install loadlibrary
-BYTE callOldLoad[7][6]={{0xFF,0x15,0x3C,0xC0,0xA7,0x6F},
+						{0xE8,0xD8,0x19,0x00,0x00,0x90},// JMP  6FA8CE00-6FA8B428 ;install loadlibrary
+						{0xE8,0xF8,0x23,0x00,0x00,0x90}};// JMP  6FA8CE00-6FA8B428 ;install loadlibrary
+BYTE callOldLoad[8][6]={{0xFF,0x15,0x3C,0xC0,0xA7,0x6F},
 						{0xFF,0x15,0x3C,0xC0,0xA7,0x6F},
 						{0xFF,0x15,0x40,0xC0,0xA7,0x6F},
 						{0xFF,0x15,0x1C,0xD1,0xA8,0x6F},
 						{0xFF,0x15,0x1C,0xD1,0xA8,0x6F},
 						{0xFF,0x15,0x1C,0xD1,0xA8,0x6F},
+						{0xFF,0x15,0x1C,0xD1,0xA8,0x6F},
 						{0xFF,0x15,0x1C,0xD1,0xA8,0x6F}};
 
-int CALL_FREE[7] = {0x3A8C,0x3A8C,0x3A6D,0x8ACA,0xB3CA,0x8F0A,0xB3CA};
-BYTE callNewFree[7][6]={{0xE8,0xAF,0x83,0x00,0x00,0x90}, // JMP  6FA7BE40-6FA73A91 ;install freelibrary
+int CALL_FREE[8] = {0x3A8C,0x3A8C,0x3A6D,0x8ACA,0xB3CA,0x8F0A,0xB3CA,0xA9AA};
+BYTE callNewFree[8][6]={{0xE8,0xAF,0x83,0x00,0x00,0x90}, // JMP  6FA7BE40-6FA73A91 ;install freelibrary
 						{0xE8,0xAF,0x83,0x00,0x00,0x90}, // JMP  6FA7BE40-6FA73A91 ;install freelibrary
 						{0xE8,0xD2,0x83,0x00,0x00,0x90}, // JMP  6FA7BE44-6FA73A72 ;install freelibrary
 						{0xE8,0x75,0x43,0x00,0x00,0x90}, // JMP  6FA8CE44-6FA88ACF ;install freelibrary
 						{0xE8,0x75,0x1A,0x00,0x00,0x90}, // JMP  6FA8CE44-6FA8B3CF ;install freelibrary
 						{0xE8,0x35,0x3F,0x00,0x00,0x90}, // JMP  6FA8CE44-6FA88F0F ;install freelibrary
-						{0xE8,0x75,0x1A,0x00,0x00,0x90}};// JMP  6FA8CE44-6FA8B3CF ;install freelibrary
-BYTE callOldFree[7][6]={{0xFF,0x15,0x44,0xC0,0xA7,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
+						{0xE8,0x75,0x1A,0x00,0x00,0x90}, // JMP  6FA8CE44-6FA8B3CF ;install freelibrary
+						{0xE8,0x95,0x24,0x00,0x00,0x90}};// JMP  6FA8CE44-6FA8B3CF ;install freelibrary
+BYTE callOldFree[8][6]={{0xFF,0x15,0x44,0xC0,0xA7,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
 						{0xFF,0x15,0x44,0xC0,0xA7,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
 						{0xFF,0x15,0x48,0xC0,0xA7,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
 						{0xFF,0x15,0x2C,0xD1,0xA8,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
 						{0xFF,0x15,0x2C,0xD1,0xA8,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
 						{0xFF,0x15,0x2C,0xD1,0xA8,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
-						{0xFF,0x15,0x2C,0xD1,0xA8,0x6F}};// CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
+						{0xFF,0x15,0x2C,0xD1,0xA8,0x6F}, // CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
+						{0xFF,0x15,0x24,0xD1,0xA8,0x6F}};// CALL DWORD PTR DS:[<&KERNEL32.FreeLibrary>]
 
 int CALLER_LOADPLUGY = 0xBE00;//6FA7BE00-6FA70000
 BYTE caller_LoadPlugY[]={
@@ -108,9 +114,9 @@ enum eFileVersion
 	V111b,
 	V112,
 	V113c,
-	UNKNOW
+	V113d
 };
-
+/*
 int getVersion(FILE *dll)
 {
 	int ver;
@@ -143,7 +149,7 @@ int getVersion(FILE *dll)
 		ver = UNKNOW;
 	return ver;
 }
-
+*/
 
 void updateData(int version)
 {
@@ -164,6 +170,7 @@ void updateData(int version)
 	case V111b:
 	case V112:
 	case V113c:
+	case V113d:
 		CALLER_LOADPLUGY += 0x1000;
 		CALLER_FREEPLUGY += 0x1000;
 		S_INIT += 0x1000;
@@ -172,9 +179,16 @@ void updateData(int version)
 		*(DWORD*)(&caller_LoadPlugY[6]) = 0x6FA8D11C;
 		*(DWORD*)(&caller_LoadPlugY[18]) = 0x6FA8D11C;
 		*(DWORD*)(&caller_LoadPlugY[39]) = 0x6FA8D120;
-		*(DWORD*)(&caller_FreePlugY[6]) = 0x6FA8D12C;
+		if (version == V113d)
+		{
+			*(DWORD*)(&caller_FreePlugY[6]) = 0x6FA8D124;
+			*(DWORD*)(&caller_FreePlugY[48]) = 0x6FA8D124;
+		} else
+		{
+			*(DWORD*)(&caller_FreePlugY[6]) = 0x6FA8D12C;
+			*(DWORD*)(&caller_FreePlugY[48]) = 0x6FA8D12C;
+		}
 		*(DWORD*)(&caller_FreePlugY[36]) = 0x6FA8D120;
-		*(DWORD*)(&caller_FreePlugY[48]) = 0x6FA8D12C;
 		caller_LoadPlugY[13] += 0x10;
 		caller_LoadPlugY[14]++;
 		caller_LoadPlugY[25]++;
@@ -191,6 +205,18 @@ void updateData(int version)
 }
 
 ////////////////////////////// EXPORTED FUNCTIONS //////////////////////////////
+
+int GetD2Ver()
+{
+	char currentpath[MAX_PATH];
+	if (! GetD2Path(currentpath, MAX_PATH))
+	{
+		MessageBox(0,"Can't find path to Game.exe.",
+		boxNameInstall, MB_OK|MB_ICONEXCLAMATION);
+		exit(0);;
+	}
+	return GetD2Version(currentpath);
+}
 
 void Patch()
 {
@@ -215,9 +241,12 @@ void Patch()
 		exit(0);
 	}
 
-	int version = getVersion(dll);
+	//int version = getVersion(dll);
+		
+	int version = GetD2Ver();
 
-	if (version == UNKNOW)
+	//if (version == UNKNOW)
+	if (version == -1)
 	{
 		MessageBox(0,"Bad version of D2gfx.dll.\n"
 					 "You can try to uninstall any previous version of PlugY, The Survival Kit then retry.\n"
@@ -341,9 +370,11 @@ void Unpatch()
 		exit(0);
 	}
 
-	int version = getVersion(dll);
+	//int version = getVersion(dll);
+	int version = GetD2Ver();
 
-	if (version == UNKNOW)
+	//if (version == UNKNOW)
+	if (version == -1)
 	{
 		MessageBox(0,"Bad version of D2gfx.dll.\n"
 					 "You can try to uninstall any previous version of PlugY, The Survival Kit then retry.\n"

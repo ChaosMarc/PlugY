@@ -1,9 +1,11 @@
 /*
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 */
 #include <windows.h>
 #include <stdio.h>
 #include <Psapi.h>
+#include "../Commons/VersionInfo.h"
 //#using <mscorlib.dll>
 //#using <System.dll>
 //using namespace EnvDTE;
@@ -32,12 +34,13 @@ $+40     >CD AB BA DC 00 00 00 00                          Í«ºÜ....
 */
 
 #define SUBKEY "Software\\Blizzard Entertainment\\Diablo II"
-#define GAMEFILE "\\Game.exe "
+#define GAMEFILE "\\Game.exe"
 #define INIFILE "\\PlugY.ini"
 #define LAUNCHING "LAUNCHING"
 #define LOD_VERSION "LodVersionFolder"
 #define PARAM "Param"
 #define LIBRARY_NAME "Library"
+
 
 BYTE loadDll[]={
 0xFF,0x74,0x24,0x04,			//PUSH DWORD PTR SS:[ESP+4]
@@ -101,6 +104,7 @@ BYTE freeDll[]={
 //LPCSTR dllName = "PlugY.dll";
 LPCSTR initFctName = "_Init@4";
 LPCSTR releaseFctName = "_Release@0";
+
 static bool versionXP;
 
 typedef int (__stdcall* tDebugActiveProcessStop)(DWORD);
@@ -113,24 +117,27 @@ void assertion(LPCSTR msg)
 	exit(1);
 }
 
-bool installPlugY(HANDLE h, DWORD addr, char* libraryName, int isAdd)
+bool installPlugY(HANDLE h, DWORD addr, char* libraryName, int isAdd, int ver)
 {
 	BYTE buf[200];
 	DWORD pos=0;
 	SIZE_T nb=0;
-	DWORD version;
+	SIZE_T nb2=0;
+	//DWORD version;
 	int res;
-
-	// Get Version and needed addresses.
-	res = ReadProcessMemory(h,(LPVOID)(addr+0x110),&version,4,&nb);//0x80
-	if (!res || (nb!=4)) assertion("Read to get current d2gfx version in memory failed");
 	
+			
+	// Get Version and needed addresses.
+/*	res = ReadProcessMemory(h,(LPVOID)(addr+0x110),&version,4,&nb);//0x80
+	if (!res || (nb!=4)) assertion("Read to get current d2gfx version in memory failed");
+*/
 	DWORD loadCallerAddr = addr;
 	DWORD freeCallerAddr = addr;
 	DWORD loadLibraryAddr = addr;
 	DWORD freeLibraryAddr = addr;
 	DWORD getProcAddressAddr = addr;
 //	GET_VERSION(D2gfx,		110,	000054EB, 00001000, 0000C000, 42E6C22A, 43028B19);//110
+/*
 	switch (version)
 	{
 	case 0x000054EB://1.09b 0x00949FA8:
@@ -169,7 +176,7 @@ bool installPlugY(HANDLE h, DWORD addr, char* libraryName, int isAdd)
 		freeLibraryAddr += 0xD12C;
 		getProcAddressAddr += 0xD120;
 		break;
-	case 0x00000000://1.13c
+	case 0x00000000://1.13
 		loadCallerAddr += 0xB423;
 		freeCallerAddr += 0xB3CA;
 		loadLibraryAddr += 0xD11C;
@@ -178,7 +185,66 @@ bool installPlugY(HANDLE h, DWORD addr, char* libraryName, int isAdd)
 		break;
 	default:
 		assertion("Wrong version of the library D2gfx.dll");
+	}*/
+	
+	switch (ver)
+	{	
+	case v109b:
+	case v109d:
+		loadCallerAddr += 0x389B;
+		freeCallerAddr += 0x3A8C;
+		loadLibraryAddr += 0xC03C;
+		freeLibraryAddr += 0xC044;
+		getProcAddressAddr += 0xC038;
+		break;
+	case v110:
+		loadCallerAddr += 0x3870;
+		freeCallerAddr += 0x3A6D;
+		loadLibraryAddr += 0xC040;
+		freeLibraryAddr += 0xC048;
+		getProcAddressAddr += 0xC03C;
+		break;
+	case v111:
+		loadCallerAddr += 0x8B23;
+		freeCallerAddr += 0x8ACA;
+		loadLibraryAddr += 0xD11C;
+		freeLibraryAddr += 0xD12C;
+		getProcAddressAddr += 0xD120;
+		break;
+	case v111b:
+		loadCallerAddr += 0xB423;
+		freeCallerAddr += 0xB3CA;
+		loadLibraryAddr += 0xD11C;
+		freeLibraryAddr += 0xD12C;
+		getProcAddressAddr += 0xD120;
+		break;
+	case v112:
+		loadCallerAddr += 0x8F63;
+		freeCallerAddr += 0x8F0A;
+		loadLibraryAddr += 0xD11C;
+		freeLibraryAddr += 0xD12C;
+		getProcAddressAddr += 0xD120;
+		break;
+	case v113c:
+		loadCallerAddr += 0xB423;
+		freeCallerAddr += 0xB3CA;
+		loadLibraryAddr += 0xD11C;
+		freeLibraryAddr += 0xD12C;
+		getProcAddressAddr += 0xD120;
+		break;
+	case v113d:
+		loadCallerAddr += 0xAA03;
+		freeCallerAddr += 0xA9AA;
+		loadLibraryAddr += 0xD11C;
+		freeLibraryAddr += 0xD124;
+		getProcAddressAddr += 0xD120;
+		break;	
+	default:
+		return false;//assertion("Wrong version of the Game.exe");
 	}
+
+//const char sD2Ver[8][7] = {{"v1.09b"},{"v1.09d"},{"v1.10 "},{"v1.11 "},{"v1.11b"},{"v1.12 "},{"v1.13c"},{"v1.13d"}};
+//assertion(sD2Ver[version]);
 
 	//Verify if memory are ok.
 	bool alreadyInstalled = false;
@@ -360,7 +426,7 @@ bool launchNormal(char* command, char* currentDirectory)
 	return success?true:false;
 }
 
-bool launchGame98(char* command, char* currentDirectory, char* libraryName)
+bool launchGame98(char* command, char* currentDirectory, char* libraryName, int ver)
 {
 //	MessageBox(0, "LAUNCH 98", "PlugYRun", MB_OK|MB_ICONASTERISK);
 	STARTUPINFO si;
@@ -383,14 +449,14 @@ bool launchGame98(char* command, char* currentDirectory, char* libraryName)
 		if (isD2gfx(pi.hProcess,(LPVOID)0x6FA80000))
 		{
 //			MessageBox(0, "INSTALL 98", "PlugYRun", MB_OK|MB_ICONASTERISK);
-			installPlugY(pi.hProcess, 0x6FA80000, libraryName, 1);
+			installPlugY(pi.hProcess, 0x6FA80000, libraryName, 1, ver);
 			ResumeThread(pi.hThread);
 			return true;
 		}
 		if (isD2gfx(pi.hProcess,(LPVOID)0x6FA70000))
 		{
 //			MessageBox(0, "INSTALL 98", "PlugYRun", MB_OK|MB_ICONASTERISK);
-			installPlugY(pi.hProcess, 0x6FA70000, libraryName, 0);
+			installPlugY(pi.hProcess, 0x6FA70000, libraryName, 0, ver);
 			ResumeThread(pi.hThread);
 			return true;
 		}
@@ -401,7 +467,7 @@ bool launchGame98(char* command, char* currentDirectory, char* libraryName)
 }
 
 
-bool launchGameXP(char* command, char* currentDirectory, char* libraryName)
+bool launchGameXP(char* command, char* currentDirectory, char* libraryName, int ver)
 {
 //	MessageBox(0, "LAUNCH XP", "PlugYRun", MB_OK|MB_ICONASTERISK);
 	STARTUPINFO si;
@@ -442,7 +508,7 @@ bool launchGameXP(char* command, char* currentDirectory, char* libraryName)
 			if(isD2gfx(pi.hProcess, DebugEvent.u.LoadDll.lpBaseOfDll))
 			{
 //				MessageBox(0, "INSTALL XP", "PlugYRun", MB_OK|MB_ICONASTERISK);
-				installPlugY(pi.hProcess, (DWORD)DebugEvent.u.LoadDll.lpBaseOfDll, libraryName, (DWORD)DebugEvent.u.LoadDll.lpBaseOfDll == 0x6FA8000);
+				installPlugY(pi.hProcess, (DWORD)DebugEvent.u.LoadDll.lpBaseOfDll, libraryName, (DWORD)DebugEvent.u.LoadDll.lpBaseOfDll == 0x6FA8000, ver);
 				CloseHandle(DebugEvent.u.LoadDll.hFile);
 				CloseHandle(pi.hProcess);
 				CloseHandle(pi.hThread);
@@ -465,6 +531,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	char currrentDirectory[MAX_PATH];
 	char iniFileName[MAX_PATH];
 	char command[MAX_PATH+50];
+	int ver;
 
 //	MessageBox(NULL,"START","PlugYRun",MB_OK);
 	//Get Current Directory.
@@ -489,6 +556,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (!getWinReg(command, MAX_PATH+50))
 			 return 1;
 
+	ver = GetD2Version(command);
+	if (ver == -1) assertion("Wrong version of the Game.exe");
+	strcat(command, " ");
+
 	//Add params.
 	strcat(command,lpCmdLine);
 	len = strlen(command);
@@ -496,7 +567,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//copyLodVersionFiles();
 
-	char libraryName[50];
+	char libraryName[50];		
 	if (!GetPrivateProfileString(LAUNCHING,LIBRARY_NAME,"",libraryName,50,iniFileName) || !libraryName[0])
 		return !launchNormal(command, currrentDirectory);
 
@@ -506,9 +577,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		debugActiveProcessStop = (tDebugActiveProcessStop) GetProcAddress(module,"DebugActiveProcessStop");
 		if (debugActiveProcessStop)
-			return !launchGameXP(command, currrentDirectory, libraryName);
+			return !launchGameXP(command, currrentDirectory, libraryName, ver);
 	}
-	return !launchGame98(command, currrentDirectory, libraryName);
+	return !launchGame98(command, currrentDirectory, libraryName, ver);
 }
 
 

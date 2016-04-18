@@ -1,5 +1,6 @@
 /*================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
     This file implements some common and useful
     function related to some Diablo II mechanisms.
@@ -15,9 +16,9 @@
 #define E2S(F, A, R, N, P)	typedef R (STDCALL  *T##N) P; extern T##N N;
 #define E2F(F, A, R, N, P)	typedef R (FASTCALL *T##N) P; extern T##N N;
 #define E2C(F, A, T, N)		extern T* pt##N;
-#define F7(X, Z, A,B,C,D,E,F,G, R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
-#define A7(X, Z, A,B,C,D,E,F,G, R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
-#define C7(Z, A,B,C,D,E,F,G, T, N)       extern T* pt##N;
+#define F7(X, Z, A,B,C,D,E,F,G,H,  R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
+#define A7(X, Z, A,B,C,D,E,F,G,H,  R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
+#define C7(Z, A,B,C,D,E,F,G,H, T, N)       extern T* pt##N;
 
 #include "../Commons/D2Funcs.h"
 extern DataTables* SgptDataTables;

@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Unassign Stats Point for futher re-assignment.
 
@@ -331,39 +332,42 @@ void Install_StatsPoints()
 //if ( version_D2Client < V113 )
 {
 	// Always print stat button images.
-	mem_seek R7(D2Client, 29B12, 29B02, 30073, 82BBA, 8963A, 6B59A, BD1B5);
+	mem_seek R7(D2Client, 29B12, 29B02, 30073, 82BBA, 8963A, 6B59A, BD1B5, BF955);
 	memt_byte( 0x8B, 0xEB );	// JMP SHORT D2Client.6FAD0088
-	memt_byte( 0x4C, V7(D2Client, 12, 12, 13, 13, 13, 13, 13) );
+	memt_byte( 0x4C, V7(D2Client, 12, 12, 13, 13, 13, 13, 13, 13) );
 	memt_byte( 0x24, 0x90 );	// NOP
-	memt_byte( V7(D2Client, 20, 20, 14, 1C, 1C, 1C, 1C), 0x90 );			// NOP (V109d:0x20 , V110:0x14
+	memt_byte( V7(D2Client, 20, 20, 14, 1C, 1C, 1C, 1C, 1C), 0x90 );			// NOP (V109d:0x20 , V110:0x14
 	//6FAD0073     8B4C24 14      MOV ECX,DWORD PTR SS:[ESP+14]
 	//6FB32BBA   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB3963A   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB1B59A   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB6D1B5  |> 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
+	//6FB6F955   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 
 	//print our buttons
-	mem_seek R7(D2Client, 29B9D, 29B8D, 300FD, 82C54, 896D4, 6B637, BD23E);
+	mem_seek R7(D2Client, 29B9D, 29B8D, 300FD, 82C54, 896D4, 6B637, BD23E, BF9DE);
 	MEMJ_REF4( D2PrintImage, caller_printUnassignStatsBtn);
 	//6FB32C53   . E8 82A3F8FF    CALL <JMP.&D2gfx.#10047>
 	//6FB396D3   . E8 D238F8FF    CALL <JMP.&D2gfx.#10044>
 	//6FB1B636   . E8 431AFAFF    CALL <JMP.&D2gfx.#10024>
 	//6FB6D23D   . E8 54FEF4FF    CALL <JMP.&D2gfx.#10041>
+	//6FB6F9DD   . E8 ECD5F4FF    CALL <JMP.&D2gfx.#10042>
 
 	// Always manage push down.
-	mem_seek R7(D2Client, 2AA7B, 2AA6B, 3134D, 827D9, 89259, 6B1B9, BCDD9);
+	mem_seek R7(D2Client, 2AA7B, 2AA6B, 3134D, 827D9, 89259, 6B1B9, BCDD9, BF579);
 	memt_byte( 0x74, 0x90 );	// NOP
 	memt_byte( 0x4E, 0x90 );	// NOP
-	//6FAD134D     74 4E             JE SHORT D2Client.6FAD139D
+	//6FAD134D     74 4E          JE SHORT D2Client.6FAD139D
 	//6FB327D9   . 74 4E          JE SHORT D2Client.6FB32829
 	//6FB39259   . 74 4E          JE SHORT D2Client.6FB392A9
-	//6FB1B1B9   74 4E            JE SHORT D2Client.6FB1B209
+	//6FB1B1B9     74 4E          JE SHORT D2Client.6FB1B209
 	//6FB6CDD9   . 74 4E          JE SHORT D2Client.6FB6CE29
+	//6FB6F579   . 74 4E          JE SHORT D2Client.6FB6F5C9
 
 	if ( version_D2Client >= V111 )
 	{
 		// On Push down.
-		mem_seek R7(D2Client, 2AAE6, 2AAD6, 313B8, 82844, 892C4, 6B224, BCE44);
+		mem_seek R7(D2Client, 2AAE6, 2AAD6, 313B8, 82844, 892C4, 6B224, BCE44, BF5E4);
 		memt_byte( 0x6B, 0xE8 );
 		MEMT_REF4( 0x01BF0ED2, caller_pushDown_111);
 		memt_byte( 0x00, 0x6B );	// IMUL EDX,EDX,0E
@@ -377,10 +381,12 @@ void Install_StatsPoints()
 		//6FB1B227   BF 01000000      MOV EDI,1
 		//6FB6CE44   > 6BD2 0E        IMUL EDX,EDX,0E
 		//6FB6CE47   . BF 01000000    MOV EDI,1
+		//6FB6F5E4   > 6BD2 0E        IMUL EDX,EDX,0E
+		//6FB6F5E7   . BF 01000000    MOV EDI,1
 
 	} else {
 		// On Push down.
-		mem_seek R7(D2Client, 2AAE6, 2AAD6, 313B8, 82844, 892C4, 0000, 0000);
+		mem_seek R7(D2Client, 2AAE6, 2AAD6, 313B8, 82844, 892C4, 0000, 0000, 0000);
 		memt_byte( 0x8D, 0xE8 );	// CALL
 		MEMT_REF4( 0x0000D504, caller_pushDown);
 		memt_byte( 0x00, 0x90 );	// NOP
@@ -392,17 +398,18 @@ void Install_StatsPoints()
 	if ( version_D2Client >= V110 )
 	{
 		// Always manage push up.
-		mem_seek R7(D2Client, 0000, 0000, 3152E, 83869, 8A2E9, 6C249, BDE49);
+		mem_seek R7(D2Client, 0000, 0000, 3152E, 83869, 8A2E9, 6C249, BDE49, C05E9);
 		memt_byte( 0x74, 0x90 );	// NOP
 		memt_byte( version_D2Client >= V111 ? 0x65 : 0x68, 0x90 );	// NOP
 		//6FAD152E     74 68          JE SHORT D2Client.6FAD1598
 		//6FB33869   . 74 65          JE SHORT D2Client.6FB338D0
 		//6FB3A2E9   . 74 65          JE SHORT D2Client.6FB3A350
-		//6FB1C249   74 65            JE SHORT D2Client.6FB1C2B0
+		//6FB1C249     74 65          JE SHORT D2Client.6FB1C2B0
 		//6FB6DE49   . 74 65          JE SHORT D2Client.6FB6DEB0
+		//6FB705E9   . 74 65          JE SHORT D2Client.6FB70650
 
 		// Unassign stats point when ctrl is push.
-		mem_seek R7(D2Client, 0000, 0000, 315D3, 8391B, 8A39B, 6C2FB, BDEFB);
+		mem_seek R7(D2Client, 0000, 0000, 315D3, 8391B, 8A39B, 6C2FB, BDEFB, C069B);
 		memt_byte( 0x66, 0xE8 );	// CALL
 		MEMT_REF4( 0x077CC085, caller_UnassignStats);
 		//6FAD15D3   . 66:85C0        TEST AX,AX
@@ -415,23 +422,25 @@ void Install_StatsPoints()
 		//6FB1C2FE   . 7C 07          JL SHORT D2Client.6FB1C307
 		//6FB6DEFB   . 66:85C0        TEST AX,AX
 		//6FB6DEFE   . 7C 07          JL SHORT D2Client.6FB6DF07
+		//6FB7069B   . 66:85C0        TEST AX,AX
+		//6FB7069E   . 7C 07          JL SHORT D2Client.6FB706A7
 	} else {
 		// Always manage push up.
-		mem_seek R7(D2Client, 2AC55, 2AC45, 0000, 0000, 0000, 0000, 0000);
+		mem_seek R7(D2Client, 2AC55, 2AC45, 0000, 0000, 0000, 0000, 0000, 0000);
 		memt_byte( 0x0F, 0x90 );	// NOP
 		memt_byte( 0x84, 0x90 );	// NOP
 		memt_dword( 0x000000AE, 0x90909090 );	// NOP NOP NOP NOP
 		//6FACAC45   . 0F84 AE000000  JE D2Client.6FACACF9
 
 		// Unassign stats point when ctrl is push.
-		mem_seek R7(D2Client, 2ACD9, 2ACC9, 0000, 0000, 0000, 0000, 0000);
+		mem_seek R7(D2Client, 2ACD9, 2ACC9, 0000, 0000, 0000, 0000, 0000, 0000);
 		memt_byte( 0xB8, 0xE8 );	// CALL
 		MEMT_REF4( 0x00000001, caller_UnassignStats_9);
 		//6FACACC9   . B8 01000000    MOV EAX,1
 	}
 
 	// Set the id for the calling function.
-	mem_seek R7(D2Client, 2AD02, 2ACF2, 31611, 8395E, 8A3DE, 6C33E, BDF3E);
+	mem_seek R7(D2Client, 2AD02, 2ACF2, 31611, 8395E, 8A3DE, 6C33E, BDF3E, C06DE);
 	if ( version_D2Client >= V111 ) {
 		memt_byte( 0x66, 0xE8 );	// CALL
 		MEMT_REF4( 0x15244C89, caller_setValue_111);
@@ -439,6 +448,7 @@ void Install_StatsPoints()
 		//6FB3A3DE   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX
 		//6FB1C33E   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX              ; |
 		//6FB6DF3E   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX              ; |
+		//6FB706DE   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX              ; |
 	} else {
 		MEMC_REF4( D2SendToServer3, caller_setValue);
 		//6FAD1610   . E8 7BC3FDFF    CALL D2Client.6FAAD990
@@ -475,7 +485,7 @@ void Install_StatsLimitShiftClick()
 	log_msg("Patch D2Client for limit the assigment of stat points when shift is used. (LimitShift)\n");
 
 	// Limit the assigment of stat points.
-	mem_seek R7(D2Client, 2ACD0, 2ACC0, 315CD, 83915, 8A395, 6C2F5, BDEF5);
+	mem_seek R7(D2Client, 2ACD0, 2ACC0, 315CD, 83915, 8A395, 6C2F5, BDEF5, C0695);
 	memt_byte( 0xFF, 0x90 );	// NOP
 	memt_byte( 0x15, 0xE8 );	// CALL
 	MEMD_REF4( GetKeyState, version_D2Client >= V111 ? caller_LimitShift_111 : caller_LimitShift);
@@ -484,6 +494,7 @@ void Install_StatsLimitShiftClick()
 	//6FB3A395   . FF15 08F1B76F  CALL DWORD PTR DS:[<&USER32.GetKeyState>]
 	//6FB1C2F5   . FF15 10F1B76F  CALL DWORD PTR DS:[<&USER32.GetKeyState>>; \GetKeyState
 	//6FB6DEF5   . FF15 04F1B76F  CALL DWORD PTR DS:[<&USER32.GetKeyState>>; \GetKeyState
+	//6FB70695   . FF15 2001B86F  CALL DWORD PTR DS:[<&USER32.GetKeyState>>; \GetKeyState
 
 	log_msg("\n");
 

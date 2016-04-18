@@ -65,8 +65,8 @@ LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,3,0
- PRODUCTVERSION 1,0,3,0
+ FILEVERSION 1,0,5,0
+ PRODUCTVERSION 1,0,5,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -81,11 +81,12 @@ BEGIN
     BEGIN
         BLOCK "040c04b0"
         BEGIN
+            VALUE "Comments", "Modified by L'Autour"
             VALUE "CompanyName", "Yohann NICOLAS"
-            VALUE "FileVersion", "1.03"
+            VALUE "FileVersion", "1.05"
             VALUE "OriginalFilename", "PlugY.exe"
             VALUE "ProductName", "PlugY launcher."
-            VALUE "ProductVersion", "1.03"
+            VALUE "ProductVersion", "1.05"
         END
     END
     BLOCK "VarFileInfo"

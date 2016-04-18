@@ -3,25 +3,23 @@
 ;                               "PlugY, The Survival Kit"                              ;
 ;                                                                                      ;
 ;                                  by Yohann Nicolas                                   ;
-;                                                                                      ;
-;                                     version 10.00                                    ;
+;                              (modification by L'Autour)                              ;
+;                                     version 11.00                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
-Official website : http://plugy.free.fr
+Official website for version 10.00: http://plugy.free.fr
 You can make a donation if you want.
 
 
 ******** WARNING ********
-- This plug-in works with LoD version 1.09 to 1.13c and mods based on.
+- This plug-in works with LoD version 1.09 to 1.13d and mods based on.
 - This plug-in doesn't work on realms (Battle.net or private).
 - All files may be changed since previous version, so uninstall any previous version.
 - Please, use a clean D2dfx.dll before report any crash on starting LoD.
 - PlugY.ini has changed since previous version, use the one in this package.
 - Don't forget to read the part named "COMMENTS ON THE CONFIGURATION FILE".
-- Don't forget to read the PlugY forum at :
-    http://phrozenkeep.planetdiablo.gamespy.com/forum/viewforum.php?f=133
-
+- Don't forget to read the PlugY forum at : http://d2mods.info/forum/viewforum.php?f=133
 
 ******** FEATURES ********
 - Disable access to Battle.net.
@@ -42,7 +40,13 @@ You can make a donation if you want.
 - Always display Mana and Life values above the globes.
 - D2 can load all files, even those opened with Microsoft Excel (disabled by default).
 - Display the stats current value (without magical bonus) like Magic/gold find or maximum resistances.
-- PlugY is localized in English, French, German, Italian, Spanish, Polish.
+- PlugY is localized in English, French, German, Italian, Spanish, Polish, *Portuguese, Japanese, Korean, Chinese, Polish, *Russian.
+  (* - required informal localization of the game.)
+
+
+v11.00 changes :
+- PlugY works for 1.13d version of LoD too.
+- A complete support of all languages in game.
 
 
 v10.00 changes :
@@ -329,13 +333,15 @@ v1.00 features (can all be easily enabled or disabled) :
 
 
 ******** CONTENTS ********
-19 files, 1 folder :
+21 files, 1 folder :
 - PlugY_The_Survival_Kit_-_Readme.txt
 - PlugY_The_Survival_Kit_-_LisezMoi.txt
 - PlugY_The_Survival_Kit_-_Liesmich.txt
 - PlugY.exe
 - PlugY.dll (in Diablo II directory)
 - PlugY.ini
+- Plugy\PlugYLocal.dll
+- Plugy\PlugYLocal.ini
 - PlugY\PlugYFixed.ini
 - PlugY\PlugYDefault.ini
 - PlugY\EmptyPage.dc6
@@ -355,7 +361,7 @@ v1.00 features (can all be easily enabled or disabled) :
 ******** INSTALLATION ********
 - The officials sites are :
 http://djaftal.chez-alice.fr/
-http://phrozenkeep.18v.biz/dload.php?action=category&cat_id=128
+http://d2mods.info/forum/viewforum.php?f=133
 http://diablo2.judgehype.com/index.php?page=telechargements
 
 
@@ -377,6 +383,8 @@ And the mod to add this plug-in is here : D:\D2Mod\MyMod\
 And the second mod to add this plug-in is here : D:\D2Mod\MyMod2\
 So the new installation is :
    C:\Games\Diablo II\PlugY.dll
+   D:\D2Mod\MyMod\Plugy\PlugYLocal.dll
+   D:\D2Mod\MyMod\Plugy\PlugYLocal.ini
    D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
    D:\D2Mod\MyMod\PlugY\PlugYFixed.ini
    D:\D2Mod\MyMod\PlugY\PlugYDefault.ini
@@ -781,9 +789,14 @@ PS : Sorry for english faults ;)
 - PhrozenKeep team for all stuff they shared for us (including mine ;)
 - Translation :
 	* English : Yohann, Jurica.
-	* French : Yohann
+	* French : Yohann.
 	* German : ChaosEnergy, TheMasterCaster.
-	* Italian : ItalianPlayer
+	* Italian : ItalianPlayer 
 	* Spanish : Acrerune
-	* Polish : Serdel
+	* Polish : Serdel + https://translate.google.com
+                                        * Russian: L'Autour.
+                                        * Portuguese: https://translate.google.com
+                                        * Japanese: https://translate.google.com
+                                        * Korean: https://translate.google.com
+                                        * Chinese: https://translate.google.com
                                          ~~~~~~~~~~~~

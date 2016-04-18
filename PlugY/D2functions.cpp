@@ -1,5 +1,6 @@
 /*================================================
 	File created by Yohann NICOLAS.
+	*Add support 1.13d by L'Autour.
 
     This file implements some common and useful
     function related to some Diablo II mechanisms.
@@ -16,9 +17,9 @@
 #define E2S(F, A, R, N, P)	T##N N;
 #define E2F(F, A, R, N, P)	T##N N;
 #define E2C(F, A, T, N)		T* pt##N;
-#define F7(X, Z, A,B,C,D,E,F,G, R, N, P) T##N N;
-#define A7(X, Z, A,B,C,D,E,F,G, R, N, P) T##N N;
-#define C7(Z, A,B,C,D,E,F,G, T, N)       T* pt##N;
+#define F7(X, Z, A,B,C,D,E,F,G,H, R, N, P) T##N N;
+#define A7(X, Z, A,B,C,D,E,F,G,H, R, N, P) T##N N;
+#define C7(Z, A,B,C,D,E,F,G,H, T, N)       T* pt##N;
 
 #include "../Commons/D2Funcs.h"
 DataTables* SgptDataTables;
@@ -616,12 +617,12 @@ bool initD2functions()
 	#define E2S(F, A, R, N, P)	N = (T##N)(offset_##F + 0x##A);
 	#define E2F(F, A, R, N, P)	N = (T##N)(offset_##F + 0x##A);
 	#define E2C(F, A, T, N)		pt##N = (T*)(offset_##F + 0x##A);
-	#define F7(X, Z, A,B,C,D,E,F,G, R, N, P) setFctAddr((DWORD*)&N, (HMODULE)offset_##Z, (LPCSTR)((version_##Z == V113? G : (version_##Z == V112? F : version_##Z == V111b? E : (version_##Z == V111? D : (version_##Z == V110? C : (version_##Z == V109d? B : A)))))));
-	#define A7(X, Z, A,B,C,D,E,F,G, R, N, P) N = (T##N)R7(Z,A,B,C,D,E,F,G);
-	#define C7(Z, A,B,C,D,E,F,G, T, N)       pt##N = (T*)R7(Z,A,B,C,D,E,F,G);
+	#define F7(X, Z, A,B,C,D,E,F,G,H, R, N, P) setFctAddr((DWORD*)&N, (HMODULE)offset_##Z, (LPCSTR)((version_##Z == V113d? H : (version_##Z == V113c? G : (version_##Z == V112? F : (version_##Z == V111b? E : (version_##Z == V111? D : (version_##Z == V110? C : (version_##Z == V109d? B : A)))))))));
+	#define A7(X, Z, A,B,C,D,E,F,G,H, R, N, P) N = (T##N)R7(Z,A,B,C,D,E,F,G,H);
+	#define C7(Z, A,B,C,D,E,F,G,H, T, N)       pt##N = (T*)R7(Z,A,B,C,D,E,F,G,H);
 
 	#include "../Commons/D2Funcs.h"
-	SgptDataTables = *(DataTables**) R7(D2Common, 0000, 0000, 96A20, 9B74C, 9EE8C, 9B500, 99E1C);
+	SgptDataTables = *(DataTables**) R7(D2Common, 0000, 0000, 96A20, 9B74C, 9EE8C, 9B500, 99E1C, A33F0);
 	if (version_D2Common < V110)
 	{
 		D2S(D2Common,10581,	CharStatsBIN*,		D2Common10581, (DWORD charID));//ONLY in 1.09
@@ -915,10 +916,10 @@ bool initD2functions()
 		D2GetClientPlayer = D2GetClientPlayer_111;
 		D2GetRealItem = D2GetRealItem_111;
 		D2CleanStatMouseUp = D2CleanStatMouseUp_111;
-		StatMouse1 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C004, 11C2F4, 11C040, 11C3DC);
-		StatMouse2 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C008, 11C2F8, 11C044, 11C3E0);
-		StatMouse3 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C020, 11C310, 11C05C, 11C3F8);
-		StatMouse4 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C024, 11C314, 11C060, 11C3FC);
+		StatMouse1 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C004, 11C2F4, 11C040, 11C3DC, 11D224);
+		StatMouse2 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C008, 11C2F8, 11C044, 11C3E0, 11D228);
+		StatMouse3 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C020, 11C310, 11C05C, 11C3F8, 11D240);
+		StatMouse4 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C024, 11C314, 11C060, 11C3FC, 11D244);
 	} else {
 		D2SendToServer = (TD2SendToServer) D2SendToServer_1XX;
 		D2GetGameByClientID = (TD2GetGameByClientID) D2GetGameByClientID_1XX;
@@ -946,16 +947,16 @@ bool initD2functions()
 
 
 	//////////////// STRUCTURE MANAGEMENT ////////////////
-
+	//L'Autour - ??????
 //	shifting.ptPYPlayerData = V7(D2Common,118,118,F4,F4,F4,F4,F4);
-	shifting.ptPYPlayerData = *(DWORD*)((DWORD)D2InitPlayerData + V7(D2Common,5D,5D,5D,49,49,49,49));
-	shifting.ptSpecificData = V7(D2Common,70,70,14,14,14,14,14);
-	shifting.ptGame = V7(D2Common,A4,A4,80,80,80,80,80);
-	shifting.ptClientGame = V7(D2Common,170,194,1A8,1A8,1A8,1A8,1A8);
-	shifting.ptInventory = V7(D2Common,84,84,60,60,60,60,60);
-	shifting.ptSkills = V7(D2Common,CC,CC,A8,A8,A8,A8,A8);
-	shifting.ptImage = V7(D2Common,04,04,04,08,08,3C,34);
-	shifting.ptFrame = V7(D2Common,08,08,08,44,44,40,00);
+	shifting.ptPYPlayerData = *(DWORD*)((DWORD)D2InitPlayerData + V7(D2Common,5D,5D,5D,49,49,49,49,49));
+	shifting.ptSpecificData = V7(D2Common,70,70,14,14,14,14,14,14);
+	shifting.ptGame = V7(D2Common,A4,A4,80,80,80,80,80,80);
+	shifting.ptClientGame = V7(D2Common,170,194,1A8,1A8,1A8,1A8,1A8,1A8);
+	shifting.ptInventory = V7(D2Common,84,84,60,60,60,60,60,60);
+	shifting.ptSkills = V7(D2Common,CC,CC,A8,A8,A8,A8,A8,A8);
+	shifting.ptImage = V7(D2Common,04,04,04,08,08,3C,34,34);
+	shifting.ptFrame = V7(D2Common,08,08,08,44,44,40,00,00);
 	return true;
 }
 

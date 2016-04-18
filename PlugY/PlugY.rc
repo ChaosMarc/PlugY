@@ -65,8 +65,8 @@ LANGUAGE LANG_FRENCH, SUBLANG_FRENCH
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 10,0,0,0
- PRODUCTVERSION 10,0,0,0
+ FILEVERSION 11,0,0,0
+ PRODUCTVERSION 11,0,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -81,11 +81,12 @@ BEGIN
     BEGIN
         BLOCK "040004b0"
         BEGIN
+            VALUE "Comments", "Modified by L'Autour"
             VALUE "CompanyName", "Yohann Nicolas"
-            VALUE "FileVersion", "10.00"
+            VALUE "FileVersion", "11.00"
             VALUE "OriginalFilename", "PlugY.dll"
             VALUE "ProductName", "PlugY, The Survival Kit"
-            VALUE "ProductVersion", "10.00"
+            VALUE "ProductVersion", "11.00"
         END
     END
     BLOCK "VarFileInfo"

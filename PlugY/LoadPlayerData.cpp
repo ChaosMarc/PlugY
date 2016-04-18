@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
   Load Player Custom Data.
 
@@ -476,7 +477,7 @@ void Install_LoadPlayerData()
 	log_msg("Patch D2Game & D2Client for load Player's custom data. (LoadPlayerData)\n");
 
 	// Load SP player custom data.
-	mem_seek R7(D2Game, 5046F, 5086F, 5CB0F, BB8ED, 278CD, 465BD, 5638D);
+	mem_seek R7(D2Game, 5046F, 5086F, 5CB0F, BB8ED, 278CD, 465BD, 5638D, 3BCCD);
 	memt_byte( 0x8B, 0xE8); // CALL caller_LoadSPPlayerCustomData
 	MEMT_REF4( 0x75F685F0 , caller_LoadSPPlayerCustomData);
 	memt_byte( 0x16, 0x90); // NOP
@@ -495,9 +496,12 @@ void Install_LoadPlayerData()
 	//6FC7638D  |> 8BF0           MOV ESI,EAX
 	//6FC7638F  |. 85F6           TEST ESI,ESI
 	//6FC76391  |. 75 16          JNZ SHORT D2Game.6FC763A9
+	//6FC5BCCD  |> 8BF0           MOV ESI,EAX
+	//6FC5BCCF  |. 85F6           TEST ESI,ESI
+	//6FC5BCD1  |. 75 16          JNZ SHORT D2Game.6FC5BCE9
 
 	// Load MP player custom data.
-	mem_seek R7(D2Game, 50790, 50B90, 5CC66, BB777, 27757, 46447, 56217);
+	mem_seek R7(D2Game, 50790, 50B90, 5CC66, BB777, 27757, 46447, 56217, 3BB57);
 	memt_byte( 0x83, 0xE8);
 	MEMT_REF4( version_D2Game >= V111 ? 0x2174003B : version_D2Game == V110 ? 0x4674003F : 0x1D74003F, version_D2Game >= V111 ? caller_LoadMPPlayerCustomData_111 : version_D2Game == V110 ? caller_LoadMPPlayerCustomData: caller_LoadMPPlayerCustomData_9);
 	//6FC8CC66  . 833F 00         CMP DWORD PTR DS:[EDI],0
@@ -510,18 +514,21 @@ void Install_LoadPlayerData()
 	//6FC6644A  |. 74 21          JE SHORT D2Game.6FC6646D
 	//6FC76217  |> 833B 00        CMP DWORD PTR DS:[EBX],0
 	//6FC7621A  |. 74 21          JE SHORT D2Game.6FC7623D
+	//6FC5BB57  |> 833B 00        CMP DWORD PTR DS:[EBX],0
+	//6FC5BB5A  |. 74 21          JE SHORT D2Game.6FC5BB7D
 
 	// Send save files to Server.
-	mem_seek R7(D2Client, CF42, CF32, D5A2, 733FC, 5DFDC, 7933C, 1457C);
+	mem_seek R7(D2Client, CF42, CF32, D5A2, 733FC, 5DFDC, 7933C, 1457C, B638C);
 	MEMJ_REF4( D2FogGetSavePath, version_D2Game >= V111 ? caller_SendSaveFiles_111 : caller_SendSaveFiles);
 	//6FAAD5A1  |. E8 88D10B00    CALL <JMP.&Fog.#10115>
 	//6FB233FB  |. E8 CA8AF9FF    CALL <JMP.&Fog.#10115>
 	//6FB0DFDB  |. E8 C6DEFAFF    CALL <JMP.&Fog.#10115>
 	//6FB2933B  |. E8 6A2CF9FF    CALL <JMP.&Fog.#10115>
 	//6FAC457B  |. E8 187AFFFF    CALL <JMP.&Fog.#10115>
+	//6FB6638B  |. E8 2E5BF5FF    CALL <JMP.&Fog.#10115>
 
 	// Receive save files from client.
-	mem_seek R7(D2Game, 183A, 183A, 191A, 376E9, 703D9, 624D9, CAF39);
+	mem_seek R7(D2Game, 183A, 183A, 191A, 376E9, 703D9, 624D9, CAF39, D53E9);
 	memt_byte( 0x8B ,0xE8);
 	if ( version_D2Game >= V111 ) {
 		MEMT_REF4( 0xB60F005D, caller_ReceiveSaveFiles_111);
@@ -535,6 +542,8 @@ void Install_LoadPlayerData()
 		//6FC824DC  |. 0FB645 04      MOVZX EAX,BYTE PTR SS:[EBP+4]
 		//6FCEAF39  |. 8B5D 00        MOV EBX,DWORD PTR SS:[EBP]
 		//6FCEAF3C  |. 0FB645 04      MOVZX EAX,BYTE PTR SS:[EBP+4]
+		//6FCF53E9  |. 8B5D 00        MOV EBX,DWORD PTR SS:[EBP]
+		//6FCF53EC  |. 0FB645 04      MOVZX EAX,BYTE PTR SS:[EBP+4]
 	} else {
 		MEMT_REF4( 0x04468A3E, caller_ReceiveSaveFiles);
 		//6FC3191A  |. 8B3E           MOV EDI,DWORD PTR DS:[ESI]
@@ -543,7 +552,7 @@ void Install_LoadPlayerData()
 
 	if ( version_Fog <= V109d )
 	{
-		mem_seek R7(Fog, 47DE, 45AE, 0000, 0000, 0000, 0000, 0000);
+		mem_seek R7(Fog, 47DE, 45AE, 0000, 0000, 0000, 0000, 0000, 0000);
 		memt_byte( 0x8B ,0xE8);
 		MEMT_REF4( 0x891C2444, version_Fog == V109b? caller_BugFix109b : caller_BugFix109d);
 		memt_byte( 0x44 ,0x90);

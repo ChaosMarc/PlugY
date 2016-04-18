@@ -1,5 +1,6 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
 	Interface functions
 
@@ -36,7 +37,7 @@ void STDCALL printSkillsPageBtns()
 
 		if ( isOnButtonUnassignSkill(D2GetMouseX(),D2GetMouseY()))
 		{
-			LPWSTR popupText = getTranslatedString(STR_SKILLS_UNASSIGN);
+			LPWSTR popupText = getTranslatedString(STR_SKILLS_UNASSIGN);			
 			D2PrintPopup(popupText, getXSkillBtn()+getLSkillBtn()/2, getYSkillBtn()-getHSkillBtn(), 0, 1);
 		}
 	}
@@ -140,7 +141,7 @@ void Install_InterfaceSkills()
 	log_msg("Patch D2Client for skills interface. (InterfaceSkills)\n");
 
 	// Print new buttons images
-	mem_seek R7(D2Client, 7AC20, 7AC20, 77073, 16190, 8A9C0, 7F320, 77F20);
+	mem_seek R7(D2Client, 7AC20, 7AC20, 77073, 16190, 8A9C0, 7F320, 77F20, 2F380);
 	memt_byte( 0x5F, 0xE9 );	// JMP caller_printBtns
 	if ( version_D2Client >= V111 ) {
 		MEMT_REF4( 0xCCC35B5E, caller_printSkillsPageBtns_111);
@@ -164,6 +165,11 @@ void Install_InterfaceSkills()
 		//6FB27F22  |. 5B             POP EBX
 		//6FB27F23  \. C3             RETN
 		//6FB27F24     CC             INT3
+		//6FADF380  |> 5F             POP EDI
+		//6FADF381  |. 5E             POP ESI
+		//6FADF382  |. 5B             POP EBX
+		//6FADF383  \. C3             RETN
+		//6FADF384     CC             INT3
 	} else {
 		MEMT_REF4( 0x835B5D5E, caller_printSkillsPageBtns);
 		memt_byte( 0xC4, 0x90 );	// NOP
@@ -180,7 +186,7 @@ void Install_InterfaceSkills()
 	if (posXUnassignSkillBtn==-1 && posYUnassignSkillBtn==-1)
 	{
 		// Don't print "Skill Points Remaining"
-		mem_seek R7(D2Client, 7AC30, 7AC30, 77080, 16294, 8AC74, 7ECF4, 78334);
+		mem_seek R7(D2Client, 7AC30, 7AC30, 77080, 16294, 8AC74, 7ECF4, 78334, 2F7E4);
 		memt_byte( 0xB9, 0xE8 );
 		MEMT_REF4( 0x00001083, version_D2Client >= V111 ? caller_DontPrintSkillPointsRemaining_111 : caller_DontPrintSkillPointsRemaining);
 		//6FB17080  /$ B9 83100000    MOV ECX,1083
@@ -188,10 +194,11 @@ void Install_InterfaceSkills()
 		//6FB3AC74  |. B9 83100000    MOV ECX,1083
 		//6FB2ECF4  |. B9 83100000    MOV ECX,1083
 		//6FB28334  |. B9 83100000    MOV ECX,1083
+		//6FADF7E4  |. B9 83100000    MOV ECX,1083
 	}
 
 	// Manage mouse down (Play sound)
-	mem_seek R7(D2Client, 7BBD1, 7BBD1, 780E4, 17BC2, 8C6E2, 808B2, 79C62);
+	mem_seek R7(D2Client, 7BBD1, 7BBD1, 780E4, 17BC2, 8C6E2, 808B2, 79C62, 31112);
 	memt_byte( 0xC7, 0xE8 );	// CALL caller_skillsPageMouseDown
 	MEMT_REF4( version_D2Client >= V111 ? 0x00001845 : 0x00001843, version_D2Client >= V111 ? caller_skillsPageMouseDown_111 : caller_skillsPageMouseDown);
 	memt_byte( 0x00, 0x90 );	// NOP
@@ -199,17 +206,19 @@ void Install_InterfaceSkills()
 	//6FB180E4   > C743 18 00000000     MOV DWORD PTR DS:[EBX+18],0
 	//6FAC7BC2   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
 	//6FB3C6E2   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
-	//6FB308B2   > C745 18 000000>MOV DWORD PTR SS:[EBP+18],0
-	//6FB29C62   > C745 18 000000>MOV DWORD PTR SS:[EBP+18],0
+	//6FB308B2   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
+	//6FB29C62   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
+	//6FAE1112   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
 
 	// Manage mouse up
-	mem_seek R7(D2Client, 7BC40, 7BC40, 78466, 17558, 8C078, 80248, 795F8);
+	mem_seek R7(D2Client, 7BC40, 7BC40, 78466, 17558, 8C078, 80248, 795F8, 30AA8);
 	MEMJ_REF4( D2FreeWinMessage, caller_skillsPageMouseUp);//0xFFF93B0A
 	//6FB18465   . E8 C07D0400    CALL <JMP.&Storm.#511>
 	//6FAC7557   .^E9 4248FFFF    JMP <JMP.&Storm.#511>
 	//6FB3C077   .^E9 16FDF7FF    JMP <JMP.&Storm.#511>
 	//6FB30247   .^E9 2CBCF8FF    JMP <JMP.&Storm.#511>
 	//6FB295F7   .^E9 8828F9FF    JMP <JMP.&Storm.#511>
+	//6FAE0AA7   .^E9 E0B2FDFF    JMP <JMP.&Storm.#511>
 
 	log_msg("\n");
 

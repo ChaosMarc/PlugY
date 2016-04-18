@@ -3,8 +3,8 @@
 ;                               "PlugY, The Survival Kit"                              ;
 ;                                                                                      ;
 ;                                  par Yohann Nicolas                                  ;
-;                                                                                      ;
-;                                     version 10.00                                    ;
+;                              (modification par L'Autour)                             ;
+;                                     version 11.00                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -14,7 +14,7 @@ Vous pouvez y faire un don si vous le souhaitez.
 
 
 ******** ATTENTION ********
-- Ce plugin fonctionne sur LoD version 1.09 à 1.13c et sur leurs mods.
+- Ce plugin fonctionne sur LoD version 1.09 à 1.13d et sur leurs mods.
 - Ce plugin ne fonctionne pas sur les royaumes (Battle.net ou privé).
 - Tous les fichiers ont changés depuis les versions précédentes, donc déinstaller toutes les versions précédentes.
 - S'il vous plait, utilisé le D2gfx.dll non modifié avant de rapporter une erreur.
@@ -23,7 +23,7 @@ Vous pouvez y faire un don si vous le souhaitez.
 - Les moddeurs devraient lire la version anglaise de ce readme.
 - N'oubliez pas de lire les forums :
     http://forum.judgehype.com/judgehype/ModsetModding/liste_sujet-1.htm
-    http://phrozenkeep.planetdiablo.gamespy.com/forum/viewforum.php?f=133 (anglais)
+    http://d2mods.info/forum/viewforum.php?f=133 (anglais)
 
 
 ******** CARACTERISTIQUES ********
@@ -47,6 +47,9 @@ Vous pouvez y faire un don si vous le souhaitez.
 - Affiche la valeur courante des caracs (sans les bonus magiques).
 - Localisé en français, anglais, allemand, italien, espagnol et polonais.
 
+Changements apportés par la v11.00 :
+- PlugY fonctionne aussi la version 1.13c de LOD.
+- Plein soutien en faveur d'autres langues dans le jeu.
 
 Changements apportés par la v10.00 :
 - Désactive l'accès à Battle.net par le bouton du menu principal.
@@ -276,6 +279,8 @@ Changements apportés par la v2.03 :
 - PlugY.exe
 - PlugY.dll (in Diablo II directory)
 - PlugY.ini
+- Plugy\PlugYLocal.dll
+- Plugy\PlugYLocal.ini
 - PlugY\PlugYFixed.ini
 - PlugY\PlugYDefault.ini
 - PlugY\EmptyPage.dc6
@@ -295,7 +300,7 @@ Changements apportés par la v2.03 :
 ******** INSTALLATION ********
 Les sites de téléchargement officiel sont :
 http://djaftal.chez-alice.fr/
-http://phrozenkeep.18v.biz/dload.php?action=category&cat_id=128
+http://d2mods.info/forum/viewforum.php?f=133
 http://diablo2.judgehype.com/index.php?page=telechargements
 
 
@@ -318,6 +323,8 @@ Et que le mod ciblé se trouve là : D:\D2Mod\MyMod\
 Et que un second mod se trouve là : D:\D2Mod\MyMod2\
 Alors la configuration classique est ceci :
    C:\Jeux\Diablo II\PlugY.dll
+   D:\D2Mod\MyMod\Plugy\PlugYLocal.dll
+   D:\D2Mod\MyMod\Plugy\PlugYLocal.ini
    D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
    D:\D2Mod\MyMod\PlugY\PlugYFixed.ini
    D:\D2Mod\MyMod\PlugY\PlugYDefault.ini
@@ -701,5 +708,10 @@ PS : Désolé pour les fôtes mais je n'ai pas envie de corriger ;)
 	* Allemand : ChaosEnergy, TheMasterCaster.
 	* Italien : ItalianPlayer
 	* Espagnol : Acrerune
-	* Polonais : Serdel
-                                         ~~~~~~~~~~~~
+	* Polonais : Serdel +  https://translate.google.com
+                                        * Russian: Around.
+                                        * Portuguese: https://translate.google.com
+                                        * Japanese: https://translate.google.com
+                                        * Korean: https://translate.google.com
+                                        * Chinese: https://translate.google.com
+                                        ~~~~~~~~~~~~

@@ -269,6 +269,14 @@
 				RelativePath="PlugYInstall.cpp"
 				>
 			</File>
+			<Filter
+				Name="Commons"
+				>
+				<File
+					RelativePath="..\Commons\VersionInfo.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -278,6 +286,14 @@
 				RelativePath="resource.h"
 				>
 			</File>
+			<Filter
+				Name="Commons"
+				>
+				<File
+					RelativePath="..\Commons\VersionInfo.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
