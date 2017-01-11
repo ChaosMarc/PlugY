@@ -35,7 +35,6 @@ void updateClient(Unit* ptChar, DWORD mFunc, DWORD p1, DWORD p2, DWORD p3)
 	D2SendPacket(ptNetClient, &packet, sizeof(DataPacket));
 }
 
-
 DWORD FASTCALL handleClientUpdate(DataPacket* packet)
 {
 	log_msg("[CLIENT] Received custom message: %d with param: %08X , %08X , %08X\n",packet->mFunc,packet->mParam1,packet->mParam2,packet->mParam3);

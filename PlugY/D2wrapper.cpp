@@ -470,7 +470,7 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 	if (active_VersionTextChange)
 		Install_VersionChange();
 
-	if (active_PrintPlugYVersion)
+	if (active_PrintPlugYVersion || active_Windowed)
 		Install_PrintPlugYVersion();
 
 	if (active_StatsPoints)

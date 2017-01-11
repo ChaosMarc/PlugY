@@ -2,7 +2,7 @@
 !include "LogicLib.nsh"
 !include "MUI2.nsh"
 
-!define VERSION "10.00"
+!define VERSION "10.01"
 !define D2FILES "."
 !define NAME "PlugY, The Survival Kit"
 !define MOD_DIR "Mod PlugY"
@@ -18,7 +18,8 @@
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 !define MUI_FINISHPAGE_SHOWREADME "$(README_FILENAME)"
-!define MUI_FINISHPAGE_RUN "PlugY.exe"
+!define MUI_FINISHPAGE_RUN ;"PlugY.exe"
+!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchPlugY"
 !define MUI_FINISHPAGE_RUN_NOTCHECKED
 !define MUI_FINISHPAGE_NOREBOOTSUPPORT
 !define MUI_ABORTWARNING
@@ -106,6 +107,11 @@ Function Un.onInit
   ReadRegStr $D2Path HKLM "${REGKEY}" "PlugYDllPath"
 FunctionEnd
 
+Function LaunchPlugY
+	SetOutPath "$INSTDIR"
+	ExecShell "" "$INSTDIR\PlugY.exe"
+FunctionEnd
+
 ;--------------------------------
 ; Custom Page
 ;Function OptionsPage
@@ -151,8 +157,7 @@ Section "!$(SECTION_NAME_CORE)" Core
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Readme.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_LisezMoi.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Liesmich.txt"
-  CreateDirectory "$D2Path\PlugY"
-  setOutPath "$D2Path\PlugY"
+  setOutPath "$INSTDIR\PlugY"
   File "${D2FILES}\PlugY\EmptyPage.dc6"
   File "${D2FILES}\PlugY\PlugYDefault.ini"
   File "${D2FILES}\PlugY\PlugYFixed.ini"
@@ -175,7 +180,7 @@ Section $(SECTION_NAME_STARTMENU_SHORTCUTS) MenuShortcuts
   SectionIn 1
   CreateDirectory "$SMPROGRAMS\${NAME}"
   SetOutPath $INSTDIR
-  CreateShortCut "$SMPROGRAMS\${NAME}\Uninstall.lnk" "$INSTDIR\${UNINSTALL_FILE}" "" "$INSTDIR\${UNINSTALL_FILE}" 0
+  CreateShortCut "$SMPROGRAMS\${NAME}\Uninstaller.lnk" "$INSTDIR\${UNINSTALL_FILE}" "" "$INSTDIR\${UNINSTALL_FILE}" 0
   CreateShortCut "$SMPROGRAMS\${NAME}\${NAME}.lnk" "$INSTDIR\PlugY.exe" "" "$INSTDIR\PlugY.exe" 0
 SectionEnd
 
@@ -187,13 +192,13 @@ Section $(SECTION_NAME_UNINSTALLER) Uninstaller
   WriteUninstaller "${UNINSTALL_FILE}"
 
   ; Write the installation path into the registry
-  WriteRegStr HKLM "${REGKEY}" "InstallPath" "$INSTDIR"
+  WriteRegStr HKLM "${REGKEY}" "InstallPath" $INSTDIR
   WriteRegStr HKLM "${REGKEY}" "PlugYDllPath" "$D2Path"
 
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "InstallLocation" "$$INSTDIR"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayName" "${NAME}"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "HelpLink" "http://djaftal.chez-alice.fr/"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "HelpLink" "http://plugy.free.fr"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayVersion" "${VERSION}"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "UninstallString" '"$INSTDIR\${UNINSTALL_FILE}"'
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "NoModify" 1
@@ -224,6 +229,7 @@ Section "Uninstall" Uninstall
   Delete "$D2Path\RestoreD2gfxDll.exe"
   Delete "$INSTDIR\PlugY.exe"
   Delete "$INSTDIR\PlugY.log"
+  Delete "$INSTDIR\BnetLog.txt"
   Delete "$INSTDIR\PlugY.ini"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Readme.txt"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_LisezMoi.txt"

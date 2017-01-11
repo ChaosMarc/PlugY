@@ -44,11 +44,12 @@ enum UpdateServerConst
 	US_MAXGOLD,
 	US_PUTGOLD,
 	US_TAKEGOLD,
-
-//For CB
-	US_TEST1,
-	US_TEST2,
-	US_TEST3
+	US_TEST1,	//For CB
+	US_TEST2,	//For CB
+	US_TEST3,	//For CB
+	US_TOGGLE,
+	US_SWAP,
+	US_SWAPLAST = 0xFFFF
 };
 
 /*================================= END OF FILE =================================*/

@@ -37,7 +37,7 @@ static char *strstri(char *text, char *string)
 		{
 			while(*text)
 			{
-				if(strnicmp(string, text, len) == 0)
+				if(_strnicmp(string, text, len) == 0)
 				{
 					found = text;
 					break;
@@ -280,7 +280,7 @@ int INIFile::GetPrivateProfileString(const char *section, const char *key, const
 
 	if((m_cache) && (section && key && dest && size))
 	{
-		if(stricmp(section, m_currentSection) != 0)
+		if(_stricmp(section, m_currentSection) != 0)
 		{
 			strncpy(m_currentSection, section, MAX_SECTIONNAME_LENGTH);
 
@@ -343,7 +343,7 @@ BOOL INIFile::WritePrivateProfileString(char *section, char *key, char *string)
 {
 	if(!section || !key || !string) return false;
 
-	if(stricmp(section, m_currentSection) != 0)
+	if(_stricmp(section, m_currentSection) != 0)
 	{
 		if(m_cacheWritePos == 0)
 			m_cacheWritePos += sprintf((m_cache + m_cacheWritePos), "[%s]\r\n", section);

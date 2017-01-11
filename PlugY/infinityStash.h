@@ -33,6 +33,7 @@ void selectPrevious2Stash(Unit* ptChar);
 void selectNext2Stash(Unit* ptChar);
 void selectPreviousIndex2Stash(Unit* ptChar);
 void selectNextIndex2Stash(Unit* ptChar);
+void swapStash(Unit* ptChar, DWORD page, bool toggle);
 
 void selectStash(Unit* ptChar, Stash* newStash);
 void setSelectedStashClient(DWORD stashId, DWORD stashFlags, DWORD flags);

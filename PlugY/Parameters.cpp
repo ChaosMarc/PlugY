@@ -60,6 +60,18 @@ const char* S_active_CheckMemory = "ActiveCheckMemory";
 const char* S_active_Commands = "ActiveCommands";
 const char* S_active_othersFeatures = "ActiveAllOthersFeatures";
 
+const char* S_WINDOWED = "WINDOWED";
+const char* S_ActiveWindowed = "ActiveWindowed";
+const char* S_RemoveBorder = "RemoveBorder";
+const char* S_WindowOnTop = "WindowOnTop";
+const char* S_Maximized = "Maximized";
+const char* S_SetWindowPos = "SetWindowPos";
+const char* S_X = "X";
+const char* S_Y = "Y";
+const char* S_Width = "Width";
+const char* S_Height = "Height";
+const char* S_LockMouseOnStartup = "LockMouseOnStartup";
+
 const char* S_LANGUAGE = "LANGUAGE";
 const char* S_active_ChangeLanguage = "ActiveChangeLanguage";
 const char* S_selectedLanguage = "SelectedLanguage";
@@ -210,7 +222,7 @@ void init_General(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFi
 {
 	GET_PRIVATE_PROFILE_STRING(S_GENERAL, S_active_DisableBattleNet, "0");
 	active_DisableBattleNet = atoi(buffer) != 0;
-	log_msg("active_DisableBattleNet\t\t\t\t= %d\n", active_DisableBattleNet);
+	log_msg("active_DisableBattleNet\t\t= %d\n", active_DisableBattleNet);
 
 	GET_PRIVATE_PROFILE_STRING(S_GENERAL, S_active_logFile, "0");
 	active_logFile = atoi(buffer)+1;
@@ -242,6 +254,51 @@ void init_General(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFi
 	log_msg("\n");
 }
 
+void init_Windowed(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFile, char* buffer, DWORD maxSize)
+{
+	GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_ActiveWindowed, "0");
+	active_Windowed = atoi(buffer) != 0;
+	log_msg("active_Windowed\t\t\t\t= %d\n", active_Windowed);
+	if (active_Windowed)
+	{
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_RemoveBorder, "0");
+		active_RemoveBorder = atoi(buffer) != 0;
+		log_msg("active_RemoveBorder\t\t\t= %d\n", active_RemoveBorder);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_WindowOnTop, "0");
+		active_WindowOnTop = atoi(buffer) != 0;
+		log_msg("active_WindowOnTop\t\t\t= %d\n", active_WindowOnTop);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Maximized, "0");
+		active_Maximized = atoi(buffer) != 0;
+		log_msg("active_Maximized\t\t\t= %d\n", active_Maximized);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_SetWindowPos, "0");
+		active_SetWindowPos = atoi(buffer) != 0;
+		log_msg("active_MoveAndResizeWindow\t= %d\n", active_SetWindowPos);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_X, "0");
+		windowedX = atoi(buffer);
+		log_msg("windowedX\t\t\t\t\t= %d\n", windowedX);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Y, "0");
+		windowedY = atoi(buffer);
+		log_msg("windowedY\t\t\t\t\t= %d\n", windowedY);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Width, "0");
+		windowedWidth = atoi(buffer);
+		log_msg("windowedWidth\t\t\t\t= %d\n", windowedWidth);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Height, "0");
+		windowedHeight = atoi(buffer);
+		log_msg("windowedHeight\t\t\t\t= %d\n", windowedHeight);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_LockMouseOnStartup, "0");
+		active_LockMouseOnStartup = atoi(buffer) != 0;
+		log_msg("active_LockMouseOnStartup\t= %d\n\n", active_LockMouseOnStartup);
+	}
+}
+
 void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFile, char* buffer, DWORD maxSize)
 {
 	GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_active_ChangeLanguage, "0");
@@ -251,7 +308,7 @@ void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDe
 	if (active_ChangeLanguage)
 	{
 		GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_selectedLanguage, "ENG");
-		strupr(buffer);
+		_strupr(buffer);
 		switch (*(DWORD*)buffer)
 		{
 			case BIN('E','N','G',0) : selectedLanguage=LNG_ENG;break;
@@ -281,7 +338,7 @@ void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDe
 	if (active_LanguageManagement)
 	{
 		GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_defaultLanguage, "ENG");
-		strupr(buffer);
+		_strupr(buffer);
 		switch (*(DWORD*)buffer)
 		{
 			case BIN('E','N','G',0) : defaultLanguage=LNG_ENG;break;
@@ -302,7 +359,7 @@ void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDe
 
 		GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_availableLanguages, "ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS");
 		availableLanguages.all = 0;
-		strupr(buffer);
+		_strupr(buffer);
 		char* curString = strtok(buffer,"|");
 		while (curString)
 		{
@@ -783,6 +840,7 @@ void loadParameters()
 		if (active_plugin)
 		{
 			init_General(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);
+			init_Windowed(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);
 			init_ActiveLanguage(iniFile, iniFixedFile, iniDefaultFile, buffer,BUFSIZE);
 			init_SavePath(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);
 			init_VersionText(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);

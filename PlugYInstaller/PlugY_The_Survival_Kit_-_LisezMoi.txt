@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  par Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 10.00                                    ;
+;                                     version 10.01                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -23,13 +23,13 @@ Vous pouvez y faire un don si vous le souhaitez.
 - Les moddeurs devraient lire la version anglaise de ce readme.
 - N'oubliez pas de lire les forums :
     http://forum.judgehype.com/judgehype/ModsetModding/liste_sujet-1.htm
-    http://phrozenkeep.planetdiablo.gamespy.com/forum/viewforum.php?f=133 (anglais)
+    http://d2mods.info/forum/viewforum.php?f=133 (anglais)
 
 
 ******** CARACTERISTIQUES ********
 - Désactive l'accès à Battle.net
-- Espace de stockage infini dans le coffre (jusqu'à 4 294 967 296 pages personnelles!)
-- Espace de stockage partagé dans le coffre (jusqu'à 4 294 967 296 pages partagées aussi!)
+- Espace de stockage infini dans le coffre !
+- Espace de stockage partagé dans le coffre !
 - Active les mots runiques du ladder en dehors des royaumes.
 - World Event et Uber Quest en Local pour le monojoueur et le multijoueur hors royaumes !
 - Permet d'ouvrir le portail vers le Cow Level même quand on a tuer le Cow King dans cette difficulté.
@@ -46,19 +46,47 @@ Vous pouvez y faire un don si vous le souhaitez.
 - D2 peut charger tout les fichiers, même ceux ouvert par Microsoft Excel (désactivé par defaut).
 - Affiche la valeur courante des caracs (sans les bonus magiques).
 - Localisé en français, anglais, allemand, italien, espagnol et polonais.
+- Ajout des commandes suivantes (les fonctions correspondantes doivent être activées dans PlugY.ini) :
+	/save : Sauvegarde la partie sans quitter.
+	/reload : Recharge la page des paris.
+	/page 1 : Affiche la page des stats de base (la page des stats doit être ouverte, espace non obligatoire).
+	/page 2 : Affiche la page des stats en plus (la page des stats doit être ouverte, espace non obligatoire).
+	/page 3 : Affiche la page des stats de resistances (la page des stats doit être ouverte, espace non obligatoire).
+	/page 4 : (bêta) Affiche la page des mots runiques actifs (la page des stats doit être ouverte, espace non obligatoire).
+	/lockmouse : Bloque le curseur de la souris dans la fenêtre.
+	/lock : Identique à /lockmouse.
+	/pagename name : (bêta) Renomme la page courante du coffre (Ce nouveau nom n'est pas sauvegardé).
+	/swap page : Echange le contenu de la page actuelle du coffre avec le contenu d'une autre "page" (espace non obligatoire).
+	/toggle page : Echanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre opposé partagé/personnel (espace non obligatoire).
+	/dlm : Inverse le mode d'affichage: Toujours afficher les valeurs de vie et de mana. (Depuis 1.13c, on peut clicker sur le bas de l'orbe)
+	/dml : Identique à /dlm.
+	/dl : Inverse le mode d'affichage: Toujours afficher les valeurs de vie. (Depuis 1.13c, on peut clicker sur le bas de l'orbe)
+	/dm : Inverse le mode d'affichage: Toujours afficher les valeurs de mana. (Depuis 1.13c, on peut clicker sur le bas de l'orbe)
+	/rename newname : (bêta) Renomme la personnage et le sauvegarde (Vous devez quitter la partie pour la mise à jour de la page des stats).
+	/listcube : (bêta) Crée un fichier "cube.txt" dans le répertoire courant contenant toutes les formules actives du cube.
+	/maxgold : CHEAT ne pas utiliser en partie normal. Remplit le coffre personnel, celui partagée et le personnage au maximum d'or.
 
+
+Changements apportés par la v10.01 :
+- Ajout du mode fenêtré.
+- Peut bloquer le curseur de la souris dans la fenêtre. (mode fenêtré).
+- Peut supprimer les bordure de la fenêtre (mode fenêtré).
+- Peut redimensionner ou maximiser la fenêtre (mode fenêtré).
+- Peut mettre la fenêtre au-dessus de toutes les autres fenêtres, y compris la barre des tâches (mode fenêtré).
+- Permet de verrouiller le curseur de la souris dans les fenêtres au démarrage et avec la commande "/lockmouse" ou "/lock" (mode fenêtré).
+- Ajout de la commande "/swap page" pour échanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page".
+- Ajout de la commande "/toggle page" pour échanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre opposé (partagé/personnel).
+- Ajout de la commande "/rename newname" pour renommer son personnage. Cette fonctionnalité est en bêta et vous devez quitter la partie pour mettre à jour la page des stats.
 
 Changements apportés par la v10.00 :
 - Désactive l'accès à Battle.net par le bouton du menu principal.
 - PlugY fonctionne aussi la version 1.13c de LOD.
 - Corrige le raccourci dans le menu démarrer.
 
-
 Changements apportés par la v9.00 :
 - PlugY fonctionne aussi la version 1.12 de LOD.
 - Corrige différents bugs.
 - Ajout d'une option pour le déassignement des skill dans les mods.
-
 
 Changements apportés par la v8.00 :
 - Installation plus aisée : Nouvel installeur.
@@ -70,15 +98,12 @@ Changements apportés par la v8.00 :
 - Multiplayer : Sauvegarde les fichiers du stash (avec les données du client comme avec les versions d'avant 5.00) quand il y a une déconnection ou une erreur apparait durant la procédure de sauvegarde.
 - Remove the "check load memory failed" message when D2gfx.dll was patched.
 
-
 Changements apportés par la v7.02 :
 - Corrige la perte de points de skills quand on les désalloue dans les mods contenant des skills spéciaux.
-
 
 Changements apportés par la v7.01b :
 - Corrige l'activation des mots runiques du ladder dans les versions 1.11 and 1.10 de LoD.
 - Corrige les caractères étranges de quelques texts.
-
 
 Changements apportés par la v7.01 :
 - Active les mots runiques du ladder en dehors des royaumes.
@@ -88,7 +113,6 @@ Changements apportés par la v7.01 :
 - Ajout d'un exécutable pour lancer Plugy (plus aucun fichier de LoD modifié). (RAPPEL)
 - Traduction en espagnol et polonais.
 
-
 Changements apportés par la v7.00 :
 - PlugY fonctionne aussi la version 1.11b de LOD.
 - Ajout d'un exécutable pour lancer Plugy (plus aucun fichier de LoD modifié).
@@ -97,16 +121,13 @@ Changements apportés par la v7.00 :
 - Corrige les fonctions qui restais active sur Battle.net.
 - Traduction en italien.
 
-
 Changements apportés par la v6.01b :
 - Correction d'un bug avec l'affichage du popup sur les bouttons d'assignement des points de stats.
-
 
 Changements apportés par la v6.01 :
 - Corrige le bug qui cause la disparition des items "carry1" du stash quand ils sont cubbés dans LoD 1.10
 - Clés et organes des uber ne sont plus détruit quant on essaie d'ouvrir le portail en dehors d'Harrogath.
 - Corrige le conflit avec D2Mod pour l'affichage de la version.
-
 
 Changements apportés par la v6.00 :
 - PlugY fonctionne aussi la version 1.11 de LOD.
@@ -115,13 +136,11 @@ Changements apportés par la v6.00 :
 - Corrige quelques bugs mineurs et ajoute des améliorations mineurs.
 - Ajoute la commande "/save" pour sauvegarder la partie sans quitter (uniquement LoD 1.11).
 
-
 Changements apportés par la v5.06 :
 - Ajoute des bouttons pour le partage de l'or.
 - Active l'or partagé en multijoueur.
 - La commande "/DisplayLifeMana" est remplacée par "/dlm".
 - Corrige quelques bugs.
-
 
 Changements apportés par la v5.05 :
 - Corrige les couleurs par défauts dans l'interface des stats.
@@ -130,12 +149,10 @@ Changements apportés par la v5.05 :
 - Possiblité d'afficher ou non les nom des objets de set dans le popup quand ceux-ci sont dans le coffre partagée.
 - Correction des bugs du multiplayer (réécriture de ces fonctions).
 
-
 Changements apportés par la v5.04 :
 - Corrige Stat/Skill points par levelup
 - Corrige des bugs en Multiplayer.
 - PlugY/PlugYDefault.ini completé.
-
 
 Changements apportés par la v5.03 :
 - Corrige le bug qui échange quelques fois les coffres partagés Hardcore et Softcore.
@@ -143,16 +160,13 @@ Changements apportés par la v5.03 :
 - Change les valeurs par défaut des nouvelles pages de stats.
 - Mets EnabledTXTFilesWhenMSExcelOpenIt=1 dans le fichier PlugY.ini.
 
-
 Changements apportés par la v5.02 :
 - Corrige la correction d'un bug précédent qui engendre la disparition d'objets.
-
 
 Changements apportés par la v5.01 :
 - Corrige les bugs importants dans la gestion du stash.
 - Remets ActiveLogFile=0 par défaut dans le fichier PlugY.ini.
 - Corrige : Bug quand le stash partagé est désactivé.
-
 
 Changements apportés par la v5.00 :
 - PlugY fonctionne sur les mods des versions 1.09, 1.09b, 1.09d et 1.10 de LOD.
@@ -168,13 +182,11 @@ Changements apportés par la v5.00 :
 - Corrige la génération de DiabloClone au démarrage d'une nouvelle partie.
 - Corrige plusieurs autres bugs.
 
-
 Changements apportés par la v4.04 :
 - Corrige le bug d'affichage quand statPerLevelUp est activé
 - Corrige le bug de sauvegarde quand le disque dur est plein.
 - Nouveau système de configuration pour les moddeurs.
 - Affiche toujours les valeurs numériques de mana et de vie au-dessus des globes correspondants.
-
 
 Changements apportés par la v4.03 :
 - Corrige le bug des objets uniques carry1 (charme unique) quand on drop le cube.
@@ -183,12 +195,10 @@ Changements apportés par la v4.03 :
 - Ajouts d'infos sur les pages de stats supplémentaires (2 pages maintenant).
 - Ajoute un bouton "page précédente" sur la principale page de stats (uniquement en 800x600).
 - Déplace les boutons des pages de stats supplémentaire aux même emplacements que ceux de la page principale (uniquement en 800x600).
-- Possibilité de choisir si la page affichée quand on ouvre la page des stats est la page principale ou celle sélectionnée précédemment.
-
+- Possibilité de choisir si la page affichée quand on ouvre la page des stats est la page principale ou celle sélectionnée précédemment
 
 Changements apportés par la v4.02b :
 - Les fonctionnalités restent activées sur Battle.net ouvert.
-
 
 Changements apportés par la v4.02 :
 - Corrige le conflit avec Battle.net (BigStash désactivé sur les royaumes)
@@ -197,15 +207,12 @@ Changements apportés par la v4.02 :
 - Corrige l'activation de l'affichage de l'item level pour toutes les configurations de PlugY.
 - Ajouts d'infos sur la 2ème page de stats.
 
-
 Changements apportés par la v4.01 :
 - Corrige le bug du MSVCR70.dll non trouvé.
 - Ajouts d'infos sur la 2ème page de stats.
 
-
 Changements apportés par la v4.00b :
 - Corrige le bug du MSVCR70.dll non trouvé.
-
 
 Changements apportés par la v4.00 :
 - Meilleure optimisation du code.
@@ -224,12 +231,10 @@ Changements apportés par la v4.00 :
 - Corrige : Diablo Clone ne peut pas apparaître en mode normal et cauchemar.
 - Corrige : Détruit les minions(par exemple les squelettes) en trop près la désallocation si on a un bonus +x dans cette skill.
 
-
 Changements apportés par la v3.02 :
 - Corrige : le changement du nombre de points de Stats reçus à chaque gain de niveau.
 - Corrige : Quand le coffre partagé est désactivé vous pouvez charger vos persos.
 - Corrige : Vous pouvez changer les paramètres du World Event sans activer les skill reçus à chaque gain de niveau.
-
 
 Changements apportés par la v3.01 :
 - Change le nombre de points de Stats reçus à chaque gain de niveau.
@@ -237,14 +242,12 @@ Changements apportés par la v3.01 :
 - Ajoutent les paramètres du WorldEvent dans le fichier de configuration.
 - Par défaut, Le WorldEvent AFFICHE "X SOJ vendu" uniquement dans la difficulté enfer.
 
-
 Changements apportés par la v3.00 :
 - World Event en Local pour le monojoueur et le multijoueur hors royaumes !
 - Désalloue les points de capacités(skills) précédemment allouées.
 - Nouvelle image de fond pour le coffre.
 - On peut changer le nom du fichier de sauvegarde.
 - L'affichage du numero de page pour le coffre partagé est en rouge maintenant.
-
 
 Changements apportés par la v2.05 :
 - Correction importante : Le bug qui faisais que D2 ne démarrais est définitivement corrigé.
@@ -293,19 +296,13 @@ Changements apportés par la v2.03 :
 
 
 ******** INSTALLATION ********
-Les sites de téléchargement officiel sont :
-http://djaftal.chez-alice.fr/
-http://phrozenkeep.18v.biz/dload.php?action=category&cat_id=128
-http://diablo2.judgehype.com/index.php?page=telechargements
-
-
 Installation normale :
 - Suivre les directives de l'installeur.
 
 note : Vous pouvez choisir le répertoire de "Diablo II" comme répertoire d'installation.
 
 Installation dans un autre mod 
-- Copier PlugY.ini, PlugY.exe er PlugY folder (+son sontenu) dans le répertoire du mod ciblé.
+- Copier PlugY.ini, PlugY.exe et PlugY folder (+son sontenu) dans le répertoire du mod ciblé.
 - Editer PlugY.ini pour configurer les options (voir section plus bas).
 - Lancer le jeu PlugY.exe et amusez-vous :)
 
@@ -314,8 +311,8 @@ note : Vous pouvez déplacer le répertoire "PlugY" dans celui de "Diablo II" et i
 
 Exemple :
 Si vous avez installé Lord of Destruction ici : C:\Jeux\Diablo II\Diablo II.exe
-Et que le mod ciblé se trouve là : D:\D2Mod\MyMod\
-Et que un second mod se trouve là : D:\D2Mod\MyMod2\
+Et que le mod ciblé se trouve dans : D:\D2Mod\MyMod\
+Et qu'un second mod se trouve dans : D:\D2Mod\MyMod2\
 Alors la configuration classique est ceci :
    C:\Jeux\Diablo II\PlugY.dll
    D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
@@ -490,6 +487,30 @@ Désactivez-le seulement si vous savez ce que vous faites.
 
 Active les fonctions cachés ou non finis. (ne pas utiliser)
 - ActiveAllOthersFeatures=0 	{0:Désactivé; 1:Activé}
+
+
+[WINDOWED]
+Lancement en mode fenêtré.
+- ActiveWindowed=0 		{0:Désactivé; 1:Activé}
+
+Supprime le cadre de la fenêtre en mode fenêtré.
+- RemoveBorder=0 		{0:Désactivé; 1:Activé}
+
+Met la fenêtre au plus haut (au-dessus de la barre des tâches) en mode fenêtré.
+- WindowOnTop=0 		{0:Désactivé; 1:Activé}
+
+Fenêtre centrée et maximisée (ratio maintenu à 4/3) en mode fenêtré (si SetWindowPos = 0).
+- Maximized=0 			{0:Désactivé; 1:Activé}
+
+Définie la position et la taille de la fenêtre en mode fenêtré.
+- SetWindowPos=0 		{0:Désactivé; 1:Activé}
+- X=0 				{0:Position X de la fenêtre}
+- Y=0 				{0:Position Y de la fenêtre}
+- Width=0 			{0:Largeur de la fenêtre}
+- Height=0 			{0:Hauteur de la fenêtre}
+
+Verrouiller le curseur da la souris dans la fenêtre en mode fenêtré.
+- LockMouseOnStartup=0		{0:Désactivé; 1:Activé}
 
 
 [LANGUAGE]
@@ -702,4 +723,5 @@ PS : Désolé pour les fôtes mais je n'ai pas envie de corriger ;)
 	* Italien : ItalianPlayer
 	* Espagnol : Acrerune
 	* Polonais : Serdel
-                                         ~~~~~~~~~~~~
+
+;--------------------------------------------------------------------------------------;

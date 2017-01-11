@@ -7,7 +7,7 @@
 
 #pragma once
 
-#define PLUGY_VERSION "10.00"
+#define PLUGY_VERSION "10.01"
 
 #define LOG_FILE "PlugY.log"
 

@@ -23,10 +23,17 @@ bool active_savegame=false;
 #define MAX_CMD_SIZE 200
 
 const char * CMD_RENAME="/rename";
+
+const char * CMD_PAGENAME = "/pagename";
 const char * CMD_LISTCUBEFORMULA="/listcube";
 const char * CMD_SELECTPAGE="/page";
+const char * CMD_SWAP = "/swap";
+const char * CMD_TOGGLE = "/toggle";
 
 const char * CMD_RELOAD="/reload";
+
+const char * CMD_LOCK_MOUSE = "/lockmouse";
+const char * CMD_LOCK_MOUSE2 = "/lock";
 
 const char * CMD_STARTSAVE="/save";
 
@@ -145,18 +152,89 @@ int STDCALL commands (char* ptText)
 	char command[MAX_CMD_SIZE];
 	ZeroMemory(command,MAX_CMD_SIZE);
 	strncpy(command,ptText,MAX_CMD_SIZE-1);
-	strlwr(command);
+	_strlwr(command);
 
-	if (!strncmp(command,CMD_RENAME,strlen(CMD_RENAME)))
+	if (!strncmp(command, CMD_RENAME, strlen(CMD_RENAME)) && ptClientNameChar != NULL)
+	{
+		char* param = &command[strlen(CMD_RENAME)];
+		int len = strlen(param);
+		if (param[0] != ' ')
+			return 1;
+		param++;
+		len--;
+		if (len < 2 || len > 15)
+			return 0;
+		for (int i = 0; i < len; i++)
+		{
+			char c = param[i];
+			if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '_')))
+				return 1;
+		}
+		// Move current save file
+		{
+			char szCurrentFile[MAX_PATH];
+			char szNewFile[MAX_PATH];
+
+			//Get temporary savefile name.
+			D2FogGetSavePath(szCurrentFile, MAX_PATH);
+			D2FogGetSavePath(szNewFile, MAX_PATH);
+			strcat(szCurrentFile, ptChar->ptPlayerData->name);
+			strcat(szNewFile, param);
+			strcat(szCurrentFile, ".");
+			strcat(szNewFile, ".");
+			int curLen = strlen(szCurrentFile);
+			int newLen = strlen(szNewFile);
+			strcpy(&szCurrentFile[curLen], "d2s");
+			strcpy(&szNewFile[newLen], "d2s");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "d2x");
+			strcpy(&szNewFile[newLen], "d2x");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "key");
+			strcpy(&szNewFile[newLen], "key");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "ma0");
+			strcpy(&szNewFile[newLen], "ma0");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "ma1");
+			strcpy(&szNewFile[newLen], "ma1");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "ma2");
+			strcpy(&szNewFile[newLen], "ma2");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "ma3");
+			strcpy(&szNewFile[newLen], "ma3");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "ma4");
+			strcpy(&szNewFile[newLen], "ma4");
+			MoveFile(szCurrentFile, szNewFile);
+			strcpy(&szCurrentFile[curLen], "map");
+			strcpy(&szNewFile[newLen], "map");
+			MoveFile(szCurrentFile, szNewFile);
+		}
+		// Update server
+		for (int i = 0; i <= len; i++)
+		{
+			updateServer(US_RENAME + (param[i] << 8));
+		}
+
+		// Update client
+		log_msg("Rename on Client : %s -> %s\n", ptChar->ptPlayerData->name, param);
+		strcpy(ptChar->ptPlayerData->name, param);
+		strcpy(ptClientNameChar, param);
+		updateServer(US_SAVE);
+		return 0;
+	}
+
+	if (!strncmp(command, CMD_PAGENAME,strlen(CMD_PAGENAME)))
 	{
 		if (!active_multiPageStash) return 1;
-		char* param = &command[strlen(CMD_RENAME)];
+		char* param = &command[strlen(CMD_PAGENAME)];
 		DWORD len = strlen(param);
-		if (len && (param[0] != ' ')) return 1;
 
 		Stash* ptStash = PCPY->currentStash;
 		if (!ptStash) return 0;
-		if (len>1)
+		if (len>1 && param[0] == ' ')
 		{
 			D2FogMemDeAlloc(ptStash->name,__FILE__,__LINE__,0);
 			ptStash->name = (char *)malloc(len);//D2FogMemAlloc(len,__FILE__,__LINE__,0);
@@ -182,6 +260,32 @@ int STDCALL commands (char* ptText)
 		return 0;
 	}
 
+	if (!strncmp(command, CMD_TOGGLE, strlen(CMD_TOGGLE)))
+	{
+		if (!active_sharedStash) return 1;
+		int page = atoi(&command[strlen(CMD_TOGGLE)]) - 1;
+		if (page < 0)
+			return 1;
+		updateServer(US_SWAP3 + ((page & 0xFF000000) >> 16));
+		updateServer(US_SWAP2 + ((page & 0xFF0000) >> 8));
+		updateServer(US_SWAP1 + (page & 0xFF00));
+		updateServer(US_SWAP0_TOGGLE + ((page & 0xFF) << 8));
+		return 0;
+	}
+
+	if (!strncmp(command, CMD_SWAP, strlen(CMD_SWAP)))
+	{
+		if (!active_multiPageStash) return 1;
+		int page = atoi(&command[strlen(CMD_SWAP)]) - 1;
+		if (page < 0)
+			return 1;
+		updateServer(US_SWAP3 + ((page & 0xFF000000) >> 16));
+		updateServer(US_SWAP2 + ((page & 0xFF0000) >> 8));
+		updateServer(US_SWAP1 + (page & 0xFF00));
+		updateServer(US_SWAP0 + ((page & 0xFF) << 8));
+		return 0;
+	}
+
 	if (!strcmp(command,CMD_RELOAD))
 	{
 		if (onRealm) return 1;
@@ -189,10 +293,17 @@ int STDCALL commands (char* ptText)
 		return 0;
 	}
 
+	if (!strcmp(command, CMD_LOCK_MOUSE) || !strcmp(command, CMD_LOCK_MOUSE2))
+	{
+		if (onRealm) return 1;
+		lockMouseCursor();
+		return 0;
+	}
+
 	if (!strcmp(command,CMD_STARTSAVE))
 	{
 		if (onRealm) return 1;
-		updateServer(US_STARTSAVE);
+		updateServer(US_SAVE);
 		return 0;
 	}
 

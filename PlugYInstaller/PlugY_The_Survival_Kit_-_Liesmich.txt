@@ -1,10 +1,10 @@
 ;--------------------------------------------------------------------------------------;
 ;                                                                                      ;
-;                              "PlugY, The Survival Kit"                               ;
+;                               "PlugY, The Survival Kit"                              ;
 ;                                                                                      ;
 ;                                  von Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 10.00                                    ;
+;                                     version 10.01                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -20,7 +20,7 @@ WARNUNG:
 - PlugY.ini wurde stark verändert, bitte nehmt die Neue!
 - Vergesst nicht den Teil: "Kommentare zur Konfigurations-Datei" zu lesen.
 - Bitte lest im PlugY-Forum: 
-	http://phrozenkeep.planetdiablo.gamespy.com/forum/viewforum.php?f=133
+	http://d2mods.info/forum/viewforum.php?f=133
 
 
 ******** ALLE FUNKTIONEN ********
@@ -43,19 +43,47 @@ WARNUNG:
 - Man kann die Versionsanzeige im Hauptbildschirm anpassen.
 - Diablo kann nun auf Text-Dateien laden die von Microsoft Excel geöffnet sind.
 - Lokalisiert in Englisch, Französisch, Deutsch, Italienisch, Spanisch, Polnisch.
+- Add following commands (the corresponding functions must be enabled in PlugY.ini) :
+	/save : Save game without exit.
+	/reload : Reload gamble page.
+	/page 1 : Show normal stats page (stats page must be opened, space not mandatory).
+	/page 2 : Show extra stats page (stats page must be opened, space not mandatory).
+	/page 3 : Show resistance stats page (stats page must be opened, space not mandatory).
+	/page 4 : (beta) Show available runewords (stats page must be opened, space not mandatory).
+	/lockmouse : Lock mouse cursor in the window.
+	/lock : same as /lockmouse.
+	/pagename name : (beta) Rename current page stash (the new name isn't saved).
+	/swap page : Swap the content of current stash page with the content of another page (space not mandatory).
+	/toggle page : Swap the content of current stash page with the content of another page in opposing stash shared/personal (space not mandatory).
+	/dlm : Toggle always display mana and life mode. (Since 1.13c, you can click on the bottom of each orbs)
+	/dml : Same as /dlm.
+	/dl : Toggle always display life mode. (Since 1.13c, you can click on the bottom of the orb)
+	/dm : Toggle always display mana mode. (Since 1.13c, you can click on the bottom of the orb)
+	/rename newname : (beta) rename your character and save it. (You must exit the game to update the stats page.)
+	/listcube : (beta) Create a "cube.txt" file in current directory containing all cube's receipts.
+	/maxgold : CHEAT don't use in normal game. Set personnal stash, shared stash and character to max gold.
 
+
+v10.01 Änderungen :
+- Add windowed mode.
+- Can lock mouse cursor in the window (windowed mode).
+- Can remove border (windowed mode).
+- Can resize or maximize window (windowed mode).
+- Can fix window above any others windows including taskbar (windowed mode).
+- Can lock mouse cursor in the windows on startup and with command "/lockmouse" or "/lock" (windowed mode).
+- Add command "/swap page" to swap the content of current stash page with the content of another page.
+- Add command "/toggle page" to swap the content of current stash page with the content of another page in opposing stash shared/personal.
+- Add command "/rename newname" to rename your character. This feature is still in beta and you must exit the game to update the stats page.
 
 v10.00 Änderungen :
 - Disable access to Battle.net via main menu button.
 - PlugY funktioniert nun auch mit LoD 1.13c Versionen.
 - Fix shortcut in start menu
 
-
 v9.00 Änderungen :
 - PlugY funktioniert nun auch mit LoD 1.12 Versionen.
 - Ein paar Bugs behoben.
 - Eine neue Möglichkeit zum Skills neuverteilen in Mods hinzugefügt.
-
 
 v8.00 Änderungen :
 - Einfachere Installation : Neuer Installer.
@@ -67,11 +95,9 @@ v8.00 Änderungen :
 - Multiplayer : Die Truhendaten werden jetzt korrekt gespeichert wenn es einen Disconnect oder einen Fehler während des Speicherns gibt.
 - Die "check load memory failed" Meldung, wenn die D2gfx.dll gepachtt war, wurde entfernt.
 
-
 v7.01b Änderungen :
 - Behoben : Die Ladder-only Runenwortfeatures in den LoD-Versionen 1.11 und 1.10.
 - Behoben : Seltsame Zeichen in manchen Texten.
-
 
 v7.01 Änderungen :  
 - Die Ladder-Only Runenwörter können für den Singleplayer aktivert werden. 
@@ -81,7 +107,6 @@ v7.01 Änderungen :
 - Eine eigene EXE wurde hinzugefügt um PlugY zu starten (es werden keine LoD-Dateien mehr verändert)
 - Spanische und Polnische Übersetzung hinzugefügt.
 
-
 V7.00 Änderungen :
 - PlugY funktioniert nun auch mit LoD 1.11b Versionen.
 - Den Basiswert für jeden Stat im Mausübertext hinzugefügt.
@@ -89,16 +114,13 @@ V7.00 Änderungen :
 - Behoben: Einige Features blieben auch im Battle.net aktiviert
 - Italienische Übersetzung hinzugefügt.
 
-
 v6.01b Änderungen :
 - Fehler mit dem Popups der Statuspunktvergabe-Buttons behoben.
-
 
 v6.01 Änderungen :
 - Behoben : unique carry1 items verschwinden nicht wenn sie in LoD 1.10 gecubt werden 
 - Schlüssel und Uber-Organe werden nicht mehr entfernt wenn man das rote Portal ausserhalb von Harrogath öffnen wollte.
 - Fehler in der Versionsanzeige wegen einem Konflikt mit D2Mod behoben.
-
 
 V6.00 Änderungen :
 - PlugY funktioniert nun auch mit LoD 1.11 Versionen
@@ -107,13 +129,11 @@ V6.00 Änderungen :
 - Kleine Fehler behoben, und kleine Verbesserungen eingebaut
 - "/save"-Befehl hinzugefügt um das Spiel zu speichern ohne es zu verlassen (nur LoD 1.11).
 
-
 v5.06 Änderungen :
 - Knöpf for gemeinsamen Goldvorrat hinzugefügt.
 - Gemeinsamer Goldvorrat in Multiplayer hinzugefügt.
 - Befehl "/DisplayLifeMana" ersetzt durch "/dlm".
 - Diverse Fehler behoben.
-
 
 v5.05 Änderungen :
 - Standard Hintergrundfarbe im Status Interface geändert
@@ -122,12 +142,10 @@ v5.05 Änderungen :
 - Möglichkeit die Namen von Setgegenständ in Grün bei Mouseover in der gemeinsamen Kiste anzuzeigen
 - Multiplayer Fehler behoben, indem der gesamte Prozess neu programmiert wurde
  
-
 v5.04 Änderungen :
 - Behoben : Status/Skill Punkte per Levelup bug.
 - Behoben : Multiplayer bugs.
 - PlugY/PlugYDefault.ini sind jetzt vollständig.
-
 
 v5.03 Änderungen :
 - Behoben : Bug der manchmal zwischen den Hardcore und Softcore gemeinsamen Truhen gewechselt hat.
@@ -135,10 +153,8 @@ v5.03 Änderungen :
 - Standartwerte in den Extra-Seiten geändert.
 - EnabledTXTFilesWhenMSExcelOpenIt in der PlugY.ini ist nun standartmäßig aktiviert.
 
-
 v5.02 Änderungen :
 - Behoben : Bug der das Verschwinden von Gegenständen hervorgerufen hat.
-
 
 v5.01 Änderungen :
 - Behoben : Größere bugs bei der gemeinsamen Truhe.
@@ -160,13 +176,11 @@ v5.00 Änderungen :
 - Behoben : Das Erscheinen des Diablo Klones am Spielstart.
 - Behoben : Andere kleine Bugs.
 
-
 v4.04 Änderungen :
 - Behoben : Anzeige-bug wenn StatPerLevelUp aktiviert war.
 - Behoben : Fehler bei der Speicherprozedur wenn die Festplatte voll war.
 - Neues Konfigurations-System für Modder.
 - Man kann auswählen, ob die Mana und Lebens Anzeige immer über den Kugeln erscheint.
-
 
 v4.03 Änderungen
 - Behoben: Wenn man einen "carry1" - einzigartigen Gegenstand (einzigartiger Zauber) in den Würfel steckt
@@ -177,10 +191,8 @@ v4.03 Änderungen
 - Button für die zusätzlichen Status Seiten an die gleiche Stelle  verschoben, wie die original Buttons (nur in 800x600)
 - Man kann auswählen, ob die zuletzt angezeigte Seite erscheint, oder die Hauptseite
 
-
 v4.02b Änderungen :
 - Behoben : Alle Funktionen bleiben im offenen Battle.net eingeschaltet.
-
 
 v4.02 Änderungen :
 - Behoben : Das vergessene "d" in "SeparateHardcoreStash=1" in der PlugY.ini ergänzt 
@@ -211,12 +223,10 @@ v4.00 Änderungen :
 - Behoben : Diablo Clone kann nicht mehr in Normal und Albtraum erscheinen
 - Behoben : Zerstörung von zusätzlichen Minions wenn man Fertigkeitspukte zurücksetzt
 
-
 v3.02  Änderungen  :
 - Fehler im Bereich Statuspunkte pro LevelUp behoben
 - Fehler behoben der verhinderte das bei abgeschalteter gemeinsamer Kiste ein Charkter nicht geladen werden konnte.
 - Fehler behoben der es erlaubte Werte zu setzen, ohne das Fertigkeiten pro LevelUp aktiviert waren.
-
 
 v3.01  Änderungen  :
 - Man kann die Statuspunkte ändern, die man beim LevelUp bekommt.
@@ -224,15 +234,12 @@ v3.01  Änderungen  :
 - Konfigurationsparameter für den World Event hinzugefügt
 - Standardmässig wird nur inHölle der World Event Zähler gezeigt "X SOJ verkauft".
 
-
 v3.00  Änderungen  :
 - Lokaler  World Event !
 - Zurücksetzen von Fertigkeitspunkten
 
-
 v2.05 Änderungen :
 - Wichtiger Ffix : Alle Fehler die einen Start von Diablo2 verhinderten sind entfernt
-
 
 v2.04 Änderungen :
 - Das zurücksetzen der Statuspunkte, sowie die Fertigkeiten pro LevelUp werden abgeschaltet, wenn man sich in ein Realm-Spiel einklinkt (wie bei der Goldkiste die Knöpfe)
@@ -241,10 +248,8 @@ v2.04 Änderungen :
 - Einen Fehler bezüglich der verschwindenden Knöpfe behoben
 - Abspeicher-Problem unter Win95/98/Me behoben
 
-
 v2.03b Änderungen :
 - Anzeige der PlugY Version nur im Hauptbild
-
 
 v2.03 Änderungen :
 - Wichtigster Fix : Die Abspeicher-Routine geändert, damit bei einem Spiel-Absturz keine Items in der Kiste verloren gehen, und der Charakter korrupt wird.
@@ -253,7 +258,6 @@ v2.03 Änderungen :
 - Die Versionsanzeige auf der Hauptseite geändert (PlugY Version jetzt rechts, und Farben sind nun möglich)
 - Charaktere ohne PlugY können nun an Spielen teilnehmen die gehosted werden von PlugY-Spilern.
 
-
 v2.02 Änderungen :
 - PlugY nutzt die D2win.dll nicht mehr zum laden.
 - PlugY enthält einen Patcher/Ent-Patcher um die D2gfx.dll so zu verändern, das PlugY gestartet wird.
@@ -261,11 +265,9 @@ v2.02 Änderungen :
 - Die Goldkistenerweiterung wird bei Realm Spielen automatisch abgeschaltet.
 - Index Button Fehler behoben.
 
-
 v.2.01 Änderungen 
 - Fertigkeitsfehler beim LevelUp behoben.
 - Anzeigefehler im Hauptbildschirm behoben.
-
 
 v2.00 Änderungen :
 - Deutsche Lokalisierung hinzugefügt.
@@ -283,18 +285,15 @@ v2.00 Änderungen :
 - Der Fehler mir carry1 Gegenständen wurde behoben (Uniques die nur einaml getragen werden dürfen)
 - Weitere kleine Verbesserungen eingebaut.
 
-
 v1.03 Änderungen :
 - Französische Liesmich- und Ini-Datei hinzugefügt.
 - Fehler in D2Classic-Spielen entfernt (es gibt dort keine Seiten-Erweiterungen, dies ist kein Fehler)
 - Fehler behoben, der beim laden mit vor LOD 1.10 generierten Charakteren auftrat.
  (zB: ShadowMaster Charakter oder 1.09 oder D2Classic Charakter)
 
-
 v1.02 Änderungen :
 - Dateinamen geändert wegen eines Fehlers mit dem IE und ZIP-Files
 - Man kann die Versions-Information im Hauptbildschirm ändern (siehe Ini-Datei).
-
 
 v1.01 Änderungen : 
 - Französische Lokalisierung hinzugefügt (Französisches Liesmich.txt folgt) 
@@ -304,7 +303,6 @@ v1.01 Änderungen :
 - Den Eintrag "[GENERAL]PlugYDirectory=PlugY\" aus der Ini-Datei entfernt
   (Man kann ihn weiterhin hinzufügen, sollte aber wissen, was man tut...) 
 - Paket von .rar auf .zip umgestellt
-
 
 v1.00 Funktionen (es können alle einfach ein- und ausgeschaltet werden) :
 - Man kann den "Save"-Pfad anpassen.
@@ -340,11 +338,6 @@ v1.00 Funktionen (es können alle einfach ein- und ausgeschaltet werden) :
 
 
 ******** INSTALLATION ********
-- The officials sites are :
-http://djaftal.chez-alice.fr/
-http://phrozenkeep.18v.biz/dload.php?action=category&cat_id=128
-http://diablo2.judgehype.com/index.php?page=telechargements
-
 Installation : 
 - Entpacke alle Dateien in dein Diablo Verzeichnis. 
 - Kopiere die PlugY.ini und die PlugY.exe in das Verzeichnis in dem dein Mod ist. 
@@ -530,6 +523,30 @@ Neue Kommandos in PlugY hinzugefügt, diese können während des Spiels genutzt wer
 Beendet D2, wenn PlugY nicht alle Features installieren konnte.
 Nur Ausschalten wenn du weist was du machst.
 - ActiveCheckMemory=1
+
+
+[WINDOWED]
+Launch in windowed mode.
+- ActiveWindowed=0 		{0:Disabled; 1:Enabled}
+
+Remove border in windowed mode.
+- RemoveBorder=0 		{0:Disabled; 1:Enabled}
+
+Set window at most top (above taskbar) in windowed mode.
+- WindowOnTop=0 		{0:Disabled; 1:Enabled}
+
+Maximized and center window (keep ratio 4/3) in windowed mode (if SetWindowPos=0).
+- Maximized=0 			{0:Disabled; 1:Enabled}
+
+Set position and size of the window in windowed mode.
+- SetWindowPos=0 		{0:Disabled; 1:Enabled}
+- X=0 				{0:Window Position X}
+- Y=0 				{0:Window Position Y}
+- Width=0 			{0:Window Width}
+- Height=0 			{0:Window Height}
+
+Lock cursor mouse in the window in windowed mode.
+- LockMouseOnStartup=0		{0:Disabled; 1:Enabled}
 
 
 [LANGUAGE]
@@ -753,4 +770,4 @@ Zur Korrektur der deutschen Übersetzung bitte eine eMail an ChaosEnergy@planetdi
 	* Spanish : Acrerune
 	* Polnisch : Serdel
 
-         ~~~~~~~~~~~~
+;--------------------------------------------------------------------------------------;
