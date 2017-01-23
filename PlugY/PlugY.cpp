@@ -1,22 +1,27 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Main file of this DLL
+	Main file of this DLL
 
 =================================================================*/
 
+#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 #include <windows.h>
 
-BOOL WINAPI DllMain(HANDLE /*hModule*/, DWORD dwReason, LPVOID /*lpReserved*/)
+BOOL APIENTRY DllMain( HMODULE hModule,
+                       DWORD  ul_reason_for_call,
+                       LPVOID lpReserved
+					 )
 {
-	switch(dwReason)
+	switch (ul_reason_for_call)
 	{
-		case DLL_PROCESS_ATTACH:
-		break;
-		case DLL_PROCESS_DETACH:
+	case DLL_PROCESS_ATTACH:
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+	case DLL_PROCESS_DETACH:
 		break;
 	}
-	return true;
+	return TRUE;
 }
 
 /*================================= END OF FILE =================================*/

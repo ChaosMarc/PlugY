@@ -4,7 +4,6 @@
   Data added to D2 base-stucture
 
 =================================================================*/
-
 #pragma once
 
 #include "playerCustomData.h"

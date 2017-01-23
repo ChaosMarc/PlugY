@@ -5,10 +5,9 @@
 
 =================================================================*/
 
-#include "common.h"
 #include "error.h"
+#include "parameters.h"
 #include "modifMemory.h"
-#include "d2functions.h"
 
 const char* MSG_ERROR_READ_MEMORY = "Error : Read access missing to patch memory at %08X.\nPlease install a clean version of Lord of Destruction\n\n"
 				"You can avoid this error message by setting ActiveCkeckMemory=0 in PlugY.ini\n(WARNING: Be careful when you use it, it shouldn't be used by common user)";

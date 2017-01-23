@@ -5,13 +5,11 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "updateServer.h"	// Install_UpdateServer()
 #include "plugYFiles.h"		// Install_PlugYImagesFiles()
 #include "statsPoints.h"
 #include "newInterfaces.h"
+#include "common.h"
 #include <stdio.h>
 
 
@@ -573,12 +571,12 @@ if (version_D2Client <= V110)
 	}
 	else if (isOnPreviousPageBtn(x,y))	//print popup "previous page"
 	{
-		lpText = getTranslatedString(STR_PREVIOUS_PAGE);
+		lpText = getLocalString(STR_PREVIOUS_PAGE);
 		D2PrintPopup(lpText, getXPreviousPageBtn()+getLPreviousPageBtn()/2, getYPreviousPageBtn()-getHPreviousPageBtn(), WHITE, 1);
 	}
 	else if (isOnNextPageBtn(x,y))	//print popup "next page"
 	{
-		lpText = getTranslatedString(STR_NEXT_PAGE);
+		lpText = getLocalString(STR_NEXT_PAGE);
 		D2PrintPopup(lpText, getXNextPageBtn()+getLNextPageBtn()/2, getYNextPageBtn()-getHNextPageBtn(), WHITE, 1);
 	}
 	else if (isOnRect(x, y, 0xAD, 0x137, 0x15, 0x13))

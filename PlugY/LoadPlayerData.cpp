@@ -6,12 +6,10 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "infinityStash.h"
 #include "extendedSaveFile.h"
 #include "sharedSaveFile.h"
+#include "common.h"
 
 
 /************************************ LOADING ***********************************/

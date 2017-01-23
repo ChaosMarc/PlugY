@@ -1,14 +1,12 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
-	Modified by 1.13d by L'Autour.
 
   Loading parameters from ini file.
 
 =================================================================*/
-
 #pragma once
 
-#define PLUGY_VERSION "11.00"
+#define PLUGY_VERSION "11.01"
 
 #define LOG_FILE "PlugY.log"
 

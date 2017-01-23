@@ -4,12 +4,12 @@
 	New Stat Interface
 
 =================================================================*/
+#pragma once
 
-#ifndef __NEWINTERFACE_STATS_H__INCLUDED
-#define __NEWINTERFACE_STATS_H__INCLUDED
+#include "common.h"
 
 void STDCALL printNewStatsPage();
 DWORD STDCALL mouseNewStatsPageLeftDown(sWinMessage* msg);
 DWORD STDCALL mouseNewStatsPageLeftUp(sWinMessage* msg);
 
-#endif
+/*================================= END OF FILE =================================*/

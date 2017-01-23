@@ -4,9 +4,9 @@
 	New Interfaces functions
 
 =================================================================*/
+#pragma once
 
-#ifndef __NEW_INTERFACES_H__INCLUDED
-#define __NEW_INTERFACES_H__INCLUDED
+#include "common.h"
 
 #define MILIEU(X,L,N) (X + ((N<L)? (L-N)/2 : 0))
 #define isOnStatsPage(x,y)		((x<400) && (y<553))
@@ -24,4 +24,4 @@ extern bool printBackgroundOnMainPage;
 
 void Install_NewInterfaces();
 
-#endif
+/*================================= END OF FILE =================================*/

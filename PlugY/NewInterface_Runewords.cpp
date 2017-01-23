@@ -5,13 +5,11 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "updateServer.h"	// Install_UpdateServer()
 #include "plugYFiles.h"		// Install_PlugYImagesFiles()
 #include "statsPoints.h"
 #include "newInterfaces.h"
+#include "common.h"
 #include <stdio.h>
 
 #define NB_RUNES_PER_PAGE 25
@@ -74,9 +72,10 @@ void printRuneword(RunesBIN* runesData, DWORD pos)
 	{
 		WORD type = runesData->Itypes[numItype];
 		if (!type) break;
-		getTypeUString(type,temp,50);
+		ItemTypesBIN* itemTypeData = D2GetItemTypesBIN(type);
+		LPCWSTR typeName = getLocalTypeString(itemTypeData->code);
 		if (numItype) wcscat(typesList,L"/");
-		wcscat(typesList,temp);
+		wcscat(typesList, typeName);
 		numItype++;
 	}
 	nbPixel = D2GetPixelLen(typesList);
@@ -200,7 +199,7 @@ void STDCALL printRunewordsPage()
 	}
 	else if (isOnNextPageBtn(x,y))	// print popup "next page"
 	{
-		lpText = getTranslatedString(STR_NEXT_PAGE);
+		lpText = getLocalString(STR_NEXT_PAGE);
 		D2PrintPopup(lpText, getXNextPageBtn()+getLNextPageBtn()/2, getYNextPageBtn()-getHNextPageBtn(), WHITE, 1);
 	}
 }

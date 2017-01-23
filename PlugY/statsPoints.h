@@ -4,10 +4,9 @@
 	Unassign Stats Point for futher re-assignment.
 
 =================================================================*/
-
 #pragma once
 
-#include <windows.h>
+#include "common.h"
 
 extern bool active_StatsPoints;
 extern DWORD keyUsedForUnassignStatPoint;

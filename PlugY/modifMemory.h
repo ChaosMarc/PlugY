@@ -4,8 +4,9 @@
 	Modification of code in memory functions.
  
 /*============================================*/
-
 #pragma once
+
+#include <Windows.h>
 
 extern void* currentMemoryPos;
 DWORD mem_seek(DWORD newPos);

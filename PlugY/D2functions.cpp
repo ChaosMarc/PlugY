@@ -1,6 +1,6 @@
 /*================================================
 	File created by Yohann NICOLAS.
-	*Add support 1.13d by L'Autour.
+	Add support 1.13d by L'Autour.
 
     This file implements some common and useful
     function related to some Diablo II mechanisms.
@@ -8,9 +8,8 @@
 ================================================*/
 
 #include "common.h"
-#include "d2functions.h"
-#include "error.h"
 
+s_shifting shifting;
 
 #define D2S(F, I, R, N, P)	T##N N;
 #define D2F(F, I, R, N, P)	T##N N;
@@ -617,7 +616,7 @@ bool initD2functions()
 	#define E2S(F, A, R, N, P)	N = (T##N)(offset_##F + 0x##A);
 	#define E2F(F, A, R, N, P)	N = (T##N)(offset_##F + 0x##A);
 	#define E2C(F, A, T, N)		pt##N = (T*)(offset_##F + 0x##A);
-	#define F7(X, Z, A,B,C,D,E,F,G,H, R, N, P) setFctAddr((DWORD*)&N, (HMODULE)offset_##Z, (LPCSTR)((version_##Z == V113d? H : (version_##Z == V113c? G : (version_##Z == V112? F : (version_##Z == V111b? E : (version_##Z == V111? D : (version_##Z == V110? C : (version_##Z == V109d? B : A)))))))));
+	#define F7(X, Z, A,B,C,D,E,F,G,H, R, N, P) setFctAddr((DWORD*)&N, (HMODULE)offset_##Z, (LPCSTR)(version_##Z == V113d? H : (version_##Z == V113c? G : (version_##Z == V112? F : (version_##Z == V111b? E : (version_##Z == V111? D : (version_##Z == V110? C : (version_##Z == V109d? B : A))))))));
 	#define A7(X, Z, A,B,C,D,E,F,G,H, R, N, P) N = (T##N)R7(Z,A,B,C,D,E,F,G,H);
 	#define C7(Z, A,B,C,D,E,F,G,H, T, N)       pt##N = (T*)R7(Z,A,B,C,D,E,F,G,H);
 
@@ -947,7 +946,7 @@ bool initD2functions()
 
 
 	//////////////// STRUCTURE MANAGEMENT ////////////////
-	//L'Autour - ??????
+
 //	shifting.ptPYPlayerData = V7(D2Common,118,118,F4,F4,F4,F4,F4);
 	shifting.ptPYPlayerData = *(DWORD*)((DWORD)D2InitPlayerData + V7(D2Common,5D,5D,5D,49,49,49,49,49));
 	shifting.ptSpecificData = V7(D2Common,70,70,14,14,14,14,14,14);

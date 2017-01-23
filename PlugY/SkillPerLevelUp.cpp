@@ -8,8 +8,6 @@
 
 #include "skillPerLevelUp.h"
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 
 bool active_SkillPerLevelUpChange=0;
 DWORD skillPerLevelUp=1;

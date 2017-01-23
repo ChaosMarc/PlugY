@@ -2,7 +2,7 @@
 ;	Modified by L'Autour.
 !include "MUI2.nsh"
 
-!define VERSION "11.00"
+!define VERSION "11.01"
 !define D2FILES "."
 !define NAME "PlugY, The Survival Kit"
 !define MOD_DIR "Mod PlugY"
@@ -12,14 +12,14 @@
 !define MUI_COMPONENTSPAGE_SMALLDESC
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP "PlugYInstallerHeader.bmp"
-
-;!define MUI_LANGDLL_REGISTRY_ROOT "HKLM"
-;!define MUI_LANGDLL_REGISTRY_KEY "SOFTWARE\${NAME}"
-;!define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+!define MUI_LANGDLL_REGISTRY_ROOT HKLM
+!define MUI_LANGDLL_REGISTRY_KEY "SOFTWARE\${NAME}"
+!define MUI_LANGDLL_REGISTRY_VALUENAME "Install Language"
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 !define MUI_FINISHPAGE_SHOWREADME "$(README_FILENAME)"
-!define MUI_FINISHPAGE_RUN "PlugY.exe"
+!define MUI_FINISHPAGE_RUN ;"PlugY.exe"
+!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchPlugY"
 !define MUI_FINISHPAGE_RUN_NOTCHECKED
 !define MUI_FINISHPAGE_NOREBOOTSUPPORT
 !define MUI_ABORTWARNING
@@ -27,7 +27,7 @@
 
 Name "${NAME} v${VERSION}"
 OutFile "PlugY_The_Survival_Kit_v${VERSION}.exe"
-InstallDirRegKey HKCU "${REGKEY}" "InstallPath"
+InstallDirRegKey HKLM "${REGKEY}" "InstallPath"
 
 ;--------------------------------
 ; Pages
@@ -88,14 +88,12 @@ LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_ENGLISH} "Error : Diablo II instal
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_FRENCH} "Erreur : Le rйpertoire d'installation de Diablo II n'a pas йtй trouvй.$\nVeuillez rй-installer votre copie de Diablo II - Lord of Destruction."
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_RUSSIAN} "Ошибка : каталог с установленной игрой Diablo II не найден.$\nПожалуйста переустановите вашу копию Diablo II - Lord of Destruction."
 
-;!insertmacro MUI_RESERVEFILE_LANGDLL
-
 Var D2Path
 ;--------------------------------
 ; Initialisation
 Function .onInit
   !define MUI_LANGDLL_WINDOWTITLE "${NAME} v${VERSION}"
-  !define MUI_LANGDLL_INFO "Select your language:$\nChoisissez votre langue:$\nВыберите ваш язык:"
+  !define MUI_LANGDLL_INFO "Select your language:$\nChoisissez votre langue:"
   !insertmacro MUI_LANGDLL_DISPLAY
   !undef MUI_LANGDLL_WINDOWTITLE
   !undef MUI_LANGDLL_INFO
@@ -123,6 +121,11 @@ FunctionEnd
 Function Un.onInit
   !insertmacro MUI_UNGETLANGUAGE
   ReadRegStr $D2Path HKLM "${REGKEY}" "PlugYDllPath"
+FunctionEnd
+
+Function LaunchPlugY
+	SetOutPath "$INSTDIR"
+	ExecShell "" "$INSTDIR\PlugY.exe"
 FunctionEnd
 
 ;--------------------------------
@@ -170,12 +173,11 @@ Section "!$(SECTION_NAME_CORE)" Core
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Readme.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_LisezMoi.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Liesmich.txt"
-  ;File "${D2FILES}\PlugY_The_Survival_Kit_-_Описание.txt"
-  CreateDirectory "$D2Path\PlugY"
   setOutPath "$D2Path\PlugY"
   File "${D2FILES}\PlugY\EmptyPage.dc6"
   File "${D2FILES}\PlugY\PlugYDefault.ini"
   File "${D2FILES}\PlugY\PlugYFixed.ini"
+  File "${D2FILES}\PlugY\LocalizedStrings.ini"
   File "${D2FILES}\PlugY\SharedGoldBtns.dc6"
   File "${D2FILES}\PlugY\StashBtns.dc6"
   File "${D2FILES}\PlugY\StatsBackground.dc6"
@@ -183,8 +185,6 @@ Section "!$(SECTION_NAME_CORE)" Core
   File "${D2FILES}\PlugY\TradeStash.dc6"
   File "${D2FILES}\PlugY\UnassignSkillsBtns.dc6"
   File "${D2FILES}\PlugY\UnassignStatsBtns.dc6"
-  File "${D2FILES}\PlugY\PlugYLocal.dll"
-  File "${D2FILES}\PlugY\PlugYLocal.ini"
 SectionEnd
 
 Section "$(SECTION_NAME_DESKTOP_SHORTCUT)" DesktopShortcuts
@@ -209,13 +209,13 @@ Section $(SECTION_NAME_UNINSTALLER) Uninstaller
   WriteUninstaller "${UNINSTALL_FILE}"
 
   ; Write the installation path into the registry
-  WriteRegStr HKLM "${REGKEY}" "InstallPath" "$INSTDIR"
+  WriteRegStr HKLM "${REGKEY}" "InstallPath" $INSTDIR
   WriteRegStr HKLM "${REGKEY}" "PlugYDllPath" "$D2Path"
 
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "InstallLocation" "$$INSTDIR"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayName" "${NAME}"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "HelpLink" "http://djaftal.chez-alice.fr/"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "HelpLink" "http://plugy.free.fr"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "DisplayVersion" "${VERSION}"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "UninstallString" '"$INSTDIR\${UNINSTALL_FILE}"'
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "NoModify" 1
@@ -246,24 +246,23 @@ Section "Uninstall" Uninstall
   Delete "$D2Path\RestoreD2gfxDll.exe"
   Delete "$INSTDIR\PlugY.exe"
   Delete "$INSTDIR\PlugY.log"
+  Delete "$INSTDIR\BnetLog.txt"
   Delete "$INSTDIR\PlugY.ini"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Readme.txt"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_LisezMoi.txt"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Liesmich.txt"
-  ;Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Описание.txt"
-  Delete "$INSTDIR\PlugY\EmptyPage.dc6"
-  Delete "$INSTDIR\PlugY\PlugYDefault.ini"
-  Delete "$INSTDIR\PlugY\PlugYFixed.ini"
-  Delete "$INSTDIR\PlugY\SharedGoldBtns.dc6"
-  Delete "$INSTDIR\PlugY\StashBtns.dc6"
-  Delete "$INSTDIR\PlugY\StatsBackground.dc6"
-  Delete "$INSTDIR\PlugY\statsinterface.txt"
-  Delete "$INSTDIR\PlugY\TradeStash.dc6"
-  Delete "$INSTDIR\PlugY\UnassignSkillsBtns.dc6"
-  Delete "$INSTDIR\PlugY\UnassignStatsBtns.dc6"
-  Delete "$INSTDIR\PlugY\PlugYLocal.dll"
-  Delete "$INSTDIR\PlugY\PlugYLocal.ini"
-  RMDir "$INSTDIR\PlugY"
+  Delete "$D2Path\PlugY\EmptyPage.dc6"
+  Delete "$D2Path\PlugY\PlugYDefault.ini"
+  Delete "$D2Path\PlugY\PlugYFixed.ini"
+  Delete "$D2Path\PlugY\LocalizedStrings.ini"
+  Delete "$D2Path\PlugY\SharedGoldBtns.dc6"
+  Delete "$D2Path\PlugY\StashBtns.dc6"
+  Delete "$D2Path\PlugY\StatsBackground.dc6"
+  Delete "$D2Path\PlugY\statsinterface.txt"
+  Delete "$D2Path\PlugY\TradeStash.dc6"
+  Delete "$D2Path\PlugY\UnassignSkillsBtns.dc6"
+  Delete "$D2Path\PlugY\UnassignStatsBtns.dc6"
+  RMDir "$D2Path\PlugY"
   Delete "$INSTDIR\${UNINSTALL_FILE}"
   RMDir "$INSTDIR"
 SectionEnd

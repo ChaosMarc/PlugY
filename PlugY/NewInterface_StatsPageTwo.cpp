@@ -5,13 +5,11 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "updateServer.h"
 #include "plugYFiles.h"
 #include "statsPoints.h"
 #include "newInterfaces.h"
+#include "common.h"
 #include <stdio.h>
 
 #define	getXCloseBtn()			RX(0x110)
@@ -227,12 +225,12 @@ void STDCALL printNewStatsPageTwo(int currentPage)
 	}
 	else if (isOnPreviousPageBtn(mx,my))	//print popup "previous page"
 	{
-		lpText = getTranslatedString(STR_PREVIOUS_PAGE);
+		lpText = getLocalString(STR_PREVIOUS_PAGE);
 		D2PrintPopup(lpText, getXPreviousPageBtn()+getLPreviousPageBtn()/2, getYPreviousPageBtn()-getHPreviousPageBtn(), WHITE, 1);
 	}
 	else if (isOnNextPageBtn(mx,my))	//print popup "next page"
 	{
-		lpText = getTranslatedString(STR_NEXT_PAGE);
+		lpText = getLocalString(STR_NEXT_PAGE);
 		D2PrintPopup(lpText, getXNextPageBtn()+getLNextPageBtn()/2, getYNextPageBtn()-getHNextPageBtn(), WHITE, 1);
 	}
 }

@@ -11,9 +11,7 @@
 		©1999-2004 Ultrafunk (www.ultrafunk.com) - info@ultrafunk.com
 
 ******************************************************************************/
-
-#ifndef _INIFILE_H
-#define _INIFILE_H
+#pragma once
 
 #include <windows.h>
 
@@ -24,31 +22,48 @@
 #define MAX_SECTIONNAME_LENGTH	128
 #define MAX_KEYNAME_LENGTH		128
 
-/*****************************************************************************/
-
 class INIFile
 {
 public:
 	INIFile();
 	~INIFile();
 
-	BOOL  InitReadWrite(char *path, int readWrite, DWORD writeCacheSize);
-	BOOL  close();
-	int	  GetPrivateProfileString(const char *section, const char *key, const char *def, char *dest, DWORD size);
-	BOOL  WritePrivateProfileString(char *section, char *key, char *string);
+	BOOL InitReadWrite(const char *path, int readWrite, DWORD writeCacheSize);
+	BOOL close();
+	int GetPrivateProfileString(const char *section, const char *key, const char *def, char *dest, DWORD size);
+	BOOL WritePrivateProfileString(char *section, char *key, char *string);
 
 private:
+	char	m_currentSection[MAX_SECTIONNAME_LENGTH];
+	char   *m_cache;
+	char   *m_sectionStart;
+	char   *m_sectionEnd;
 	int		m_readWrite;
 	char	m_path[_MAX_PATH];
 	HANDLE  m_file;
-	char   *m_cache;
 	DWORD	m_cacheWritePos;
-	char   *m_sectionStart;
-	char   *m_sectionEnd;
-	char	m_currentSection[MAX_SECTIONNAME_LENGTH];
 };
 
+class INIFileW
+{
+public:
+	INIFileW();
+	~INIFileW();
 
-#endif // _INIFILE_H
+	BOOL InitReadWrite(const char *path, int readWrite, DWORD writeCacheSize);
+	BOOL close();
+	int GetPrivateProfileString(LPCWSTR section, LPCWSTR key, LPCWSTR def, LPWSTR dest, DWORD size);
+	int GetPrivateProfileStringList(LPCWSTR section, LPCWSTR key, DWORD** codes, LPWSTR** values);
+	//BOOL WritePrivateProfileString(char *section, char *key, char *string);
+	LPWSTR m_cache;
 
+private:
+	WCHAR m_currentSection[MAX_SECTIONNAME_LENGTH];
+	LPCWSTR m_sectionStart;
+	LPCWSTR m_sectionEnd;
+	int		m_readWrite;
+	char	m_path[_MAX_PATH];
+	HANDLE  m_file;
+	DWORD	m_cacheWritePos;
+};
 /*================================= END OF FILE =================================*/

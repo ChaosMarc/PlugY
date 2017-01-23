@@ -1,30 +1,34 @@
-#include <windows.h>
+/*=================================================================
+	File created by Yohann NICOLAS.
 
-union TFileVersion
-{
-	__int64 full;
-	struct {
-		WORD subrevision;
-		WORD revision;
-		WORD minor;
-		WORD major;
-	};
-	WORD w[4];
-};
+	Get Game version.
+
+=================================================================*/
+#pragma once
 
 enum eGameVersion
 {
-	v109b=0,
-	v109d,
-	v110,
-	v111,
-	v111b,
-	v112,
-	v113c,
-	v113d,
-	v114a
+	UNKNOW = -1,
+	V100 = 0,
+	V107,
+	V108,
+	V109,
+	V109b,
+	V109d,
+	V110,
+	V111,
+	V111b,
+	V112,
+	V113c,
+	V113d,
+	V114a,
+	V114b,
+	V114c,
+	V114d
 };
 
-bool GetAppVersion(char* FileName, TFileVersion* VerInfo); // получение версии файла
-bool GetD2Path(char* buf, DWORD bufsize);
-int GetD2Version(char* PathGameExe);
+const char* GetVersionString(int version);
+eGameVersion GetD2Version(char* gamePath);
+eGameVersion GetD2Version();
+
+///////////////////////// END OF FILE ///////////////////////

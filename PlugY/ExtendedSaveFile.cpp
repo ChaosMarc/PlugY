@@ -5,12 +5,11 @@
 
 =================================================================*/
 
-#include "common.h"
 #include "extendedSaveFile.h"
-#include "error.h"
-#include "d2functions.h"
 #include "infinityStash.h"
 #include "customLibraries.h"
+#include "common.h"
+#include <stdio.h>
 
 #define BUFFER_SIZE 0x4000
 #define FILE_VERSION 0x3130			//"01"

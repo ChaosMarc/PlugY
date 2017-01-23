@@ -8,8 +8,6 @@
 
 #include "statPerLevelUp.h"
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 
 bool active_StatPerLevelUpChange=0;
 DWORD statPerLevelUp=5;

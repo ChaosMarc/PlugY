@@ -6,8 +6,6 @@
 =================================================================*/
 /*
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include <stdio.h>
 
 #define BUFFER_SIZE 0x4000

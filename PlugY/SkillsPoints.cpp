@@ -5,11 +5,9 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "updateServer.h"
 #include "interface_Skills.h"	// Install_InterfaceSkills()
+#include "common.h"
 
 bool active_SkillsPoints=0;
 bool unassignSkillsPointsOneByOne=0;

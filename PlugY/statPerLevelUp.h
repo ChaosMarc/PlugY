@@ -4,10 +4,9 @@
 	Change Stat win per level up.
 
 =================================================================*/
-
 #pragma once
 
-#include <windows.h>
+#include "common.h"
 
 extern bool active_StatPerLevelUpChange;
 extern DWORD statPerLevelUp;

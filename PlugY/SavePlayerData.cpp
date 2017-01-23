@@ -2,16 +2,14 @@
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
 
-  Save Player Custom Data.
+    Save Player Custom Data.
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "infinityStash.h"
 #include "extendedSaveFile.h"
 #include "sharedSaveFile.h"
+#include "common.h"
 
 
 void STDCALL SaveSPPlayerCustomData(Unit* ptChar)

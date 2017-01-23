@@ -8,9 +8,7 @@
     error handling in D2External functions.
 
 ==============================================*/
-
-#ifndef __ERROR_H__INCLUDED__
-#define __ERROR_H__INCLUDED__
+#pragma once
 
 #include <windows.h>
 
@@ -21,4 +19,4 @@ void log_box( const char* pFormat, ... );
 void log_msg( const char* pFormat, ... );
 void d2_assert( bool pCondition, char* pLocation, char* pMessage, int pLineNbr );
 
-#endif
+/*================================= END OF FILE =================================*/

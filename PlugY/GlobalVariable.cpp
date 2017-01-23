@@ -6,13 +6,10 @@
 
 =================================================================*/
 
+#include "bigStash.h" // active_bigStash_tested
+#include "uberQuest.h" //active_UberQuest + resetQuestState()
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
-#include "bigStash.h"
 #include <stdio.h>
-#include "uberQuest.h"
-#include "worldEvent.h"
 
 bool onRealm=false;
 bool needToInit=false;

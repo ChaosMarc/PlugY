@@ -7,15 +7,15 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
 #include "updateClient.h"
-#include "d2functions.h"
 #include "infinityStash.h"
 #include "savePlayerData.h" //Install_SavePlayerData()
 #include "loadPlayerData.h" //Install_LoadPlayerData()
+#include "common.h"
 
 bool active_PlayerCustomData = true;
+bool openSharedStashOnLoading = false;
+
 
 
 /*********************************** UPDATING ***********************************/
@@ -72,7 +72,11 @@ void STDCALL updateClientPlayerOnLoading(Unit* ptChar)
 	log_msg("--- Start updateClientPlayerOnLoading ---\n");
 	if (PCGame->isLODGame)
 	{
-		selectStash(ptChar, PCPY->selfStash);
+		//selectStash(ptChar, openSharedStashOnLoading ? PCPY->sharedStash : PCPY->selfStash);
+		if (openSharedStashOnLoading)
+			toggleToSharedStash(ptChar);
+		else
+			toggleToSelfStash(ptChar);
 		log_msg("End update client on loading.\n\n");
 	}
 	updateClient(ptChar, UC_SHARED_GOLD, PCPY->sharedGold, 0, 0);
@@ -271,7 +275,7 @@ void Install_PlayerCustomData()
 	log_msg("Patch D2Game & D2Client & D2Common for Player's custom data. (PlayerCustomData)\n");
 
 	// Initialize custom data.
-	mem_seek( version_D2Client == V113d ?  offset_D2Common + 0x170DE : version_D2Client == V113c ?  offset_D2Common + 0x309BE : version_D2Client == V112 ? offset_D2Common + 0x585EE : version_D2Client == V111b ? offset_D2Common + 0x5BFCE : version_D2Common == V111 ? offset_D2Common + 0x4ED5E :(DWORD)D2InitPlayerData + 0x62 );
+	mem_seek(version_D2Client == V113d ? offset_D2Common + 0x170DE : version_D2Client == V113c ?  offset_D2Common + 0x309BE : version_D2Client == V112 ? offset_D2Common + 0x585EE : version_D2Client == V111b ? offset_D2Common + 0x5BFCE : version_D2Common == V111 ? offset_D2Common + 0x4ED5E :(DWORD)D2InitPlayerData + 0x62 );
 	MEMJ_REF4( D2AllocMem, init_PlayerCustomData);
 	//01BD0381  |. E8 C03F0000    CALL <JMP.&Fog.#10045>
 	//6FD9ED5D  |. E8 94A4FBFF    CALL <JMP.&Fog.#10045>

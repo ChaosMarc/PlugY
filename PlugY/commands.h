@@ -4,9 +4,9 @@
 	Commands directly in game.
 
 =================================================================*/
+#pragma once
 
-#ifndef __COMMANDS_H__INCLUDED
-#define __COMMANDS_H__INCLUDED
+#include "common.h"
 
 extern bool active_Commands;
 
@@ -18,4 +18,4 @@ void updateSharedGold(DWORD goldAmount);
 
 void Install_Commands();
 
-#endif
+/*================================= END OF FILE =================================*/

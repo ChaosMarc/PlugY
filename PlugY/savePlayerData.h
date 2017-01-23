@@ -4,10 +4,10 @@
   Save Player Custom Data.
 
 =================================================================*/
+#pragma once
 
-#ifndef __SAVEPLAYERDATA_H__INCLUDED
-#define __SAVEPLAYERDATA_H__INCLUDED
+#include "common.h"
 
 void Install_SavePlayerData();
 
-#endif
+/*================================= END OF FILE =================================*/

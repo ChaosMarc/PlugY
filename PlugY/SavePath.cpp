@@ -8,8 +8,6 @@
 
 #include "savePath.h"
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 
 char* savePath = NULL;
 bool active_changingSavePath = false;

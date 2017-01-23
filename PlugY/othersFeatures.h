@@ -4,13 +4,13 @@
 	Others features.
 
 =================================================================*/
+#pragma once
 
-#ifndef __OTHERSFEATURES_H__INCLUDED
-#define __OTHERSFEATURES_H__INCLUDED
+#include "common.h"
 
 extern bool active_othersFeatures;
 
 void Install_OthersFeatures();
 void Install_ChangeResolution();
 
-#endif
+/*================================= END OF FILE =================================*/

@@ -4,8 +4,9 @@
 	Uber Quest Management.
 
 =================================================================*/
-
 #pragma once
+
+#include "common.h"
 
 extern bool active_UberQuest;
 

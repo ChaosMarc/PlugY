@@ -4,8 +4,9 @@
   Data added to D2 base-stucture
 
 =================================================================*/
-
 #pragma once
+
+#include "common.h"
 
 extern void* unassignSkillsBtnImages;
 extern void* unassignStatsBtnImages;

@@ -6,12 +6,10 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
-#include "plugYFiles.h"		// Install_PlugYImagesFiles()
 #include "statsPoints.h"
+#include "plugYFiles.h"		// Install_PlugYImagesFiles()
 #include "newInterfaces.h"
+#include "common.h"
 #include <stdio.h>
 
 static struct
@@ -49,17 +47,17 @@ void STDCALL printStatsPageBtns()
 
 	sDrawImageInfo data;
 	ZeroMemory(&data,sizeof(data));
-	
+
 	if (printBackgroundOnMainPage && D2GetResolution())
-	{ 
+	{
 		setImage(&data, statsBackgroundImages);
-		setFrame(&data, 1); 
+		setFrame(&data, 1);
 		D2PrintImage(&data, getXPreviousPageBtn()-7, getYPreviousPageBtn()+8, -1, 5, 0);
 	}
-	
+
 	setImage(&data, D2LoadBuySelBtn());
 	if (D2GetResolution())
-	{ 
+	{
 		setFrame(&data, 12 + isDownBtn.previousPage);
 		D2PrintImage(&data, getXPreviousPageBtn(), getYPreviousPageBtn(), -1, 5, 0);
 	}
@@ -68,13 +66,13 @@ void STDCALL printStatsPageBtns()
 
 	D2SetFont(1);
 	if (D2GetResolution() && isOnPreviousPageBtn(mx,my))	//print popup "previous page"
-	{ 
-		lpText = getTranslatedString(STR_PREVIOUS_PAGE);
+	{
+		lpText = getLocalString(STR_PREVIOUS_PAGE);
 		D2PrintPopup(lpText, getXPreviousPageBtn()+getLPreviousPageBtn()/2, getYPreviousPageBtn()-getHPreviousPageBtn(), WHITE, 1);
 	}
 	else if ( isOnNextPageBtn(mx,my))
-	{ 
-		lpText = getTranslatedString(STR_NEXT_PAGE);
+	{
+		lpText = getLocalString(STR_NEXT_PAGE);
 		D2PrintPopup(lpText, getXNextPageBtn()+getLNextPageBtn()/2, getYNextPageBtn()-getHNextPageBtn(), WHITE, 1);
 	}
 }
@@ -285,6 +283,7 @@ void Install_InterfaceStats()
 	//6FB703B9  |. 5B             POP EBX
 	//6FB703BA  |. 81C4 70030000  ADD ESP,370
 	//6FB703Ñ0  \. C3             RETN
+
 	if ( version_D2Client >= V111 )
 	{
 		// Manage mouse down (Play sound)

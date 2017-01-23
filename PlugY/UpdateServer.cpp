@@ -6,21 +6,23 @@
 
 =================================================================*/
 
-#include "common.h"
 #include "updateServer.h"
-#include "error.h"
-#include "d2functions.h"
-
 #include "statsPoints.h"
 #include "skillsPoints.h"
 #include "infinityStash.h"
 #include "commands.h"
+#include "common.h"
 
+int renameIndex = 0;
+char renameString[16];
+DWORD PageSwap;
 
 int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
 {
-	log_msg("Received custom message: %X\n", param);
-	switch(param & 0xFF)
+	int type = param & 0xFF;
+	DWORD arg = (param & 0xFF00) >> 8;
+	log_msg("Received custom message: type=%i, arg=%i\n", type, arg);
+	switch(type)
 	{
 		case US_UNASSIGN_STR_POINT :	UnassignStrPoint( ptChar ); return 1;
 		case US_UNASSIGN_ENE_POINT :	UnassignEnePoint( ptChar ); return 1;
@@ -31,29 +33,64 @@ int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
 		case US_UNASSIGN_DEX_POINTS :	UnassignDexPoints( ptChar ); return 1;
 		case US_UNASSIGN_VIT_POINTS :	UnassignVitPoints( ptChar ); return 1;
 		case US_UNASSIGN_SKILLS :		UnassignAllSkillsPoints( ptChar ); return 1;
+
+		case US_SET_INDEX:				setCurrentStashIndex(ptChar, true); return 1;
+		case US_RESET_INDEX:			setCurrentStashIndex(ptChar, false); return 1;
 		case US_SELECT_PREVIOUS :		selectPreviousStash( ptChar ); return 1;
 		case US_SELECT_NEXT :			selectNextStash( ptChar ); return 1;
 		case US_SELECT_SELF :			if (active_sharedStash) toggleToSelfStash( ptChar ); return 1;
 		case US_SELECT_SHARED :			if (active_sharedStash) toggleToSharedStash( ptChar ); return 1;
 		case US_SELECT_PREVIOUS_INDEX :	selectPreviousIndexStash( ptChar ); return 1;
 		case US_SELECT_NEXT_INDEX :		selectNextIndexStash( ptChar ); return 1;
-
 		case US_SELECT_PREVIOUS2 :		selectPrevious2Stash( ptChar ); return 1;
 		case US_SELECT_NEXT2 :			selectNext2Stash( ptChar ); return 1;
 		case US_SELECT_PREVIOUS_INDEX2:	selectPreviousIndex2Stash( ptChar ); return 1;
 		case US_SELECT_NEXT_INDEX2 :	selectNextIndex2Stash( ptChar ); return 1;
+		case US_INSERT_PAGE:			insertStash(ptChar); return 1;
+		case US_DELETE_PAGE:			deleteStash(ptChar); return 1;
 
-		case US_STARTSAVE :				savePlayers( ptChar ); return 1;
+		case US_SAVE :				savePlayers( ptChar ); return 1;
 
 		case US_MAXGOLD :				maxGold(ptChar); return 1;
 		case US_PUTGOLD :				putGold(ptChar, 0); return 1;
 		case US_TAKEGOLD :				takeGold(ptChar, 0); return 1;
-		default : return 0;
+		case US_SWAP3 :					PageSwap = arg << 24; return 1;
+		case US_SWAP2 :					PageSwap |= arg << 16; return 1;
+		case US_SWAP1 :					PageSwap |= arg << 8; return 1;
+		case US_SWAP0:					swapStash(ptChar, PageSwap | arg, false); PageSwap = 0; return 1;
+		case US_SWAP0_TOGGLE :			swapStash(ptChar, PageSwap | arg, true); PageSwap = 0; return 1;
+		case US_RENAME :
+				if (renameIndex == 0)
+					for (int i = 0; i < 16; i++)
+						renameString[i] = 0;
+				renameString[renameIndex++] = (char)arg;
+				if (arg == 0)
+				{
+					renameIndex = 0;
+					log_msg("Rename on Server : %s -> %s\n", ptChar->ptPlayerData->name, renameString);
+					strcpy(ptChar->ptPlayerData->name, renameString);
+					strcpy(ptChar->ptPlayerData->ptNetClient->name, renameString);
+				}
+			return 1;
+		case US_PAGENAME:
+			if (renameIndex == 0)
+				for (int i = 0; i < 16; i++)
+					renameString[i] = 0;
+			renameString[renameIndex++] = (char)arg;
+			if (arg == 0)
+			{
+				renameIndex = 0;
+				log_msg("Rename current page on Server : %s -> %s\n", PCPY->currentStash->name, renameString);
+				renameCurrentStash(ptChar, renameString);
+			}
+			return 1;
+		default :
+			return 0;
 	}
 }
 
 FCT_ASM( caller_handleServerUpdate)
-	PUSH EAX
+	PUSH ESI
 	PUSH EBX
 	CALL handleServerUpdate
 	TEST EAX,EAX
@@ -118,6 +155,9 @@ void Install_UpdateServer()
 		//6FCEC983   . C1EE 08        SHR ESI,8
 		//6FCEC986   . 57             PUSH EDI
 		//6FCEC987   . 8BF8           MOV EDI,EAX
+		//066A76C3  |.  C1EE 08       SHR ESI,8
+		//066A76C6  |.  57            PUSH EDI
+		//066A76C7  |.  8BF8          MOV EDI,EAX
 	} else if (version_D2Game == V110) {
 		memt_byte( 0xC1, 0xE8 );	// CALL caller_handleServerUpdate
 		MEMT_REF4( 0xF88B08EE, caller_handleServerUpdate);

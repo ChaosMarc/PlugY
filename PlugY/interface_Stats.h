@@ -4,10 +4,10 @@
 	Interface Stats functions
 
 =================================================================*/
+#pragma once
 
-#ifndef __INTERFACE_STATS_HPP__INCLUDED
-#define __INTERFACE_STATS_HPP__INCLUDED
+#include "common.h"
 
 void Install_InterfaceStats();
 
-#endif
+/*================================= END OF FILE =================================*/

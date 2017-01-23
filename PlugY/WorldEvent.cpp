@@ -6,9 +6,8 @@
 
 =================================================================*/
 
+#include "worldEvent.h"
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 
 #pragma pack(1)
 struct s_WEdata

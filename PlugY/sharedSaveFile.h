@@ -4,11 +4,9 @@
   Add an extra save file shared by all own characters.
 
 =================================================================*/
-
 #pragma once
 
 #include "common.h"
-#include <stdio.h>
 
 BYTE* readSharedSaveFile(char* name, DWORD* size);
 void writeSharedSaveFile(char* name, BYTE* data, DWORD size, bool isHardcore);

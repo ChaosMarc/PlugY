@@ -6,12 +6,10 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "updateServer.h"	// Install_UpdateServer()
 #include "plugYFiles.h"		// Install_PlugYImagesFiles()
 #include "skillsPoints.h"
+#include "common.h"
 #include <stdio.h>
 
 int posXUnassignSkillBtn=-1;
@@ -37,7 +35,7 @@ void STDCALL printSkillsPageBtns()
 
 		if ( isOnButtonUnassignSkill(D2GetMouseX(),D2GetMouseY()))
 		{
-			LPWSTR popupText = getTranslatedString(STR_SKILLS_UNASSIGN);			
+			LPWSTR popupText = getLocalString(STR_SKILLS_UNASSIGN);
 			D2PrintPopup(popupText, getXSkillBtn()+getLSkillBtn()/2, getYSkillBtn()-getHSkillBtn(), 0, 1);
 		}
 	}
