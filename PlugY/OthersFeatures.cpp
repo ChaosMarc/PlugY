@@ -6,8 +6,6 @@
 =================================================================*/
 
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 
 bool active_othersFeatures = false;
 

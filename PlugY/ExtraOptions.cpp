@@ -7,14 +7,12 @@
 =================================================================*/
 
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include <stdio.h>
 
-int active_RunLODs = false;
-int active_alwaysRegenMapInSP = false;
-DWORD nbPlayersCommandByDefault = 1;
 int active_DisplayItemLevel = false;
+DWORD nbPlayersCommandByDefault = 0;
+int active_alwaysRegenMapInSP = false;
+int active_RunLODs = false;
 int active_AlwaysDisplayLifeMana = false;
 int active_EnabledTXTFilesWithMSExcel = false;
 int active_DisplayBaseStatsValue = false;
@@ -27,9 +25,7 @@ void STDCALL displayItemlevel(LPWSTR popup, Unit* ptItem)
 {
 	if (onRealm && (selectModParam==MOD_NO)) return;
 	WCHAR text[0x50];
-	//swprintf(text, L"Item Level: %u\n", D2GetItemLevel(ptItem));
-	swprintf(text, getTranslatedString(STR_ITEM_LEVEL), D2GetItemLevel(ptItem));
-	wcscat(text,L"\n");
+	_snwprintf(text, sizeof(text), L"%s: %u\n", getLocalString(STR_ITEM_LEVEL), D2GetItemLevel(ptItem));
 	D2SetColorPopup(text,WHITE);
 	wcscat(popup,text);
 }
@@ -138,7 +134,7 @@ void Install_DisplayItemLevel()
 {
 	static int isInstalled = false;
 	if (isInstalled) return;
-	
+
 	log_msg("Patch D2Client for display item popup. (DisplayPopup)\n");
 
 	// print the text in the final buffer
@@ -401,10 +397,7 @@ void Install_AlwaysDisplayLifeMana()
 		//6FAD7659  |. A1 4CBCB86F    MOV EAX,DWORD PTR DS:[6FB8BC4C]
 
 		//6FAD7667  |. 0F8C A4000000  JL D2Client.6FAD7711
-		//--
 		//6FB1D717  |. 0F8C A4000000  JL D2Client.6FB1D7C1
-
-
 	} else {
 		// Always display life.
 		mem_seek R7(D2Client, 58B32, 58B32, 5F102, 2D713, B5DF3, 81733, 0000, 0000);
@@ -437,7 +430,6 @@ void Install_AlwaysDisplayLifeMana()
 		//6FAD77CA  |. 5B             POP EBX
 		//6FAD77CB  |. 81C4 28030000  ADD ESP,328
 		//6FAD77D1  \. C3             RETN
-		//--
 		//6FB1D7BC  |> A1 3870BA6F    MOV EAX,DWORD PTR DS:[6FB8BC4C]
 	}
 	else if ( version_D2Client >= V110 )
@@ -525,7 +517,7 @@ void STDCALL printDisplayBaseStatsValue(WORD statID, sDrawImageInfo* data, DWORD
 	if (isOnRect(D2GetMouseX(),D2GetMouseY(),x+5,y+5,32,32))
 	{
 		WCHAR text[100];
-		swprintf(text, getTranslatedString(STR_STATS_BASE_MIN), statValue, minValue);
+		_snwprintf(text, sizeof(text), getLocalString(STR_STATS_BASE_MIN), statValue, minValue);
 		D2SetFont(1);
 		D2PrintPopup(text, x+18, y-32, WHITE, 1);
 	}

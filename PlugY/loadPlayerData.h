@@ -4,10 +4,10 @@
   Load Player Custom Data.
 
 =================================================================*/
+#pragma once
 
-#ifndef __LOADPLAYERDATA_H__INCLUDED
-#define __LOADPLAYERDATA_H__INCLUDED
+#include "common.h"
 
 void Install_LoadPlayerData();
 
-#endif
+/*================================= END OF FILE =================================*/

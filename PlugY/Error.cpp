@@ -5,13 +5,13 @@
 
 =================================================================*/
 
+#include "parameters.h"
+#include "error.h"
+#include <windows.h>
 #include <stdio.h>			// fopen() fclose() fprintf() vfprintf()
 #include <stdarg.h>			// ...
 #include <string.h>			// strlen() strcat()
 #include <direct.h>			// _getcwd()
-
-#include "error.h"
-#include "d2functions.h"	// Fog_assert()
 
 DWORD active_logFile = 1;
 

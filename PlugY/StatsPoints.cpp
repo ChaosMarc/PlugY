@@ -6,13 +6,10 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
-
 #include "plugYFiles.h"			// Install_PlugYImagesFiles()
 #include "interface_Stats.h"	// Install_InterfaceStats()
 #include "updateServer.h"
+#include "common.h"
 #include <stdio.h>
 
 bool active_StatsPoints=0;
@@ -162,11 +159,12 @@ void STDCALL printDisabledStatsBtn(WORD statID, sDrawImageInfo* data, DWORD x, D
 	{
 		WCHAR text[100];
 		if (active_StatsShiftClickLimit)
-			swprintf(text, getTranslatedString(STR_STATS_UNASSIGN_WITH_LIMIT),limitValueToShiftClick);
+			_snwprintf(text, sizeof(text) - 1, getLocalString(STR_STATS_UNASSIGN_WITH_LIMIT), limitValueToShiftClick);
 		else
-			swprintf(text, getTranslatedString(STR_STATS_UNASSIGN_WITHOUT_LIMIT));
+			_snwprintf(text, sizeof(text) - 1, getLocalString(STR_STATS_UNASSIGN_WITHOUT_LIMIT));
 		wcscat(text,L"\n");
-		swprintf(text+wcslen(text), getTranslatedString(STR_STATS_BASE_MIN), statValue, minValue);
+		int len = wcslen(text);
+		_snwprintf(text + len, sizeof(text) - len, getLocalString(STR_STATS_BASE_MIN), statValue, minValue);
 		D2SetFont(1);
 		D2PrintPopup(text, x+18, y-32, WHITE, 1);
 	}
@@ -329,8 +327,7 @@ void Install_StatsPoints()
 	Install_UpdateServer();
 
 	log_msg("Patch D2Client for unassign stat points when specified key is press. (StatsPoints)\n");
-//if ( version_D2Client < V113 )
-{
+
 	// Always print stat button images.
 	mem_seek R7(D2Client, 29B12, 29B02, 30073, 82BBA, 8963A, 6B59A, BD1B5, BF955);
 	memt_byte( 0x8B, 0xEB );	// JMP SHORT D2Client.6FAD0088
@@ -453,7 +450,7 @@ void Install_StatsPoints()
 		MEMC_REF4( D2SendToServer3, caller_setValue);
 		//6FAD1610   . E8 7BC3FDFF    CALL D2Client.6FAAD990
 	}
-}	log_msg("\n");
+	log_msg("\n");
 
 	isInstalled = true;
 }

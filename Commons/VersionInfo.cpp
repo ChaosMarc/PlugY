@@ -1,118 +1,86 @@
+/*=================================================================
+	File created by Yohann NICOLAS.
+
+	Get Game version.
+
+=================================================================*/
+
+//#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 #include "VersionInfo.h"
-#pragma comment(lib, "Version.Lib") //по сравнению с Delphi 7 - такой гемморой! :(
+#include <windows.h>
 
+#pragma comment(lib, "Version.Lib")
 
-bool IsFile(char* sPath)
+const char* VersionStrings[16] = { "1.00","1.07","1.08","1.09","1.09b","1.09d","1.10","1.11","1.11b","1.12","1.13c","1.13d","1.14a","1.14b","1.14c","1.14d" };
+
+const char* GetVersionString(int version)
 {
-        bool bFile = false;
-        HANDLE hFile = CreateFile
-                (
-                        sPath, 
-                        GENERIC_READ,
-                        FILE_SHARE_READ,
-                        NULL, 
-                        OPEN_EXISTING, 
-                        FILE_ATTRIBUTE_NORMAL,
-                        NULL
-                );
-        if(hFile != INVALID_HANDLE_VALUE)
-        {
-                CloseHandle(hFile);
-                bFile = true;
-        }
-        return bFile;
+	return VersionStrings[version];
 }
 
-bool GetAppVersion(char* FileName, TFileVersion* VerInfo){ // получение версии файла
-   VerInfo->full = -1;
-   if(!IsFile(FileName)){ // Проверяем наличие файла
-       return false; // Если нет ф-ция неуспешна
-   }
-   DWORD FSize = GetFileVersionInfoSize(FileName,NULL); // размер инфы о версии файла
-   if(FSize==0){ // Если 0 функция неуспешна
-       return false;
-   }
-   LPVOID pBlock = (char*)malloc(FSize); // адрес буфера для ресурсов версии
-   GetFileVersionInfo(FileName,NULL,FSize,pBlock); // получаем ресурс информации о версии
-   LPVOID MS;
-   UINT LS;
-   try{
-       VerQueryValue(pBlock,"\\",&MS,&LS); // извлекаем информацию из ресурса
-   }
-   catch(...){
-       return false; // в случае ошибки функция неуспешна
-   }
-   VS_FIXEDFILEINFO FixedFileInfo; // структура с информацией о версии файла
-   memmove(&FixedFileInfo, MS, LS); // приводим информацию к структуре
+eGameVersion GetD2Version(LPCVOID pVersionResource)
+{
+	UINT uLen;
+	VS_FIXEDFILEINFO* ptFixedFileInfo;
+	if (!VerQueryValue(pVersionResource, "\\", (LPVOID*)&ptFixedFileInfo, &uLen))
+		return UNKNOW;
 
-   DWORD FileVersionMS = FixedFileInfo.dwFileVersionMS;
-   DWORD FileVersionLS = FixedFileInfo.dwFileVersionLS;
+	if (uLen == 0)
+		return UNKNOW;
 
-   VerInfo->major = HIWORD(FileVersionMS)	; // получаем значения
-   VerInfo->minor = LOWORD(FileVersionMS); // и присваиваеи их входному указателю
-   VerInfo->revision = HIWORD(FileVersionLS);
-   VerInfo->subrevision = LOWORD(FileVersionLS);
+	WORD major = HIWORD(ptFixedFileInfo->dwFileVersionMS);
+	WORD minor = LOWORD(ptFixedFileInfo->dwFileVersionMS);
+	WORD revision = HIWORD(ptFixedFileInfo->dwFileVersionLS);
+	WORD subrevision = LOWORD(ptFixedFileInfo->dwFileVersionLS);
 
-   return true; // функция успешна
+	if (major != 1)
+		return UNKNOW;
+	if (minor == 0 && revision == 7 && subrevision == 0) return V107;
+	if (minor == 0 && revision == 8 && subrevision == 28) return V108;
+	if (minor == 0 && revision == 9 && subrevision == 19) return V109;
+	if (minor == 0 && revision == 9 && subrevision == 20) return V109b;
+	if (minor == 0 && revision == 9 && subrevision == 22) return V109d;
+	if (minor == 0 && revision == 10 && subrevision == 39) return V110;
+	if (minor == 0 && revision == 11 && subrevision == 45) return V111;
+	if (minor == 0 && revision == 11 && subrevision == 46) return V111b;
+	if (minor == 0 && revision == 12 && subrevision == 49) return V112;
+	if (minor == 0 && revision == 13 && subrevision == 60) return V113c;
+	if (minor == 0 && revision == 13 && subrevision == 64) return V113d;
+	if (minor == 14 && revision == 0 && subrevision == 64) return V114a;
+	if (minor == 14 && revision == 1 && subrevision == 68) return V114b;
+	if (minor == 14 && revision == 2 && subrevision == 70) return V114c;
+	if (minor == 14 && revision == 3 && subrevision == 71) return V114d;
+	return UNKNOW;
 }
 
-
-#define SUBKEY "Software\\Blizzard Entertainment\\Diablo II"
-#define GAMEFILE "\\Game.exe"
-bool GetD2Path(char* buf, DWORD bufsize)
+eGameVersion GetD2Version(char* gameExe)
 {
-	HKEY hKey;
-	DWORD type;
-	int res;
-	if (RegOpenKeyEx(HKEY_CURRENT_USER, SUBKEY, 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
-		res = RegQueryValueEx(hKey,"InstallPath",NULL,&type,(LPBYTE)buf,&bufsize);
-		RegCloseKey(hKey);
-		if (res!=ERROR_SUCCESS) return false;
-	} else if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, SUBKEY, 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
-		res = RegQueryValueEx(hKey,"InstallPath",NULL,&type,(LPBYTE)buf,&bufsize);
-		RegCloseKey(hKey);
-		if (res!=ERROR_SUCCESS) return false;
-	} else {
-		return false;
-	}
-	strcat(buf, GAMEFILE);
-	if (GetFileAttributes(buf) == INVALID_FILE_ATTRIBUTES)
-		return false;
-	return true;
-};
+	DWORD len = GetFileVersionInfoSize(gameExe, NULL);
+	if (len == 0)
+		return UNKNOW;
 
-int GetVerD2(TFileVersion GameVer)
-{
-	if ((GameVer.major != 1)||(GameVer.minor != 0)) return -1;
-	switch (GameVer.revision)
-	{
-	case 9:
-		if (GameVer.subrevision == 20) return v109b;
-		if (GameVer.subrevision == 22) return v109d;
-		break;
-	case 10:
-		if (GameVer.subrevision == 39) return v110;
-		break;
-	case 11:
-		if (GameVer.subrevision == 45) return v111;
-		if (GameVer.subrevision == 46) return v111b;
-		break;
-	case 12:
-		if (GameVer.subrevision == 49) return v112;
-		break;
-	case 13:
-		if (GameVer.subrevision == 60) return v113c;
-		if (GameVer.subrevision == 64) return v113d;
-		break;
-	}
-	return -1;
+	BYTE* pVersionResource = new BYTE[len];
+	GetFileVersionInfo(gameExe, NULL, len, pVersionResource);
+	eGameVersion version = GetD2Version(pVersionResource);
+	delete pVersionResource;
+
+	return version;
 }
 
-
-int GetD2Version(char* PathGameExe)
+eGameVersion GetD2Version()
 {
-	TFileVersion GameVer = {-1};
-	if (! GetAppVersion(PathGameExe, &GameVer)) return -1;	
-	int ver = GetVerD2(GameVer);
-	return ver;
+	HMODULE hModule = GetModuleHandle(NULL);
+	HRSRC hResInfo = FindResource(hModule, MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
+	HGLOBAL hResData = LoadResource(hModule, hResInfo);
+	LPVOID pVersionResource = LockResource(hResData);
+	//DWORD dwSize = SizeofResource(hInst, hResInfo);
+	//LPVOID pVersionResource = LocalAlloc(LMEM_FIXED, dwSize);
+	//CopyMemory(pVersionResource, pRes, dwSize);
+
+	eGameVersion version = GetD2Version(pVersionResource);
+	FreeResource(hResData);
+	//LocalFree(pVersionResource);
+	return version;
 }
+
+///////////////////////// END OF FILE ///////////////////////

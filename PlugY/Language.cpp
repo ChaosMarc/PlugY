@@ -5,10 +5,8 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "language.h"
+#include "common.h"
 #include <stdio.h>
 
 

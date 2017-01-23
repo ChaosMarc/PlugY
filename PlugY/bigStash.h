@@ -4,16 +4,13 @@
 	Use a more big stash
 
 =================================================================*/
+#pragma once
 
-#ifndef __BIGSTASH_HPP__INCLUDED
-#define __BIGSTASH_HPP__INCLUDED
-
-#include <windows.h>
+#include "common.h"
 
 extern bool active_bigStash;
 extern bool active_bigStash_tested;
 
 void Install_BigStash();
 
-
-#endif
+/*================================= END OF FILE =================================*/

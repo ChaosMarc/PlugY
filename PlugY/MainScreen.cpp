@@ -2,14 +2,13 @@
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
 
-
-  Add "plugY v1.00" on screen.
+    Print PlugY version on screen.
 
 =================================================================*/
 
+#include "extraOptions.h"
+#include "windowed.h"
 #include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include <stdio.h>
 
 char* versionText = "";
@@ -22,12 +21,17 @@ DWORD newTextBoxData[]={4,0x237,0x243,0xC8,0x14,0,0,0,0,0,0,2};//type,x,y,l,h,?,
 
 void STDCALL printPlugYVersion(void** childrens, DWORD* sgnNumChildren)
 {
-	char buf[20];
-	void* textbox = D2CreateTextBox(newTextBoxData);
-	childrens[*sgnNumChildren]=textbox;
-	d2_assert((*sgnNumChildren)++ >= 40,"sgnNumChildren < MAX_CHILDREN", __FILE__, __LINE__);
-	sprintf(buf, "PlugY %s", PLUGY_VERSION);
-	D2PrintLineOnTextBox(textbox, buf, colorOfPlugYVersion);
+	if (active_Windowed)
+		SetWindowedOptions();
+	if (active_PrintPlugYVersion)
+	{
+		char buf[20];
+		void* textbox = D2CreateTextBox(newTextBoxData);
+		childrens[*sgnNumChildren] = textbox;
+		d2_assert((*sgnNumChildren)++ >= 40, "sgnNumChildren < MAX_CHILDREN", __FILE__, __LINE__);
+		sprintf(buf, "PlugY %s", PLUGY_VERSION);
+		D2PrintLineOnTextBox(textbox, buf, colorOfPlugYVersion);
+	}
 }
 
 FCT_ASM ( caller_printPlugYVersion )

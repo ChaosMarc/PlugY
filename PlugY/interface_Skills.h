@@ -4,10 +4,10 @@
 	Interface Skills functions
 
 =================================================================*/
+#pragma once
 
-#ifndef __INTERFACE_SKILLS_HPP__INCLUDED
-#define __INTERFACE_SKILLS_HPP__INCLUDED
+#include "common.h"
 
 void Install_InterfaceSkills();
 
-#endif
+/*================================= END OF FILE =================================*/

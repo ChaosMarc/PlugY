@@ -4,12 +4,12 @@
   Data added to Player base-stucture
 
 =================================================================*/
-
 #pragma once
 
 #include "common.h"
 
 extern bool active_PlayerCustomData;
+extern bool openSharedStashOnLoading;
 
 struct Unit;
 
@@ -20,7 +20,9 @@ struct Stash
 		DWORD flags; 
 		struct { 
 			DWORD isShared:1;	//
-		}; 
+			DWORD isIndex:1;	//
+			DWORD isReserved:1;	// For swap items comand
+		};
 	};
 	char* name;
 	Unit* ptListItem;

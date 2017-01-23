@@ -4,13 +4,13 @@
   Changing the current save path.
 
 =================================================================*/
+#pragma once
 
-#ifndef __SAVEPATH_H__INCLUDED
-#define __SAVEPATH_H__INCLUDED
+#include "common.h"
 
 extern char* savePath;
 extern bool active_changingSavePath;
 
 void Install_ChangingSavePath();
 
-#endif
+/*================================= END OF FILE =================================*/

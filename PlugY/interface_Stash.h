@@ -4,10 +4,10 @@
 	Interface functions
 
 =================================================================*/
+#pragma once
 
-#ifndef __INTERFACE_STASH_HPP__INCLUDED
-#define __INTERFACE_STASH_HPP__INCLUDED
+#include "common.h"
 
 void Install_InterfaceStash();
 
-#endif
+/*================================= END OF FILE =================================*/

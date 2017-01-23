@@ -5,12 +5,11 @@
 
 =================================================================*/
 
-#include "common.h"
 #include "sharedSaveFile.h"
-#include "error.h"
-#include "d2functions.h"
 #include "infinityStash.h"
 #include "customLibraries.h"
+#include "common.h"
+#include <stdio.h>
 
 #define FILE_SHAREDSTASH 0x00535353	//"SSS "
 #define BUFFER_SIZE 0x4000

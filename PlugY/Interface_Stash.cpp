@@ -6,13 +6,11 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
 #include "interface_Stash.h"
-#include "d2functions.h"
 #include "updateServer.h"
 #include "infinityStash.h"
 #include "plugYFiles.h"		// Install_PlugYImagesFiles()
+#include "common.h"
 #include <stdio.h>
 
 static struct
@@ -142,31 +140,31 @@ void* STDCALL printBtns()
 	D2SetFont(1);
 
 	if (isOnButtonPreviousStash(mx,my)) {
-		lpText = getTranslatedString(STR_STASH_PREVIOUS_PAGE);
+		lpText = getLocalString(STR_STASH_PREVIOUS_PAGE);
 		D2PrintPopup(lpText, getXPreviousBtn()+getLPreviousBtn()/2, getYPreviousBtn()-getHPreviousBtn(), WHITE, 1);
 
 	} else if (isOnButtonNextStash(mx,my)) {
-		lpText = getTranslatedString(STR_STASH_NEXT_PAGE);
+		lpText = getLocalString(STR_STASH_NEXT_PAGE);
 		D2PrintPopup(lpText, getXNextBtn()+getLNextBtn()/2, getYNextBtn()-getHNextBtn(), WHITE, 1);
 
 	} else if (active_sharedStash && isOnButtonToggleSharedStash(mx,my)) {
-		lpText = getTranslatedString(PCPY->showSharedStash ? STR_TOGGLE_TO_PERSONAL : STR_TOGGLE_TO_SHARED);
+		lpText = getLocalString(PCPY->showSharedStash ? STR_TOGGLE_TO_PERSONAL : STR_TOGGLE_TO_SHARED);
 		D2PrintPopup(lpText, getXSharedBtn()+getLSharedBtn()/2, getYSharedBtn()-getHSharedBtn(), WHITE, 1);
 
 	} else if (isOnButtonPreviousIndexStash(mx,my)) {
-		swprintf(text, getTranslatedString(STR_STASH_PREVIOUS_INDEX) ,nbPagesPerIndex,nbPagesPerIndex2);
+		_snwprintf(text, sizeof(text), getLocalString(STR_STASH_PREVIOUS_INDEX) ,nbPagesPerIndex,nbPagesPerIndex2);
 		D2PrintPopup(text, getXPreviousIndexBtn()+getLPreviousIndexBtn()/2, getYPreviousIndexBtn()-getHPreviousIndexBtn(), 0, 0);
 
 	} else if (isOnButtonNextIndexStash(mx,my))	{
-		swprintf(text, getTranslatedString(STR_STASH_NEXT_INDEX) ,nbPagesPerIndex,nbPagesPerIndex2);
+		_snwprintf(text, sizeof(text), getLocalString(STR_STASH_NEXT_INDEX) ,nbPagesPerIndex,nbPagesPerIndex2);
 		D2PrintPopup(text, getXNextIndexBtn()+getLNextIndexBtn()/2, getYNextIndexBtn()-getHNextIndexBtn(), WHITE, 1);
 
 	} else if (active_sharedGold && isOnButtonPutGold(mx,my))	{
-		lpText = getTranslatedString(STR_PUT_GOLD);
+		lpText = getLocalString(STR_PUT_GOLD);
 		D2PrintPopup(lpText, getXPutGoldBtn()+getLPutGoldBtn()/2, getYPutGoldBtn()-getHPutGoldBtn(), WHITE, 1);
 
 	} else if (active_sharedGold && isOnButtonTakeGold(mx,my))	{
-		lpText = getTranslatedString(STR_TAKE_GOLD);
+		lpText = getLocalString(STR_TAKE_GOLD);
 		D2PrintPopup(lpText, getXTakeGoldBtn()+getLTakeGoldBtn()/2, getYTakeGoldBtn()-getHTakeGoldBtn(), WHITE, 1);
 	}
 
@@ -275,15 +273,16 @@ void FASTCALL printPageNumber(LPWSTR maxGoldText, DWORD x, DWORD y, DWORD color,
 	if (PCPY->currentStash)
 	{
 		bool isShared = PCPY->currentStash->isShared;
+		bool isIndex = PCPY->currentStash->isIndex;
 		DWORD currentId = PCPY->currentStash->id;
 
 		if (PCPY->currentStash->name && PCPY->currentStash->name[0])
 			mbstowcs(popupText,PCPY->currentStash->name,50);//strlen(PCPY->currentStash->name)+1
-		else swprintf(popupText, getTranslatedString( isShared ? STR_SHARED_PAGE_NUMBER : STR_PERSONAL_PAGE_NUMBER), currentId+1);
-		D2PrintString(popupText,x,y, isShared?RED:WHITE ,bfalse);
+		else _snwprintf(popupText, sizeof(popupText), getLocalString( isShared ? STR_SHARED_PAGE_NUMBER : STR_PERSONAL_PAGE_NUMBER), currentId+1);
+		D2PrintString(popupText, x, y, isShared ? (isIndex ? CRYSTAL_RED : RED) : (isIndex ? BRIGHT_WHITE : WHITE), bfalse);
 	} else {
-		swprintf(popupText, getTranslatedString(STR_NO_SELECTED_PAGE));
-		D2PrintString(popupText,x,y, WHITE ,bfalse);
+		_snwprintf(popupText, sizeof(popupText), getLocalString(STR_NO_SELECTED_PAGE));
+		D2PrintString(popupText, x, y, WHITE, bfalse);
 	}
 
 	//printGoldMaxPopup
@@ -293,8 +292,7 @@ void FASTCALL printPageNumber(LPWSTR maxGoldText, DWORD x, DWORD y, DWORD color,
 	{
 		if (active_sharedGold)
 		{
-			swprintf(popupText, L"%s\n", maxGoldText);
-			swprintf(popupText+wcslen(popupText), getTranslatedString(STR_SHARED_GOLD_QUANTITY), PCPY->sharedGold);
+			_snwprintf(popupText, sizeof(popupText), L"%s\n%s: %u", maxGoldText, getLocalString(STR_SHARED_GOLD_QUANTITY), PCPY->sharedGold);
 			DWORD x = D2GetPixelLen(maxGoldText);
 			DWORD x2 = D2GetPixelLen(popupText) - x;
 			D2PrintPopup(popupText, RX(0xA8-max(x,x2)/2), RY(0x1CA), WHITE, 0);
@@ -467,7 +465,7 @@ void Install_InterfaceStash()
 	//6FB60FE2  |. E8 99C2F5FF    CALL <JMP.&D2Win.#10020>
 	//6FB2DF62  |. E8 19F3F8FF    CALL <JMP.&D2Win.#10064>
 	//6FB63632  |. E8 299DF5FF    CALL <JMP.&D2Win.#10001>
-	//6FB49A32  |. E8 91F4F6FF    CALL <JMP.&D2Win.#10150>
+	//6FB49A32  |. E8 4739F7FF    CALL <JMP.&D2Win.#10150>
 	//6FB4DE02  |. E8 4739F7FF    CALL <JMP.&D2Win.#10076>
 
 	// Manage mouse down (Play sound)

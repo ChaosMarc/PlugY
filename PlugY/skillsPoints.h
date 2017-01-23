@@ -4,9 +4,9 @@
 	Unassign Skill Point for futher re-assignment.
 
 =================================================================*/
+#pragma once
 
-#ifndef __SKILLSPOINTS_H__INCLUDED
-#define __SKILLSPOINTS_H__INCLUDED
+#include "common.h"
 
 extern bool active_SkillsPoints;
 extern bool unassignSkillsPointsOneByOne;
@@ -17,4 +17,4 @@ void client_UnassignAllSkillsPoints();
 
 void Install_SkillsPoints();
 
-#endif
+/*================================= END OF FILE =================================*/

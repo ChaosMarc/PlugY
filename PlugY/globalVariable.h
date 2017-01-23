@@ -4,13 +4,13 @@
 	Set global variable.
 
 =================================================================*/
+#pragma once
 
-#ifndef __GLOBAL_VARIABLE_H__INCLUDED
-#define __GLOBAL_VARIABLE_H__INCLUDED
+#include "common.h"
 
 extern bool onRealm;
 extern bool needToInit;
 
 void Install_VariableOnRealm();
 
-#endif
+/*================================= END OF FILE =================================*/

@@ -7,10 +7,8 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "plugYFiles.h"
+#include "common.h"
 #include <stdio.h>
 
 //#include "newInterfaces.h"

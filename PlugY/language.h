@@ -4,9 +4,9 @@
 	Language management.
 
 =================================================================*/
+#pragma once
 
-#ifndef __LANGUAGE_H__INCLUDED
-#define __LANGUAGE_H__INCLUDED
+#include "common.h"
 
 extern bool active_ChangeLanguage;
 extern DWORD selectedLanguage;
@@ -36,4 +36,4 @@ extern t_availableLanguages availableLanguages;
 
 void Install_LanguageManagement();
 
-#endif
+/*================================= END OF FILE =================================*/

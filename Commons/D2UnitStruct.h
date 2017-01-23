@@ -13,6 +13,9 @@
 struct CBPlayerData;
 struct CBItemData;
 struct Unit;
+struct SkillsBIN;
+struct SkillData;
+struct ObjectsBIN;
 
 /*=================================================================*/
 /*  Skill Structure.                                               */
@@ -345,12 +348,14 @@ struct NetClient
 			WORD isHardCoreGame:1;
 		};
 	};
-	BYTE	uk2[0x170];					//+0C
+	BYTE	uk2;						//+0C
+	char	name[0x10];					//+0D
+	BYTE	uk3[0x15F];					//+1D
 	BYTE*	savefile;					//+17C
 	DWORD	finalSize;					//+180
 	DWORD	counter;					//+184
 	DWORD	currentSize;				//+188
-	BYTE	uk3[0x1C];					//+18C
+	BYTE	uk4[0x1C];					//+18C
 	Game*	ptGame;						//+1A8
 	//+1A8 is ptGame
 	//+4A8 ptNextClient

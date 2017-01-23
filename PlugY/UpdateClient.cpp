@@ -6,14 +6,10 @@
  
 =================================================================*/
 
-#include "common.h"
 #include "updateClient.h"
-#include "error.h"
-#include "d2functions.h"
-
 #include "infinityStash.h"
 #include "commands.h"
-
+#include "common.h"
 
 void updateClient(Unit* ptChar, DWORD mFunc, DWORD p1, DWORD p2, DWORD p3)
 {
@@ -36,14 +32,36 @@ void updateClient(Unit* ptChar, DWORD mFunc, DWORD p1, DWORD p2, DWORD p3)
 	D2SendPacket(ptNetClient, &packet, sizeof(DataPacket));
 }
 
+void updateClient(Unit* ptChar, DWORD mFunc, char* msg)
+{
+	void* ptNetClient;
+	DataPacket packet;
+
+	// Intialize the packet to send to client
+	ZeroMemory(&packet, sizeof(DataPacket));
+	packet.mType = 0x9D;
+	packet.mFunc = (BYTE)mFunc;
+	packet.mSize = sizeof(DataPacket);
+	packet.mPlayerID = ptChar->nUnitId;
+	if (msg != NULL && strlen(msg) >= 20)
+		return;
+	if (msg != NULL)
+		strcpy((char*)&packet.mItemID, msg);
+
+	ptNetClient = D2GetClient(ptChar, __FILE__, __LINE__);
+
+	// Send packet to client for remove placed skills
+	D2SendPacket(ptNetClient, &packet, sizeof(DataPacket));
+}
 
 DWORD FASTCALL handleClientUpdate(DataPacket* packet)
 {
 	log_msg("[CLIENT] Received custom message: %d with param: %08X , %08X , %08X\n",packet->mFunc,packet->mParam1,packet->mParam2,packet->mParam3);
 	switch (packet->mFunc)
 	{
-	case UC_SELECT_STASH :	 setSelectedStashClient(packet->mParam1,packet->mParam2,packet->mParam3); return 1;
+	case UC_SELECT_STASH:	 setSelectedStashClient(packet->mParam1, packet->mParam2, packet->mParam3, (packet->mParam2 & 4) == 4); return 1;
 	case UC_SHARED_GOLD :	 updateSharedGold(packet->mParam1); return 1;
+	case UC_PAGE_NAME:		 renameCurrentStash(D2GetClientPlayer(), (char*)&packet->mItemID); return 1;
 	default : return 0;
 	}
 }

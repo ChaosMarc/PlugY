@@ -6,13 +6,10 @@
 
 =================================================================*/
 
-
-#include "common.h"
 #include "infinityStash.h"
-#include "error.h"
-#include "d2functions.h"
 #include "updateClient.h"
 #include "interface_Stash.h"
+#include "common.h"
 
 #define STASH_TAG 0x5453			//"ST"
 #define JM_TAG 0x4D4A 				//"JM"
@@ -27,7 +24,7 @@ bool separateHardSoftStash = false;
 bool active_sharedGold=false;
 char* sharedStashFilename = NULL;
 
-typedef int (*TchangeToSelectedStash)(Unit* ptChar, Stash* newStash, DWORD bIsClient);
+typedef int (*TchangeToSelectedStash)(Unit* ptChar, Stash* newStash, DWORD bOnlyItems, DWORD bIsClient);
 
 Unit* firstClassicStashItem(Unit* ptChar)
 {
@@ -48,7 +45,8 @@ DWORD endStashList(Unit* ptChar, Stash* ptStash)//WORKS
 	while (stash)
 	{
 		if (stash->ptListItem || ((stash == PCPY->currentStash) && firstClassicStashItem(ptChar))) return 0;
-		stash = stash->nextStash;	
+		if (stash->isIndex || (stash->name != NULL && stash->name[0])) return 0;
+		stash = stash->nextStash;
 	}
 	return 1;
 }
@@ -78,10 +76,10 @@ Stash* getLastStash(Stash* ptStash)//WORKS
 
 Stash* newStash(DWORD id)
 {
-	d2_assert( id == 0xFFFFFFFF , "trop de stash", __FILE__, __LINE__);
+	d2_assert( id == 0xFFFFFFFF , "Too much stash", __FILE__, __LINE__);
 	
 	Stash* stash = (Stash*)malloc(sizeof(Stash));//D2AllocMem(memPool, sizeof(Stash),__FILE__,__LINE__,0);
-	d2_assert(!stash , "pb de generation de stash", __FILE__, __LINE__);
+	d2_assert(!stash , "Error on stash allocation.", __FILE__, __LINE__);
 	ZeroMemory(stash, sizeof(Stash));
 	stash->id = id;
 	
@@ -131,11 +129,11 @@ Stash* getStash(Unit* ptChar, DWORD isShared, DWORD id)//WORKS
 }
 
 
-int changeToSelectedStash_9(Unit* ptChar, Stash* newStash, DWORD bIsClient)
+int changeToSelectedStash_9(Unit* ptChar, Stash* newStash, DWORD bOnlyItems, DWORD bIsClient)
 {
 	if (!newStash) return 0;
 
-	log_msg("changeToSelectedStash ID:%d\tshared:%d\tclient:%d\n",newStash->id,newStash->id,bIsClient);
+	log_msg("changeToSelectedStash ID:%d\tshared:%d\tonlyItems:%d\tclient:%d\n", newStash->id, newStash->isShared, bOnlyItems, bIsClient);
 
 	Stash* currentStash = PCPY->currentStash;
 	if (currentStash == newStash) return 0;
@@ -176,7 +174,6 @@ int changeToSelectedStash_9(Unit* ptChar, Stash* newStash, DWORD bIsClient)
 	}
 
 	// add items of new stash
-	PCPY->currentStash = newStash;
 	ptItem = newStash->ptListItem;
 	while (ptItem)
 	{
@@ -184,16 +181,20 @@ int changeToSelectedStash_9(Unit* ptChar, Stash* newStash, DWORD bIsClient)
 		D2Common10242(PCInventory, D2GetRealItem(ptItem), 1);
 		ptItem = D2UnitGetNextItem(ptItem);
 	}
-	newStash->ptListItem = NULL;
+	if (bOnlyItems)
+		newStash->ptListItem = PCPY->currentStash->ptListItem;
+	else
+		PCPY->currentStash = newStash;
+	PCPY->currentStash->ptListItem = NULL;
 
 	return 1;
 }
 
-int changeToSelectedStash_10(Unit* ptChar, Stash* newStash, DWORD bIsClient)
+int changeToSelectedStash_10(Unit* ptChar, Stash* newStash, DWORD bOnlyItems, DWORD bIsClient)
 {
 	if (!newStash) return 0;
 
-	log_msg("changeToSelectedStash ID:%d\tshared:%d\tclient:%d\n",newStash->id,newStash->id,bIsClient);
+	log_msg("changeToSelectedStash ID:%d\tshared:%d\tonlyItems:%d\tclient:%d\n",newStash->id,newStash->isShared, bOnlyItems,bIsClient);
 
 	Stash* currentStash = PCPY->currentStash;
 	if (currentStash == newStash) return 0;
@@ -221,14 +222,17 @@ int changeToSelectedStash_10(Unit* ptChar, Stash* newStash, DWORD bIsClient)
 	}
 
 	// add items of new stash
-	PCPY->currentStash = newStash;
 	ptItem = newStash->ptListItem;
 	while (ptItem)
 	{
 		D2InvAddItem(PCInventory, ptItem, ptItem->path->x, ptItem->path->y, 0xC, bIsClient, 4);
 		ptItem = D2UnitGetNextItem(ptItem);
 	}
-	newStash->ptListItem = NULL;
+	if (bOnlyItems)
+		newStash->ptListItem = PCPY->currentStash->ptListItem;
+	else
+		PCPY->currentStash = newStash;
+	PCPY->currentStash->ptListItem = NULL;
 
 	return 1;
 }
@@ -251,6 +255,15 @@ DWORD loadStash(Unit* ptChar, Stash* ptStash, BYTE data[], DWORD startSize, DWOR
 	}
 	curSize += 2;
 
+	// Read flags.
+	int len = strlen((char*)&data[curSize]);
+	if (*(WORD*)&data[curSize + len + 1] != JM_TAG)
+	{
+		ptStash->flags = *(DWORD *)&data[curSize];
+		curSize += 4;
+	}
+
+	// Read Name
 //	if (strlen((char *)&data[curSize]) > 0xF)
 //		*(char *)&data[curSize+0xF] = NULL;
 	if (strlen((char *)&data[curSize]))
@@ -259,6 +272,7 @@ DWORD loadStash(Unit* ptChar, Stash* ptStash, BYTE data[], DWORD startSize, DWOR
 		strcpy(ptStash->name, (char *)&data[curSize]);
 	curSize += strlen((char *)&data[curSize]) + 1;
 
+	// Read inventory.
 	DWORD ret = D2LoadInventory(PCGame, ptChar, (saveBitField*)&data[curSize], 0x60, maxSize-curSize, 0, &nbBytesRead);
 	if (ret) log_msg("loadStash -> D2LoadInventory failed\n");
 	log_msg("Stash loaded (%d : %s)\n", ptStash->id ,ptStash->name);
@@ -267,7 +281,7 @@ DWORD loadStash(Unit* ptChar, Stash* ptStash, BYTE data[], DWORD startSize, DWOR
 	return ret;
 }
 
-DWORD loadStashList(Unit* ptChar, BYTE data[], DWORD maxSize, DWORD* curSize, bool isShared)//WORKS
+DWORD loadStashList(Unit* ptChar, BYTE* data, DWORD maxSize, DWORD* curSize, bool isShared)//WORKS
 {
 	DWORD curStash = 0;
 	Stash* newStash;
@@ -278,12 +292,12 @@ DWORD loadStashList(Unit* ptChar, BYTE data[], DWORD maxSize, DWORD* curSize, bo
 	while (curStash < nbStash)
 	{
 		newStash = addStash(ptChar, isShared);
-		changeToSelectedStash(ptChar, newStash, false);
+		changeToSelectedStash(ptChar, newStash, 0, false);
 		DWORD ret = loadStash(ptChar, newStash, data, *curSize, 10000000, curSize);
 		if (ret) return ret;
 		curStash++;
 	}
-	
+
 	if (!isShared && !PCPY->selfStash)
 	{
 		newStash = addStash(ptChar, isShared);
@@ -296,7 +310,7 @@ DWORD loadStashList(Unit* ptChar, BYTE data[], DWORD maxSize, DWORD* curSize, bo
 		if (!PCPY->currentStash)
 			PCPY->currentStash = newStash;
 	}
-	
+
 	return 0;
 }
 
@@ -310,6 +324,9 @@ void saveStash(Unit* ptChar, Stash* ptStash, BYTE** data, DWORD* maxSize, DWORD*
 {
 	//write "ST"
 	SETDATA(WORD, STASH_TAG);
+
+	//Write flags.
+	SETDATA(DWORD, ptStash->flags);
 
 	//save name
 	if (ptStash->name)
@@ -380,24 +397,27 @@ void updateSelectedStashClient(Unit* ptChar)//WORKS
 {
 	Stash* newStash = PCPY->currentStash;
 	updateClient(ptChar, UC_SELECT_STASH, newStash->id, newStash->flags, PCPY->flags);
+	updateClient(ptChar, UC_PAGE_NAME, newStash->name);
+
 }
 
-void setSelectedStashClient(DWORD stashId, DWORD stashFlags, DWORD flags)//WORKS
+void setSelectedStashClient(DWORD stashId, DWORD stashFlags, DWORD flags, bool bOnlyItems)//WORKS
 {
-	log_msg("setSelectedStashClient ID:%d, isShared:%d, flags:%08X\n", stashId, stashFlags&1, flags);
+	log_msg("setSelectedStashClient ID:%d, stashFlags:%d, flags:%08X\n", stashId, stashFlags, flags);
 	Unit* ptChar = D2GetClientPlayer();
-	Stash* newStash = getStash(ptChar, stashFlags&1, stashId);
+	Stash* newStash = getStash(ptChar, (stashFlags & 1) == 1, stashId);
 	if (!newStash) do
-		newStash = addStash(ptChar, stashFlags&1);
+		newStash = addStash(ptChar, (stashFlags & 1) == 1);
 	while (newStash->id < stashId);
-	changeToSelectedStash(ptChar, newStash, 1);
+	newStash->flags = stashFlags;
+	changeToSelectedStash(ptChar, newStash, bOnlyItems, 1);
 	PCPY->flags = flags;
 }
 
 
 void selectStash(Unit* ptChar, Stash* newStash)//WORKS
 {
-	changeToSelectedStash(ptChar, newStash, 0);
+	changeToSelectedStash(ptChar, newStash, 0, 0);
 	updateSelectedStashClient(ptChar);
 }
 
@@ -422,6 +442,112 @@ void toggleToSharedStash(Unit* ptChar)
 		PCPY->showSharedStash = true;
 		selectStash(ptChar, selStash);
 	}
+}
+
+void swapStash(Unit* ptChar, Stash* curStash, Stash* swpStash)
+{
+	if (!ptChar || !curStash || !swpStash || curStash == swpStash)
+		return;
+	changeToSelectedStash(ptChar, swpStash, 1, 0);
+	updateClient(ptChar, UC_SELECT_STASH, swpStash->id, swpStash->flags | 4, PCPY->flags);
+}
+
+void toggleStash(Unit* ptChar, DWORD page)
+{
+	log_msg("toggle stash page = %u\n", page);
+	Stash* curStash = PCPY->currentStash;
+	Stash* swpStash = curStash->isShared ? PCPY->selfStash : PCPY->sharedStash;
+	swapStash(ptChar, curStash, swpStash);
+}
+
+void swapStash(Unit* ptChar, DWORD page, bool toggle)
+{
+	log_msg("swap stash page = %u\n", page);
+	Stash* curStash = PCPY->currentStash;
+	Stash* swpStash = curStash->isShared == toggle ? PCPY->selfStash : PCPY->sharedStash;
+	for (DWORD i = 0; i < page; i++)
+	{
+		if (curStash->nextStash == NULL)
+			addStash(ptChar, swpStash->isShared);
+		swpStash = swpStash->nextStash;
+	}
+	swapStash(ptChar, curStash, swpStash);
+}
+
+void insertStash(Unit* ptChar)
+{
+	Stash* curStash = PCPY->currentStash;
+	Stash* stash = addStash(ptChar, curStash->isShared);
+	do 
+	{
+		stash->flags = stash->previousStash->flags;
+		stash->name = stash->previousStash->name;
+		stash->ptListItem = stash->previousStash->ptListItem;
+		stash = stash->previousStash;
+	} while (stash != curStash);
+	stash->isIndex = 0;
+	stash->name = NULL;
+	stash->ptListItem = NULL;
+	selectNextStash(ptChar);
+}
+
+bool deleteStash(Unit* ptChar)
+{
+	if (firstClassicStashItem(ptChar) != NULL)
+		return false;
+	//if (D2InventoryGetFirstItem())
+	Stash* stash = PCPY->currentStash;
+	if (stash->nextStash == NULL)
+	{
+		stash->isIndex = 0;
+		stash->name = NULL;
+		return true;
+	}
+	stash->flags = stash->nextStash->flags;
+	stash->name = stash->nextStash->name;
+	if (stash->nextStash->ptListItem != NULL)
+		swapStash(ptChar, stash, stash->nextStash);
+	stash = stash->nextStash;
+	do {
+		stash->flags = stash->nextStash->flags;
+		stash->name = stash->nextStash->name;
+		stash->ptListItem = stash->nextStash->ptListItem;
+		stash = stash->nextStash;
+	} while (stash->nextStash);
+	stash->isIndex = 0;
+	stash->name = NULL;
+	stash->ptListItem = NULL;
+	return true;
+}
+
+
+void renameCurrentStash(Unit* ptChar, char* name)
+{
+	log_msg("renameCurrentStash : %08X, %s\n", ptChar, name);
+	Stash* stash = PCPY->currentStash;
+	int len = 0;
+	if (name != NULL)
+		len = strlen(name);
+	log_msg("renameCurrentStash : %d\n", len);
+	if (stash->name)
+		D2FogMemDeAlloc(stash->name, __FILE__, __LINE__, 0);
+	log_msg("renameCurrentStash 3\n");
+	if (len > 0)
+	{
+		stash->name = (char *)malloc(len);//D2FogMemAlloc(len,__FILE__,__LINE__,0);
+		strcpy(stash->name, name);
+	}
+	else
+		stash->name = NULL;
+	log_msg("renameCurrentStash 4\n");
+}
+
+
+void setCurrentStashIndex(Unit* ptChar, bool isIndex)
+{
+	if (PCPY->currentStash)
+		PCPY->currentStash->isIndex = isIndex;
+	updateSelectedStashClient(ptChar);
 }
 
 
@@ -473,8 +599,15 @@ void selectPreviousIndexStash(Unit* ptChar)
 {
 	selectPreviousStash(ptChar);
 	Stash* selStash = PCPY->currentStash;
-	while (selStash->previousStash && ((selStash->id+1) % nbPagesPerIndex != 0))
+	while (selStash && !selStash->isIndex)
 		selStash = selStash->previousStash;
+
+	if (selStash == NULL)
+	{
+		selStash = PCPY->currentStash;
+		while (selStash->previousStash && ((selStash->id + 1) % nbPagesPerIndex != 0))
+			selStash = selStash->previousStash;
+	}
 
 	if (selStash && (selStash != PCPY->currentStash))
 		selectStash(ptChar, selStash);
@@ -495,11 +628,18 @@ void selectNextIndexStash(Unit* ptChar)
 {
 	selectNextStash(ptChar);
 	Stash* selStash = PCPY->currentStash;
-	while ((selStash->id+1) % nbPagesPerIndex != 0)
+	while (selStash && !selStash->isIndex)
+		selStash = selStash->nextStash;
+
+	if (selStash == NULL)
 	{
-		if (!selStash->isShared && (selStash->id >= maxSelfPages))	break;
-		if (selStash->isShared && (selStash->id >= maxSharedPages)) break;
-		selStash = selStash->nextStash ? selStash->nextStash : addStash(ptChar, PCPY->showSharedStash);;
+		selStash = PCPY->currentStash;
+		while ((selStash->id + 1) % nbPagesPerIndex != 0)
+		{
+			if (!selStash->isShared && (selStash->id >= maxSelfPages))	break;
+			if (selStash->isShared && (selStash->id >= maxSharedPages)) break;
+			selStash = selStash->nextStash ? selStash->nextStash : addStash(ptChar, PCPY->showSharedStash);;
+		}
 	}
 	if (selStash && (selStash != PCPY->currentStash))
 		selectStash(ptChar, selStash);

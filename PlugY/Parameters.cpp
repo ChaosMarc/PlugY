@@ -5,15 +5,12 @@
 
 =================================================================*/
 
-// Core Class Headers
+#include "error.h"
+#include "INIfile.h"
+#include "parameters.h"		// loadParameters()
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "common.h"
-#include "error.h"
-#include "parameters.h"		// loadParameters()
-#include "D2functions.h"
-#include "INIfile.h"
 
 
 #define PARAMETERS_FILENAME "PlugY.ini"
@@ -37,7 +34,7 @@
 #include "extraOptions.h"
 #include "commands.h"
 #include "language.h"
-extern bool displayGreenSetItemIncludeSharedStash;
+#include "windowed.h"
 
 
 char* modDataDirectory = "PlugY";
@@ -59,6 +56,18 @@ const char* S_active_logFile = "ActiveLogFile";
 const char* S_active_CheckMemory = "ActiveCheckMemory";
 const char* S_active_Commands = "ActiveCommands";
 const char* S_active_othersFeatures = "ActiveAllOthersFeatures";
+
+const char* S_WINDOWED = "WINDOWED";
+const char* S_ActiveWindowed = "ActiveWindowed";
+const char* S_RemoveBorder = "RemoveBorder";
+const char* S_WindowOnTop = "WindowOnTop";
+const char* S_Maximized = "Maximized";
+const char* S_SetWindowPos = "SetWindowPos";
+const char* S_X = "X";
+const char* S_Y = "Y";
+const char* S_Width = "Width";
+const char* S_Height = "Height";
+const char* S_LockMouseOnStartup = "LockMouseOnStartup";
 
 const char* S_LANGUAGE = "LANGUAGE";
 const char* S_active_ChangeLanguage = "ActiveChangeLanguage";
@@ -85,6 +94,7 @@ const char* S_maxSelfPages = "MaxPersonnalPages";
 const char* S_nbPagesPerIndex = "NbPagesPerIndex";
 const char* S_nbPagesPerIndex2 = "NbPagesPerIndex2";
 const char* S_active_sharedStash = "ActiveSharedStash";
+const char* S_openSharedStashOnLoading = "OpenSharedStashOnLoading";
 const char* S_maxSharedPages = "MaxSharedPages";
 const char* S_sharedStashFilename = "SharedStashFilename";
 const char* S_separateHardSoftStash = "SeparateHardcoreStash";
@@ -167,6 +177,10 @@ const char* S_USER = "USER:\t";
 const char* S_FIXED = "FIXED:\t";
 
 
+// Convert 4 char code in a DWORD code
+#define BIN(A,B,C,D) ((DWORD)A) + (((DWORD)B) << 8) + (((DWORD)C) << 16) + (((DWORD)D) << 24)
+
+
 #define GET_PRIVATE_PROFILE_STRING(S,F,D)\
 if (!iniFixedFile->GetPrivateProfileString(S, F, NULL, buffer, maxSize)) \
 if (!iniFile->GetPrivateProfileString(S, F, NULL, buffer, maxSize)) \
@@ -182,7 +196,6 @@ if (!iniDefaultFile->GetPrivateProfileString(S, F, D, buffer, maxSize)) \
 	 log_msg(S_DLL); \
 else log_msg(S_DEFAULT); \
 else log_msg(S_USER)
-
 
 #define GET_PRIVATE_PROFILE_STRING3(S,F,D)\
 if (!iniFile->GetPrivateProfileString(S, F, NULL, buffer, maxSize)) \
@@ -210,7 +223,7 @@ void init_General(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFi
 {
 	GET_PRIVATE_PROFILE_STRING(S_GENERAL, S_active_DisableBattleNet, "0");
 	active_DisableBattleNet = atoi(buffer) != 0;
-	log_msg("active_DisableBattleNet\t\t\t\t= %d\n", active_DisableBattleNet);
+	log_msg("active_DisableBattleNet\t\t= %d\n", active_DisableBattleNet);
 
 	GET_PRIVATE_PROFILE_STRING(S_GENERAL, S_active_logFile, "0");
 	active_logFile = atoi(buffer)+1;
@@ -242,6 +255,51 @@ void init_General(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFi
 	log_msg("\n");
 }
 
+void init_Windowed(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFile, char* buffer, DWORD maxSize)
+{
+	GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_ActiveWindowed, "0");
+	active_Windowed = atoi(buffer) != 0;
+	log_msg("active_Windowed\t\t\t\t= %d\n", active_Windowed);
+	if (active_Windowed)
+	{
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_RemoveBorder, "0");
+		active_RemoveBorder = atoi(buffer) != 0;
+		log_msg("active_RemoveBorder\t\t\t= %d\n", active_RemoveBorder);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_WindowOnTop, "0");
+		active_WindowOnTop = atoi(buffer) != 0;
+		log_msg("active_WindowOnTop\t\t\t= %d\n", active_WindowOnTop);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Maximized, "0");
+		active_Maximized = atoi(buffer) != 0;
+		log_msg("active_Maximized\t\t\t= %d\n", active_Maximized);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_SetWindowPos, "0");
+		active_SetWindowPos = atoi(buffer) != 0;
+		log_msg("active_MoveAndResizeWindow\t= %d\n", active_SetWindowPos);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_X, "0");
+		windowedX = atoi(buffer);
+		log_msg("windowedX\t\t\t\t\t= %d\n", windowedX);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Y, "0");
+		windowedY = atoi(buffer);
+		log_msg("windowedY\t\t\t\t\t= %d\n", windowedY);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Width, "0");
+		windowedWidth = atoi(buffer);
+		log_msg("windowedWidth\t\t\t\t= %d\n", windowedWidth);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_Height, "0");
+		windowedHeight = atoi(buffer);
+		log_msg("windowedHeight\t\t\t\t= %d\n", windowedHeight);
+
+		GET_PRIVATE_PROFILE_STRING(S_WINDOWED, S_LockMouseOnStartup, "0");
+		active_LockMouseOnStartup = atoi(buffer) != 0;
+		log_msg("active_LockMouseOnStartup\t= %d\n\n", active_LockMouseOnStartup);
+	}
+}
+
 void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFile, char* buffer, DWORD maxSize)
 {
 	GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_active_ChangeLanguage, "0");
@@ -251,7 +309,7 @@ void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDe
 	if (active_ChangeLanguage)
 	{
 		GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_selectedLanguage, "ENG");
-		strupr(buffer);
+		_strupr(buffer);
 		switch (*(DWORD*)buffer)
 		{
 			case BIN('E','N','G',0) : selectedLanguage=LNG_ENG;break;
@@ -281,7 +339,7 @@ void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDe
 	if (active_LanguageManagement)
 	{
 		GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_defaultLanguage, "ENG");
-		strupr(buffer);
+		_strupr(buffer);
 		switch (*(DWORD*)buffer)
 		{
 			case BIN('E','N','G',0) : defaultLanguage=LNG_ENG;break;
@@ -302,7 +360,7 @@ void init_ActiveLanguage(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDe
 
 		GET_PRIVATE_PROFILE_STRING(S_LANGUAGE, S_availableLanguages, "ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS");
 		availableLanguages.all = 0;
-		strupr(buffer);
+		_strupr(buffer);
 		char* curString = strtok(buffer,"|");
 		while (curString)
 		{
@@ -392,11 +450,24 @@ void init_VersionText(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefau
 		{
 			switch(version_D2Game)
 			{
-			case V109b: strcpy(buffer, "v 1.09b");break;
-			case V109d: strcpy(buffer, "v 1.09d");break;
-			//case V110:  strcpy(buffer, "v 1.10");break;
-			//case V111:  strcpy(buffer, "v 1.11");break;
-			case V111b: strcpy(buffer, "v 1.11b");break;
+			//case V107: //"v 1.07"
+			//case V108: //"v 1.08"
+			//case V109: //"v 1.09"
+			case V109b: //"v 1.09"
+			case V109d: //"v 1.09"
+			//case V110: //"v 1.10"
+			//case V111: //"v 1.11"
+			case V111b: //"v 1.11"
+			//case V112: //"v 1.12"
+			case V113c: //"v 1.13"
+			case V113d: //"v 1.13"
+			case V114a: //"v 1.14"
+			//case V114b: //"v 1.14b"
+			//case V114c: //"v 1.14c"
+			//case V114d: //"v 1.14d"
+				strcpy(buffer, "v ");
+				strcat(buffer, GetVersionString(version_D2Game));
+				break;
 			default:
 				active_VersionTextChange=0;
 			}
@@ -414,7 +485,6 @@ void init_VersionText(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefau
 	GET_PRIVATE_PROFILE_STRING(S_MAIN_SCREEN, S_active_PrintPlugYVersion, "1");
 	active_PrintPlugYVersion = atoi(buffer) != 0;
 	log_msg("active_PrintPlugYVersion\t= %u\n", active_PrintPlugYVersion);
-
 
 	if (active_PrintPlugYVersion)
 	{
@@ -494,6 +564,10 @@ void init_Stash(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultFile
 
 	if (active_sharedStash)
 	{
+		GET_PRIVATE_PROFILE_STRING(S_STASH, S_openSharedStashOnLoading, "0");
+		openSharedStashOnLoading = atoi(buffer) != 0;
+		log_msg("openSharedStashOnLoading\t\t= %u\n", openSharedStashOnLoading);
+
 		GET_PRIVATE_PROFILE_STRING(S_STASH, S_maxSharedPages, "0");
 		maxSharedPages = atoi(buffer) - 1;
 		log_msg("maxSharedPages\t\t\t\t= %u\n", maxSharedPages);
@@ -757,7 +831,7 @@ void loadParameters()
 	INIFile *iniFixedFile = new INIFile;
 	INIFile *iniDefaultFile = new INIFile;
 
-	srand(time(NULL));
+	srand((UINT)time(NULL));
 
 	log_msg("***** PARAMETERS *****\n");
 	if (iniFile->InitReadWrite(PARAMETERS_FILENAME, INIFILE_READ, 0))
@@ -783,6 +857,7 @@ void loadParameters()
 		if (active_plugin)
 		{
 			init_General(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);
+			init_Windowed(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);
 			init_ActiveLanguage(iniFile, iniFixedFile, iniDefaultFile, buffer,BUFSIZE);
 			init_SavePath(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);
 			init_VersionText(iniFile, iniFixedFile, iniDefaultFile, buffer, BUFSIZE);

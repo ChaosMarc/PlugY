@@ -4,10 +4,9 @@
 	Change Skill win per level up.
 
 =================================================================*/
-
 #pragma once
 
-#include <windows.h>
+#include "common.h"
 
 extern bool active_SkillPerLevelUpChange;
 extern DWORD skillPerLevelUp;

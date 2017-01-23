@@ -6,10 +6,8 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
 #include "plugYFiles.h"		// Install_PlugYFiles()
+#include "common.h"
 
 bool active_bigStash = false;
 bool active_bigStash_tested = false;

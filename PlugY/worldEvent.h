@@ -4,8 +4,9 @@
 	World Event Management.
 
 =================================================================*/
-
 #pragma once
+
+#include "common.h"
 
 extern bool active_WorldEvent;
 extern DWORD showSOJSoldCounterInAllDiff;

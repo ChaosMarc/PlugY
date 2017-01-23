@@ -6,17 +6,15 @@
 
 =================================================================*/
 
-#include "common.h"
-#include "error.h"
-#include "d2functions.h"
+#include "plugYFiles.h"		// Install_PlugYImagesFiles()
 #include "globalVariable.h"
 #include "updateServer.h"	// Install_UpdateServer()
-#include "plugYFiles.h"		// Install_PlugYImagesFiles()
 #include "interface_Stats.h"// Install_InterfaceStats()
 #include "newInterfaces.h"
 #include "newInterface_Stats.h"
 #include "newInterface_StatsPageTwo.h"
 #include "newInterface_Runewords.h"
+#include "common.h"
 #include <stdio.h>
 
 bool active_newInterfaces=false;
@@ -70,7 +68,6 @@ void STDCALL printCustomPage()
 
 DWORD STDCALL mouseCustomPageLeftDown(sWinMessage* msg)
 {
-
 	if(onRealm) return -1;
 	if ( (selectedPage > 0) && (selectedPage<=lastPage) )
 		return mouseNewStatsPageTwoLeftDown(msg);

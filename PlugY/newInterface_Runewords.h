@@ -4,12 +4,12 @@
 	New runeword Interface
 
 =================================================================*/
+#pragma once
 
-#ifndef __NEWINTERFACE_RUNEWORDS_H__INCLUDED
-#define __NEWINTERFACE_RUNEWORDS_H__INCLUDED
+#include "common.h"
 
 void STDCALL printRunewordsPage();
 DWORD STDCALL mouseRunewordsPageLeftDown(sWinMessage* msg);
 DWORD STDCALL mouseRunewordsPageLeftUp(sWinMessage* msg);
 
-#endif
+/*================================= END OF FILE =================================*/

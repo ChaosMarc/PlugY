@@ -4,8 +4,9 @@
 	Language management.
 
 =================================================================*/
-
 #pragma once
+
+#include "common.h"
 
 typedef int (STDCALL *TsaveSaveFile) (Unit* ptChar, BYTE** data, DWORD* maxSize, DWORD* curSize);
 typedef int (STDCALL *TloadSaveFile) (Unit* ptChar, BYTE* data, DWORD maxSize, DWORD* curSize);
@@ -41,6 +42,5 @@ private:
 };
 
 extern TCustomDll* customDlls;
-
 
 /*================================= END OF FILE =================================*/
