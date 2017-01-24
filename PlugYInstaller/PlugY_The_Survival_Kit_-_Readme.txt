@@ -68,20 +68,21 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 
 
 v11.01 changes :
-Compatibily with 1.13d (thanks to L'Autour)
-Add command /unlockmouse : Unlock the mouse
-Add command /unlock : same as /unlockmouse
-Add command /renamepage : stash page name are succefully saved.
-Add command /setindex : Set the current stash page as index (prev/next index button go to an index if exists)
-Add command /resetindex : Remove index flag on the current stash page (prev/next index button go to this index if exists).
-Add command /insertpage : Insert a new page after the current page.
-Add command /deletepage : Delete current page if empty.
-Add localizion in Russian and google traduction for not translated language. (thanks to L'Autour)
-Add an option in PlugY.ini to select shared stash (instead of personal one) on character loading.
-Rename command /rename to /renamechar.
-Remove unfinished command /reload.
+- Compatibily with 1.13d (thanks to L'Autour)
+- Add command /unlockmouse : Unlock the mouse
+- Add command /unlock : same as /unlockmouse
+- Add command /renamepage : stash page name are succefully saved.
+- Add command /setindex : Set the current stash page as index (prev/next index button go to an index if exists)
+- Add command /resetindex : Remove index flag on the current stash page (prev/next index button go to this index if exists).
+- Add command /insertpage : Insert a new page after the current page.
+- Add command /deletepage : Delete current page if empty.
+- Add localizion in Russian and google traduction for not translated language. (thanks to L'Autour)
+- Add an option in PlugY.ini to select shared stash (instead of personal one) on character loading.
+- Rename command /rename to /renamechar.
+- Remove unfinished command /reload.
 
-v11.00 changes : Unofficial version supporting LOD 1.13d
+v11.00 changes :
+- Unofficial version supporting LOD 1.13d
 
 v10.01 changes :
 - Add windowed mode.

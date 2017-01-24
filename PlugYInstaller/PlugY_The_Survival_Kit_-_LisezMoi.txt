@@ -70,20 +70,21 @@ Toutes ces fonctions peuvent être activé/désactivé via PlugY.ini (voir "COMMENTA
 
 
 Changements apportés par la v11.01 :
-Ajout de la compatibilité avec la version 1.13d de LOD. (merci à L'Autour)
-Ajout de la commande /unlockmouse : Libère le curseur de la souris de la fenêtre.
-Ajout de la commande /unlock : Identique à /unlockmouse.
-Ajout de la commande /renamepage name : Renomme la page courante du coffre.
-Ajout de la commande /setindex : La page courante devient un index.
-Ajout de la commande /resetindex : Retire la page courante des index.
-Ajout de la commande /insertpage : Insère une nouvelle page après la page courante.
-Ajout de la commande /deletepage : Supprime la page courante si elle est vide.
-Ajout de la localisation en russe ainsi qu'une traduction Google pour les langue non traduite. (merci à L'Autour)
-Ajout d'une option dans PlugY.ini pour sélectionner le coffre partagé (au lieu du personnel) lors du chargement d'un persos.
-Renomme la commande /rename en /renamechar.
-Suppression de la commande non terminé : /reload.
+- Ajout de la compatibilité avec la version 1.13d de LOD. (merci à L'Autour)
+- Ajout de la commande /unlockmouse : Libère le curseur de la souris de la fenêtre.
+- Ajout de la commande /unlock : Identique à /unlockmouse.
+- Ajout de la commande /renamepage name : Renomme la page courante du coffre.
+- Ajout de la commande /setindex : La page courante devient un index.
+- Ajout de la commande /resetindex : Retire la page courante des index.
+- Ajout de la commande /insertpage : Insère une nouvelle page après la page courante.
+- Ajout de la commande /deletepage : Supprime la page courante si elle est vide.
+- Ajout de la localisation en russe ainsi qu'une traduction Google pour les langue non traduite. (merci à L'Autour)
+- Ajout d'une option dans PlugY.ini pour sélectionner le coffre partagé (au lieu du personnel) lors du chargement d'un persos.
+- Renomme la commande /rename en /renamechar.
+- Suppression de la commande non terminé : /reload.
 
-Changements apportés par la v11.00 : Version non officielle ajoutant le support pour LoD 1.13d
+Changements apportés par la v11.00 :
+- Version non officielle ajoutant le support pour LoD 1.13d
 
 Changements apportés par la v10.01 :
 - Ajout du mode fenêtré.
