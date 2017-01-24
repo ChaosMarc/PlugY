@@ -22,7 +22,7 @@ WARNUNG:
 
 
 ******** ALLE FUNKTIONEN ********
-Each features can be turn on/off via PlugY.ini (see "Kommentare aus der Konfigurations-Datei")
+Jedes Feature kann via PlugY.ini an/ausgeschaltet werden (siehe "Kommentare aus der Konfigurations-Datei")
 - Battle.net LogIn via Hauptmenu deaktiviert.
 - Nahezu unbegrenzter Speicherplatz im Goldschatz.
 - Gemeinsam genutzter Speicherplatz im Goldschatz.
@@ -41,57 +41,58 @@ Each features can be turn on/off via PlugY.ini (see "Kommentare aus der Konfigur
 - Man kann das "SAVE" Verzeichnis ändern.
 - Man kann die Versionsanzeige im Hauptbildschirm anpassen.
 - Diablo kann nun auf Text-Dateien laden die von Microsoft Excel geöffnet sind.
-- Add following commands (see "Kommentare aus der Konfigurations-Datei") :
-	/save : Save game without exit.
-	/page 1 : Show normal stats page (stats page must be opened).
-	/page 2 : Show extra stats page (stats page must be opened).
-	/page 3 : Show resistance stats page (stats page must be opened).
-	/page 4 : (beta) Show available runewords (stats page must be opened).
-	/lockmouse : Lock mouse cursor in the window.
-	/lock : Same as /lockmouse.
-	/unlockmouse : Unlock mouse cursor in the window.
-	/unlock : Same as /unlockmouse.
-	/renamechar newname : Rename your character and save it.
-	/renamepage name : Rename current page stash.
-	/setindex : Set current stash page as index
-	/resetindex : Remove index flag on the current stash page.
-	/insertpage : Insert a new page after the current page.
-	/deletepage : Delete current page if empty.
-	/swap page : Swap the content of current stash page with the content of another page.
-	/toggle page : Swap the content of current stash page with the content of another page in opposing stash shared/personal.
-	/dlm : Toggle always display mana and life mode.
-	/dml : Same as /dlm.
-	/dl : Toggle always display life mode.
-	/dm : Toggle always display mana mode.
-	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
+- Folgende Befehle hinzugefügt (siehe "Kommentare aus der Konfigurations-Datei") :
+	/save : Speichert das Spiel ohne es zu beenden.
+	/page 1 : Zeigt die normale Spielerinfo-Seite (Die Spielerinfo-Seite muss geöffnet sein).
+	/page 2 : Zeigt die extra Spielerinfo-Seite (Die Spielerinfo-Seite muss geöffnet sein).
+	/page 3 : Zeigt die Resistenzen Spielerinfo-Seite (Die Spielerinfo-Seite muss geöffnet sein).
+	/page 4 : (Beta) Zeigt alle verfügbaren Runenwörter (Die Spielerinfo-Seite muss geöffnet sein).
+	/lockmouse : Begrenzt den Mauszeiger auf das Fenster.
+	/lock : Siehe /lockmouse.
+	/unlockmouse : Entfernt die Begrenzung des Mauszeigers auf das Fenster.
+	/unlock : Siehe /unlockmouse.
+	/renamechar newname : Speichert und benennt den Char um.
+	/renamepage name : Benennt die aktuelle Truhenseite um.
+	/setindex : Fügt einen Index für die aktuelle Truhenseite hinzu.
+	/resetindex : Entfernt den Index von der aktuellen Truhenseite
+	/insertpage : Fügt eine neue Truhenseite hinter der aktuellen ein.
+	/deletepage : Löscht die aktuelle Truhenseite, sofern sie leer ist.
+	/swap page : Tauscht den Inhalt der aktuellen Truhenseite mit einer anderen.
+	/toggle page : Tauscht den Inhalt der aktuellen Truhenseite mit einer anderen aus der alternativen Truhe (Gemeinsam/Persönlich).
+	/dlm : Aktiviert/Deaktiviert die permanente Anzeige der Mana und Lebenanzeige.
+	/dml : Siehe /dlm.
+	/dl : Aktiviert/Deaktiviert die permanente Anzeige der Lebenanzeige.
+	/dm : Aktiviert/Deaktiviert die permanente Anzeige der Manaanzeige.
+	/listcube : (Beta) Erstellt eine "cube.txt" Datei im Savegame-Verzeichnis mit allen Würfelrezepten.
 
 
 v11.01 Änderungen :
-Compatibily with 1.13d (thanks to L'Autour)
-Add command /unlockmouse : Unlock the mouse
-Add command /unlock : same as /unlockmouse
-Add command /renamepage : stash page name are now successfully saved.
-Add command /setindex : Set the current stash page as index (prev/next index button go to an index if exists)
-Add command /resetindex : Remove index flag on the current stash page (prev/next index button go to this index if exists).
-Add command /insertpage : Insert a new page after the current page.
-Add command /deletepage : Delete current page if empty.
-Add localizion in Russian and google traduction for not translated language. (thanks to L'Autour)
-Add an option in PlugY.ini to select shared stash (instead of personal one) on character loading.
-Rename command /rename to /renamechar.
-Remove unfinished command /reload.
+- Kompatibilität mit 1.13d (Vielen Dank an L'Autour)
+- Befehl /unlockmouse hinzugefügt : Entfernt die Begrenzung des Mauszeigers auf das Fenster
+- Befehl /unlock hinzugefügt : Siehe /unlockmouse
+- Befehl /renamepage hinzugefügt : Der Truhenname wird nun gespeichert.
+- Befehl /setindex hinzugefügt : Fügt einen Index für die aktuelle Truhenseite hinzu (prev/next index button go to an index if exists)
+- Befehl /resetindex hinzugefügt : Entfernt den Index von der aktuellen Truhenseite (prev/next index button go to this index if exists).
+- Befehl /insertpage hinzugefügt : Fügt eine neue Truhenseite hinter der aktuellen ein.
+- Befehl /deletepage hinzugefügt : Löscht die aktuelle Truhenseite, sofern sie leer ist.
+- Übersetzung für Russisch and Google-Übersetzungen für nicht-übersetzte Sprachen hinzugefügt. (Vielen Dank an L'Autour)
+- Eine Option wurde zur PlugY.ini hinzugefügt um die gemeinsame Truhe beim Spielstart ausgewählt zu haben (statt der eigenen).
+- Der Befehl /rename wurde zu /renamechar umbenannt.
+- Der unvollständige Befehl /reload wurde entfernt.
 
-v11.00 Änderungen : Unofficial version supporting LOD 1.13d
+v11.00 Änderungen :
+- Inoffzielle Version mit Unterstützung für LOD 1.13d
 
 v10.01 Änderungen :
-- Add windowed mode.
-- Can lock mouse cursor in the window (windowed mode).
-- Can remove border (windowed mode).
-- Can resize or maximize window (windowed mode).
-- Can fix window above any others windows including taskbar (windowed mode).
-- Can lock mouse cursor in the windows on startup and with command "/lockmouse" or "/lock" (windowed mode).
-- Add command "/swap page" to swap the content of current stash page with the content of another page.
-- Add command "/toggle page" to swap the content of current stash page with the content of another page in opposing stash shared/personal.
-- Add command "/rename newname" to rename your character. This feature is still in beta and you must exit the game to update the stats page.
+- Fenstermodus Konfiguration hinzugefügt.
+- Der Mauszeiger kann auf das Fenster begrenzt werden (Fenstermodus).
+- Der Fensterrahmen kann entfernt werden (Fenstermodus).
+- Das Fenster kann vergrößert oder maximiert werden (Fenstermodus).
+- Das Fenster kann über allen anderen Fenstern und der Startleiste fixiert werden (Fenstermodus).
+- Der Mauszeiger kann bei Spielstart auf das Fenster begrenzt werden oder mit den Befehlen "/lockmouse" und "/lock" (Fenstermodus).
+- Befehl "/swap page" hinzugefügt, der den Inhalt der aktuellen Truhenseite mit einer anderen tauscht.
+- Befehl "/toggle page" hinzugefügt, der den Inhalt der aktuellen Truhenseite mit einer anderen aus der alternativen Truhe (Gemeinsam/Persönlich) tauscht.
+- Befehl "/rename newname" hinzugefügt mit dem der Char umbenannt werden kann. Dieses Feature ist noch im Betastatus und um die Spielerinfo-Seite zu aktualisieren muss das Spiel verlassen werden.
 
 v10.00 Änderungen :
 - Battle.net LogIn via Hauptmenu deaktiviert.
