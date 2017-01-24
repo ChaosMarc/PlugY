@@ -25,25 +25,25 @@ Each features can be turned on/off via PlugY.ini
 * Display the stats current value (without magical bonus) like Magic/gold find or maximum resistances.
 * Can launch game in windowed mode with some options (lock mouse/resize/on top/noborder).
 * Add following commands:
-	/save : Save game without exit.
-	/page 1 : Show normal stats page (stats page must be opened).
-	/page 2 : Show extra stats page (stats page must be opened).
-	/page 3 : Show resistance stats page (stats page must be opened).
-	/page 4 : (beta) Show available runewords (stats page must be opened).
-	/lockmouse : Lock mouse cursor in the window.
-	/lock : Same as /lockmouse.
-	/unlockmouse : Unlock mouse cursor in the window.
-	/unlock : Same as /unlockmouse.
-	/renamechar newname : Rename your character and save it.
-	/renamepage name : Rename current page stash.
-	/setindex : Set current stash page as index
-	/resetindex : Remove index flag on the current stash page.
-	/insertpage : Insert a new page after the current page.
-	/deletepage : Delete current page if empty.
-	/swap page : Swap the content of current stash page with the content of another page.
-	/toggle page : Swap the content of current stash page with the content of another page in opposing stash shared/personal.
-	/dlm : Toggle always display mana and life mode.
-	/dml : Same as /dlm.
-	/dl : Toggle always display life mode.
-	/dm : Toggle always display mana mode.
-	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
+	* /save : Save game without exit.
+	* /page 1 : Show normal stats page (stats page must be opened).
+	* /page 2 : Show extra stats page (stats page must be opened).
+	* /page 3 : Show resistance stats page (stats page must be opened).
+	* /page 4 : (beta) Show available runewords (stats page must be opened).
+	* /lockmouse : Lock mouse cursor in the window.
+	* /lock : Same as /lockmouse.
+	* /unlockmouse : Unlock mouse cursor in the window.
+	* /unlock : Same as /unlockmouse.
+	* /renamechar newname : Rename your character and save it.
+	* /renamepage name : Rename current page stash.
+	* /setindex : Set current stash page as index
+	* /resetindex : Remove index flag on the current stash page.
+	* /insertpage : Insert a new page after the current page.
+	* /deletepage : Delete current page if empty.
+	* /swap page : Swap the content of current stash page with the content of another page.
+	* /toggle page : Swap the content of current stash page with the content of another page in opposing stash shared/personal.
+	* /dlm : Toggle always display mana and life mode.
+	* /dml : Same as /dlm.
+	* /dl : Toggle always display life mode.
+	* /dm : Toggle always display mana mode.
+	* /listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
