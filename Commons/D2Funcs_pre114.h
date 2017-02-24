@@ -197,9 +197,9 @@ F7(STD,  D2Common,00000,00000,00000,10572,11048,10150,10111,10033,  ,	void,		D2S
 F7(STD,  D2Common,10487,10487,10487,00000,00000,00000,00000,00000,  00000,	DWORD,		D2isInState, (Unit* ptChar, DWORD isLODGame));
 //F7(STD,  D2Common,10517,10517,10517,00000,00000,00000,00000,	void,		D2SetPlayerStat, (Unit* ptChar, DWORD statID, int amount, DWORD index));
 F7(STD,  D2Common,10518,10518,10518,10109,10627,10762,10551,10645,  ,	void,		D2AddPlayerStat, (Unit* ptChar, DWORD statID, int amount, DWORD index));//ONLY 1.11b
-F7(STD,  D2Common,10519,10519,10519,11092,10061,10658,10973,10550,  ,	int,		D2GetPlayerStat, (Unit* ptChar, DWORD statID, DWORD index));//ONLY 1.11b
+F7(STD,  D2Common,10519,10519,10519,11092,10061,10658,10973,10550,  225480,	int,		D2GetPlayerStat, (Unit* ptChar, DWORD statID, DWORD index));//ONLY 1.11b
 //F7(STD,  D2Common,10520,10520,10520,00000,00000,00000,00000,	int,		D2GetPlayerStat20, (Unit* ptChar, DWORD statID, DWORD index));
-F7(STD,  D2Common,10521,10521,10521,10733,10550,10494,10587,10216,  ,	int,		D2GetPlayerBaseStat, (Unit* ptChar, DWORD statID, DWORD index));//ONLY 1.11b
+F7(STD,  D2Common,10521,10521,10521,10733,10550,10494,10587,10216,  2253B0,	int,		D2GetPlayerBaseStat, (Unit* ptChar, DWORD statID, DWORD index));//ONLY 1.11b
 //F7(STD,  D2Common,10527,10527,10527,00000,00000,00000,00000,	DWORD,		D2Common10527, (Unit* ptUnit));
 F7(STD,  D2Common,10539,10539,10539,00000,00000,00000,00000,00000,  00000,	DWORD,		D2haveDefenceBonus, (Unit* ptChar));
 F7(STD,  D2Common,10540,10540,10540,00000,00000,00000,00000,00000,  00000,	DWORD,		D2haveFireResBonus, (Unit* ptChar));
@@ -218,8 +218,8 @@ F7(STD,  D2Common,10550,10550,10550,00000,00000,00000,00000,00000,  00000,	DWORD
 //F7(STD,  D2Common,10575,10575,10575,00000,00000,00000,00000,	void,		D2FreeBinFiles, ());
 //F7(STD,  D2Common,10576,10576,10576,00000,00000,00000,00000,	void,		D2LoadBinFiles, (DWORD zero1, DWORD zero2, bool));
 //F7(STD,  D2Common,00000,00000,00000,10651,10651,00000,00000,	DWORD,		D2CheckQuestState, (void* ptQuest, DWORD index, DWORD value));
-F7(STD,  D2Common,10578,10578,10578,10653,10496,10244,10849,10037,  ,	void*,		D2CompileTxtFile, (DWORD unused, const char* filename, BINField* ptFields, DWORD* ptRecordCount, DWORD recordLength));
-F7(STD,  D2Common,10600,10600,10600,10573,10262,10887,10695,10994,  ,	ItemsBIN*,	D2GetItemsBIN, (DWORD itemID));
+F7(STD,  D2Common,10578,10578,10578,10653,10496,10244,10849,10037,  2122F0,	void*,		D2CompileTxtFile, (DWORD unused, const char* filename, BINField* ptFields, DWORD* ptRecordCount, DWORD recordLength));
+F7(STD,  D2Common,10600,10600,10600,10573,10262,10887,10695,10994,  2335F0,	ItemsBIN*,	D2GetItemsBIN, (DWORD itemID));
 //F7(STD,  D2Common,10601,10601,10601,00000,00000,00000,00000,	ItemsBIN*,	D2GetByCodeItemStatsBIN, (DWORD code, DWORD* itemID));
 //F7(STD,  D2Common,10604,10604,10604,00000,00000,00000,00000,	AffixBIN*,	D2GetAffixBIN, (int affixID));
 F7(STD,  D2Common,10616,10616,10616,10500,10523,10774,10806,10619,  ,	GemsBIN*,	D2GetGemsBIN, (DWORD gemID));
@@ -228,7 +228,7 @@ F7(STD,  D2Common,11233,11233,11233,10639,11135,10390,10675,10235,  ,	int,		D2Ge
 //F7(STD,  D2Common,10737,10737,10737,00000,00000,00000,00000,	LevelsBIN*,	D2GetLevelsBIN, (DWORD levelID));
 F7(STD,  D2Common,10628,10628,10628,00000,00000,00000,00000,00000,  00000,	DWORD,		D2GetNextLevelXP, (DWORD classID, DWORD level));
 F7(STD,  D2Common,10629,10629,10629,00000,00000,00000,00000,00000,  00000,	DWORD,		D2GetMaxLevel, (DWORD classID));
-F7(STD,  D2Common,10655,10655,10655,10655,10309,10297,10218,10694,  ,	DifficultyLevelsBIN*,	D2GetDifficultyLevelsBIN, (DWORD difficultyLevel));
+F7(STD,  D2Common,10655,10655,10655,10655,10309,10297,10218,10694,  211D30,	DifficultyLevelsBIN*,	D2GetDifficultyLevelsBIN, (DWORD difficultyLevel));
 //F7(STD,  D2Common,10659,10659,10659,00000,00000,00000,00000,	TreasureClassBIN*,		D2GetTreasureClassBIN, (WORD id, DWORD uk));
 //F7(STD,  D2Common,10668,10668,10668,10450,10953,00000,00000,	SuperUniqueBIN*,		D2GetSuperUniqueBIN, (WORD id));
 F7(STD,  D2Common,10695,10695,10695,10927,10899,10276,10106,10911,  ,	DWORD,		D2GetItemQuality, (Unit* ptItem));
@@ -238,7 +238,7 @@ F7(STD,  D2Common,10707,10707,10707,10911,10303,10989,10202,10458,  ,	DWORD,		D2
 //F7(STD,  D2Common,10711,10711,10711,00000,00000,00000,00000,	void,		D2ItemSetFlags, (Unit* ptItem, DWORD flags, DWORD toSet));// toSet = 0 for set to 0 the selected flags else set to 1
 F7(STD,  D2Common,10717,10717,10717,10898,10100,10410,10086,10008,  ,	DWORD,		D2GetItemLevel, (Unit* ptItem));
 F7(STD,  D2Common,10719,10719,10719,10820,10505,10370,10020,10810,  ,	BYTE,		D2ItemGetPage, (Unit* ptUnit));
-F7(STD,  D2Common,10720,10720,10720,10485,10608,10223,10012,11026,  ,	void,		D2ItemSetPage, (Unit* ptItem, BYTE page));
+F7(STD,  D2Common,10720,10720,10720,10485,10608,10223,10012,11026,  228280,	void,		D2ItemSetPage, (Unit* ptItem, BYTE page));
 F7(STD,  D2Common,10731,10731,10731,11017,10890,10231,10744,10601,  229BB0	DWORD,		D2CheckItemType, (Unit* ptItem, DWORD itype));
 F7(STD,  D2Common,10732,10732,10732,10692,10685,10280,10620,10075,  ,	int,		D2GetUniqueID, (Unit* ptItem));
 F7(STD,  D2Common,10734,10734,10734,00000,00000,00000,00000,00000,  00000,	void,		D2SetAnim, (Unit* ptUnit, int anim));
@@ -273,17 +273,17 @@ F7(STD,  D2Common,10968,10968,10968,10700,10109,10904,10306,10007,  ,	DWORD,		D2
 //F7(STD,  D2Common,11270,11270,11270,00000,00000,00000,00000,	DWORD,		D2GetAllIndexFromStatID, (Unit* ptItem, DWORD statID, D2Stat* allIndex, DWORD));
 F7(STD,  D2Common,11276,11276,11276,10254,10074,10111,10435,11081,  ,	DWORD,		D2GetSkillCost, (Unit* ptChar, int skpoints, DWORD skillID, DWORD curSkillLevel));//not 10447
 A7(FAST, D2Common,00000,00000,82C80, 15D0, 1800, 1220, 12D0, 17B0,  ,	CharStatsBIN*,	D2GetCharStatsBIN, (DWORD charID));
-A7(FAST, D2Common,00000,00000,12410,5D7D0,1A100,116C0,1C020,5B0E0,  ,	DWORD,			D2CompileCubeInput, (CubeInput* cubeinput, char* s, DWORD p1, DWORD p2));
-A7(FAST, D2Common,00000,00000,12910,5D210,19B40,11100,1BA60,5AB20,  ,	DWORD,			D2CompileCubeOutput, (CubeOutput* cubeoutput, char* s, DWORD p1, DWORD p2));
-A7(FAST, D2Common,00000,00000,2B1A0, 11F0, 1380, 1140, 1300, 1160,  ,	ItemTypesBIN*,	D2GetItemTypesBIN, (DWORD itemTypesId));
+A7(FAST, D2Common,00000,00000,12410,5D7D0,1A100,116C0,1C020,5B0E0,  268600,	DWORD,			D2CompileCubeInput, (CubeInput* cubeinput, char* s, DWORD p1, DWORD p2));
+A7(FAST, D2Common,00000,00000,12910,5D210,19B40,11100,1BA60,5AB20,  268A90,	DWORD,			D2CompileCubeOutput, (CubeOutput* cubeoutput, char* s, DWORD p1, DWORD p2));
+A7(FAST, D2Common,00000,00000,2B1A0, 11F0, 1380, 1140, 1300, 1160,  155C90,	ItemTypesBIN*,	D2GetItemTypesBIN, (DWORD itemTypesId));
 //A7(FAST, D2Common,00000,00000,62FD0,00000,00000,00000,00000,	void,			D2EncodeValueCheckMax, (saveBitField* data, DWORD value, DWORD bitSize));
-A7(FAST, D2Common,00000,00000,642B0, 13F0, 12F0, 1540, 17A0, 17E0,  ,	ItemStatCostBIN*,D2GetItemStatCostBIN, (DWORD id));
+A7(FAST, D2Common,00000,00000,642B0, 13F0, 12F0, 1540, 17A0, 17E0,  5C4F0,	ItemStatCostBIN*,D2GetItemStatCostBIN, (DWORD id));
 //A7(FAST, D2Common,00000,00000,764A0,00000,00000,00000,00000,	void*,			D2Common764A0, (Stats* ptStats, DWORD stat, ItemStatCostBIN* itemStatCost ,DWORD));
 //A7(STD,  D2Common,00000,00000,76E30,00000,00000,00000,00000,	void,			D2PreUpdateDisabledStat, (Stats* ptStats));
 //A7(FAST, D2Common,00000,00000,76C10,00000,00000,00000,00000,	void,			D2ApplyStat,(Stats* ptCharStats, DWORD statId, DWORD value, Unit* ptItem));
-A7(FAST, D2Common,738A4,739B4,84268, 96E0, 98D0, 9900, 9900, B5E0,  ,	void*,			D2ReadFile,(DWORD unused, char* filename, DWORD* size, const char*, DWORD));
+A7(FAST, D2Common,738A4,739B4,84268, 96E0, 98D0, 9900, 9900, B5E0,  117079,	void*,			D2ReadFile,(DWORD unused, char* filename, DWORD* size, const char*, DWORD));
 //A7(FAST, D2Common,00000,00000, 94D0,00000,00000,00000,00000,	void*,			D2GetStringIDForTxtFile,(const char * string));
-A7(STD,  D2Common,1F500,1F510,29FA0,71EB0,32AA0,7D2A0,59870,80C40,  ,	void,			D2LoadSuperuniques,(DWORD mempool));//FASCALL UNTIL 1.10
+A7(STD,  D2Common,1F500,1F510,29FA0,71EB0,32AA0,7D2A0,59870,80C40,  2552E0,	void,			D2LoadSuperuniques,(DWORD mempool));//FASCALL UNTIL 1.10
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -309,11 +309,11 @@ A7(STD,  D2Common,1F500,1F510,29FA0,71EB0,32AA0,7D2A0,59870,80C40,  ,	void,			D2
 //E2F(D2Client,1FEB0,	void,		D2OpenNPCMenu, (Unit* ptNPC));//1.11b by ESI
 
 A8(FAST, D2Client, 1000, 1000, 1000,75D00,A9070,BEF70,2B420,A9480,  788B0	void*,		D2LoadImage, (const char* filename, DWORD filetype));
-A8(FAST, D2Client, 1150, 1150, 1140,00000,00000,00000,00000,00000,  ,	void,		D2FreeImage, (void* image));//6FAA1140
-A8(FAST, D2Client, D640, D630, DB50,73620,5E4E0,79670,147A0,B6890,  ,	void,		D2SendMsgToAll,(BYTE* data));//1.11 and 1.11b by ESI !!
+A8(FAST, D2Client, 1150, 1150, 1140,00000,00000,00000,00000,00000,  00000,	void,		D2FreeImage, (void* image));//6FAA1140
+A8(FAST, D2Client, D640, D630, DB50,73620,5E4E0,79670,147A0,B6890,  787B0,	void,		D2SendMsgToAll,(BYTE* data));//1.11 and 1.11b by ESI !!
 //A8(STD,  D2Client,00000,00000,15A80,00000,00000,00000,00000,	int,		D2GetAvgChanceMonsterWillHitYou, ());//6FAB5A80
-A8(STD,  D2Client,00000,00000,15A80,00000,00000,00000,00000,00000,  ,	DWORD,		D2GetLastMonsterIDFight, ());//6FAB5A80
-A8(STD,  D2Client,29800,297F0,2FD60,828A0,89320,6B280,BCEA0,BF640,  ,	void,		D2PrintStatsPage, ());
+A8(STD,  D2Client,00000,00000,15A80,00000,00000,00000,00000,00000,  00000,	DWORD,		D2GetLastMonsterIDFight, ());//6FAB5A80
+A8(STD,  D2Client,29800,297F0,2FD60,828A0,89320,6B280,BCEA0,BF640,  A7D00,	void,		D2PrintStatsPage, ());
 //A8(FAST, D2Client,00000,00000,45990,00000,00000,00000,00000,	Unit*,		D245990, (Inventory*,DWORD idItem);//6FAE5990
 A8(FAST, D2Client,4BB20,4BB20,521C0,B8CB0,21250,88EA0,54E10,2CE40,  E4D80,	DWORD,		D2PrintStat,(Unit* ptItem, Stats* ptStats, DWORD statID, DWORD statIndex, DWORD statValue, LPWSTR lpText));//statID=EAX, lpText=ESI 1.11b
 A8(FAST, D2Client,85A60,84DE0,80430,9EEB0,62070,8B7A0,BF5F0,18820,  521C0,	LPWSTR,		D2SetColorPopup, (LPWSTR popupText, DWORD color));//1.11 and 1.11b BY EDI
@@ -406,7 +406,7 @@ A7(FAST, D2Game,00000,00000,00000,70320,D2D70,C2A90,7B4E0,49480,  ,	void,		D2Ube
 A7(FAST, D2Game,00000,00000,00000,7F200,7FE60,D6250,A39D0,2C3F0,  ,	void,		D2UberDiabloIA, (Game* ptGame, Unit* ptMonster, DWORD*));
 A7(FAST, D2Game,00000,00000,00000,E92B0,2A300,B2210,B6C80,C6EC0,  ,	void,		D2UberBaalIA, (Game* ptGame, Unit* ptMonster, DWORD*));
 //A7(FAST, D2Game,00000,00000,00000,00000,92420,00000,00000,	void,		D2ReloadGambleScreenGame, (Unit* ptNPC, Game* ptGame, Unit* ptChar, DWORD, DWORD one));
-A7(STD,  D2Game,00000,00000, 89C0,E2390,E66D0,A8090,2C830,BE660,  ,	void,		D2SaveGame, (Game* ptGame) );
+A7(STD,  D2Game,00000,00000, 89C0,E2390,E66D0,A8090,2C830,BE660,  12CA10,	void,		D2SaveGame, (Game* ptGame) );
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -414,8 +414,8 @@ A7(STD,  D2Game,00000,00000, 89C0,E2390,E66D0,A8090,2C830,BE660,  ,	void,		D2Sav
 //D2S(D2Net,10020,	DWORD,		D2SendToServer, (DWORD size, DWORD one, void* data));//ONLY 1.11b
 //D2S(D2Net,10018,	DWORD,		D2SendToClient, (DWORD zero, DWORD clientID, void* data, DWORD size));//ONLY 1.11b
 
-F7(STD,  D2Net,	10005,10005,10005,10035,10020,10036,10024,10015,  ,	DWORD,		D2SendToServer, (DWORD size, DWORD one, void* data));//(DWORD zero, void* data, DWORD size) for 1.10 and before
-F7(STD,  D2Net,	10006,10006,10006,10018,10018,10015,10002,10012,  ,	DWORD,		D2SendToClient, (DWORD zero, DWORD clientID, void* data, DWORD size));
+F7(STD,  D2Net,	10005,10005,10005,10035,10020,10036,10024,10015,  12AE50,	DWORD,		D2SendToServer, (DWORD size, DWORD one, void* data));//(DWORD zero, void* data, DWORD size) for 1.10 and before
+F7(STD,  D2Net,	10006,10006,10006,10018,10018,10015,10002,10012,  12B330,	DWORD,		D2SendToClient, (DWORD zero, DWORD clientID, void* data, DWORD size));
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
