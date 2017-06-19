@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  by Yohann Nicolas                                   ;
 ;                                                                                      ;
-;                                     version 11.01                                    ;
+;                                     version 11.02                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -54,7 +54,8 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 	/unlock : Same as /unlockmouse.
 	/renamechar newname : Rename your character and save it.
 	/renamepage name : Rename current page stash.
-	/setindex : Set current stash page as index
+	/setindex : Set current stash page as index.
+	/setmainindex : Set current stash page as main index.
 	/resetindex : Remove index flag on the current stash page.
 	/insertpage : Insert a new page after the current page.
 	/deletepage : Delete current page if empty.
@@ -66,6 +67,10 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 	/dm : Toggle always display mana mode.
 	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
 
+
+v11.02 changes :
+Add command /setmainindex : Set the current stash page as main index (shift + prev/next index button go to an main index if exists)
+Current number of simulated players use with /players command is save with the player and set on game loading. NBPlayersByDefault must be different to 0 in PlugY.ini.
 
 v11.01 changes :
 Compatibily with 1.13d (thanks to L'Autour)
@@ -583,6 +588,7 @@ Activate some new commands in PlugY. In parenthesis is the condition to be able 
 /renamechar newname : Rename your character and save it. (You must exit the game to update the stats page.)
 /renamepage name : Rename current page stash (MultiStash activated).
 /setindex : Set current stash page as index (prev/next index button go to an index if exists) (MultiStash activated).
+/setmainindex : Set current stash page as main index (shift + prev/next index button go to an main index if exists) (MultiStash activated).
 /resetindex : Remove index flag on the current stash page (MultiStash activated).
 /insertpage : Insert a new page after the current page (MultiStash activated).
 /deletepage : Delete current page if empty (MultiStash activated).

@@ -7,7 +7,6 @@
 
 //#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 #include "VersionInfo.h"
-#include <windows.h>
 
 #pragma comment(lib, "Version.Lib")
 
@@ -15,11 +14,15 @@ const char* VersionStrings[16] = { "1.00","1.07","1.08","1.09","1.09b","1.09d","
 
 const char* GetVersionString(int version)
 {
+	if (version < 0 || version >= sizeof(VersionStrings))
+		return "UNKNOW";
 	return VersionStrings[version];
 }
 
 eGameVersion GetD2Version(LPCVOID pVersionResource)
 {
+	if (!pVersionResource) return UNKNOW;
+
 	UINT uLen;
 	VS_FIXEDFILEINFO* ptFixedFileInfo;
 	if (!VerQueryValue(pVersionResource, "\\", (LPVOID*)&ptFixedFileInfo, &uLen))
@@ -67,19 +70,15 @@ eGameVersion GetD2Version(char* gameExe)
 	return version;
 }
 
-eGameVersion GetD2Version()
+eGameVersion GetD2Version(HMODULE hModule)
 {
-	HMODULE hModule = GetModuleHandle(NULL);
 	HRSRC hResInfo = FindResource(hModule, MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
+	if (!hResInfo) return UNKNOW;
 	HGLOBAL hResData = LoadResource(hModule, hResInfo);
+	if (!hResData) return UNKNOW;
 	LPVOID pVersionResource = LockResource(hResData);
-	//DWORD dwSize = SizeofResource(hInst, hResInfo);
-	//LPVOID pVersionResource = LocalAlloc(LMEM_FIXED, dwSize);
-	//CopyMemory(pVersionResource, pRes, dwSize);
-
 	eGameVersion version = GetD2Version(pVersionResource);
 	FreeResource(hResData);
-	//LocalFree(pVersionResource);
 	return version;
 }
 

@@ -22,6 +22,8 @@ bool active_savegame=false;
 
 #define MAX_CMD_SIZE 200
 
+const char * CMD_PLAYERS="players set to";
+
 const char * CMD_SAVE="/save";
 const char * CMD_SELECTPAGE="/page";
 
@@ -34,6 +36,7 @@ const char * CMD_RENAME_CHAR="/renamechar";
 
 const char * CMD_REPAGE_NAME = "/renamepage";
 const char * CMD_SET_INDEX = "/setindex";
+const char * CMD_SET_MAIN_INDEX = "/setmainindex";
 const char * CMD_RESET_INDEX = "/resetindex";
 const char * CMD_INSERT_PAGE = "/insertpage";
 const char * CMD_DELETE_PAGE = "/deletepage";
@@ -334,6 +337,14 @@ int STDCALL commands (char* ptText)
 	strncpy(command,ptText,MAX_CMD_SIZE-1);
 	_strlwr(command);
 
+	if (!strncmp(command, CMD_PLAYERS, strlen(CMD_PLAYERS)))
+	{
+		int nb = atoi(&command[strlen(CMD_PLAYERS)]);
+		if (nb > 0 && nb <= 64)
+			nbPlayersCommand = nb;
+		return 1;
+	}
+
 	if (!strcmp(command, CMD_SAVE))
 	{
 		if (onRealm) return 1;
@@ -364,7 +375,7 @@ int STDCALL commands (char* ptText)
 
 	if (!strncmp(command, CMD_RENAME_CHAR, strlen(CMD_RENAME_CHAR)))
 	{
-		const char* param = &command[strlen(CMD_RENAME_CHAR)];
+		const char* param = &ptText[strlen(CMD_RENAME_CHAR)];
 		if (param[0] != ' ')
 			return 1;
 		param++;
@@ -374,7 +385,7 @@ int STDCALL commands (char* ptText)
 	if (!strncmp(command, CMD_REPAGE_NAME,strlen(CMD_REPAGE_NAME)))
 	{
 		if (!active_multiPageStash) return 1;
-		char* param = &command[strlen(CMD_REPAGE_NAME)];
+		char* param = &ptText[strlen(CMD_REPAGE_NAME)];
 		Stash* ptStash = PCPY->currentStash;
 		if (!ptStash)
 			return 0;
@@ -408,6 +419,13 @@ int STDCALL commands (char* ptText)
 		return 0;
 	}
 
+	if (!strcmp(command, CMD_SET_MAIN_INDEX))
+	{
+		if (!active_multiPageStash) return 1;
+		updateServer(US_SET_MAIN_INDEX);
+		return 0;
+	}
+
 	if (!strcmp(command, CMD_RESET_INDEX))
 	{
 		if (!active_multiPageStash) return 1;
@@ -426,7 +444,7 @@ int STDCALL commands (char* ptText)
 	if (!strcmp(command, CMD_DELETE_PAGE))
 	{
 		if (!active_multiPageStash) return 1;
-		if (deleteStash(ptChar))
+		if (deleteStash(ptChar, true))
 			updateServer(US_DELETE_PAGE);
 		return 0;
 	}
@@ -435,6 +453,8 @@ int STDCALL commands (char* ptText)
 	{
 		if (!active_multiPageStash) return 1;
 		int page = atoi(&command[strlen(CMD_SWAP)]) - 1;
+		if (page < 0 && PCPY->currentStash->nextStash)
+			page = PCPY->currentStash->nextStash->id;
 		if (page < 0)
 			return 1;
 		updateServer(US_SWAP3 + ((page & 0xFF000000) >> 16));

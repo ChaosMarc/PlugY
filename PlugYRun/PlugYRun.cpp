@@ -5,25 +5,12 @@
 	PlugY launcher.
 
 =================================================================*/
-#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
-#include <windows.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 #include "../Commons/VersionInfo.h"
 #include "PlugYRun.h"
-/*
-0012C458   00000000  |ModuleFileName = NULL
-0012C45C   0012C908  |CommandLine = ""C:\Jeux\Diablo II\Game.exe""
-0012C460   00000000  |pProcessSecurity = NULL
-0012C464   00000000  |pThreadSecurity = NULL
-0012C468   00000000  |InheritHandles = FALSE
-0012C46C   04000022  |CreationFlags = DEBUG_ONLY_THIS_PROCESS|NORMAL_PRIORITY_CLASS|CREATE_DEFAULT_ERROR_MODE
-0012C470   00000000  |pEnvironment = NULL
-0012C474   0012DF94  |CurrentDir = "C:\Jeux\Diablo II\"
-0012C478   0012C6BC  |pStartupInfo = 0012C6BC
-0012C47C   0012C5CC  \pProcessInfo = 0012C5CC
-*/
+#include <stdlib.h>
+#include <stdio.h>
+
 
 #define MAX_LOADSTRING 100
 #define SUBKEY "Software\\Blizzard Entertainment\\Diablo II"
@@ -44,7 +31,7 @@ BYTE loadDll[] = {
 	0xFF,0x15,0x40,0xC0,0xA7,0x6F,  //CALL DWORD PTR DS:[<&KERNEL32.LoadLibraryA>]      ; kernel32.LoadLibraryA
 	0xA3,0xFC,0xEF,0xA8,0x6F,		//MOV DWORD PTR DS:[6FA8EFFC],EAX
 	0x85,0xC0,						//TEST EAX,EAX
-	0x74,0x2F,						//JE SHORT d2gfx.6FA7BE37
+	0x74,0x2B,						//JE SHORT d2gfx.6FA7BE33
 	0x50,							//PUSH EAX
 	0x68,0x90,0xBE,0xA7,0x6F,		//PUSH d2gfx.6FA7BE10                            ;Init String
 	0x50,							//PUSH EAX
@@ -62,12 +49,7 @@ BYTE loadDll[] = {
 	0x58,							//POP EAX
 	0x58,							//POP EAX
 	0xC2,0x04,0x00,					//RETN 4
-	0x59,							//POP ECX
-	0xB9,0x80,0xBE,0xA7,0x6F,		//MOV ECX,d2gfx.6FA7BE80                            ;  ASCII "PlugY.dll"
-	0x83,0x04,0x24,0x10,			//ADD DWORD PTR SS:[ESP],10
-	0xC2,0x04,0x00,					//RETN 4
 	0x00,0x00,0x00,0x00 };			//HANDLE var;
-
 
 BYTE freeDll[] = {
 	0xFF,0x74,0x24,0x04,			//PUSH DWORD PTR SS:[ESP+4]
@@ -94,11 +76,9 @@ BYTE freeDll[] = {
 	0x58,							//POP EAX
 	0xC2,0x04,0x00 };				//RETN 4
 
-
-																	//LPCSTR dllName = "PlugY.dll";
+//LPCSTR dllName = "PlugY.dll";
 LPCSTR initFctName = "_Init@4";
 LPCSTR releaseFctName = "_Release@0";
-static bool versionXP;
 
 typedef int(__stdcall* tDebugActiveProcessStop)(DWORD);
 tDebugActiveProcessStop debugActiveProcessStop;
@@ -124,12 +104,17 @@ bool installPlugY(HANDLE h, LPBYTE addr, char* libraryName, eGameVersion version
 	LPBYTE loadLibraryAddr = addr;
 	LPBYTE freeLibraryAddr = addr;
 	LPBYTE getProcAddressAddr = addr;
+
 	switch (version)
 	{
 	case V107:
+		loadCallerAddr += 0x3882;
+		freeCallerAddr += 0x3A6C;
+		loadLibraryAddr += 0xC038;
+		freeLibraryAddr += 0xC040;
+		getProcAddressAddr += 0xC034;
+		break;
 	case V108:
-		//TODO
-		return false;
 	case V109:
 	case V109b:
 	case V109d:
@@ -182,11 +167,27 @@ bool installPlugY(HANDLE h, LPBYTE addr, char* libraryName, eGameVersion version
 		getProcAddressAddr += 0xD120;
 		break;
 	case V114a:
+		loadCallerAddr += 0x1BCB;// Load advapi.dll
+		freeCallerAddr += 0xF375;// Free dbghelp.dll
+		loadLibraryAddr += 0x2CD118;
+		freeLibraryAddr += 0x2CD120;
+		getProcAddressAddr += 0x2CD11C;
+		break;
 	case V114b:
 	case V114c:
+		loadCallerAddr += 0x1BCB;// Load advapi.dll
+		freeCallerAddr += 0x6F75;// Free dbghelp.dll
+		loadLibraryAddr += 0x2CD11C;
+		freeLibraryAddr += 0x2CD124;
+		getProcAddressAddr += 0x2CD120;
+		break;
 	case V114d:
-		//TODO
-		return false;
+		loadCallerAddr += 0x621C;// Load advapi.dll
+		freeCallerAddr += 0xB514;// Free dbghelp.dll
+		loadLibraryAddr += 0x2CC144;
+		freeLibraryAddr += 0x2CC14C;
+		getProcAddressAddr += 0x2CC148;
+		break;
 	default:
 		return false;
 	}
@@ -230,7 +231,6 @@ bool installPlugY(HANDLE h, LPBYTE addr, char* libraryName, eGameVersion version
 		DWORD baseOfCode = *(DWORD*)(buf + 0x2C);
 
 		//MessageBox(0, "no memory", "RunPlugY.\n", MB_OK|MB_ICONASTERISK);
-		//memory = addr + 0xBE00 + isAdd * 0x1000;
 		memory = addr + baseOfCode + sizeOfCode - 200;
 		if (!VirtualProtectEx(h, memory, 200, PAGE_EXECUTE_READWRITE, &oldProtect))
 			assertion("PlugY : Failed to get memory pool in game thread");
@@ -271,7 +271,6 @@ bool installPlugY(HANDLE h, LPBYTE addr, char* libraryName, eGameVersion version
 	*(LPBYTE*)&loadDll[33] = initNameAddr;
 	*(LPBYTE*)&loadDll[40] = getProcAddressAddr;
 	*(LPBYTE*)&loadDll[63] = getProcAddressAddr;
-	*(LPBYTE*)&loadDll[80] = dllNameAddr;
 	len = sizeof(loadDll);
 	res = WriteProcessMemory(h, loadDllAddr, loadDll, len, &nb);
 	if (!res || (nb != len)) assertion("PlugY: Write custom data in memory failed");
@@ -282,15 +281,13 @@ bool installPlugY(HANDLE h, LPBYTE addr, char* libraryName, eGameVersion version
 	*(LPBYTE*)&freeDll[6] = freeLibraryAddr;
 	*(LPBYTE*)&freeDll[12] = handleAddr;
 	*(LPBYTE*)&freeDll[22] = releaseNameAddr;
-	//	*(LPBYTE*)&freeDll[30] = handleAddr;
-	*(LPBYTE*)&freeDll[36 - 7] = getProcAddressAddr;
-	*(LPBYTE*)&freeDll[55 - 7] = getProcAddressAddr;
-	*(LPBYTE*)&freeDll[67 - 7] = freeLibraryAddr;
+	*(LPBYTE*)&freeDll[29] = getProcAddressAddr;
+	*(LPBYTE*)&freeDll[48] = getProcAddressAddr;
+	*(LPBYTE*)&freeDll[60] = freeLibraryAddr;
 	len = sizeof(freeDll);
 	res = WriteProcessMemory(h, freeDllAddr, freeDll, len, &nb);
 	if (!res || (nb != len)) assertion("PlugY: Write custom data in memory failed");
 	pos += pos % 16 ? len + 16 - pos % 16 : len;
-
 
 	// Patch load library
 	buf[0] = 0x90;
@@ -305,16 +302,13 @@ bool installPlugY(HANDLE h, LPBYTE addr, char* libraryName, eGameVersion version
 	res = WriteProcessMemory(h, freeCallerAddr, buf, len, &nb);
 	if (!res || (nb != len)) assertion("PlugY: Write free library in memory failed");
 
-	//	if (oldProtect != -1)
-	//		VirtualProtectEx(h,(LPVOID)memory, 200, oldProtect, &oldProtect);
+//	if (oldProtect != -1)
+//		VirtualProtectEx(h,(LPVOID)memory, 200, oldProtect, &oldProtect);
 	return true;
 }
 
 
-
-
 //###########################################################################################//
-
 
 /*bool copyLodVersionFiles()
 {
@@ -337,32 +331,43 @@ return true;
 
 
 #define BUF_SIZE 0x300
-bool isD2gfx(HANDLE hProcess, LPVOID dllAdr)
+bool isD2gfxLoaded(HANDLE hProcess, LPVOID addr)
 {
 	SIZE_T nbRead;
 	BYTE buf[BUF_SIZE];
-	ReadProcessMemory(hProcess, dllAdr, buf, BUF_SIZE, &nbRead);
-	if (nbRead < 0x40) return false;
-	int offsetPESignature = *(DWORD*)(buf + 0x3C);
-	if (offsetPESignature + 38 >= BUF_SIZE) return false;
-	DWORD baseOfCode = *(DWORD*)(buf + offsetPESignature + 0x34);
-	if ((baseOfCode != 0x6FA80000) && (baseOfCode != 0x6FA70000)) return false;
-
-	return true;
-}
-
-bool isGameLoaded(HANDLE hProcess, LPVOID baseAdr)
-{
-	SIZE_T nbRead;
-	BYTE buf[BUF_SIZE];
-	ReadProcessMemory(hProcess, baseAdr, buf, BUF_SIZE, &nbRead);
-	if (nbRead < 0x40) return false;
+	ReadProcessMemory(hProcess, addr, buf, BUF_SIZE, &nbRead);
+	if (nbRead < 0x60) return false;
 	int offsetPESignature = *(DWORD*)(buf + 0x3C);
 	if (offsetPESignature + 0x5C >= BUF_SIZE) return false;
-	DWORD baseOfCode = *(DWORD*)(buf + offsetPESignature + 0x34);
+	DWORD ImageBase = *(DWORD*)(buf + offsetPESignature + 0x34);
 	DWORD SizeOfImage = *(DWORD*)(buf + offsetPESignature + 0x50);
 	DWORD CheckSum = *(DWORD*)(buf + offsetPESignature + 0x58);
-	if ((baseOfCode==0x00400000) && (SizeOfImage == 0x005A5000) && (CheckSum == 0x00374101)) return true;//1.14c
+	if (ImageBase == 0x6FAA0000 && SizeOfImage == 0x00021000 && CheckSum == 0x00000000) return true;// 1.07 - 1.08
+	if (ImageBase == 0x6FA70000 && SizeOfImage == 0x00021000 && CheckSum == 0x00000000) return true;// 1.09 - 1.09b - 1.09d - 1.10
+	if (ImageBase == 0x6FA80000 && SizeOfImage == 0x00021000 && CheckSum == 0x0001743E) return true;// 1.11
+	if (ImageBase == 0x6FA80000 && SizeOfImage == 0x00021000 && CheckSum == 0x0001F6C4) return true;// 1.11b
+	if (ImageBase == 0x6FA80000 && SizeOfImage == 0x00021000 && CheckSum == 0x0001F0B2) return true;// 1.12
+	if (ImageBase == 0x6FA80000 && SizeOfImage == 0x00021000 && CheckSum == 0x0001BE5C) return true;// 1.13c
+	if (ImageBase == 0x6FA80000 && SizeOfImage == 0x00021000 && CheckSum == 0x00018542) return true;// 1.13d
+
+	return false;
+}
+
+bool isGameLoaded(HANDLE hProcess, LPVOID addr)
+{
+	SIZE_T nbRead;
+	BYTE buf[BUF_SIZE];
+	ReadProcessMemory(hProcess, addr, buf, BUF_SIZE, &nbRead);
+	if (nbRead < 0x60) return false;
+	int offsetPESignature = *(DWORD*)(buf + 0x3C);
+	if (offsetPESignature + 0x5C >= BUF_SIZE) return false;
+	DWORD ImageBase = *(DWORD*)(buf + offsetPESignature + 0x34);
+	DWORD SizeOfImage = *(DWORD*)(buf + offsetPESignature + 0x50);
+	DWORD CheckSum = *(DWORD*)(buf + offsetPESignature + 0x58);
+	if (ImageBase == 0x00400000 && SizeOfImage == 0x005A6000 && CheckSum == 0x00371D8F) return true;//1.14a
+	if (ImageBase == 0x00400000 && SizeOfImage == 0x005A6000 && CheckSum == 0x0037645F) return true;//1.14b
+	if (ImageBase == 0x00400000 && SizeOfImage == 0x005A5000 && CheckSum == 0x00374101) return true;//1.14c
+	if (ImageBase == 0x00400000 && SizeOfImage == 0x005BA000 && CheckSum == 0x0037CED2) return true;//1.14d
 
 	return false;
 }
@@ -431,20 +436,26 @@ bool launchGame98(LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, 
 
 		if (!GetExitCodeProcess(pi.hProcess, &ret) || (ret != STILL_ACTIVE))
 			exit(0);
-		if (isD2gfx(pi.hProcess, (LPVOID)0x6FA80000))
+		if (isD2gfxLoaded(pi.hProcess, (LPVOID)0x6FA80000))
 		{
 			installPlugY(pi.hProcess, (LPBYTE)0x6FA80000, libraryName, version);
 			ResumeThread(pi.hThread);
 			return true;
 		}
-		if (isD2gfx(pi.hProcess, (LPVOID)0x6FA70000))
+		if (isD2gfxLoaded(pi.hProcess, (LPVOID)0x6FA70000))
 		{
 			installPlugY(pi.hProcess, (LPBYTE)0x6FA70000, libraryName, version);
 			ResumeThread(pi.hThread);
 			return true;
 		}
+		if (isD2gfxLoaded(pi.hProcess, (LPVOID)0x6FAA0000))
+		{
+			installPlugY(pi.hProcess, (LPBYTE)0x6FAA0000, libraryName, version);
+			ResumeThread(pi.hThread);
+			return true;
+		}
 		ResumeThread(pi.hThread);
-		//		Sleep(10);
+		//Sleep(10);
 	}
 	return false;
 }
@@ -469,9 +480,9 @@ bool launchGameXP(LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, 
 			CloseHandle(DebugEvent.u.CreateThread.hThread);
 			break;
 		case CREATE_PROCESS_DEBUG_EVENT:
-			if (version >= V114a && isGameLoaded(pi.hProcess, DebugEvent.u.CreateProcessInfo.lpBaseOfImage))
+			if (version >= V114a)// && isGameLoaded(pi.hProcess, DebugEvent.u.CreateProcessInfo.lpBaseOfImage))
 			{
-				//installPlugYOnGame(pi.hProcess, (DWORD)DebugEvent.u.CreateProcessInfo.lpBaseOfImage, libraryName, (DWORD)DebugEvent.u.LoadDll.lpBaseOfDll == 0x6FA8000, version);
+				installPlugY(pi.hProcess, (LPBYTE)DebugEvent.u.CreateProcessInfo.lpBaseOfImage, libraryName, version);
 				CloseHandle(DebugEvent.u.CreateProcessInfo.hFile);
 				CloseHandle(pi.hProcess);
 				CloseHandle(pi.hThread);
@@ -486,7 +497,7 @@ bool launchGameXP(LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, 
 				MessageBox(0, "EXCEPTION_ACCESS_VIOLATION", "PlugY", MB_OK | MB_ICONASTERISK);
 			break;
 		case LOAD_DLL_DEBUG_EVENT:
-			if (version <= V113d && isD2gfx(pi.hProcess, DebugEvent.u.LoadDll.lpBaseOfDll))
+			if (version <= V113d && isD2gfxLoaded(pi.hProcess, DebugEvent.u.LoadDll.lpBaseOfDll))
 			{
 				installPlugY(pi.hProcess, (LPBYTE)DebugEvent.u.LoadDll.lpBaseOfDll, libraryName, version);
 				CloseHandle(DebugEvent.u.LoadDll.hFile);
@@ -514,8 +525,6 @@ int APIENTRY WinMain (
     __in int nShowCmd
     )
 {
-	GetD2Version();
-
 	char currrentDirectory[MAX_PATH];
 	char iniFileName[MAX_PATH + sizeof(INIFILE) - 1];
 	char command[MAX_PATH + sizeof(GAMEFILE) + 200];
@@ -592,10 +601,8 @@ int APIENTRY WinMain (
 		return !launchNormal(command, currrentDirectory);
 
 	// Check version
-	if (version == UNKNOW)
-		assertion("This LoD version isn't supported by PlugY.");
-	else if (version < V109 || version > V113d)
-		assertion("The %s version of LoD isn't supported by PlugY.", GetVersionString(version));
+	if (version < V107 || version > V114d)
+		assertion("PlugY isn't compatible with this version : %s", GetVersionString(version));
 
 	// Launch LoD and install PlugY
 	HMODULE module = GetModuleHandle("Kernel32.dll");

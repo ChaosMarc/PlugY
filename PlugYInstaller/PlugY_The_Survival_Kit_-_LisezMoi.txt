@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  par Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 11.01                                    ;
+;                                     version 11.02                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -57,6 +57,7 @@ Toutes ces fonctions peuvent être activé/désactivé via PlugY.ini (voir "COMMENTA
 	/renamechar newname : Renomme la personnage et le sauvegarde.
 	/renamepage name : Renomme la page courante du coffre.
 	/setindex : La page courante devient un index.
+	/setmainindex : La page courante devient un index principal.
 	/resetindex : Retire la page courante des index.
 	/insertpage : Insère une nouvelle page après la page courante.
 	/deletepage : Supprime la page courante si elle est vide.
@@ -68,6 +69,10 @@ Toutes ces fonctions peuvent être activé/désactivé via PlugY.ini (voir "COMMENTA
 	/dm : Inverse le mode d'affichage: Toujours afficher les valeurs de mana.
 	/listcube : (bêta) Crée un fichier "cube.txt" dans le répertoire de sauvegarde contenant toutes les formules actives du cube.
 
+
+Changements apportés par la v11.02 :
+Ajout de la commande /setmainindex : La page courante devient un index principal.
+Le nombre de joueurs simulé grace à la commande /players est sauvegardé avec le joueur et réactivé lors du chargement d'une partie. NBPlayersByDefault doit être différent de 0 dans PlugY.ini.
 
 Changements apportés par la v11.01 :
 Ajout de la compatibilité avec la version 1.13d de LOD. (merci à L'Autour)
@@ -509,6 +514,7 @@ Active les nouvelles commandes de PlugY.
 /renamechar newname : Renomme la personnage et le sauvegarde. (Vous devez quittez la partie pour mettre à jour la page des stats).
 /renamepage name : Renomme la page courante du coffre (MultiStash activé).
 /setindex : La page courante devient un index (Les boutons d'index vont jusqu'au prochain index s'il en existe un) (MultiStash activé).
+/setmainindex : La page courante devient un index principal (Les boutons d'index +shift vont jusqu'au prochain index s'il en existe un) (MultiStash activé).
 /resetindex : Retire la page courante des index (MultiStash activé).
 /insertpage : Insère une nouvelle page après la page courante (MultiStash activé).
 /deletepage : Supprime la page courante si elle est vide (MultiStash activé).

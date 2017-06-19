@@ -10,6 +10,7 @@
 
 extern int active_DisplayItemLevel;
 extern DWORD nbPlayersCommandByDefault;
+extern DWORD nbPlayersCommand;
 extern int active_alwaysRegenMapInSP;
 extern int active_RunLODs;
 extern int active_AlwaysDisplayLifeMana;

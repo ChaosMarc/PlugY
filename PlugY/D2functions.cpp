@@ -607,7 +607,7 @@ void setFctAddr(DWORD* addr, HMODULE module, LPCSTR index)
 		*addr = NULL;
 }
 
-bool initD2functions()
+void initD2functions()
 {
 //	#define D2S(F, I, R, N, P)	N = (F##I)GetProcAddress((HMODULE)offset_##F, (LPCSTR)I);
 //	#define D2F(F, I, R, N, P)	N = (F##I)GetProcAddress((HMODULE)offset_##F, (LPCSTR)I);
@@ -956,7 +956,6 @@ bool initD2functions()
 	shifting.ptSkills = V7(D2Common,CC,CC,A8,A8,A8,A8,A8,A8);
 	shifting.ptImage = V7(D2Common,04,04,04,08,08,3C,34,34);
 	shifting.ptFrame = V7(D2Common,08,08,08,44,44,40,00,00);
-	return true;
 }
 
 /*================================= END OF FILE =================================*/

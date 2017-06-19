@@ -783,9 +783,9 @@ void init_ExtraOptions(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefa
 
 	GET_PRIVATE_PROFILE_STRING(S_EXTRA, S_nbPlayersCommandByDefault, "0");
 	nbPlayersCommandByDefault = atoi(buffer);
-	if (version_D2Common == V110)
-		{if (nbPlayersCommandByDefault > 8) nbPlayersCommandByDefault=8;}
-	else if (nbPlayersCommandByDefault > 64) nbPlayersCommandByDefault=64;
+	if (version_D2Common == V109 || version_D2Common == V109b)
+		{if (nbPlayersCommandByDefault > 64) nbPlayersCommandByDefault=64;}
+	else if (nbPlayersCommandByDefault > 8) nbPlayersCommandByDefault=8;
 	log_msg("nbPlayersCommandByDefault\t= %d\n", nbPlayersCommandByDefault);
 
 	GET_PRIVATE_PROFILE_STRING(S_EXTRA, S_active_DisplayItemLevel, "0");

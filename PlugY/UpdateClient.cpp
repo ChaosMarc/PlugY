@@ -59,7 +59,7 @@ DWORD FASTCALL handleClientUpdate(DataPacket* packet)
 	log_msg("[CLIENT] Received custom message: %d with param: %08X , %08X , %08X\n",packet->mFunc,packet->mParam1,packet->mParam2,packet->mParam3);
 	switch (packet->mFunc)
 	{
-	case UC_SELECT_STASH:	 setSelectedStashClient(packet->mParam1, packet->mParam2, packet->mParam3, (packet->mParam2 & 4) == 4); return 1;
+	case UC_SELECT_STASH:	 setSelectedStashClient(packet->mParam1, packet->mParam2, packet->mParam3, (packet->mParam2 & 8) == 8); return 1;
 	case UC_SHARED_GOLD :	 updateSharedGold(packet->mParam1); return 1;
 	case UC_PAGE_NAME:		 renameCurrentStash(D2GetClientPlayer(), (char*)&packet->mItemID); return 1;
 	default : return 0;

@@ -30,99 +30,77 @@
 #include "common.h"
 
 
-int version_SmackW32 = UNKNOW;
-int version_D2Common = UNKNOW;
-int version_ijl11 = UNKNOW;
-int version_D2Gdi = UNKNOW;
-int version_D2Win = UNKNOW;
-int version_D2sound = UNKNOW;
-int version_D2MCPCLI = UNKNOW;
-int version_D2Launch = UNKNOW;
-int version_D2gfx = UNKNOW;
+int version_Game = UNKNOW;
+//int version_binkw32 = UNKNOW;
+//int version_Bnclient = UNKNOW;
 int version_D2Client = UNKNOW;
-int version_D2Net = UNKNOW;
-int version_D2Lang = UNKNOW;
-int version_D2Game = UNKNOW;
 int version_D2CMP = UNKNOW;
-int version_Bnclient = UNKNOW;
+int version_D2Common = UNKNOW;
+//int version_D2DDraw = UNKNOW;
+//int version_D2Direct3D = UNKNOW;
+int version_D2Game = UNKNOW;
+//int version_D2Gdi = UNKNOW;
+int version_D2gfx = UNKNOW;
+//int version_D2Glide = UNKNOW;
+int version_D2Lang = UNKNOW;
+int version_D2Launch = UNKNOW;
+//int version_D2MCPClient = UNKNOW;
+//int version_D2Multi = UNKNOW;
+int version_D2Net = UNKNOW;
+//int version_D2sound = UNKNOW;
+int version_D2Win = UNKNOW;
 int version_Fog = UNKNOW;
+//int version_ijl11 = UNKNOW;
+//int version_SmackW32 = UNKNOW;
 int version_Storm = UNKNOW;
 
-
-DWORD	offset_SmackW32 = NULL;
-DWORD	offset_D2Common = NULL;
-DWORD	offset_ijl11 = NULL;
-DWORD	offset_D2Gdi = NULL;
-DWORD	offset_D2Win = NULL;
-DWORD	offset_D2sound = NULL;
-DWORD	offset_D2Multi = NULL;
-DWORD	offset_D2MCPCLI = NULL;
-DWORD	offset_D2Launch = NULL;
-DWORD	offset_D2gfx = NULL;
-DWORD	offset_D2Game = NULL;
+DWORD	offset_Game = NULL;
+//DWORD	offset_binkw32 = NULL;
+//DWORD	offset_Bnclient = NULL;
 DWORD	offset_D2Client = NULL;
-DWORD	offset_D2Net = NULL;
-DWORD	offset_D2Lang = NULL;
 DWORD	offset_D2CMP = NULL;
-DWORD	offset_Bnclient = NULL;
+DWORD	offset_D2Common = NULL;
+//DWORD	offset_D2DDraw = NULL;
+//DWORD	offset_D2Direct3D = NULL;
+DWORD	offset_D2Game = NULL;
+//DWORD	offset_D2Gdi = NULL;
+DWORD	offset_D2gfx = NULL;
+//DWORD	offset_D2Glide = NULL;
+DWORD	offset_D2Lang = NULL;
+DWORD	offset_D2Launch = NULL;
+//DWORD	offset_D2MCPClient = NULL;
+//DWORD	offset_D2Multi = NULL;
+DWORD	offset_D2Net = NULL;
+//DWORD	offset_D2sound = NULL;
+DWORD	offset_D2Win = NULL;
 DWORD	offset_Fog = NULL;
+//DWORD	offset_ijl11 = NULL;
+//DWORD	offset_SmackW32 = NULL;
 DWORD	offset_Storm = NULL;
-// manque : Game.exe D2DDraw.dll D2Direct3D.dll D2Glide.dll
 
-const char* S_SmackW32 =	"SmackW32.dll";
-const char* S_D2Common =	"D2Common.dll";
-const char* S_ijl11 =		"ijl11.dll";
-const char* S_D2Gdi =		"D2Gdi.dll";
-const char* S_D2Win =		"D2Win.dll";
-const char* S_D2sound =		"D2sound.dll";
-const char* S_D2Multi =		"D2Multi.dll";
-const char* S_D2MCPCLI =	"D2MCPClient.dll";
-const char* S_D2Launch =	"D2Launch.dll";
-const char* S_D2gfx =		"D2gfx.dll";
-const char* S_D2Game =		"D2Game.dll";
+const char* S_Game =		"Game.exe";
+//const char* S_binkw32 =		"binkw32.dll";
+//const char* S_Bnclient =	"Bnclient.dll";
 const char* S_D2Client =	"D2Client.dll";
-const char* S_D2Net =		"D2Net.dll";
-const char* S_D2Lang =		"D2Lang.dll";
 const char* S_D2CMP =		"D2CMP.dll";
-const char* S_Bnclient =	"Bnclient.dll";
+const char* S_D2Common =	"D2Common.dll";
+//const char* S_D2DDraw =		"D2DDraw.dll";
+//const char* S_D2Direct3D =	"D2Direct3D.dll";
+const char* S_D2Game =		"D2Game.dll";
+//const char* S_D2Gdi =		"D2Gdi.dll";
+const char* S_D2gfx =		"D2gfx.dll";
+//const char* S_D2Glide =		"D2Glide.dll";
+const char* S_D2Lang =		"D2Lang.dll";
+const char* S_D2Launch =	"D2Launch.dll";
+//const char* S_D2MCPClient =	"D2MCPClient.dll";
+//const char* S_D2Multi =		"D2Multi.dll";
+const char* S_D2Net =		"D2Net.dll";
+//const char* S_D2sound =		"D2sound.dll";
+const char* S_D2Win =		"D2Win.dll";
 const char* S_Fog =			"Fog.dll";
+//const char* S_ijl11 =		"ijl11.dll";
+//const char* S_SmackW32 =	"SmackW32.dll";
 const char* S_Storm =		"Storm.dll";
-
-DWORD loadLibrary( const char* libraryName)
-{
-	DWORD offset;
-/*	char currentpath[MAX_PATH];
-
-	if (!strcmp(libraryName,"D2Common.dll") || !strcmp(libraryName,"D2Game.dll") || !strcmp(libraryName,"D2Client.dll"))
-	{
-		GetCurrentDirectory(MAX_PATH,currentpath);
-		strncat(currentpath,"\\",MAX_PATH);
-		strncat(currentpath,libraryName,MAX_PATH);
-		log_msg("Load = %s : ",currentpath);
-		offset = (DWORD)LoadLibrary(currentpath);
-		log_msg("offset = %08X\n",offset);
-		if (offset)
-		{
-			log_msg("%s loaded successfully at: %08X\n", libraryName,	offset);			
-			return offset;
-		}
-	}*/
-	offset = (DWORD)LoadLibrary(libraryName);
-	if (!offset)
-	{
-		log_msg("Failed to load library : %s\n", libraryName);
-		exit(-1);
-	}
-	log_msg("%s loaded successfully at: %08X\n", libraryName,	offset);
-
-	return offset;
-}
-
-void freeLibrary( DWORD library )
-{
-	if (library)
-		FreeLibrary((HINSTANCE__ *)library);
-}
 
 // Change the protection scheme of a loaded
 // DLL called libraryName in memory space at address addr+size to allow us to customize it.
@@ -152,55 +130,40 @@ void unhookLibrary(const char* libraryName, DWORD addr)
 		log_msg("%s successfully unhooked. (%08X,%08X)\n", libraryName ,baseOfCode, sizeOfCode);
 }
 
-
-void loadD2Libraries ()
+void freeLibrary( DWORD library )
 {
-	log_msg("***** Load D2 Libraries *****\n");
-
-	offset_SmackW32	= loadLibrary( S_SmackW32);		//0xD000	0x03B90000 Already Loaded	-
-	offset_D2Common	= loadLibrary( S_D2Common);		//0x8D000	0x037A0000					0x7C000
-	offset_ijl11	= loadLibrary( S_ijl11);		//0x24000	0x60000000 Already Loaded	-
-	offset_D2Gdi	= loadLibrary( S_D2Gdi);		//0x7000	0x6F830000 Already Loaded	-
-	offset_D2Win	= loadLibrary( S_D2Win);		//0x19000	0x6F8A0000 Already Loaded	0x1C000
-	offset_D2sound	= loadLibrary( S_D2sound);		//0xC000	0x6F980000 Already Loaded	0xD000
-//	offset_D2Multi	= loadLibrary( S_D2Multi);		//0x1000	0x6F9A0000					?
-//	offset_D2MCPCLI	= loadLibrary( S_D2MCPCLI);		//0x6000	0x6F9F0000 Already Loaded	-
-	offset_D2Launch	= loadLibrary( S_D2Launch);		//0x20000	0x6FA10000 Already Loaded	0x1E000
-	offset_D2gfx	= loadLibrary( S_D2gfx);		//0xB000	0x6FA70000 Already Loaded	-
-	offset_D2Game	= loadLibrary( S_D2Game);		//0xF6000	0x6FC30000					0xCF000
-	offset_D2Client	= loadLibrary( S_D2Client);		//0xCC000	0x6FAA0000					0xCA000
-	offset_D2Net	= loadLibrary( S_D2Net);		//0x6000	0x6FC00000 Already Loaded	-	
-	offset_D2Lang	= loadLibrary( S_D2Lang);		//0x0A000	0x6FC10000 Already Loaded	-
-	offset_D2CMP	= loadLibrary( S_D2CMP);		//0x18000	0x6FDF0000 Already Loaded	0x19000
-	offset_Bnclient	= loadLibrary( S_Bnclient);		//0x15000	0x6FF00000 Already Loaded	-
-	offset_Fog		= loadLibrary( S_Fog);			//0x20000	0x6FF50000 Already Loaded	0x1F000
-	offset_Storm	= loadLibrary( S_Storm);		//0x30000	0x6FFB0000 Already Loaded	-
-
-	log_msg("\n\n");
+	if (library && library != offset_Game)
+		FreeLibrary((HMODULE)library);
 }
-
 
 void freeD2Libraries()
 {
+	if (version_Game >= V114a)
+		return;
+
 	log_msg("***** Free Libraries *****\n");
 
-	freeLibrary( offset_SmackW32 );
-	freeLibrary( offset_D2Common );
-	freeLibrary( offset_ijl11 );
-	freeLibrary( offset_D2Gdi );
-	freeLibrary( offset_D2Win );
-	freeLibrary( offset_D2sound );
-//	freeLibrary( offset_D2Multi );
-//	freeLibrary( offset_D2MCPCLI );
-	freeLibrary( offset_D2Launch );
-	freeLibrary( offset_D2gfx );
-	freeLibrary( offset_D2Game );
+//	freeLibrary( offset_binkw32 );
+//	freeLibrary( offset_Bnclient );
 	freeLibrary( offset_D2Client );
-	freeLibrary( offset_D2Net );
-	freeLibrary( offset_D2Lang );
 	freeLibrary( offset_D2CMP );
-	freeLibrary( offset_Bnclient );
-	freeLibrary( offset_Fog	);
+	freeLibrary( offset_D2Common );
+//	freeLibrary( offset_D2DDraw );
+//	freeLibrary( offset_D2Direct3D );
+	freeLibrary( offset_D2Game );
+//	freeLibrary( offset_D2Gdi );
+	freeLibrary( offset_D2gfx );
+//	freeLibrary( offset_D2Glide );
+	freeLibrary( offset_D2Lang );
+	freeLibrary( offset_D2Launch );
+//	freeLibrary( offset_D2MCPClient );
+//	freeLibrary( offset_D2Multi );
+	freeLibrary( offset_D2Net );
+//	freeLibrary( offset_D2sound );
+	freeLibrary( offset_D2Win );
+	freeLibrary( offset_Fog );
+//	freeLibrary( offset_ijl11 );
+//	freeLibrary( offset_SmackW32 );
 	freeLibrary( offset_Storm );
 
 	log_msg("\n\n");
@@ -210,16 +173,17 @@ void hookLibraries()
 {
 	log_msg("***** Unprotect Libraries *****\n");
 
-	hookLibrary(S_D2Common,	offset_D2Common);
 	hookLibrary(S_D2Client,	offset_D2Client);
-	hookLibrary(S_D2Lang,	offset_D2Lang);
+//	hookLibrary(S_D2CMP,	offset_D2CMP);
+	hookLibrary(S_D2Common,	offset_D2Common);
 	hookLibrary(S_D2Game,	offset_D2Game);
+	hookLibrary(S_D2gfx,	offset_D2gfx);
+	hookLibrary(S_D2Lang,	offset_D2Lang);
+	hookLibrary(S_D2Launch,	offset_D2Launch);
+//	hookLibrary(S_D2Net,	offset_D2Net);
+//	hookLibrary(S_D2Win,	offset_D2Win);
 	hookLibrary(S_Fog,		offset_Fog);
 	hookLibrary(S_Storm,	offset_Storm);
-//	hookLibrary(S_D2Win,	offset_D2Win);
-	hookLibrary(S_D2Launch,	offset_D2Launch);
-	hookLibrary(S_D2gfx,	offset_D2gfx);
-//	hookLibrary(S_D2Gdi,	offset_D2Gdi);
 
 	log_msg("\n\n");
 }
@@ -228,22 +192,26 @@ void unhookLibraries()
 {
 	log_msg("***** Reprotect Libraries *****\n");
 
-	unhookLibrary(S_D2Common,	offset_D2Common);
 	unhookLibrary(S_D2Client,	offset_D2Client);
-	unhookLibrary(S_D2Lang,		offset_D2Lang);
+//	unhookLibrary(S_D2CMP,		offset_D2CMP);
+	unhookLibrary(S_D2Common,	offset_D2Common);
 	unhookLibrary(S_D2Game,		offset_D2Game);
+	unhookLibrary(S_D2gfx,		offset_D2gfx);
+	unhookLibrary(S_D2Lang,		offset_D2Lang);
+	unhookLibrary(S_D2Launch,	offset_D2Launch);
+//	unhookLibrary(S_D2Net,		offset_D2Net);
+//	unhookLibrary(S_D2Win,		offset_D2Win);
 	unhookLibrary(S_Fog,		offset_Fog);
 	unhookLibrary(S_Storm,		offset_Storm);
-//	unhookLibrary(S_D2Win,		offset_D2Win);
-	unhookLibrary(S_D2Launch,	offset_D2Launch);
-	unhookLibrary(S_D2gfx,		offset_D2gfx);
-//	unhookLibrary(S_D2Gdi,		offset_D2Gdi);
 
 	log_msg("\n\n");
 }
 
 void freeCustomLibraries()
 {
+	if (!customDlls)
+		return;
+
 	log_msg("***** Free custom libraries *****\n");
 
 	TCustomDll* dll=customDlls;
@@ -290,14 +258,16 @@ void loadCustomLibraries()
 		{
 			if (curString[0])
 			{
-				offset_currentDll = loadLibrary(curString);
-				if (offset_currentDll)
+				offset_currentDll = (DWORD)LoadLibrary(curString);
+				if (!offset_currentDll)
 				{
-					nextDll = customDlls;
-					customDlls = new(TCustomDll);
-					customDlls->nextDll = nextDll;
-					customDlls->initialize(offset_currentDll);
+					log_msg("Load library %s failed:\n", curString);
+					exit(0);
 				}
+				nextDll = customDlls;
+				customDlls = new(TCustomDll);
+				customDlls->nextDll = nextDll;
+				customDlls->initialize(offset_currentDll);
 			}
 			curString=strtok(NULL,"|");
 		}
@@ -308,150 +278,131 @@ void loadCustomLibraries()
 	log_msg("\n\n");
 }
 
-
-/*
-void getVersion(DWORD addr, DWORD addr111, int* ver, DWORD v109b, DWORD v109d, DWORD v110, DWORD v111, DWORD v111a, DWORD v111b, DWORD v112, DWORD v113c, DWORD v113d, const char * filename)
+void loadLibrary(LPCSTR libName, int* libVersion, DWORD* libOffset, int shift, DWORD v109b, DWORD v109d, DWORD v110, DWORD v111, DWORD v111b, DWORD v112, DWORD v113c)
 {
-	log_msg("version of %s\t",filename);
-
-	if (addr==v109b) {
-		*ver = V109b;
-		log_msg("1.09b\n");
-	} else if (addr==v109d) {
-		*ver = V109d;
-		log_msg("1.09d\n");
-	} else if (addr==v110) {
-		*ver = V110;
-		log_msg("1.10\n");
-	} else if ((addr==v111) && (addr111==v111a)) {
-		*ver = V111;
-		log_msg("1.11\n");
-	} else if ((addr==v111) && (addr111==v111b)) {
-		*ver = V111b;
-		log_msg("1.11b\n");
-	} else if (addr==v112) {
-		*ver = V112;
-		log_msg("1.12\n");
-	} else if (addr==v113c) {
-		*ver = V113c;
-		log_msg("1.13c\n");
-	} else if (addr==v113d) {
-		*ver = V113d;
-		log_msg("1.13d\n");
-	} else {
-		*ver = V113d;
-		log_msg("unknow, try with 1.13d\n");
+	*libOffset = (DWORD)LoadLibrary(libName);
+	if (*libOffset == NULL)
+	{
+		log_msg("Failed to load library : %s\n", libName);
+		exit(-1);
 	}
+	log_msg("%s loaded at:\t%08X (", libName, *libOffset);
+
+	DWORD addr = *(DWORD*)(*libOffset + shift);
+	if (version_Game != UNKNOW && (version_Game <= V108 || version_Game >= V113d))
+		*libVersion = version_Game;
+	else if (addr==v109b)
+		*libVersion = V109b;
+	else if (addr==v109d)
+		*libVersion = V109d;
+	else if (addr==v110)
+		*libVersion = V110;
+	else if (addr==v111)
+		*libVersion = V111;
+	else if (addr==v111b)
+		*libVersion = V111b;
+	else if (addr==v112)
+		*libVersion = V112;
+	else if (addr==v113c)
+		*libVersion = V113c;
+	else {
+		*libVersion = version_Game != UNKNOW ? version_Game : V113d;
+		log_msg("unknow, try with ");
+	}
+	log_msg("%s)\n", GetVersionString(*libVersion));
 }
-#define GET_VERSION(F,X,Y,A,B,C,D,E,G,H,I) getVersion(*(DWORD*)(offset_##F + 0x##X), *(DWORD*)(offset_##F + 0x##Y), &version_##F, 0x##A, 0x##B, 0x##C, 0x##D, 0x##E, 0x##G, 0x##H, 0x##I, S_##F)
-bool initD2version()
+
+#define GET_VERSION(F,S,A,B,C,D,E,G,H) loadLibrary(S_##F, &version_##F, &offset_##F, 0x##S, 0x##A, 0x##B, 0x##C, 0x##D, 0x##E, 0x##G, 0x##H)
+void initD2modules()
 {
-	log_msg("***** Get dll versions *****\n");
+	log_msg("***** Get D2 Modules address and version *****\n");
+	offset_Game = (DWORD)GetModuleHandle(NULL);
+	version_Game = GetD2Version((HMODULE)offset_Game);
+	log_msg("Game.exe loaded at:\t%08X (%s)\n", offset_Game, GetVersionString(version_Game));
 
-
-//GET_VERSION(SmackW32
-	GET_VERSION(D2Common,	80, 108,	B03A26A0, 9E3DE7CC, 0355C185, 8402CA7A, 42E6C2E5, 43028BA5, E58C71DA, 00000000);
-//GET_VERSION(ijl11
-	GET_VERSION(D2Gdi,		80, 108,	90CFD95A, 86CE337B, A8CCC67B, 06059D7D, 42E6C248, 43028B2F, 5D6490A2, 00000000);
-	GET_VERSION(D2Win,		80, 108,	B595A0CD, 1995DAD2, A8F5E2FD, B6DAB75A, 42E6C266, 43028B44, 6AA01FF5, 00000000);
-//GET_VERSION(D2sound
-//GET_VERSION(D2MCPCLI
-	GET_VERSION(D2Launch,	80, 100,	A66532FF, 66678CC5, 686223E5, 80B0E2C6, 42E6C275, 43028B50, 205A4C0F, 00000000);
-	GET_VERSION(D2gfx,		80, 110,	00949FA8, 018866A8, 401526B2, 575C8A5E, 42E6C22A, 43028B19, ACBE1B9E, 00000000);
-	GET_VERSION(D2Client,	80, 108,	03522F39, 6730B639, C9817825, 37EC6E13, 42E6C43F, 43028CA5, 61A3B3D5, 00000000);
-	GET_VERSION(D2Net,		80, 0F0,	E60F4DEA, 940E178B, 890FCC0B, C293A9D5, 42E6C20D, 43028B05, 19FA9F76, 00000000);
-	GET_VERSION(D2Lang,		80, 0F8,	111DCCB7, 13978953, DF917353, B91BAEA2, 42E6C213, 43028B09, B7B3978E, 00000000);
-	GET_VERSION(D2Game,		80, 108,	B0805792, 8BB2C392, 92FA18E6, 00B6F7B7, 42E6C375, 43028C0D, BD8DD8E5, 00000000);
-	GET_VERSION(D2CMP,		80, 0F8,	BA755486, 9A77DFEE, 38F44382, 4059B13F, 42E6C203, 43028AFE, 33A9427B, 00000000);
-//GET_VERSION(Bnclient
-	GET_VERSION(Fog,		80, 100,	6F16123B, 75990846, 7E7ED3C7, D333B997, 42E6C1F0, 43028AF2, D3BD4F1B, 00000000);
-	GET_VERSION(Storm,		E0, 110,	3B4B41D8, 3B8AB1CE, 00004550, 9C2BECC4, 42E6C1CA, 43028AD9, E4FA2944, 00000000);
+	if (version_Game >= V114a)
+	{
+//		offset_Bnclient		= offset_Game;	version_Bnclient	= version_Game; 
+		offset_D2Client		= offset_Game;	version_D2Client	= version_Game;
+		offset_D2CMP		= offset_Game;	version_D2CMP		= version_Game;
+		offset_D2Common		= offset_Game;	version_D2Common	= version_Game;
+//		offset_D2DDraw		= offset_Game;	version_D2DDraw		= version_Game;
+//		offset_D2Direct3D	= offset_Game;	version_D2Direct3D	= version_Game;
+		offset_D2Game		= offset_Game;	version_D2Game		= version_Game;
+//		offset_D2Gdi		= offset_Game;	version_D2Gdi		= version_Game;
+		offset_D2gfx		= offset_Game;	version_D2gfx		= version_Game;
+//		offset_D2Glide		= offset_Game;	version_D2Glide		= version_Game;
+		offset_D2Lang		= offset_Game;	version_D2Lang		= version_Game;
+		offset_D2Launch		= offset_Game;	version_D2Launch	= version_Game;
+//		offset_D2MCPClient	= offset_Game;	version_D2MCPClient	= version_Game;
+//		offset_D2Multi		= offset_Game;	version_D2Multi		= version_Game;
+		offset_D2Net		= offset_Game;	version_D2Net		= version_Game;
+//		offset_D2sound		= offset_Game;	version_D2sound		= version_Game;
+		offset_D2Win		= offset_Game;	version_D2Win		= version_Game;
+		offset_Fog			= offset_Game;	version_Fog			= version_Game;
+		offset_Storm		= offset_Game;	version_Storm		= version_Game;
+	}
+	else
+	{
+//		GET_VERSION(Bnclient																					//0x15000	0x6FF00000 Already Loaded	-
+		GET_VERSION(D2Client,	17F,	00000000, 14500000, 12500000, 0D814800, 0D812800, 0DA01000, 0DA03000);	//0xCC000	0x6FAA0000					0xCA000
+		GET_VERSION(D2CMP,		1359,	3C686FE0, 38686FE0, 8BF78B56, 4C880424, 07C71824, CCCCCCCC, C7000005);	//0x18000	0x6FDF0000 Already Loaded	0x19000
+		GET_VERSION(D2Common,	10CA,	A1E86FDC, B1E86FDC, 72D03B42, F883057E, 16746AC6, 00FE81C3, 74FE85DB);	//0x8D000	0x037A0000					0x7C000
+//		GET_VERSION(D2DDraw		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//
+//		GET_VERSION(D2Direct3D	000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//
+//		GET_VERSION(D2Game,		1010,	D22A78A1, D22910A1, D43FB0A1, 03E8506F, 53E8506F, 89E8506F, 63E8506F);	//0xF6000	0x6FC30000					0xCF000
+		GET_VERSION(D2Game,		1092,	18968BF1, 38968BF1, 28968BF1, F6335608, C690C5B9, 895FD713, 56535700);	//0xF6000	0x6FC30000					0xCF000
+//		GET_VERSION(D2Gdi,		105,	B4000000, 0B210E00, E4000000, 48000401, 2F000401, 00000000, B7000401);	//0x7000	0x6F830000 Already Loaded	-
+		GET_VERSION(D2gfx,		10D,	EB000000, 006FA700, 00000010, 2A000401, 19000401, 0B210E00, 00000000);	//0xB000	0x6FA70000 Already Loaded	-
+//		GET_VERSION(D2Glide		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//
+		GET_VERSION(D2Lang,		126D,	FC45048B, F445048B, 02C18313, C4830000, 00C6E045, 8B48408B, 0C75FF0C);	//0x0A000	0x6FC10000 Already Loaded	-
+		GET_VERSION(D2Launch,	109A,	81E8526F, 01E8526F, 85E8526F, 247C8B00, 00FC6583, 15FF0424, E850E045);	//0x20000	0x6FA10000 Already Loaded	0x1E000
+//		GET_VERSION(D2MCPClient	000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0x6000	0x6F9F0000 Already Loaded	-
+//		GET_VERSION(D2Multi		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0x1000	0x6F9A0000					?
+		GET_VERSION(D2Net,		16E1,	78B8A73C, 68B8A73C, 10244C8B, 5349E808, 5EA9E808, 105D8B72, 53B9E808);	//0x6000	0x6FC00000 Already Loaded	-	
+//		GET_VERSION(D2sound		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0xC000	0x6F980000 Already Loaded	0xD000
+		GET_VERSION(D2Win,		1699,	88686F8C, 84686F8C, D094686F, F0030000, 001435E8, 8B088F44, 0013F5E8);	//0x19000	0x6F8A0000 Already Loaded	0x1C000
+		GET_VERSION(Fog,		102,	D0000006, 10000001, 00000006, 000042E6, 00004302, 0000483C, 00004B95);	//0x20000	0x6FF50000 Already Loaded	0x1F000
+		GET_VERSION(Storm,		1190,	19E85082, 59E85082, 13C103F6, 0474F685, 8B000321, 3B1074C9, 0D896404);	//0x30000	0x6FFB0000 Already Loaded	-
+		if (version_Game == UNKNOW)
+			 version_Game = version_D2gfx;
+	}
+//	GET_VERSION(binkw32		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//
+//	GET_VERSION(ijl11		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0x24000	0x60000000 Already Loaded	-
+//	GET_VERSION(SmackW32	000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0xD000	0x03B90000 Already Loaded	-
 
 	log_msg("\n\n");
-	return true;
-}
-*/
-
-void getVersion(DWORD addr, int* ver, DWORD v109b, DWORD v109d, DWORD v110, DWORD v111, DWORD v111b, DWORD v112, DWORD v113c, int version, const char * filename)
-{
-	log_msg("version of %s\t", filename);
-
-	if (version >= V113d) {
-		*ver = version;
-		log_msg("%s\n", GetVersionString(version));
-	} else if (addr==v109b) {
-		*ver = V109b;
-		log_msg("1.09b\n");
-	} else if (addr==v109d) {
-		*ver = V109d;
-		log_msg("1.09d\n");
-	} else if (addr==v110) {
-		*ver = V110;
-		log_msg("1.10\n");
-	} else if (addr==v111) {
-		*ver = V111;
-		log_msg("1.11\n");
-	} else if (addr==v111b) {
-		*ver = V111b;
-		log_msg("1.11b\n");
-	} else if (addr==v112) {
-		*ver = V112;
-		log_msg("1.12\n");
-	} else if (addr==v113c) {
-		*ver = V113c;
-		log_msg("1.13c\n");
-	} else {
-		*ver = V113d;
-		log_msg("unknow, try with 1.13d\n");
-	}
-}
-#define GET_VERSION(F,X,A,B,C,D,E,G,H,V) getVersion(*(DWORD*)(offset_##F + 0x##X), &version_##F, 0x##A, 0x##B, 0x##C, 0x##D, 0x##E, 0x##G, 0x##H, V, S_##F)
-bool initD2version()
-{
-	log_msg("***** Get Game.exe version *****\n");
-	int version = GetD2Version();
-	log_msg("Game.exe version : %i (%s)\n", version, GetVersionString(version));
-
-	log_msg("***** Get dll versions *****\n");
-
-//GET_VERSION(SmackW32
-	GET_VERSION(D2Common,	10CA,	A1E86FDC, B1E86FDC, 72D03B42, F883057E, 16746AC6, 00FE81C3, 74FE85DB, version);
-//GET_VERSION(ijl11
-	GET_VERSION(D2Gdi,		105,	B4000000, 0B210E00, E4000000, 48000401, 2F000401, 00000000, B7000401, version);
-	GET_VERSION(D2Win,		1699,	88686F8C, 84686F8C, D094686F, F0030000, 001435E8, 8B088F44, 0013F5E8, version);
-//GET_VERSION(D2sound
-//GET_VERSION(D2MCPCLI
-	GET_VERSION(D2Launch,	109A,	81E8526F, 01E8526F, 85E8526F, 247C8B00, 00FC6583, 15FF0424, E850E045, version);
-	GET_VERSION(D2gfx,		10D,	EB000000, 006FA700, 00000010, 2A000401, 19000401, 0B210E00, 00000000, version);
-	GET_VERSION(D2Client,	17F,	00000000, 14500000, 12500000, 0D814800, 0D812800, 0DA01000, 0DA03000, version);
-	GET_VERSION(D2Net,		16E1,	78B8A73C, 68B8A73C, 10244C8B, 5349E808, 5EA9E808, 105D8B72, 53B9E808, version);
-	GET_VERSION(D2Lang,		126D,	FC45048B, F445048B, 02C18313, C4830000, 00C6E045, 8B48408B, 0C75FF0C, version);
-//	GET_VERSION(D2Game,		1010,	D22A78A1, D22910A1, D43FB0A1, 03E8506F, 53E8506F, 89E8506F, 63E8506F, version);
-	GET_VERSION(D2Game,		1092,	18968BF1, 38968BF1, 28968BF1, F6335608, C690C5B9, 895FD713, 56535700, version);
-	GET_VERSION(D2CMP,		1359,	3C686FE0, 38686FE0, 8BF78B56, 4C880424, 07C71824, CCCCCCCC, C7000005, version);
-//GET_VERSION(Bnclient
-	GET_VERSION(Fog,		102,	D0000006, 10000001, 00000006, 000042E6, 00004302, 0000483C, 00004B95, version);
-	GET_VERSION(Storm,		1190,	19E85082, 59E85082, 13C103F6, 0474F685, 8B000321, 3B1074C9, 0D896404, version);
-
-	log_msg("\n\n");
-	return true;
 }
 //////////////////////////////////// EXPORTS FUNCTIONS ////////////////////////////////////
+
+
+extern "C" __declspec(dllexport) bool __stdcall Release()
+{
+	log_msg("\n***** ENDING DIABLO II *****\n\n" );
+
+	freeCustomLibraries();
+	freeD2Libraries();
+	return true;
+}
 
 extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 {
 	if (IniName) log_msg("* PlugY is called from D2mod.dll\n\n");
-	else log_msg("* PlugY is called from D2gfx.dll\n\n");
 
 	static int isInstalled = false;
 	if (isInstalled) return NULL;
 	isInstalled=true;
 
-	loadD2Libraries();
+	initD2modules();
 
-	if (!initD2version()) return NULL;
+	if (version_Game < V109 || version_Game > V113d)
+	{
+		log_box("PlugY isn't compatible with this version : %s", GetVersionString(version_Game));
+		Release();
+		exit(0);
+	}
 
-	if (!initD2functions()) return NULL;
+	initD2functions();
 
 	loadParameters();
 
@@ -552,17 +503,6 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 	active_logFile = active_logFile - 1;
 
 	return NULL;
-}
-
-
-
-extern "C" __declspec(dllexport) bool __stdcall Release()
-{
-	log_msg("\n***** ENDING DIABLO II *****\n\n" );
-
-	freeCustomLibraries();
-	freeD2Libraries();
-	return true;
 }
 
 /*================================= END OF FILE =================================*/
