@@ -11,6 +11,7 @@
 
 int active_DisplayItemLevel = false;
 DWORD nbPlayersCommandByDefault = 0;
+DWORD nbPlayersCommand = 0;
 int active_alwaysRegenMapInSP = false;
 int active_RunLODs = false;
 int active_AlwaysDisplayLifeMana = false;
@@ -185,15 +186,16 @@ void SendPlayersCommand()
 
 	DWORD info = *infoEnabledSendPlayersCommand;
 	if ((info != 0) && (info != 1) && (info != 6) && (info != 8)) return;
+	log_msg("SendPlayersCommand %u\n", nbPlayersCommand);
 
-	D2SetNbPlayers(nbPlayersCommandByDefault);
+	D2SetNbPlayers(nbPlayersCommand);
 
 	memset(&data,0,sizeof(data));
 	data.displayType=0x15;
 	data.un=1;
 	data.zero=0;//*(BYTE*)(offset_D2Client+0x112CFC); in 1.10
 	data.null=NULL;
-	sprintf(data.string, msgNBPlayersString, nbPlayersCommandByDefault);
+	sprintf(data.string, msgNBPlayersString, nbPlayersCommand);
 	D2SendMsgToAll((BYTE*)&data);
 }
 

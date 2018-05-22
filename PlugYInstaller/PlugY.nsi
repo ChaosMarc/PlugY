@@ -2,7 +2,7 @@
 ;	Modified by L'Autour.
 !include "MUI2.nsh"
 
-!define VERSION "11.01"
+!define VERSION "11.02"
 !define D2FILES "."
 !define NAME "PlugY, The Survival Kit"
 !define MOD_DIR "Mod PlugY"
@@ -61,9 +61,9 @@ LangString DESC_MENU_SHORTCUTS ${LANG_RUSSIAN} "Добавить ярлыки в главное меню."
 LangString DESC_UNINSTALLER ${LANG_ENGLISH} "Create a Windows uninstall program.$\nAdding registry keys in Windows."
 LangString DESC_UNINSTALLER ${LANG_FRENCH} "Crйe un programme Windows de dйsinstallation.$\nAjoute des clйs de registres dans Windows."
 LangString DESC_UNINSTALLER ${LANG_RUSSIAN} "Создать в Windows деинстллятор программы.$\nДобавляет ключи реестра в Windows."
-LangString DESC_PATCH_D2GFX ${LANG_ENGLISH} "D2gfx.dll patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
-LangString DESC_PATCH_D2GFX ${LANG_FRENCH} "D2gfx.dll patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
-LangString DESC_PATCH_D2GFX ${LANG_RUSSIAN} "Применить патч к D2gfx.dll для запуска PlugY без PlugY.exe. Подробнее смотреть в файле Readme."
+LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
+LangString DESC_PATCH_FILE ${LANG_FRENCH} "Patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
+LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "Применить патч для запуска PlugY без PlugY.exe. Подробнее смотреть в файле Readme."
 LangString SECTION_NAME_CORE ${LANG_ENGLISH} "${NAME} (required)"
 LangString SECTION_NAME_CORE ${LANG_FRENCH} "${NAME} (nйcessaire)"
 LangString SECTION_NAME_CORE ${LANG_RUSSIAN} "${NAME} (требуется)"
@@ -76,9 +76,9 @@ LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_RUSSIAN} "Ярлыки в в главном 
 LangString SECTION_NAME_UNINSTALLER ${LANG_ENGLISH} "Uninstaller (add keys registers)"
 LangString SECTION_NAME_UNINSTALLER ${LANG_FRENCH} "Dй-installeur (ajoute clйs de registre)"
 LangString SECTION_NAME_UNINSTALLER ${LANG_RUSSIAN} "Деинсталлятор (добавляет ключи реестра)"
-LangString SECTION_PATCH_D2GFX ${LANG_ENGLISH} "D2gfx.dll Patcher (advanced user only)"
-LangString SECTION_PATCH_D2GFX ${LANG_FRENCH} "Patcheur de D2gfx.dll (utilisateur avancй uniquement)"
-LangString SECTION_PATCH_D2GFX ${LANG_RUSSIAN} "Патч для D2gfx.dll Patcher (для опытных пользователей)"
+LangString SECTION_PATCH_FILE ${LANG_ENGLISH} "File Patcher (advanced user only)"
+LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de fichier (utilisateur avancй uniquement)"
+LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "Патч для Patcher (для опытных пользователей)"
 
 LangString README_FILENAME ${LANG_ENGLISH} "PlugY_The_Survival_Kit_-_Readme.txt"
 LangString README_FILENAME ${LANG_FRENCH} "PlugY_The_Survival_Kit_-_LisezMoi.txt"
@@ -222,10 +222,10 @@ Section $(SECTION_NAME_UNINSTALLER) Uninstaller
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "NoRepair" 1
 SectionEnd
 
-Section $(SECTION_PATCH_D2GFX) PatchD2gfx
+Section $(SECTION_PATCH_FILE) PatchFile
   SetOutPath $D2Path
-  File "${D2FILES}\PatchD2gfxDll.exe"
-  File "${D2FILES}\RestoreD2gfxDll.exe"
+  File "${D2FILES}\PatchD2File.exe"
+  File "${D2FILES}\RestoreD2File.exe"
 SectionEnd
 
 ;--------------------------------
@@ -242,8 +242,8 @@ Section "Uninstall" Uninstall
 
   ; Remove files and uninstaller
   Delete "$D2Path\PlugY.dll"
-  Delete "$D2Path\PatchD2gfxDll.exe"
-  Delete "$D2Path\RestoreD2gfxDll.exe"
+  Delete "$D2Path\PatchD2File.exe"
+  Delete "$D2Path\RestoreD2File.exe"
   Delete "$INSTDIR\PlugY.exe"
   Delete "$INSTDIR\PlugY.log"
   Delete "$INSTDIR\BnetLog.txt"
@@ -273,7 +273,7 @@ SectionEnd
   !insertmacro MUI_DESCRIPTION_TEXT "${Core}" $(DESC_CORE)
   !insertmacro MUI_DESCRIPTION_TEXT "${DesktopShortcuts}" $(DESC_DESKTOP_SHORTCUTS)
   !insertmacro MUI_DESCRIPTION_TEXT "${MenuShortcuts}" $(DESC_MENU_SHORTCUTS)
-  !insertmacro MUI_DESCRIPTION_TEXT "${PatchD2gfx}" $(DESC_PATCH_D2GFX)
+  !insertmacro MUI_DESCRIPTION_TEXT "${PatchFile}" $(DESC_PATCH_FILE)
   !insertmacro MUI_DESCRIPTION_TEXT "${Uninstaller}" $(DESC_UNINSTALLER)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 

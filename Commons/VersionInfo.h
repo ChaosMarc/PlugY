@@ -6,6 +6,8 @@
 =================================================================*/
 #pragma once
 
+#include <windows.h>
+
 enum eGameVersion
 {
 	UNKNOW = -1,
@@ -29,6 +31,6 @@ enum eGameVersion
 
 const char* GetVersionString(int version);
 eGameVersion GetD2Version(char* gamePath);
-eGameVersion GetD2Version();
+eGameVersion GetD2Version(HMODULE hModule);
 
 ///////////////////////// END OF FILE ///////////////////////

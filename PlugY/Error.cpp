@@ -26,7 +26,7 @@ void log_initfile()
 	_getcwd( log_file, MAX_PATH );
 	if( log_file[strlen(log_file)] != '\\')
 		strcat(log_file, "\\");
-	strcat(log_file, LOG_FILE);
+	strcat(log_file, "PlugY.log");
 	
 	FILE* lLog = fopen( log_file, "w" );
 	

@@ -6,9 +6,7 @@
 =================================================================*/
 #pragma once
 
-#define PLUGY_VERSION "11.01"
-
-#define LOG_FILE "PlugY.log"
+#define PLUGY_VERSION "11.02"
 
 enum TargetMod
 {

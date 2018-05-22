@@ -23,7 +23,7 @@ extern int posXPreviousBtn,posYPreviousBtn,posXNextBtn,posYNextBtn,posXSharedBtn
 
 void toggleToSharedStash(Unit* ptChar);
 void toggleToSelfStash(Unit* ptChar);
-void setCurrentStashIndex(Unit* ptChar, bool isIndex);
+void setCurrentStashIndex(Unit* ptChar, int index);
 void selectPreviousStash(Unit* ptChar);
 void selectNextStash(Unit* ptChar);
 void selectPreviousIndexStash(Unit* ptChar);
@@ -35,7 +35,7 @@ void selectNextIndex2Stash(Unit* ptChar);
 void swapStash(Unit* ptChar, DWORD page, bool toggle);
 void renameCurrentStash(Unit* ptChar, char* name);
 void insertStash(Unit* ptChar);
-bool deleteStash(Unit* ptChar);
+bool deleteStash(Unit* ptChar, bool isClient);
 
 void selectStash(Unit* ptChar, Stash* newStash);
 void setSelectedStashClient(DWORD stashId, DWORD stashFlags, DWORD flags, bool bOnlyItems);

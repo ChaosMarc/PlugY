@@ -34,8 +34,9 @@ int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
 		case US_UNASSIGN_VIT_POINTS :	UnassignVitPoints( ptChar ); return 1;
 		case US_UNASSIGN_SKILLS :		UnassignAllSkillsPoints( ptChar ); return 1;
 
-		case US_SET_INDEX:				setCurrentStashIndex(ptChar, true); return 1;
-		case US_RESET_INDEX:			setCurrentStashIndex(ptChar, false); return 1;
+		case US_SET_INDEX:				setCurrentStashIndex(ptChar, 1); return 1;
+		case US_SET_MAIN_INDEX:			setCurrentStashIndex(ptChar, 2); return 1;
+		case US_RESET_INDEX:			setCurrentStashIndex(ptChar, 0); return 1;
 		case US_SELECT_PREVIOUS :		selectPreviousStash( ptChar ); return 1;
 		case US_SELECT_NEXT :			selectNextStash( ptChar ); return 1;
 		case US_SELECT_SELF :			if (active_sharedStash) toggleToSelfStash( ptChar ); return 1;
@@ -46,10 +47,10 @@ int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
 		case US_SELECT_NEXT2 :			selectNext2Stash( ptChar ); return 1;
 		case US_SELECT_PREVIOUS_INDEX2:	selectPreviousIndex2Stash( ptChar ); return 1;
 		case US_SELECT_NEXT_INDEX2 :	selectNextIndex2Stash( ptChar ); return 1;
-		case US_INSERT_PAGE:			insertStash(ptChar); return 1;
-		case US_DELETE_PAGE:			deleteStash(ptChar); return 1;
+		case US_INSERT_PAGE:			insertStash(ptChar); selectNextStash(ptChar); return 1;
+		case US_DELETE_PAGE:			deleteStash(ptChar, false); return 1;
 
-		case US_SAVE :				savePlayers( ptChar ); return 1;
+		case US_SAVE :					savePlayers( ptChar ); return 1;
 
 		case US_MAXGOLD :				maxGold(ptChar); return 1;
 		case US_PUTGOLD :				putGold(ptChar, 0); return 1;

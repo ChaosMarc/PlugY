@@ -160,7 +160,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy &quot;$(TargetPath)&quot; &quot;..\PlugYInstaller\PlugY.exe&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;..\PlugYInstaller\PlugY.exe&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

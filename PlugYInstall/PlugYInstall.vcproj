@@ -159,7 +159,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy &quot;$(TargetPath)&quot; &quot;..\PlugYInstaller\PatchD2gfxDll.exe&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;..\PlugYInstaller\PatchD2gfxDll.exe&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
@@ -235,7 +235,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy &quot;$(TargetPath)&quot; &quot;..\PlugYInstaller\RestoreD2gfxDll.exe&quot;"
+				CommandLine="copy &quot;$(TargetPath)&quot; &quot;..\PlugYInstaller\RestoreD2gfxDll.exe&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>

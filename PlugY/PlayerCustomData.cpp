@@ -72,11 +72,9 @@ void STDCALL updateClientPlayerOnLoading(Unit* ptChar)
 	log_msg("--- Start updateClientPlayerOnLoading ---\n");
 	if (PCGame->isLODGame)
 	{
-		//selectStash(ptChar, openSharedStashOnLoading ? PCPY->sharedStash : PCPY->selfStash);
-		if (openSharedStashOnLoading)
-			toggleToSharedStash(ptChar);
-		else
-			toggleToSelfStash(ptChar);
+		PCPY->showSharedStash = openSharedStashOnLoading;
+		selectStash(ptChar, openSharedStashOnLoading ? PCPY->sharedStash : PCPY->selfStash);
+
 		log_msg("End update client on loading.\n\n");
 	}
 	updateClient(ptChar, UC_SHARED_GOLD, PCPY->sharedGold, 0, 0);

@@ -109,6 +109,6 @@ void __inline fillRect(DWORD x, DWORD y, DWORD Width, DWORD Height, DWORD color,
 #define ptClientChar (*ptptClientChar)
 //#define CurrentNPCNum (*ptCurrentNPCNum)
 
-bool initD2functions();
+void initD2functions();
 
 /*================================= END OF FILE =================================*/
