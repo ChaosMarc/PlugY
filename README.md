@@ -49,4 +49,4 @@ Each features can be turned on/off via PlugY.ini
 	* /listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
 	
 ## Contribute
-If you want to update the translations please use the [POEditor project](https://poeditor.com/projects/view?id=343405) and create a bug-ticket nofifying me that you have done so. Please do not edit the LocalizedStrings.ini directly. If you absolutely don't want to use POEditor, edit the json files found at [PlugYInstaller/PlugY/translations](https://github.com/ChaosMarc/PlugY/tree/master/PlugYInstaller/PlugY/translations)
+If you want to update the translations please use the [POEditor project](https://poeditor.com/join/project/VnO1SKslPV) and create a bug-ticket nofifying me that you have done so. Please do not edit the LocalizedStrings.ini directly. If you absolutely don't want to use POEditor, edit the json files found at [PlugYInstaller/PlugY/translations](https://github.com/ChaosMarc/PlugY/tree/master/PlugYInstaller/PlugY/translations)
