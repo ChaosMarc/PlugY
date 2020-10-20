@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio
+Release
+Debug
+.vs
+*.user
