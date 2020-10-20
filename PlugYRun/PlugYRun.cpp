@@ -418,25 +418,31 @@ bool getRegistryD2Directory(LPSTR buf, DWORD bufsize)
   return true;
   }
 
-bool launchNormal(LPSTR commandLine, LPSTR currentDirectory)
+bool launchNormal(LPSTR application, LPSTR commandLine, LPSTR currentDirectory)
   {
+  debug_msg("Entering function launchNormal\n");
+  debug_msg("commandLine,    = %s\n", commandLine);
+  debug_msg("application = %s\n", application);
+  debug_msg("currentDirectory = %s\n", currentDirectory);
+
   STARTUPINFO si;
   PROCESS_INFORMATION pi;
   ZeroMemory(&si, sizeof(si));
   si.cb = sizeof(si);
   ZeroMemory(&pi, sizeof(pi));
-  BOOL success = CreateProcess(NULL, commandLine, NULL, NULL, false, 0, NULL, currentDirectory, &si, &pi);//DEBUG_ONLY_THIS_PROCESS
+  BOOL success = CreateProcess(application, commandLine, NULL, NULL, false, 0, NULL, currentDirectory, &si, &pi);//DEBUG_ONLY_THIS_PROCESS
+  debug_msg("Leaving function launchNormal with return value %d\n", success);
   return success ? true : false;
   }
 
-bool launchGame98(LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, eGameVersion version)
+bool launchGame98(LPSTR application, LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, eGameVersion version)
   {
   STARTUPINFO si;
   PROCESS_INFORMATION pi;
   ZeroMemory(&si, sizeof(si));
   si.cb = sizeof(si);
   ZeroMemory(&pi, sizeof(pi));
-  BOOL success = CreateProcess(0, commandLine, 0, 0, false, 0, 0, currentDirectory, &si, &pi);//DEBUG_ONLY_THIS_PROCESS
+  BOOL success = CreateProcess(application, commandLine, 0, 0, false, 0, 0, currentDirectory, &si, &pi);//DEBUG_ONLY_THIS_PROCESS
   if (!success) return false;
   DWORD ret;
 
@@ -471,14 +477,14 @@ bool launchGame98(LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, 
   return false;
   }
 
-bool launchGameXP(LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, eGameVersion version)
+bool launchGameXP(LPSTR application, LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, eGameVersion version)
   {
   STARTUPINFO si;
   PROCESS_INFORMATION pi;
   ZeroMemory(&si, sizeof(si));
   si.cb = sizeof(si);
   ZeroMemory(&pi, sizeof(pi));
-  BOOL success = CreateProcess(0, commandLine, 0, 0, false, DEBUG_PROCESS, 0, currentDirectory, &si, &pi);//DEBUG_ONLY_THIS_PROCESS
+  BOOL success = CreateProcess(application, commandLine, 0, 0, false, DEBUG_PROCESS, 0, currentDirectory, &si, &pi);//DEBUG_ONLY_THIS_PROCESS
   if (!success) return false;
   DEBUG_EVENT DebugEvent;
   DWORD status;
@@ -536,53 +542,64 @@ int APIENTRY WinMain(
   __in int nShowCmd
 )
   {
-  char currrentDirectory[MAX_PATH];
+  //char currrentDirectory[MAX_PATH];
+  char d2Directory[MAX_PATH];
   char iniFileName[MAX_PATH + sizeof(INIFILE) - 1];
+  char application[MAX_PATH + sizeof(GAMEFILE) + 200];
   char command[MAX_PATH + sizeof(GAMEFILE) + 200];
   eGameVersion version;
 
   // Get Current Directory.
-  if (!GetCurrentDirectory(MAX_PATH - 1, currrentDirectory))
-    assertion("Current directory not found");
+  //if (!GetCurrentDirectory(MAX_PATH - 1, currrentDirectory))
+   //assertion("Current directory not found");
 
-  int len = strlen(currrentDirectory);
-  if (len == 0)
-    assertion("Current directory not found");
+  //int len = strlen(currrentDirectory);
+  //if (len == 0)
+    //assertion("Current directory not found");
 
-  if (currrentDirectory[len - 1] != '\\')
-    {
-    currrentDirectory[len++] = '\\';
-    currrentDirectory[len] = NULL;
-    }
+  //if (currrentDirectory[len - 1] != '\\')
+    //{
+    //currrentDirectory[len++] = '\\';
+    //currrentDirectory[len] = NULL;
+    //}
 
   // Get ini full path name.
-  strcpy(iniFileName, currrentDirectory);
-  strcat(iniFileName, INIFILE);
+  //strcpy(iniFileName, currrentDirectory);
+  //strcat(iniFileName, INIFILE);
 
   // Get game.exe path.
-  strcpy(command, currrentDirectory);
-  strcat(command, GAMEFILE);
+  //strcpy(command, currrentDirectory);
+  //strcat(command, GAMEFILE);
+
+  //if (GetFileAttributes(command) == INVALID_FILE_ATTRIBUTES)
+    //{
+  if (!getRegistryD2Directory(command, MAX_PATH - sizeof(GAMEFILE)))
+    {
+    assertion("D2 install path not found.");
+    return 1;
+    }
+  debug_msg("command from registry,    = %s\n", command);
+
+  strcpy(d2Directory, command);  // Set Diablo II directory
+  strcpy(iniFileName, d2Directory);
+  strcat(iniFileName, INIFILE);
+
+  strcat(command, GAMEFILE); // Create Game.exe path
+
+  strcpy(application, command);  // Copy path to application
 
   if (GetFileAttributes(command) == INVALID_FILE_ATTRIBUTES)
     {
-    if (!getRegistryD2Directory(command, MAX_PATH - sizeof(GAMEFILE)))
-      {
-      assertion("D2 install path not found.");
-      return 1;
-      }
-    strcat(command, GAMEFILE);
-    if (GetFileAttributes(command) == INVALID_FILE_ATTRIBUTES)
-      {
-      assertion("Game.exe not found.");
-      return 1;
-      }
+    assertion("Game.exe not found.");
+    return 1;
     }
+  //}
 
-  // Get Game.exe version.
+// Get Game.exe version.
   version = GetD2Version(command);
 
   // Add params.
-  len = strlen(command);
+  int len = strlen(command);
   int windowed = GetPrivateProfileInt(WINDOWED, ACTIVE_WINDOWED, 0, iniFileName);
   if (windowed)
     {
@@ -606,10 +623,17 @@ int APIENTRY WinMain(
   strcat(command, " ");
   GetPrivateProfileString(LAUNCHING, PARAM, NULL, command + len, sizeof(command) - len, iniFileName);
 
+  debug_msg("command,    = %s\n", command);
+  debug_msg("application = %s\n", application);
+  debug_msg("d2Directory = %s\n", d2Directory);
+
   // Check if PlugY must be started.
   char libraryName[50];
   if (!GetPrivateProfileString(LAUNCHING, LIBRARY_NAME, "", libraryName, 50, iniFileName) || !libraryName[0])
-    return !launchNormal(command, currrentDirectory);
+    {
+    debug_msg("Launching plugy in normal mode");
+    return !launchNormal(application, command, d2Directory);
+    }
 
   // Check version
   if (version < V107 || version > V114d)
@@ -621,9 +645,9 @@ int APIENTRY WinMain(
     {
     debugActiveProcessStop = (tDebugActiveProcessStop)GetProcAddress(module, "DebugActiveProcessStop");
     if (debugActiveProcessStop)
-      return !launchGameXP(command, currrentDirectory, libraryName, version);
+      return !launchGameXP(application, command, d2Directory, libraryName, version);
     }
-  return !launchGame98(command, currrentDirectory, libraryName, version);
+  return !launchGame98(application, command, d2Directory, libraryName, version);
   }
 
 ///////////////////////// END OF FILE ///////////////////////
