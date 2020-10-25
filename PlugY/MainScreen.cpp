@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
     Print PlugY version on screen.
 
@@ -34,6 +35,30 @@ void STDCALL printPlugYVersion(void** childrens, DWORD* sgnNumChildren)
 	}
 }
 
+void STDCALL printPlugYVersion114()
+{
+    if (active_Windowed)
+        SetWindowedOptions();
+    if (active_PrintPlugYVersion)
+    {
+        char buf[20];
+        void* textbox = D2CreateTextBox(newTextBoxData);
+        void** childrens = (void**)0x779350;
+        DWORD* sgnNumChildren = (DWORD*)0x779944;
+        childrens[*sgnNumChildren] = textbox;
+        d2_assert((*sgnNumChildren)++ >= 40, "sgnNumChildren < MAX_CHILDREN", __FILE__, __LINE__);
+        sprintf(buf, "PlugY %s", PLUGY_VERSION);
+        D2PrintLineOnTextBox(textbox, buf, colorOfPlugYVersion);
+    }
+}
+
+FCT_ASM( caller_printPlugYVersion114 )
+  POP ESI
+  CALL printPlugYVersion114
+  MOV ECX, 0x115
+  JMP ESI
+}}
+
 FCT_ASM ( caller_printPlugYVersion )
 	POP ESI
 	PUSH DWORD PTR [ESI+2]
@@ -51,16 +76,22 @@ void Install_PrintPlugYVersion()
 
 	log_msg("Patch D2Launch to print PlugY version. (PrintPlugYVersion)\n");
 
-	// Print PlugY version.
-	mem_seek R7(D2Launch, 7F5D, 7F7D, 9639, 117C7, 178A7, 16AF7, 18061, 10A11);
-	MEMJ_REF4( D2CreateTextBox, caller_printPlugYVersion);
-	//6FA19638  |. E8 1BED0000    CALL <JMP.&D2Win.#10017>
-	//6FA517C6  |. E8 6F81FFFF    CALL <JMP.&D2Win.#10147>
-	//6FA578A6  |. E8 D71FFFFF    CALL <JMP.&D2Win.#10113>
-	//6FA56B1F  |. E8 1A2EFFFF    CALL <JMP.&D2Win.#10098>
-	//6FA56AF6  |. E8 432EFFFF    CALL <JMP.&D2Win.#10098>
-	//6FA58060  |. E8 ED18FFFF    CALL <JMP.&D2Win.#10098>
-	//6FA50A10  |. E8 218FFFFF    CALL <JMP.&D2Win.#10164>
+    if (version_D2Launch == V114d) {
+        mem_seek R8(D2Launch, 7F5D, 7F7D, 9639, 117C7, 178A7, 16AF7, 18061, 10A11, 33798);
+        memt_byte(0xB9, 0xE8);
+        MEMT_REF4(0x00000115, caller_printPlugYVersion114);
+    } else {
+        // Print PlugY version.
+        mem_seek R8(D2Launch, 7F5D, 7F7D, 9639, 117C7, 178A7, 16AF7, 18061, 10A11, 10A11);
+        MEMJ_REF4(D2CreateTextBox, caller_printPlugYVersion);
+        //6FA19638  |. E8 1BED0000    CALL <JMP.&D2Win.#10017>
+        //6FA517C6  |. E8 6F81FFFF    CALL <JMP.&D2Win.#10147>
+        //6FA578A6  |. E8 D71FFFFF    CALL <JMP.&D2Win.#10113>
+        //6FA56B1F  |. E8 1A2EFFFF    CALL <JMP.&D2Win.#10098>
+        //6FA56AF6  |. E8 432EFFFF    CALL <JMP.&D2Win.#10098>
+        //6FA58060  |. E8 ED18FFFF    CALL <JMP.&D2Win.#10098>
+        //6FA50A10  |. E8 218FFFFF    CALL <JMP.&D2Win.#10164>
+  }
 
 
 	log_msg("\n");
@@ -83,6 +114,12 @@ FCT_ASM ( caller_VersionChange_10 )
 	RETN
 }}
 
+FCT_ASM(caller_VersionChange_114)
+    MOV EDX, versionText
+    MOV ECX, ESI
+    RETN
+}}
+
 void Install_VersionChange()// BUG WITH 2MOD if D2Mod started before PlugY ????
 {
 	static int isInstalled = false;
@@ -96,9 +133,14 @@ void Install_VersionChange()// BUG WITH 2MOD if D2Mod started before PlugY ????
 
 
 	// Print LoD/Mod version.
-	if (version_D2Launch >= V110)
+    if (version_D2Launch == V114d) {
+        mem_seek R8(D2Launch, 00000, 00000, 9723, 1189B, 1797B, 16BCB, 18134, 10AE4, 337EA);//6FA19721-6FA10000
+        memt_byte(0x8D, 0xE8);	// CALL
+        MEMT_REF4(0xCE8BC055, caller_VersionChange_114);
+        //memt_byte(0xCE, 0x90);	// NOP
+    } else if (version_D2Launch >= V110)
 	{
-		mem_seek R7(D2Launch, 00000, 00000, 9723, 1189B, 1797B, 16BCB, 18134, 10AE4);//6FA19721-6FA10000
+		mem_seek R8(D2Launch, 00000, 00000, 9723, 1189B, 1797B, 16BCB, 18134, 10AE4, 10AE4);//6FA19721-6FA10000
 		memt_byte( 0x8D, 0xE8 );	// CALL
 		MEMT_REF4( 0x8B102454 , caller_VersionChange_10);
 		memt_byte( 0xCF, 0x90 );	// NOP
@@ -115,7 +157,7 @@ void Install_VersionChange()// BUG WITH 2MOD if D2Mod started before PlugY ????
 		//6FA50AE4  |. 8D5424 10      LEA EDX,DWORD PTR SS:[ESP+10]
 		//6FA50AE8  |. 8BCF           MOV ECX,EDI
 	} else {
-		mem_seek R7(D2Launch, 801B, 803B, 972A, 118A2, 17982, 16BD2, 1813B, 10AEB);
+		mem_seek R8(D2Launch, 801B, 803B, 972A, 118A2, 17982, 16BD2, 1813B, 10AEB, 10AEB);
 		MEMJ_REF4( D2PrintLineOnTextBox, versionChange);
 		//6FA19729  |. E8 88EB0000    CALL <JMP.&D2Win.#10046>
 		//6FA518A1  |. E8 267FFFFF    CALL <JMP.&D2Win.#10061>

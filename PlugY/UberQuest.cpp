@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Uber Quest Management.
 
@@ -314,6 +315,15 @@ void FASTCALL uberBaalIA(Game* ptGame, Unit* ptMonster, DWORD* ptData)
 	D2BaalIA(ptGame, ptMonster, ptData);
 }
 
+FCT_ASM ( caller_spawnUber )
+    PUSHAD
+    PUSH EDX
+    PUSH ECX
+    CALL spawnUber
+    POPAD
+    RETN
+}}
+
 void Install_UberQuest()
 {
 	static int isInstalled = false;
@@ -327,27 +337,41 @@ void Install_UberQuest()
 	DWORD oldProtection;
 
 	// open Red Portal
-	VirtualProtect((LPVOID)R7(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0, FA2C4), 8, PAGE_EXECUTE_READWRITE, &oldProtection);
-	mem_seek R7(D2Game, 0000, 0000, 0000, FA480, FA7B8, FA228, FA5F0, FA2C4);
-	MEMT_DWORD( D2OpenPandPortal , openPandPortal);
-	MEMT_DWORD( D2OpenPandFinalPortal , openPandFinalPortal);
+	VirtualProtect((LPVOID)R8(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0, FA2C4, 2E11D0), 8, PAGE_EXECUTE_READWRITE, &oldProtection);
+	mem_seek R8(D2Game, 0000, 0000, 0000, FA480, FA7B8, FA228, FA5F0, FA2C4, 2E11D0);
+    if (version_D2Game == V114d) {
+        MEMT_DWORD(0x00565A90, openPandPortal);
+        MEMT_DWORD(0x00565AA0, openPandFinalPortal);
+    } else {
+        MEMT_DWORD(D2OpenPandPortal, openPandPortal);
+        MEMT_DWORD(D2OpenPandFinalPortal, openPandFinalPortal);
+    }
 	//0201E357  |. FFD0           |CALL EAX
 	//01FA77E7  |. FFD0           |CALL EAX
 	//6FCF3CC7  |. FFD0           |CALL EAX
 	//6FC92437  |. FFD0           |CALL EAX
 	//6FCB7127  |. FFD0           |CALL EAX
-	VirtualProtect((LPVOID)R7(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0, FA2C4), 8, oldProtection, &oldProtection);
+	VirtualProtect((LPVOID)R8(D2Game,0,0,0,FA480,FA7B8, FA228, FA5F0, FA2C4, 2E11D0), 8, oldProtection, &oldProtection);
 
 
 	// manage uberIA (fct table at 0209E7E8)
-	VirtualProtect((LPVOID)(R7(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788, 10ED00) + 145*0x10), 0x30, PAGE_EXECUTE_READWRITE, &oldProtection);
-	mem_seek R7(D2Game, 0000, 0000, 0000, 10F100, 10F5E8, 10F870, 10F0A0, 10F618);
-	MEMT_DWORD( D2UberBaalIA , uberBaalIA);
-	mem_seek R7(D2Game, 0000, 0000, 0000, 10F110, 10F5F8, 10F880, 10F0B0, 10F628);
-	MEMT_DWORD( D2UberMephIA , uberMephIA);
-	mem_seek R7(D2Game, 0000, 0000, 0000, 10F120, 10F608, 10F890, 10F0C0, 10F638);
-	MEMT_DWORD( D2UberDiabloIA , uberDiabloIA);
-	VirtualProtect((LPVOID)(R7(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788, 10ED00) + 145*0x10), 0x30, oldProtection, &oldProtection);
+	VirtualProtect((LPVOID)(R8(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788, 10ED00, 33CA18) + 145*0x10), 0x30, PAGE_EXECUTE_READWRITE, &oldProtection);
+    if (version_D2Game == V114d) {
+        mem_seek R8(D2Game, 0000, 0000, 0000, 10F100, 10F5E8, 10F870, 10F0A0, 10F618, 33D330);
+        MEMT_DWORD(0x005FD200, uberBaalIA);
+        mem_seek R8(D2Game, 0000, 0000, 0000, 10F110, 10F5F8, 10F880, 10F0B0, 10F628, 33D340);
+        MEMT_DWORD(0x005F81C0, uberMephIA);
+        mem_seek R8(D2Game, 0000, 0000, 0000, 10F120, 10F608, 10F890, 10F0C0, 10F638, 33D350);
+        MEMT_DWORD(0x005E9DF0, uberDiabloIA);
+    } else {
+        mem_seek R8(D2Game, 0000, 0000, 0000, 10F100, 10F5E8, 10F870, 10F0A0, 10F618, 33D330);
+        MEMT_DWORD(D2UberBaalIA, uberBaalIA);
+        mem_seek R8(D2Game, 0000, 0000, 0000, 10F110, 10F5F8, 10F880, 10F0B0, 10F628, 33D340);
+        MEMT_DWORD(D2UberMephIA, uberMephIA);
+        mem_seek R8(D2Game, 0000, 0000, 0000, 10F120, 10F608, 10F890, 10F0C0, 10F638, 33D350);
+        MEMT_DWORD(D2UberDiabloIA, uberDiabloIA);
+    }
+	VirtualProtect((LPVOID)(R8(D2Game,0,0,0,10E7E8,10ECD0,10EF58,10E788, 10ED00, 33CA18) + 145*0x10), 0x30, oldProtection, &oldProtection);
 	//0202ADA7  |> B8 E8E70902    MOV EAX,D2Game.0209E7E8
 	//01FD2BE7  |> B8 D0EC0702    MOV EAX,D2Game.0207ECD0
 	//6FC3B597  |> B8 58EFD26F    MOV EAX,D2Game.6FD2EF58
@@ -359,8 +383,12 @@ void Install_UberQuest()
 //	MEMJ_REF4( D2WarpPlayer , spawnUber);
 	//02028DAC  |. E8 491CF7FF    CALL <JMP.&D2Common.#10872>
 
-	mem_seek R7(D2Game, 0000, 0000, 0000, E26E2, E6B52, A850B, 2CCAB, BE9AB);
-	MEMC_REF4( D2Game235C0 , spawnUber);
+	mem_seek R8(D2Game, 0000, 0000, 0000, E26E2, E6B52, A850B, 2CCAB, BE9AB, 12D1DC);
+    if (version_D2Game == V114d) {
+        MEMT_REF4(0x00015960, caller_spawnUber);
+    } else {
+        MEMC_REF4(D2Game235C0, spawnUber);
+    }
 	//020726E1  |. E8 2A46FFFF    ||CALL D2Game.02066D10
 	//02056B51  |. E8 6ACAF3FF    ||CALL D2Game.01F935C0
 	//6FCC850A  |. E8 014FF6FF    ||CALL D2Game.6FC2D410

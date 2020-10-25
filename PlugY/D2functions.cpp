@@ -1,6 +1,7 @@
 /*================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
     This file implements some common and useful
     function related to some Diablo II mechanisms.
@@ -16,9 +17,9 @@ s_shifting shifting;
 #define E2S(F, A, R, N, P)	T##N N;
 #define E2F(F, A, R, N, P)	T##N N;
 #define E2C(F, A, T, N)		T* pt##N;
-#define F7(X, Z, A,B,C,D,E,F,G,H, R, N, P) T##N N;
-#define A7(X, Z, A,B,C,D,E,F,G,H, R, N, P) T##N N;
-#define C7(Z, A,B,C,D,E,F,G,H, T, N)       T* pt##N;
+#define F8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) T##N N;
+#define A8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) T##N N;
+#define C8(Z, A,B,C,D,E,F,G,H,I, T, N)       T* pt##N;
 
 #include "../Commons/D2Funcs.h"
 DataTables* SgptDataTables;
@@ -34,9 +35,9 @@ DataTables* SgptDataTables;
 ////E2F(D2Client,0,	void,		D2SendToServer13,(BYTE type, DWORD p1, DWORD p2, DWORD p3));//6FAADA70
 //E2F(D2Game,0,	NetClient*,	D2GetClient, (Unit* ptUnit, char* lpszErrFile, DWORD ErrLine));//6FCBC2E0
 //E2F(D2Client,0,	void,		D2CleanStatMouseUp, ());//6FAABF60
-#undef F7
-#undef A7
-#undef C7
+#undef F8
+#undef A8
+#undef C8
 #undef D2S
 #undef D2F
 #undef E2S
@@ -80,6 +81,8 @@ TD2GetItemStatCostBIN		 V2GetItemStatCostBIN;
 TD2SendPacket				 V2SendPacket;
 TD2LoadInventory			 V2LoadInventory;
 TD2SaveGame					 V2SaveGame;
+TD2LinkPortal					 V2LinkPortal;
+TD2Game235C0					 V2Game235C0;
 
 //DWORD* ptNbStatDesc
 //DWORD* ptStatDescTable;
@@ -282,6 +285,45 @@ continue_compileTxtFile:
 	JMP ECX
 }}
 
+__declspec(naked) void* STDCALL compileTxtFile_114(DWORD unused, const char* filename, BINField* ptFields, DWORD* ptRecordCount, DWORD recordLength) {
+    _asm {
+        SUB ESP, 0x20C
+        //	MOV EAX,DWORD PTR DS:[6FDF1464]
+        PUSH EBX
+        PUSH EBP
+        PUSH ESI
+        PUSH EDI
+        MOV DWORD PTR SS : [ESP + 0x10], 0
+        MOV EBX, DWORD PTR SS : [ESP + 0x224]
+
+        PUSH EBX
+        LEA EAX, DWORD PTR SS : [ESP + 0x1A]
+        PUSH EAX
+        CALL DWORD PTR SS : [wsprintf]
+        MOV EDX, DWORD PTR SS : [ESP + 0x228]
+        ADD ESP, 8
+        LEA EDX, DWORD PTR SS : [ESP + 0xE]
+        PUSH EDX
+        PUSH EAX
+        LEA EDX, DWORD PTR SS : [ESP + 0x20]
+        CALL D2ReadFile
+        TEST EAX, EAX
+        JNZ continue_compileTxtFile
+        PUSH __LINE__
+        CALL D2GetInstructionPointer
+        PUSH EAX
+        PUSH S_errorReadTxtFile
+        CALL D2FogAssert
+        ADD ESP, 0xC
+        PUSH - 1
+        CALL exit
+        continue_compileTxtFile :
+        MOV ECX, D2CompileTxtFile
+        ADD ECX, 0x1EC
+        JMP ECX
+    }
+}
+
 __declspec(naked) void* STDCALL compileTxtFile_111(DWORD unused, const char* filename, BINField* ptFields, DWORD* ptRecordCount, DWORD recordLength)
 {_asm{
 	SUB ESP,0x20C
@@ -330,6 +372,14 @@ Unit* STDCALL	D2GetClientPlayer_111(){return ptClientChar;}
 DWORD *StatMouse1, *StatMouse2, *StatMouse3, *StatMouse4;
 void FASTCALL D2CleanStatMouseUp_111(){*StatMouse1=*StatMouse2=*StatMouse3=*StatMouse4=0;}
 
+FCT_ASM ( D2CleanStatMouseUp_114 )
+    MOV DWORD PTR DS : [StatMouse1], 0
+    MOV DWORD PTR DS : [StatMouse2], 0
+    MOV DWORD PTR DS : [StatMouse3], 0
+    MOV DWORD PTR DS : [StatMouse4], 0
+    RETN
+}}
+
 Unit* STDCALL	D2GetRealItem_111(Unit* ptItem){return ptItem;}
 /* 1.11 : sizememory : 0x104 (LoadBuySell)
 6FADA7F0  |. A1 48BDBC6F    MOV EAX,DWORD PTR DS:[6FBCBD48]
@@ -372,6 +422,14 @@ FCT_ASM ( D2LoadImage_111 )
 	RETN
 }}
 
+FCT_ASM( D2LoadImage_114 )
+    PUSH EDX
+    MOV EAX, ECX
+    CALL V2LoadImage
+    POP EDX
+    RETN
+}}
+
 const char* D2FreeImage_FILE = __FILE__;
 FCT_ASM ( D2FreeImage_111 )
 	PUSH ESI
@@ -410,6 +468,20 @@ FCT_ASM ( D2GetClient_111 )
 	RETN 4
 }}
 
+FCT_ASM( D2SetSkillBaseLevelOnClient_114 )
+    PUSH EBX
+    PUSH EBX
+    PUSH ESI
+    PUSH DWORD PTR SS : [ESP + 0x14]
+    PUSH DWORD PTR SS : [ESP + 0x14]
+    MOV EBX, DWORD PTR SS : [ESP + 0x14]
+    MOV EAX, ECX
+    MOV ESI, EDX
+    CALL V2SetSkillBaseLevelOnClient
+    POP ESI
+    POP EBX
+    RETN 0xC
+}}
 
 FCT_ASM ( D2SetSkillBaseLevelOnClient_111 )
 	PUSH EBX
@@ -435,6 +507,24 @@ FCT_ASM ( D2GetItemStatCostBIN_111 )
 	JMP V2GetItemStatCostBIN
 }}
 
+FCT_ASM( D2SendToServer3_114 )
+    PUSH EDI
+    PUSH ESI
+    PUSH EBX
+    PUSH ECX
+    MOV BYTE PTR SS : [ESP], CL
+    MOV WORD PTR SS : [ESP + 1], DX
+    MOV EDI, 3
+    LEA ECX, DWORD PTR SS : [ESP]
+    PUSH ECX
+    CALL D2SendToServerXX
+    POP ECX
+    POP EBX
+    POP ESI
+    POP EDI
+    RETN
+}}
+
 FCT_ASM ( D2SendToServer3_111 )
 	PUSH EBX
 	PUSH ECX
@@ -449,6 +539,23 @@ FCT_ASM ( D2SendToServer3_111 )
 	RETN
 }}
 
+FCT_ASM( D2PrintStat_114 )
+    PUSH ESI
+    PUSH EBX
+    PUSH ECX
+    MOV ESI, DWORD PTR SS : [ESP + 0x1C]
+    PUSH DWORD PTR SS : [ESP + 0x18]
+    PUSH DWORD PTR SS : [ESP + 0x18]
+    PUSH DWORD PTR SS : [ESP + 0x18]
+    PUSH EDX
+    PUSH ECX
+    CALL V2PrintStat
+    POP ECX
+    POP EBX
+    POP ESI
+    RETN 0x10
+}}
+
 FCT_ASM ( D2PrintStat_111 )
 	PUSH ESI
 	MOV ESI,DWORD PTR SS:[ESP+0x14]
@@ -460,6 +567,16 @@ FCT_ASM ( D2PrintStat_111 )
 	CALL V2PrintStat
 	POP ESI
 	RETN 0x10
+}}
+
+FCT_ASM(D2SendPacket_114)
+    PUSH EDI
+    PUSH DWORD PTR SS : [ESP + 8]
+	PUSH EDX
+	MOV EDI, ECX
+	CALL V2SendPacket
+    POP EDI
+    RETN 0x4
 }}
 
 FCT_ASM ( D2SendPacket_111 )
@@ -483,6 +600,13 @@ FCT_ASM ( D2CompileCubeInput_111 )
 	CALL V2CompileCubeInput
 	POP EBX
 	RETN 8
+}}
+
+FCT_ASM( D2CompileCubeInput_114 )
+    PUSH ECX
+    MOV EAX, EDX
+    CALL V2CompileCubeInput
+    RETN 8
 }}
 
 FCT_ASM ( D2CompileCubeOutput_111 )
@@ -529,6 +653,22 @@ FCT_ASM ( D2SpawnMonster_111b )
 	MOV ECX,DWORD PTR SS:[ESP+0x28]//superuniqueID
 	CALL V2SpawnMonster
 	RETN 0x18
+}}
+
+FCT_ASM( D2SpawnMonster_114 )
+    PUSH ECX
+    MOV EBX, DWORD PTR SS : [ESP + 0x18]
+    MOV ECX, DWORD PTR SS : [ESP + 0x14]
+    MOV DWORD PTR SS : [ESP + 0x18], ECX
+    MOV ECX, DWORD PTR SS : [ESP + 0x10]
+    MOV DWORD PTR SS : [ESP + 0x14], ECX
+    MOV ECX, DWORD PTR SS : [ESP + 0xC]
+    MOV DWORD PTR SS : [ESP + 0x10], ECX
+    MOV ECX, DWORD PTR SS : [ESP + 0x8]
+    MOV DWORD PTR SS : [ESP + 0xC], ECX
+    MOV DWORD PTR SS : [ESP + 0x8], EDX
+    POP ECX
+    JMP V2SpawnMonster
 }}
 
 FCT_ASM ( D2VerifIfNotCarry1_111 )
@@ -578,6 +718,10 @@ FCT_ASM ( D2SendToServer_1XX )
 	RETN 0xC
 }}
 
+FCT_ASM( D2GetGameByClientID_114 )
+    MOV ECX, DWORD PTR SS : [ESP + 0x4]
+    JMP V2GetGameByClientID
+}}
 
 FCT_ASM ( D2GetGameByClientID_1XX )
 	POP EAX
@@ -591,6 +735,36 @@ FCT_ASM ( D2SaveGame_1XX )
 	POP ECX
 	PUSH EAX
 	JMP V2SaveGame
+}}
+
+FCT_ASM( D2SetColorPopup_114 )
+    PUSH EDI
+    PUSH EDX
+    MOV EDI, ECX
+    CALL V2SetColorPopup
+    POP EDI
+    RETN
+}}
+
+FCT_ASM( D2LinkPortal_114 )
+    PUSH ECX
+    MOV ECX, DWORD PTR SS : [ESP + 0x8]
+    PUSH DWORD PTR SS : [ESP + 0x14]
+    PUSH DWORD PTR SS : [ESP + 0x14]
+    PUSH DWORD PTR SS : [ESP + 0x14]
+    CALL V2LinkPortal
+    POP ECX
+    RETN 0x10
+}}
+
+FCT_ASM( D2Game235C0_114 )
+    PUSH ECX
+    PUSH EDX
+    MOV ECX, DWORD PTR SS : [ESP + 0xC]
+    MOV EDX, DWORD PTR SS : [ESP + 0x10]
+    POP EDX
+    POP ECX
+    RETN 0x8
 }}
 
 #define SETFCTADDR(F, I, N) setFctAddr((DWORD*)&N, (HMODULE)offset_##F, (LPCSTR)I)
@@ -616,21 +790,24 @@ void initD2functions()
 	#define E2S(F, A, R, N, P)	N = (T##N)(offset_##F + 0x##A);
 	#define E2F(F, A, R, N, P)	N = (T##N)(offset_##F + 0x##A);
 	#define E2C(F, A, T, N)		pt##N = (T*)(offset_##F + 0x##A);
-	#define F7(X, Z, A,B,C,D,E,F,G,H, R, N, P) setFctAddr((DWORD*)&N, (HMODULE)offset_##Z, (LPCSTR)(version_##Z == V113d? H : (version_##Z == V113c? G : (version_##Z == V112? F : (version_##Z == V111b? E : (version_##Z == V111? D : (version_##Z == V110? C : (version_##Z == V109d? B : A))))))));
-	#define A7(X, Z, A,B,C,D,E,F,G,H, R, N, P) N = (T##N)R7(Z,A,B,C,D,E,F,G,H);
-	#define C7(Z, A,B,C,D,E,F,G,H, T, N)       pt##N = (T*)R7(Z,A,B,C,D,E,F,G,H);
+    #define F8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) if (version_##Z == V114d) { E2S(Z, I, 0, N, 0) } else { setFctAddr((DWORD*)&N, (HMODULE)offset_##Z, (LPCSTR)(version_##Z == V113d? H : (version_##Z == V113c? G : (version_##Z == V112? F : (version_##Z == V111b? E : (version_##Z == V111? D : (version_##Z == V110? C : (version_##Z == V109d? B : A)))))))); }
+	#define A8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) N = (T##N)R8(Z,A,B,C,D,E,F,G,H,I);
+	#define C8(Z, A,B,C,D,E,F,G,H,I, T, N)       pt##N = (T*)R8(Z,A,B,C,D,E,F,G,H,I);
 
 	#include "../Commons/D2Funcs.h"
-	SgptDataTables = *(DataTables**) R7(D2Common, 0000, 0000, 96A20, 9B74C, 9EE8C, 9B500, 99E1C, A33F0);
+    //D2FogMemAlloc = (TD2FogMemAlloc)(offset_D2Game + 0xB380);
+    //E2S(D2Game, B380, 0, D2FogMemAlloc, 0)
+    //return;
+	SgptDataTables = *(DataTables**) R8(D2Common, 0000, 0000, 96A20, 9B74C, 9EE8C, 9B500, 99E1C, A33F0, 344304);
 	if (version_D2Common < V110)
 	{
 		D2S(D2Common,10581,	CharStatsBIN*,		D2Common10581, (DWORD charID));//ONLY in 1.09
 		D2S(D2Common,10598,	ItemStatCostBIN*,	D2Common10598, (DWORD itemStatCostID));//ONLY in 1.09
 		D2S(D2Common,10673,	ItemTypesBIN*,		D2Common10673, (DWORD itemTypesID));//ONLY in 1.09
 	}
-	#undef F7
-	#undef A7
-	#undef C7
+	#undef F8
+	#undef A8
+	#undef C8
 	#undef D2S
 	#undef D2F
 	#undef E2S
@@ -642,7 +819,7 @@ void initD2functions()
 	//setImage = version_D2Common >= V111 ? setImage_111 : setImage_1XX;
 	//setFrame = version_D2Common >= V111 ? setFrame_111 : setFrame_1XX;
 	getDescStrPos = version_D2Common >= V110  ? getDescStrPos_10 : getDescStrPos_9;
-	compileTxtFile = version_D2Common >= V111 ? compileTxtFile_111 : version_D2Common == V110 ? compileTxtFile_10 : compileTxtFile_9;
+	compileTxtFile = version_D2Common == V114d ? compileTxtFile_114 : version_D2Common >= V111 ? compileTxtFile_111 : version_D2Common == V110 ? compileTxtFile_10 : compileTxtFile_9;
 
 
 	//////////////// SELECT RIGHT ADDR FUNCTION ////////////////
@@ -881,11 +1058,37 @@ void initD2functions()
 	V2TestPositionInRoom = D2TestPositionInRoom;
 	V2GetItemTypesBIN = D2GetItemTypesBIN;
 	V2SaveGame = D2SaveGame;
+	V2LinkPortal = D2LinkPortal;
+	V2Game235C0 = D2Game235C0;
 	//V2OpenNPCMenu = D2OpenNPCMenu;
 	//////////////// REDIRECT ON CUSTOM FUNCTIONS ////////////////
+  
+    if (version_D2Client == V114d) {
+        D2GetClientPlayer = D2GetClientPlayer_111;
+        D2GetClient = (TD2GetClient)D2GetClient_111;
+        D2LoadImage = (TD2LoadImage)D2LoadImage_114;
+        D2FreeImage = (TD2FreeImage)D2FreeImage_111;
+        D2isLODGame = D2isLODGame_111;
+        D2GetMouseX = D2GetMouseX_111;
+        D2GetMouseY = D2GetMouseY_111;
+        D2SendToServer3 = (TD2SendToServer3)D2SendToServer3_114;
+        D2SetSkillBaseLevelOnClient = (TD2SetSkillBaseLevelOnClient)D2SetSkillBaseLevelOnClient_114;
+        D2SendPacket = (TD2SendPacket)D2SendPacket_114;
+        D2GetGameByClientID = (TD2GetGameByClientID)D2GetGameByClientID_1XX;
+        D2SpawnMonster = (TD2SpawnMonster)D2SpawnMonster_114;
+        D2CompileCubeInput = (TD2CompileCubeInput)D2CompileCubeInput_114;
+        D2CleanStatMouseUp = (TD2CleanStatMouseUp)D2CleanStatMouseUp_114;
+        D2LinkPortal = (TD2LinkPortal)D2LinkPortal_114;
+        D2Game235C0 = (TD2Game235C0)D2Game235C0_114;
+        D2PrintStat = (TD2PrintStat)D2PrintStat_114;
+        D2SaveGame = (TD2SaveGame)D2SaveGame_1XX;
+        D2VerifIfNotCarry1 = (TD2VerifIfNotCarry1)D2VerifIfNotCarry1_111;
 
-	if ( version_D2Client >= V111 )
-	{
+        StatMouse1 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C004, 11C2F4, 11C040, 11C3DC, 11D224, A0650);
+        StatMouse2 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C008, 11C2F8, 11C044, 11C3E0, 11D228, A0654);
+        StatMouse3 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C020, 11C310, 11C05C, 11C3F8, 11D240, A0658);
+        StatMouse4 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C024, 11C314, 11C060, 11C3FC, 11D244, A065C);
+    } else if ( version_D2Client >= V111 ) {
 		D2SendMsgToAll = (TD2SendMsgToAll) D2SendMsgToAll_111;
 		D2SetColorPopup = (TD2SetColorPopup) D2SetColorPopup_111;
 		D2LoadImage = (TD2LoadImage) D2LoadImage_111;
@@ -915,10 +1118,10 @@ void initD2functions()
 		D2GetClientPlayer = D2GetClientPlayer_111;
 		D2GetRealItem = D2GetRealItem_111;
 		D2CleanStatMouseUp = D2CleanStatMouseUp_111;
-		StatMouse1 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C004, 11C2F4, 11C040, 11C3DC, 11D224);
-		StatMouse2 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C008, 11C2F8, 11C044, 11C3E0, 11D228);
-		StatMouse3 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C020, 11C310, 11C05C, 11C3F8, 11D240);
-		StatMouse4 = (DWORD*)R7(D2Client, 0000, 0000, 0000, 11C024, 11C314, 11C060, 11C3FC, 11D244);
+		StatMouse1 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C004, 11C2F4, 11C040, 11C3DC, 11D224, A0650);
+		StatMouse2 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C008, 11C2F8, 11C044, 11C3E0, 11D228, A0654);
+		StatMouse3 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C020, 11C310, 11C05C, 11C3F8, 11D240, A0658);
+		StatMouse4 = (DWORD*)R8(D2Client, 0000, 0000, 0000, 11C024, 11C314, 11C060, 11C3FC, 11D244, A065C);
 	} else {
 		D2SendToServer = (TD2SendToServer) D2SendToServer_1XX;
 		D2GetGameByClientID = (TD2GetGameByClientID) D2GetGameByClientID_1XX;
@@ -948,14 +1151,14 @@ void initD2functions()
 	//////////////// STRUCTURE MANAGEMENT ////////////////
 
 //	shifting.ptPYPlayerData = V7(D2Common,118,118,F4,F4,F4,F4,F4);
-	shifting.ptPYPlayerData = *(DWORD*)((DWORD)D2InitPlayerData + V7(D2Common,5D,5D,5D,49,49,49,49,49));
-	shifting.ptSpecificData = V7(D2Common,70,70,14,14,14,14,14,14);
-	shifting.ptGame = V7(D2Common,A4,A4,80,80,80,80,80,80);
-	shifting.ptClientGame = V7(D2Common,170,194,1A8,1A8,1A8,1A8,1A8,1A8);
-	shifting.ptInventory = V7(D2Common,84,84,60,60,60,60,60,60);
-	shifting.ptSkills = V7(D2Common,CC,CC,A8,A8,A8,A8,A8,A8);
-	shifting.ptImage = V7(D2Common,04,04,04,08,08,3C,34,34);
-	shifting.ptFrame = V7(D2Common,08,08,08,44,44,40,00,00);
+	shifting.ptPYPlayerData = *(DWORD*)((DWORD)D2InitPlayerData + V8(D2Common,5D,5D,5D,49,49,49,49,49,48));
+	shifting.ptSpecificData = V8(D2Common,70,70,14,14,14,14,14,14,14);
+	shifting.ptGame = V8(D2Common,A4,A4,80,80,80,80,80,80,80);
+	shifting.ptClientGame = V8(D2Common,170,194,1A8,1A8,1A8,1A8,1A8,1A8,1A8);
+	shifting.ptInventory = V8(D2Common,84,84,60,60,60,60,60,60,60);
+	shifting.ptSkills = V8(D2Common,CC,CC,A8,A8,A8,A8,A8,A8,A8);
+	shifting.ptImage = V8(D2Common,04,04,04,08,08,3C,34,34,34);
+	shifting.ptFrame = V8(D2Common,08,08,08,44,44,40,00,00,00);
 }
 
 /*================================= END OF FILE =================================*/

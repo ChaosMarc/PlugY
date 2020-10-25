@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Updating server.
 
@@ -27,6 +28,21 @@ void STDCALL BtnPress()
 	previouslyOnRealm = onRealm;
 }
 
+FCT_ASM( caller_BnetBtnPress114 )
+    CMP active_DisableBattleNet, 1
+    JE disableBattleNet
+    MOV onRealm, 1
+    PUSH EAX
+    CALL BtnPress
+    POP EAX
+    SUB ESP, 0x3FC//400
+    JMP DWORD PTR SS : [ESP + 0x3FC]
+disableBattleNet :
+    POP EAX
+    POP EAX
+    RETN
+}}
+
 FCT_ASM ( caller_BnetBtnPress )
 	CMP active_DisableBattleNet,1
 	JE disableBattleNet
@@ -48,6 +64,17 @@ FCT_ASM ( caller_MultiPlayerBtnPress )
 	RETN
 }}
 */
+
+FCT_ASM( caller_TCPIPBtnPress114 )
+    MOV onRealm, 0
+    PUSH EAX
+    PUSH EDX
+    CALL BtnPress
+    POP EDX
+    POP EAX
+    MOV ECX, 0x006D39BC
+    RETN
+}}
 
 FCT_ASM ( caller_TCPIPBtnPress111 )
 	MOV onRealm,0
@@ -99,9 +126,9 @@ void Install_VariableOnRealm()
 	log_msg("Patch D2Launch for set not on realm variable. (VariableonRealm)\n");
 
 	// click on Battle.net button
-	mem_seek R7(D2Launch, 8195, 81A5, 9915, 129E5, 18AA5, 17D15, 19295, 11C65);
+	mem_seek R8(D2Launch, 8195, 81A5, 9915, 129E5, 18AA5, 17D15, 19295, 11C65, 3533B);
 	memt_byte( 0x81, 0xE8 );	// CALL
-	MEMT_REF4( 0x000400EC, caller_BnetBtnPress);
+	MEMT_REF4( 0x000400EC, version_D2Launch == V114d ? caller_BnetBtnPress114 : caller_BnetBtnPress);
 	memt_byte( 0x00, 0x90 );	// NOP
 	//6FA529E5   . 81EC 00040000  SUB ESP,400
 
@@ -112,19 +139,22 @@ void Install_VariableOnRealm()
 	//6FA1EFFC   . B8 01000000    MOV EAX,1
 
 	// click on TCP/IP button
-	mem_seek R7(D2Launch, 87B9, 87C9, 9F99, 11329, 17409, 16659, 17B8E, 1053E);
+	mem_seek R8(D2Launch, 87B9, 87C9, 9F99, 11329, 17409, 16659, 17B8E, 1053E, 2FFFA);
 	if (version_D2Launch == V109b || version_D2Launch == V109d || version_D2Launch == V110)
 	{
 		memt_byte( 0xBD, 0xE8 );	// CALL
 		MEMT_REF4( 0x00000001, caller_TCPIPBtnPress);
-	} else {
+    } else if (version_D2Launch == V114d) {
+        memt_byte(0xB9, 0xE8);
+        MEMT_REF4(0x006D39BC, caller_TCPIPBtnPress114);
+    } else {
 		memt_byte( 0xBE, 0xE8 );	// CALL
 		MEMT_REF4( 0x00000040, caller_TCPIPBtnPress111);
 		//6FA51329   . BE 40000000    MOV ESI,40
 	}
 
 	// click on SinglePlayer button
-	mem_seek R7(D2Launch, D1F6, D1E6, EC16, B726, 117E6, 10A56, 11F36, A906);
+	mem_seek R8(D2Launch, D1F6, D1E6, EC16, B726, 117E6, 10A56, 11F36, A906, 30BC9);
 	memt_byte( 0xBA, 0xE8 );	// CALL
 	MEMT_REF4( 0x00000400, caller_SinglePlayerBtnPress);
 	//6FA4B726   . BA 00040000    MOV EDX,400
@@ -133,7 +163,7 @@ void Install_VariableOnRealm()
 	{
 		log_msg("\nPatch D2Game for fixing ptClient removing bug. (VariableonRealm)\n");
 		//Bug crash ptClient search fix (for Megalixir Mod).
-		mem_seek R7(D2Game, 0000, 0000, 2B97, 0000, 0000, 0000, 0000, 0000);
+		mem_seek R8(D2Game, 0000, 0000, 2B97, 0000, 0000, 0000, 0000, 0000, 0000);
 		memt_byte( 0x39 ,0xE8);
 		MEMT_REF4( 0x8B0C7429 , caller_fixClientRemovingBug);
 		memt_byte( 0xC1 ,0x90);

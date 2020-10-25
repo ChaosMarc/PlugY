@@ -31,4 +31,6 @@ void memc_ref4(DWORD old, DWORD ref);
 #define MEMD_REF4(O, R) memd_ref4((DWORD)(O), (DWORD)(R))
 void memd_ref4(DWORD old, DWORD ref);
 
+void patchMemory4(DWORD value);
+
 /*================================= END OF FILE =================================*/

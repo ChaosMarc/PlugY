@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Updating server.
 
@@ -569,9 +570,9 @@ void Install_Commands()
 	active_savegame = version_D2Common >= V111;
 
 	// Run custom commmand
-	mem_seek R7(D2Client, 2C120, 2C110, 32BDD, C1EE6, 91C16, 86926, 70AE6, B1FD6);
+	mem_seek R8(D2Client, 2C120, 2C110, 32BDD, C1EE6, 91C16, 86926, 70AE6, B1FD6, 7C548);
 	memt_byte( 0x83, 0xE8 );	// CALL 
-	MEMT_REF4( 0xC08508C4 , version_D2Client == V113d ? caller_Commands_113d : version_D2Client >= V111 ? caller_Commands_111 : caller_Commands);
+	MEMT_REF4( 0xC08508C4 , version_D2Client >= V113d ? caller_Commands_113d : version_D2Client >= V111 ? caller_Commands_111 : caller_Commands);
 	//6FB71EE6   . 83C4 08        ADD ESP,8
 	//6FB71EE7   . 85C0           TEST EAX,EAX
 	//6FB41C16  |. 83C4 08        ADD ESP,8

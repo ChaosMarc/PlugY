@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Interface stats page functions
 
@@ -346,6 +347,24 @@ Unit* STDCALL initGetNextItemForSet(Inventory* ptInventory)
 	return getNextItemForSet(item);
 }
 
+FCT_ASM( caller_manageBtnDown_114 )
+    PUSH EBX
+    CALL manageBtnDown
+    TEST EAX, EAX
+    JE IS_NOT_ON_BUTTON
+    POP EDX
+    MOV EDX, DWORD PTR DS : [EDX + 0xA]
+    MOV DWORD PTR DS : [EDX], 1
+    POP EDI
+    POP ESI
+    POP EBX
+    MOV ESP, EBP
+    POP EBP
+    RETN 4
+IS_NOT_ON_BUTTON :
+    JMP D2ClickOnStashButton
+}}
+
 
 FCT_ASM( caller_manageBtnDown_111 )
 	PUSH EBP
@@ -379,6 +398,31 @@ FCT_ASM( caller_manageBtnDown )
 	RETN 4
 IS_NOT_ON_BUTTON:
 	JMP D2isLODGame
+}}
+
+FCT_ASM( caller_manageBtnUp_114 )
+    PUSH EBX
+    CALL manageBtnUp
+    MOV isDownBtn.all, 0
+    TEST EAX, EAX
+    JE IS_NOT_ON_BUTTON
+    POP EDX
+    MOV EDX, DWORD PTR DS : [EDX + 0x33]
+    MOV DWORD PTR DS : [EDX], 0
+    SUB EDX, 8
+    MOV DWORD PTR DS : [EDX], 0
+    ADD EDX, 4
+    MOV DWORD PTR DS : [EDX], 0
+    ADD EDX, 0x68
+    MOV DWORD PTR DS : [EDX], 0
+    POP EDI
+    POP ESI
+    POP EBX
+    MOV ESP, EBP
+    POP EBP
+    RETN 4
+IS_NOT_ON_BUTTON:
+    JMP D2ClickOnStashButton
 }}
 
 FCT_ASM( caller_manageBtnUp_111 )
@@ -430,6 +474,11 @@ IS_NOT_ON_BUTTON:
 	JMP D2isLODGame
 }}
 
+FCT_ASM( initBtnsStates_114 )
+    MOV isDownBtn.all, 0
+    MOV DWORD PTR DS : [0x7BCC3C], EAX
+    RETN
+}}
 
 FCT_ASM ( initBtnsStates )
 	MOV isDownBtn.all,0
@@ -449,8 +498,12 @@ void Install_InterfaceStash()
 	log_msg("Patch D2Client for stash interface. (InterfaceStash)\n");
 
 	// Print button images
-	mem_seek R7(D2Client, 39060, 39060, 3F399, B1006, 7DF86, B3656, 99A56, 9DE26);
-	MEMC_REF4( D2LoadBuySelBtn, printBtns);
+	mem_seek R8(D2Client, 39060, 39060, 3F399, B1006, 7DF86, B3656, 99A56, 9DE26, 8F308);
+	if (version_D2Client == V114d) {
+        MEMT_REF4(0xFFFC52F4, printBtns);
+	} else {
+        MEMC_REF4(D2LoadBuySelBtn, printBtns);
+	}
 	//6FADF398  |. E8 734D0400    CALL D2Client.6FB24110
 	//6FB61005  |. E8 A6D3FEFF    CALL D2Client.6FB4E3B0
 	//6FB2DF85  |. E8 3642FEFF    CALL D2Client.6FB121C0
@@ -459,8 +512,12 @@ void Install_InterfaceStash()
 	//6FB4DE25  |. E8 76ACF7FF    CALL D2Client.6FAC8AA0
 
 	// print page number
-	mem_seek R7(D2Client, 3903C, 3903C, 3F375, B0FE3, 7DF63, B3633, 99A33, 9DE03);
-	MEMJ_REF4( D2PrintString, printPageNumber);
+	mem_seek R8(D2Client, 3903C, 3903C, 3F375, B0FE3, 7DF63, B3633, 99A33, 9DE03, 8F2E5);
+    if (version_D2Client == V114d) {
+        MEMT_REF4(0x00073037, printPageNumber);
+    } else {
+        MEMJ_REF4(D2PrintString, printPageNumber);
+    }
 	//6FADF374  |. E8 3FCC0800    CALL <JMP.&D2Win.#10117>
 	//6FB60FE2  |. E8 99C2F5FF    CALL <JMP.&D2Win.#10020>
 	//6FB2DF62  |. E8 19F3F8FF    CALL <JMP.&D2Win.#10064>
@@ -469,9 +526,13 @@ void Install_InterfaceStash()
 	//6FB4DE02  |. E8 4739F7FF    CALL <JMP.&D2Win.#10076>
 
 	// Manage mouse down (Play sound)
-	mem_seek R7(D2Client, 45091, 45091, 4BBA1, B4666, 7FDD6, B54A6, 9B8A6, 9FC76);
-	MEMC_REF4( version_D2Client >= V111 ? (DWORD)D2ClickOnStashButton : (DWORD)D2isLODGame, version_D2Client >= V111 ? caller_manageBtnDown_111 : caller_manageBtnDown);
-	//6FAEBBA0   > E8 DB04FCFF    CALL D2Client.6FAAC080
+	mem_seek R8(D2Client, 45091, 45091, 4BBA1, B4666, 7FDD6, B54A6, 9B8A6, 9FC76, 925B8);
+    if (version_D2Client == V114d) {
+        MEMT_REF4(0xFFFF73C4, caller_manageBtnDown_114);
+    } else {
+        MEMC_REF4(version_D2Client >= V111 ? (DWORD)D2ClickOnStashButton : (DWORD)D2isLODGame, version_D2Client >= V111 ? caller_manageBtnDown_111 : caller_manageBtnDown);
+    }
+    //6FAEBBA0   > E8 DB04FCFF    CALL D2Client.6FAAC080
 	//6FB64665   . E8 B61EFFFF    CALL D2Client.6FB56520
 	//6FB2FDD5   . E8 E612FFFF    CALL D2Client.6FB210C0
 	//6FB654A5   . E8 9611FFFF    CALL D2Client.6FB56640
@@ -479,9 +540,13 @@ void Install_InterfaceStash()
 	//6FB4FC75   . E8 960FFFFF    CALL D2Client.6FB40C10
 
 	// Manage mouse up
-	mem_seek R7(D2Client, 455F9, 455F9, 4C0F9, B57B9, 7FC09, B52D9, 9B6D9, 9FAA9);
-	MEMC_REF4( version_D2Client >= V111 ? (DWORD)D2ClickOnStashButton : (DWORD)D2isLODGame, version_D2Client >= V111 ? caller_manageBtnUp_111 : caller_manageBtnUp);
-	//6FAEC0F8   > E8 83FFFBFF    CALL D2Client.6FAAC080
+	mem_seek R8(D2Client, 455F9, 455F9, 4C0F9, B57B9, 7FC09, B52D9, 9B6D9, 9FAA9, 89B63);
+    if (version_D2Client == V114d) {
+        MEMT_REF4(0xFFFFFE19, caller_manageBtnUp_114);
+    } else {
+        MEMC_REF4(version_D2Client >= V111 ? (DWORD)D2ClickOnStashButton : (DWORD)D2isLODGame, version_D2Client >= V111 ? caller_manageBtnUp_111 : caller_manageBtnUp);
+    }
+    //6FAEC0F8   > E8 83FFFBFF    CALL D2Client.6FAAC080
 	//6FB657B8   > E8 630DFFFF    CALL D2Client.6FB56520
 	//6FB2FC08   > E8 B314FFFF    CALL D2Client.6FB210C0
 	//6FB652D8   > E8 6313FFFF    CALL D2Client.6FB56640
@@ -489,10 +554,15 @@ void Install_InterfaceStash()
 	//6FB4FAA8   > E8 6311FFFF    CALL D2Client.6FB40C10
 
 	// init state of button on open stash page
-	mem_seek R7(D2Client, 45B3A, 45B3A, 4C63A, A645A, 749DA, A9D9A, 8CC3A, 9441A);
-	memt_byte( 0x81, 0xE9 );	// CALL initBtnsStates
-	MEMT_REF4( 0x000104C4, initBtnsStates);
-	memt_byte( 0x00, 0x90 );
+	mem_seek R8(D2Client, 45B3A, 45B3A, 4C63A, A645A, 749DA, A9D9A, 8CC3A, 9441A, 89ED0);
+    if (version_D2Client == V114d) {
+        memt_byte(0xA3, 0xE8);
+        MEMT_REF4(0x007BCC3C, initBtnsStates_114);
+    } else {
+        memt_byte(0x81, 0xE9);	// CALL initBtnsStates
+        MEMT_REF4(0x000104C4, initBtnsStates);
+        memt_byte(0x00, 0x90);
+  }
 	//6FAE5B3A  |> 81C4 04010000  ADD ESP,104
 	//6FAE5B3A  |> 81C4 04010000  ADD ESP,104
 	//6FAEC63A  |> 81C4 04010000  ADD ESP,104
@@ -503,8 +573,12 @@ void Install_InterfaceStash()
 	//6FB4441A  |> 81C4 04010000  ADD ESP,104
 
 	// init the search of print in green the item set name we have in stash
-	mem_seek R7(D2Client, 3F098, 3F098, 45997, A71F4, 71F64, A7314, 8D434, 91A24);
-	MEMJ_REF4( D2InventoryGetFirstItem, initGetNextItemForSet);
+	mem_seek R8(D2Client, 3F098, 3F098, 45997, A71F4, 71F64, A7314, 8D434, 91A24, 86774);
+    if (version_D2Client == V114d) {
+        MEMT_REF4(0x001B4B48, initGetNextItemForSet);
+    } else {
+        MEMJ_REF4(D2InventoryGetFirstItem, initGetNextItemForSet);
+    }
 	//6FAE5996  |. E8 D5500800    CALL <JMP.&D2Common.#10277>
 	//6FB571F3  |. E8 D64EF6FF    CALL <JMP.&D2Common.#10402>
 	//6FB21F63  |. E8 96A1F9FF    CALL <JMP.&D2Common.#10535>
@@ -513,8 +587,12 @@ void Install_InterfaceStash()
 	//6FB41A23  |. E8 96A7F7FF    CALL <JMP.&D2Common.#11040>
 
 	// Get next item for print in green the item set name we have in stash
-	mem_seek R7(D2Client, 3F0FA, 3F0FA, 45A1C, A728B, 71FFB, A73AB, 8D4CB, 91ABB);
-	MEMJ_REF4( D2UnitGetNextItem, getNextItemForSet);
+	mem_seek R8(D2Client, 3F0FA, 3F0FA, 45A1C, A728B, 71FFB, A73AB, 8D4CB, 91ABB, 86807);
+    if (version_D2Client == V114d) {
+        MEMT_REF4(0x001B7795, getNextItemForSet);
+    } else {
+        MEMJ_REF4(D2UnitGetNextItem, getNextItemForSet);
+    }
 	//6FAE5A1B   E8 4A500800      CALL <JMP.&D2Common.#10304>
 	//6FB5728A  |. E8 0B4FF6FF    |CALL <JMP.&D2Common.#10934>
 	//6FB21FFA  |. E8 A1A1F9FF    |CALL <JMP.&D2Common.#11140>

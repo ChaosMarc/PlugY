@@ -170,6 +170,7 @@ const char* S_active_EnabledTXTFilesWithMSExcel= "EnabledTXTFilesWhenMSExcelOpen
 const char* S_active_DisplayBaseStatsValue = "ActiveDisplayBaseStatsValue";
 const char* S_active_LadderRunewords = "ActiveLadderRunewords";
 const char* S_active_EnabledCowPortalWhenCowKingWasKill = "ActiveCowPortalWhenCowKingWasKilled";
+const char* S_active_DoNotCloseNihlathakPortal = "ActiveDoNotCloseNihlathakPortal";
 
 const char* S_DLL = "DLL:\t";
 const char* S_DEFAULT = "DEFAULT:";
@@ -819,6 +820,10 @@ void init_ExtraOptions(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefa
 	GET_PRIVATE_PROFILE_STRING(S_EXTRA, S_active_EnabledCowPortalWhenCowKingWasKill, "0");
 	active_EnabledCowPortalWhenCowKingWasKill = atoi(buffer);
 	log_msg("active_EnabledCowPortalWhenCowKingWasKill= %u\n\n", active_EnabledCowPortalWhenCowKingWasKill);
+
+    GET_PRIVATE_PROFILE_STRING(S_EXTRA, S_active_DoNotCloseNihlathakPortal, "0");
+    active_DoNotCloseNihlathakPortal = atoi(buffer);
+    log_msg("active_DoNotCloseNihlathakPortal= %u\n\n", active_DoNotCloseNihlathakPortal);
 }
 
 

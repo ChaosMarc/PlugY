@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Adding custom data.
 	Save and load infinity & shared Stash
@@ -79,6 +80,17 @@ ISNOTMODDATA:
 	JMP DWORD PTR CS:[LeaveCriticalSection]
 }}
 
+FCT_ASM( caller_isModFile_114 )
+    PUSH EBX
+    CALL isModFile
+    TEST EAX, EAX
+    JE ISNOTMODDATA
+    MOV EDX, 0x1
+ISNOTMODDATA :
+    LEA EAX, DWORD PTR SS : [EBP - 0x108]
+    RETN
+}}
+
 void Install_PlugYFiles()
 {
 	static int isInstalled = false;
@@ -87,10 +99,14 @@ void Install_PlugYFiles()
 	log_msg("Patch Storm to found custom file. (PlugYFiles)\n");
 
 	// Try in Diablo II\PlugY\ if file not found
-	mem_seek R7(Storm,	192C6, 19296, 18677, 2CC69, 14259, 121E9, 28D89, 2DA79);//( (DWORD)D2Storm268 + V7(Storm, 01A8, 01A8, 01AB, 0429, 0429, 0429, 0000) );
-	memt_byte( 0xFF ,0x90); // NOP
-	memt_byte( 0x15 ,0xE8); // CALL
-	MEMD_REF4( LeaveCriticalSection, version_Storm >= V111 ? caller_isModFile_111 : caller_isModFile);
+	mem_seek R8(Storm,	192C6, 19296, 18677, 2CC69, 14259, 121E9, 28D89, 2DA79, 19369);//( (DWORD)D2Storm268 + V7(Storm, 01A8, 01A8, 01AB, 0429, 0429, 0429, 0000) );
+	memt_byte( version_D2Client == V114d ? 0x8D : 0xFF ,0x90); // NOP
+	memt_byte( version_D2Client == V114d ? 0x85 : 0x15 ,0xE8); // CALL
+    if (version_Storm == V114d) {
+        MEMT_REF4(0xFFFFFEF8, caller_isModFile_114);
+    } else {
+        MEMD_REF4(LeaveCriticalSection, version_Storm == V114d ? caller_isModFile_114 : version_Storm >= V111 ? caller_isModFile_111 : caller_isModFile);
+    }
 	//6FFC8677  |. FF15 F411FE6F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
 	//6FC1CC69  |. FF15 3832C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
 	//6FC04259  |. FF15 3832C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
@@ -129,7 +145,7 @@ void loadImagesFile(void** images, const char* name)
 void STDCALL loadCustomImages()
 {
 	if ( active_SkillsPoints )	 loadImagesFile(&unassignSkillsBtnImages, "UnassignSkillsBtns");
-	if ( active_StatsPoints )	 loadImagesFile(&unassignStatsBtnImages, "UnassignStatsBtns");
+    if ( active_StatsPoints )	 loadImagesFile(&unassignStatsBtnImages, "UnassignStatsBtns");
 	if ( active_multiPageStash || active_newInterfaces) loadImagesFile(&stashBtnsImages, "StashBtns");
 	if ( active_sharedGold)		 loadImagesFile(&sharedGoldBtnsImages, "SharedGoldBtns");
 	if ( active_newInterfaces )	 loadImagesFile(&newStatsInterfaceImages, "EmptyPage");	
@@ -148,10 +164,24 @@ void STDCALL freeCustomImages()
 	freeImagesFile(statsBackgroundImages);
 }
 
+FCT_ASM( caller_loadCustomImages_114 )
+    CALL loadCustomImages
+    POP EAX
+    PUSH 0x6CC8B8
+    JMP EAX
+}}
+
 FCT_ASM ( caller_loadCustomImages )
 	CALL loadCustomImages
 	MOV ECX,0x0C
 	RETN
+}}
+
+FCT_ASM( caller_freeCustomImages_114 )
+    CALL freeCustomImages
+    POP EAX
+    PUSH 0x7BEF30
+    JMP EAX
 }}
 
 FCT_ASM ( caller_freeCustomImages )
@@ -170,20 +200,20 @@ void Install_PlugYImagesFiles()
 	log_msg("Patch D2Client to load/free custom images. (PlugYImagesFiles)\n");
 
 	// Load custom images
-	mem_seek R7(D2Client, 57E21, 57E21, 5E4B1, 2E101, B67E1, 82761, 27EAE, 6E0BE);
-	memt_byte( 0xB9 ,0xE8);
-	MEMT_REF4( 0x0000000C , caller_loadCustomImages);
-	//6FAFE4B1  |. B9 0C000000    MOV ECX,0C
-	//6FADE101  |. B9 0C000000    MOV ECX,0C
-	//6FB667E1  |. B9 0C000000    MOV ECX,0C
-	//6FB32761  |. B9 0C000000    MOV ECX,0C
-	//6FAD7EAE  |. B9 0C000000    MOV ECX,0C
-	//6FB1E0BE  |. B9 0C000000    MOV ECX,0C
+    mem_seek R8(D2Client, 57E21, 57E21, 5E4B1, 2E101, B67E1, 82761, 27EAE, 6E0BE, 96955);
+    memt_byte(V8(D2Client, B9, B9, B9, B9, B9, B9, B9, B9, 68), 0xE8);
+    MEMT_REF4(version_D2Client == V114d ? 0x006CC8B8 : 0x0000000C, version_D2Client == V114d ? caller_loadCustomImages_114 : caller_loadCustomImages);
+    //6FAFE4B1  |. B9 0C000000    MOV ECX,0C
+    //6FADE101  |. B9 0C000000    MOV ECX,0C
+    //6FB667E1  |. B9 0C000000    MOV ECX,0C
+    //6FB32761  |. B9 0C000000    MOV ECX,0C
+    //6FAD7EAE  |. B9 0C000000    MOV ECX,0C
+    //6FB1E0BE  |. B9 0C000000    MOV ECX,0C
 
 	// Free custom images
-	mem_seek R7(D2Client, 57FA9, 57FA9, 5E639, 2D12D, B580D, 8158D, 26F8D, 6D07D);
-	memt_byte( 0xB9 ,0xE8);
-	MEMT_REF4( 0x0000000C , caller_freeCustomImages);
+	mem_seek R8(D2Client, 57FA9, 57FA9, 5E639, 2D12D, B580D, 8158D, 26F8D, 6D07D, 96AFB);
+	memt_byte(V8(D2Client, B9, B9, B9, B9, B9, B9, B9, B9, 68),0xE8);
+	MEMT_REF4(version_D2Client == V114d ? 0x007BEF30 : 0x0000000C, version_D2Client == V114d ? caller_freeCustomImages_114 : caller_freeCustomImages);
 	//6FAFE639  |> B9 0C000000    MOV ECX,0C
 	//6FADD12D  |> B9 0C000000    MOV ECX,0C
 	//6FB6580D  |> B9 0C000000    MOV ECX,0C
@@ -245,8 +275,8 @@ void Install_PlugYTxtFiles()
 //	lookupItemStatCost =  (void*)R7(D2Common, A1D70, A1D70, AA1D8, 0000, 0000, 0000, 0000);
 
 	// Load custom txt files
-	mem_seek R7(D2Common, 7F4B, 7F4B, 2F7D7, 76854, 37444, 81C44, 5D6E4, 855E4);
-	MEMC_REF4( D2LoadSuperuniques, version_D2Common >= V111 ? caller_loadTxtFiles_111 : caller_loadTxtFiles );
+	mem_seek R8(D2Common, 7F4B, 7F4B, 2F7D7, 76854, 37444, 81C44, 5D6E4, 855E4, 25A560);
+	MEMC_REF4( D2LoadSuperuniques, version_D2Common == V114d ? caller_loadTxtFiles : version_D2Common >= V111 ? caller_loadTxtFiles_111 : caller_loadTxtFiles );
 	//6FD47F4A  |. E8 B1750100    CALL D2Common.6FD5F500
 	//6FD47F4A  |. E8 C1750100    CALL D2Common.6FD5F510
 	//01B6F7D6  |. E8 C5A7FFFF    CALL D2Common.01B69FA0
@@ -257,8 +287,12 @@ void Install_PlugYTxtFiles()
 	//6FDD55E3  |. E8 58B6FFFF    CALL D2Common.6FDD0C40                   ; \D2Common.6FDD0C40
 
 	// Free custom txt files
-	mem_seek R7(D2Common, 79EC, 79EC, 10186, 332B3, 15AB3, 44E13, 5E8B3, FAA3);
-	MEMJ_REF4( D2Fog10212, caller_freeTxtFiles );
+	mem_seek R8(D2Common, 79EC, 79EC, 10186, 332B3, 15AB3, 44E13, 5E8B3, FAA3, 25A1C8);
+    if (version_D2Common == V114d) {
+        MEMT_REF4(0x00062EE4, caller_freeTxtFiles);
+    } else {
+        MEMJ_REF4(D2Fog10212, caller_freeTxtFiles);
+    }
 	//6FD479EB   . E8 C8C00600    CALL <JMP.&Fog.#10212>
 	//6FD479EB   . E8 C8C00600    CALL <JMP.&Fog.#10212>
 	//01B50185  |. E8 F8410700    CALL <JMP.&Fog.#10212>

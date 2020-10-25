@@ -11,6 +11,10 @@
 #include "newInterfaces.h"
 #include "common.h"
 #include <stdio.h>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <sstream>
 
 #define	getXCloseBtn()			RX(0x110)
 #define	getLCloseBtn()			32
@@ -61,6 +65,62 @@ extern int lastPage;
 int nbStatsInterface;
 statsInterfaceBIN* statsInterface;
 
+void loadStatsInterfaceDesc_114() {
+    char filename[0x104];
+    strcpy(filename, "PlugY\\statsinterface.txt");
+    char fileTemp[0x104];
+    log_msg("Load custom file : %s", filename);
+    strcpy(fileTemp, filename);
+    D2FogGetInstallPath(filename, 0x104 - strlen(filename));
+    strcat(filename, fileTemp);
+    log_msg("-> %s\n", filename);
+    std::ifstream statsFile(filename);
+    std::vector<std::string> stats;
+    if (statsFile.is_open()) {
+        std::string line;
+        while (std::getline(statsFile, line)) {
+            if (line.length() > 0 && line[0] != '*') {
+                //log_msg("Loading stat:\n");
+                //log_msg("%s\n\n", line);
+                stats.push_back(line);
+            }
+        }
+    } else {
+        log_msg("FAILED TO OPEN FILE: %s", filename);
+    }
+    statsFile.close();
+    nbStatsInterface = stats.size();
+    statsInterface = new statsInterfaceBIN[nbStatsInterface];
+    for (int i = 0; i < nbStatsInterface; ++i) {
+        std::istringstream ss(stats[i]);
+        auto& stat = statsInterface[i];
+        std::string token = "";
+        std::getline(ss, token, '\t');
+        //log_msg("Stat (%u) %s\n", i, token.c_str());
+        std::getline(ss, token, '\t');
+        stat.enabled = token.length() == 0 ? 0 : std::stoi(token.c_str());
+        //log_msg("\tenabled = %u\n", stat.enabled);
+        std::getline(ss, token, '\t');
+        stat.page = token.length() == 0 ? 0 : std::stoi(token.c_str());
+        //log_msg("\tpage = %u\n", stat.page);
+        std::getline(ss, token, '\t');
+        stat.x = token.length() == 0 ? 0 : std::stoi(token.c_str());
+        //log_msg("\tx = %u\n", stat.x);
+        std::getline(ss, token, '\t');
+        stat.y = token.length() == 0 ? 0 : std::stoi(token.c_str());
+        //log_msg("\ty = %u\n", stat.y);
+        std::getline(ss, token, '\t');
+        stat.color = token.length() == 0 ? 0 : std::stoi(token.c_str());
+        //log_msg("\tcolor = %u\n", stat.color);
+        std::getline(ss, token, '\t');
+        stat.font = token.length() == 0 ? 0 : std::stoi(token.c_str());
+        //log_msg("\tfont = %u\n", stat.font);
+        std::getline(ss, token, '\t');
+        stat.statsID = token.length() == 0 ? 0 : std::stoi(token.c_str());
+        //log_msg("\tstatsID = %u\n", stat.statsID);
+    }
+}
+
 void loadStatsInterfaceDesc(DWORD mempool)
 {
 	log_msg("loadStatsInterfaceDesc(%d)\n",mempool);
@@ -75,7 +135,15 @@ void loadStatsInterfaceDesc(DWORD mempool)
 //	ADD_LOOKUP_WORD(10,	"stat", lookupItemStatCost);
 	ADD_WORD_FIELD(12,	"statID");
 	ADD_TERM_FIELD();
-	BUILD_BIN(statsInterfaceBIN, statsInterface, nbStatsInterface, "PlugY\\statsinterface.txt");
+    //log_msg("statsInterface=0x%08x\nnbStatsInterface=0x%08x\n", statsInterface, &nbStatsInterface);
+    //void* test = D2ReadFile(mempool, "PlugY\\statsinterface.txt", (DWORD*)nbStatsInterface, __FILE__, __LINE__);
+    //void* test = D2CompileTxtFile(mempool, "PlugY\\statsinterface.txt", TableDesc, (DWORD*)&nbStatsInterface, sizeof(statsInterfaceBIN));
+    //log_msg("D2CompileTxtFile()=0x%08x", test);
+    if (version_D2Game == V114d) {
+        loadStatsInterfaceDesc_114();
+    } else {
+        BUILD_BIN(statsInterfaceBIN, statsInterface, nbStatsInterface, "PlugY\\statsinterface.txt");
+    }
 
 	lastPage = 0;
 	for (i=0; i<nbStatsInterface; i++)
@@ -89,7 +157,12 @@ void freeStatsInterfaceDesc()
 
 	if (statsInterface)
 	{
-		D2FogMemDeAlloc(statsInterface,__FILE__,__LINE__,0);
+    if (version_D2Game == V114d) {
+        delete[] statsInterface;
+    }
+    else {
+        D2FogMemDeAlloc(statsInterface, __FILE__, __LINE__, 0);
+    }
 		statsInterface = NULL;
 		nbStatsInterface = 0;
 	}
