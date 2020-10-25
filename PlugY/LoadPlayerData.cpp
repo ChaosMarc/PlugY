@@ -376,7 +376,7 @@ FCT_ASM( caller_LoadMPPlayerCustomData_114 )
     JNZ Continue_LoadMP
     ADD DWORD PTR SS : [ESP], 0x1D
 Continue_LoadMP :
-RE  TN
+	RETN
 JMP_LoadMPlayerCustomData :
     SUB DWORD PTR SS : [ESP], 0x10
     RETN
