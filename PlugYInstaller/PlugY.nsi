@@ -167,9 +167,9 @@ Section "!$(SECTION_NAME_CORE)" Core
   SectionIn 1 2 RO
   SetOutPath $D2Path
   File "${D2FILES}\PlugY.dll"
+  File "${D2FILES}\PlugY.ini"
   SetOutPath $INSTDIR
   File "${D2FILES}\PlugY.exe"
-  File "${D2FILES}\PlugY.ini"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Readme.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_LisezMoi.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Liesmich.txt"
@@ -242,12 +242,12 @@ Section "Uninstall" Uninstall
 
   ; Remove files and uninstaller
   Delete "$D2Path\PlugY.dll"
+  Delete "$D2Path\PlugY.ini"
   Delete "$D2Path\PatchD2File.exe"
   Delete "$D2Path\RestoreD2File.exe"
   Delete "$INSTDIR\PlugY.exe"
   Delete "$INSTDIR\PlugY.log"
   Delete "$INSTDIR\BnetLog.txt"
-  Delete "$INSTDIR\PlugY.ini"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Readme.txt"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_LisezMoi.txt"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Liesmich.txt"
