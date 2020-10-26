@@ -80,10 +80,6 @@ BYTE freeDll[] = {
 LPCSTR initFctName = "_Init@4";
 LPCSTR releaseFctName = "_Release@0";
 
-typedef int(__stdcall* tDebugActiveProcessStop)(DWORD);
-tDebugActiveProcessStop debugActiveProcessStop;
-
-
 void assertion(const char* pFormat, ...)
   {
   char msg[200];
@@ -435,48 +431,6 @@ bool launchNormal(LPSTR application, LPSTR commandLine, LPSTR currentDirectory)
   return success ? true : false;
   }
 
-bool launchGame98(LPSTR application, LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, eGameVersion version)
-  {
-  STARTUPINFO si;
-  PROCESS_INFORMATION pi;
-  ZeroMemory(&si, sizeof(si));
-  si.cb = sizeof(si);
-  ZeroMemory(&pi, sizeof(pi));
-  BOOL success = CreateProcess(application, commandLine, 0, 0, false, 0, 0, currentDirectory, &si, &pi);//DEBUG_ONLY_THIS_PROCESS
-  if (!success) return false;
-  DWORD ret;
-
-  Sleep(10);
-  while (true)
-    {
-    SuspendThread(pi.hThread);
-
-    if (!GetExitCodeProcess(pi.hProcess, &ret) || (ret != STILL_ACTIVE))
-      exit(0);
-    if (isD2gfxLoaded(pi.hProcess, (LPVOID)0x6FA80000))
-      {
-      installPlugY(pi.hProcess, (LPBYTE)0x6FA80000, libraryName, version);
-      ResumeThread(pi.hThread);
-      return true;
-      }
-    if (isD2gfxLoaded(pi.hProcess, (LPVOID)0x6FA70000))
-      {
-      installPlugY(pi.hProcess, (LPBYTE)0x6FA70000, libraryName, version);
-      ResumeThread(pi.hThread);
-      return true;
-      }
-    if (isD2gfxLoaded(pi.hProcess, (LPVOID)0x6FAA0000))
-      {
-      installPlugY(pi.hProcess, (LPBYTE)0x6FAA0000, libraryName, version);
-      ResumeThread(pi.hThread);
-      return true;
-      }
-    ResumeThread(pi.hThread);
-    //Sleep(10);
-    }
-  return false;
-  }
-
 bool launchGameXP(LPSTR application, LPSTR commandLine, LPSTR currentDirectory, LPSTR libraryName, eGameVersion version)
   {
   STARTUPINFO si;
@@ -503,7 +457,7 @@ bool launchGameXP(LPSTR application, LPSTR commandLine, LPSTR currentDirectory, 
           CloseHandle(DebugEvent.u.CreateProcessInfo.hFile);
           CloseHandle(pi.hProcess);
           CloseHandle(pi.hThread);
-          debugActiveProcessStop(DebugEvent.dwProcessId);
+          ::DebugActiveProcessStop(DebugEvent.dwProcessId);
           return true;
           }
         break;
@@ -520,7 +474,7 @@ bool launchGameXP(LPSTR application, LPSTR commandLine, LPSTR currentDirectory, 
           CloseHandle(DebugEvent.u.LoadDll.hFile);
           CloseHandle(pi.hProcess);
           CloseHandle(pi.hThread);
-          debugActiveProcessStop(DebugEvent.dwProcessId);
+          ::DebugActiveProcessStop(DebugEvent.dwProcessId);
           return true;
           }
         else
@@ -542,37 +496,12 @@ int APIENTRY WinMain(
   __in int nShowCmd
 )
   {
-  //char currrentDirectory[MAX_PATH];
   char d2Directory[MAX_PATH];
   char iniFileName[MAX_PATH + sizeof(INIFILE) - 1];
   char application[MAX_PATH + sizeof(GAMEFILE) + 200];
   char command[MAX_PATH + sizeof(GAMEFILE) + 200];
   eGameVersion version;
 
-  // Get Current Directory.
-  //if (!GetCurrentDirectory(MAX_PATH - 1, currrentDirectory))
-   //assertion("Current directory not found");
-
-  //int len = strlen(currrentDirectory);
-  //if (len == 0)
-    //assertion("Current directory not found");
-
-  //if (currrentDirectory[len - 1] != '\\')
-    //{
-    //currrentDirectory[len++] = '\\';
-    //currrentDirectory[len] = NULL;
-    //}
-
-  // Get ini full path name.
-  //strcpy(iniFileName, currrentDirectory);
-  //strcat(iniFileName, INIFILE);
-
-  // Get game.exe path.
-  //strcpy(command, currrentDirectory);
-  //strcat(command, GAMEFILE);
-
-  //if (GetFileAttributes(command) == INVALID_FILE_ATTRIBUTES)
-    //{
   if (!getRegistryD2Directory(command, MAX_PATH - sizeof(GAMEFILE)))
     {
     assertion("D2 install path not found.");
@@ -593,9 +522,8 @@ int APIENTRY WinMain(
     assertion("Game.exe not found.");
     return 1;
     }
-  //}
 
-// Get Game.exe version.
+  // Get Game.exe version.
   version = GetD2Version(command);
 
   // Add params.
@@ -639,15 +567,7 @@ int APIENTRY WinMain(
   if (version < V107 || version > V114d)
     assertion("PlugY isn't compatible with this version : %s", GetVersionString(version));
 
-  // Launch LoD and install PlugY
-  HMODULE module = GetModuleHandle("Kernel32.dll");
-  if (module)
-    {
-    debugActiveProcessStop = (tDebugActiveProcessStop)GetProcAddress(module, "DebugActiveProcessStop");
-    if (debugActiveProcessStop)
-      return !launchGameXP(application, command, d2Directory, libraryName, version);
-    }
-  return !launchGame98(application, command, d2Directory, libraryName, version);
+  return !launchGameXP(application, command, d2Directory, libraryName, version);
   }
 
 ///////////////////////// END OF FILE ///////////////////////
