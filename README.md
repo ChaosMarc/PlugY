@@ -1,5 +1,5 @@
 # PlugY
-PlugY, The Survival Kit - Plug-in for Diablo II Lord of Destruction (1.09b - 1.13d)
+PlugY, The Survival Kit - Plug-in for Diablo II Lord of Destruction (1.09b - 1.13d + 1.14d)
 
 Extends Diablo II - Lord of Destruction by a number of useful features
 

@@ -42,6 +42,8 @@ void UnassignAllSkillsPoints(Unit* ptChar)
 	DWORD nbPoints = 0;
 	void* ptClient = D2GetClient(ptChar,__FILE__,__LINE__);
 	SkillData* ptSkill = PCSkills->ptFirstSkill;
+    log_msg("\n\nUNASSIGN SKILL POINTS\n\n");
+
 	while (ptSkill)
 	{
 		if (getCharClass(ptSkill) == ptChar->nPlayerClass)//ptSkill->ptSkillBin->charclass

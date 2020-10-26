@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Updating client.
  
@@ -66,6 +67,15 @@ DWORD FASTCALL handleClientUpdate(DataPacket* packet)
 	}
 }
 
+FCT_ASM( caller_handleClientUpdate_114 )
+    LEA ECX, DWORD PTR SS : [ESP]
+    CALL handleClientUpdate
+    POP EDI
+    POP ESI
+    MOV ESP, EBP
+    POP EBP
+    RETN
+}}
 
 FCT_ASM ( caller_handleClientUpdate_111 )
 	LEA ECX,DWORD PTR SS:[ESP+8]
@@ -93,8 +103,8 @@ void Install_UpdateClient()
 	log_msg("Patch D2Client for received Item packet. (UpdateClient)\n");
 
 	// execute if it's our packet else continue
-	mem_seek R7(D2Client, 14236, 14226, 145B6, 9C6B6, BFE86, 66E06, AE896, 84D96);
-	MEMT_REF4( version_D2Client >= V111  ? 0x000000CF : 0x000000D6, version_D2Client >= V111 ? caller_handleClientUpdate_111 : caller_handleClientUpdate);
+	mem_seek R8(D2Client, 14236, 14226, 145B6, 9C6B6, BFE86, 66E06, AE896, 84D96, 5EC99);
+	MEMT_REF4( version_D2Client == V114d ? 0x000000CE : version_D2Client >= V111  ? 0x000000CF : 0x000000D6, version_D2Client == V114d ? caller_handleClientUpdate_114 : version_D2Client >= V111 ? caller_handleClientUpdate_111 : caller_handleClientUpdate);
 	//6FAB45B4  |. 0F87 D6000000  JA D2Client.6FAB4690
 	//6FB4C6B4  |. 0F87 CF000000  JA D2Client.6FB4C789
 	//6FB6FE84  |. 0F87 CF000000  JA D2Client.6FB6FF59

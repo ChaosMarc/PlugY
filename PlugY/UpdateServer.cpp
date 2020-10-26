@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Updating server.
 
@@ -90,6 +91,26 @@ int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
 	}
 }
 
+FCT_ASM( caller_handleServerUpdate_114 )
+    PUSH ESI
+    PUSH EBX
+    CALL handleServerUpdate
+    TEST EAX, EAX
+    JNZ END_RCM
+    MOV EAX, ESI
+    AND EAX, 0xFF
+    SHR ESI, 8
+    MOV EDI, EAX
+    RETN
+END_RCM :
+    ADD ESP, 8
+    POP EDI
+    POP ESI
+    XOR EAX, EAX
+    POP EBX
+    RETN 8
+}}
+
 FCT_ASM( caller_handleServerUpdate)
 	PUSH ESI
 	PUSH EBX
@@ -139,11 +160,11 @@ void Install_UpdateServer()
 	log_msg("Patch D2Game for received button click message. (UpdateServer)\n");
 
 	// manage button click message from Client.
-	mem_seek R7(D2Game, 4A702, 4AAC2, 56EA2, 54AE3, 2C773, 975C3, CC983, 676C3);
+	mem_seek R8(D2Game, 4A702, 4AAC2, 56EA2, 54AE3, 2C773, 975C3, CC983, 676C3, 14BD38);
 	if (version_D2Game >= V111) {
 		memt_byte( 0xC1, 0x57 );	// PUSH EDI
 		memt_byte( 0xEE, 0xE8 );	// CALL caller_handleServerUpdate
-		MEMT_REF4( 0xF88B5708, caller_handleServerUpdate);
+		MEMT_REF4( 0xF88B5708, version_D2Game == V114d ? caller_handleServerUpdate_114 : caller_handleServerUpdate);
 		//01FD4AE3   . C1EE 08        SHR ESI,8
 		//01FD4AE6   . 57             PUSH EDI
 		//01FD4AE7   . 8BF8           MOV EDI,EAX

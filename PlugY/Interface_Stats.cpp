@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Interface functions
 
@@ -138,6 +139,16 @@ Unit* STDCALL statsPageMouseUp(sWinMessage* msg)
 	return ptChar;
 }
 
+FCT_ASM( caller_printStatsPageBtns_114 )
+    CALL printStatsPageBtns
+    POP EDI
+    POP ESI
+    POP EBX
+    MOV ESP, EBP
+    POP EBP
+    RETN
+}}
+
 FCT_ASM ( caller_printStatsPageBtns_111 )
 	CALL printStatsPageBtns
 	POP EDI
@@ -169,7 +180,21 @@ FCT_ASM ( caller_printStatsPageBtns_9 )
 	RETN
 }}
 
-
+FCT_ASM( caller_statsPageMouseDown_114 )
+    PUSH DWORD PTR SS : [ESP + 0x18]
+    CALL statsPageMouseDown
+    TEST EAX, EAX
+    JE fin_statsPageMouseDown
+    MOV EAX, DWORD PTR DS : [0x7A6A70]
+    RETN
+fin_statsPageMouseDown :
+    ADD ESP, 4
+    POP EDI
+    POP ESI
+    POP EBX
+    POP EBP
+    RETN 4
+}}
 
 FCT_ASM ( caller_statsPageMouseDown_111 )
 	PUSH DWORD PTR SS:[ESP+0x20]
@@ -199,6 +224,22 @@ fin_statsPageMouseDown:
 	POP EBP
 	POP EBX
 	RETN 4
+}}
+
+FCT_ASM( caller_statsPageMouseUp_114 )
+    PUSH DWORD PTR SS : [EBP + 0x8]
+    CALL statsPageMouseUp
+    TEST EAX, EAX
+    JE fin_statsPageMouseUp
+    MOV EAX, DWORD PTR DS : [0x7A6A70]
+    RETN
+fin_statsPageMouseUp :
+    POP EDI
+    POP ESI
+    POP EBX
+    MOV ESP, EBP
+    POP EBP
+    RETN 4
 }}
 
 FCT_ASM ( caller_statsPageMouseUp )
@@ -244,10 +285,17 @@ void Install_InterfaceStats()
 	log_msg("Patch D2Client for stats interface. (InterfaceStats)\n");
 
 	// Print new buttons images
-	mem_seek R7(D2Client, 2A7BE, 2A7AE, 30F86, 83636, 8A0B6, 6C016, BDC16, C03B6);
-	memt_byte( 0x5F, 0xE9 );	// JMP
-	MEMT_REF4( 0x815B5D5E, version_D2Client >= V111 ? caller_printStatsPageBtns_111: version_D2Client == V110 ? caller_printStatsPageBtns : caller_printStatsPageBtns_9);
-	//6FAD0F86   . 5F                   POP EDI
+    if (version_D2Client == V114d) {
+        mem_seek R8(D2Client, 2A7BE, 2A7AE, 30F86, 83636, 8A0B6, 6C016, BDC16, C03B6, A8949);
+        memt_byte(0x5F, 0xE9);
+        MEMT_REF4(0xE58B5B5E, caller_printStatsPageBtns_114);
+    } else {
+        mem_seek R8(D2Client, 2A7BE, 2A7AE, 30F86, 83636, 8A0B6, 6C016, BDC16, C03B6, C03B6);
+        memt_byte(0x5F, 0xE9);	// JMP
+        MEMT_REF4(0x815B5D5E, version_D2Client >= V111 ? caller_printStatsPageBtns_111 : version_D2Client == V110 ? caller_printStatsPageBtns : caller_printStatsPageBtns_9);
+    }
+
+    //6FAD0F86   . 5F                   POP EDI
 	//6FAD0F87   . 5E                   POP ESI
 	//6FAD0F88   . 5D                   POP EBP
 	//6FAD0F89   . 5B                   POP EBX
@@ -282,14 +330,18 @@ void Install_InterfaceStats()
 	//6FB703B8  |. 5D             POP EBP
 	//6FB703B9  |. 5B             POP EBX
 	//6FB703BA  |. 81C4 70030000  ADD ESP,370
-	//6FB703Ñ0  \. C3             RETN
+	//6FB703ï¿½0  \. C3             RETN
 
 	if ( version_D2Client >= V111 )
 	{
 		// Manage mouse down (Play sound)
-		mem_seek R7(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, BCDC8, BF568);
-		memt_byte( 0xA1, 0xE8 );
-		MEMT_REF4( ptptClientChar, caller_statsPageMouseDown);
+		mem_seek R8(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, BCDC8, BF568, A77D4);
+        if (version_D2Client == V114d) {
+            MEMT_REF4(0xFFFBC5F8, caller_statsPageMouseDown_114);
+        } else {
+            memt_byte(0xA1, 0xE8);
+            MEMT_REF4(ptptClientChar, caller_statsPageMouseDown);
+        }
 		//6FB327C8   . A1 F0C4BC6F    MOV EAX,DWORD PTR DS:[6FBCC4F0]
 		//6FB39248   . A1 E0C1BC6F    MOV EAX,DWORD PTR DS:[6FBCC1E0]
 		//6FB1B1A8   . A1 D0C3BC6F    MOV EAX,DWORD PTR DS:[6FBCC3D0]
@@ -297,9 +349,13 @@ void Install_InterfaceStats()
 		//6FB6F568   . A1 50D0BC6F    MOV EAX,DWORD PTR DS:[6FBCD050]
 
 		// Manage mouse up
-		mem_seek R7(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, BDE33, C05D3);
-		memt_byte( 0xA1, 0xE8 );
-		MEMT_REF4( ptptClientChar, caller_statsPageMouseUp);
+		mem_seek R8(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, BDE33, C05D3, A7963);
+        if (version_D2Client == V114d) {
+            MEMT_REF4(0xFFFBC469, caller_statsPageMouseUp_114);
+        } else {
+            memt_byte(0xA1, 0xE8);
+            MEMT_REF4(ptptClientChar, caller_statsPageMouseUp);
+        }
 		//6FB33853   . A1 F0C4BC6F    MOV EAX,DWORD PTR DS:[6FBCC4F0]
 		//6FB3A2D3   . A1 E0C1BC6F    MOV EAX,DWORD PTR DS:[6FBCC1E0]
 		//6FB1C233   . A1 D0C3BC6F    MOV EAX,DWORD PTR DS:[6FBCC3D0]
@@ -307,12 +363,12 @@ void Install_InterfaceStats()
 		//6FB705D3   . A1 50D0BC6F    MOV EAX,DWORD PTR DS:[6FBCD050]
 	} else {
 		// Manage mouse down (Play sound)
-		mem_seek R7(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, 0000, 0000);
+		mem_seek R8(D2Client, 2AA6D, 2AA5D, 3133D, 827C8, 89248, 6B1A8, 0000, 0000, 0000);
 		MEMC_REF4( D2GetClientPlayer, caller_statsPageMouseDown);
 		//6FAD133C   . E8 8F700500    CALL D2Client.6FB283D0
 
 		// Manage mouse up
-		mem_seek R7(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, 0000, 0000);
+		mem_seek R8(D2Client, 2AC43, 2AC33, 3151A, 83853, 8A2D3, 6C233, 0000, 0000, 0000);
 		MEMC_REF4( D2GetClientPlayer, version_D2Client == V110 ? caller_statsPageMouseUp : caller_statsPageMouseUp_9);//0x00056EB2
 		//6FAD1519   . E8 B26E0500    CALL D2Client.6FB283D0
 	}

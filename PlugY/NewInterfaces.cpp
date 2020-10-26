@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
 	Interface functions
 
@@ -56,6 +57,9 @@ int GetCurrentPage()
 void STDCALL printCustomPage()
 {
 	if(onRealm) {D2PrintStatsPage();return;}
+
+    //printNewStatsPageTwo(selectedPage); return;
+
 	if ( (selectedPage > 0) && (selectedPage<=lastPage) )
 		printNewStatsPageTwo(selectedPage);
 	else if (selectedPage == lastPage+1)
@@ -92,6 +96,18 @@ DWORD STDCALL mouseCustomPageLeftUp(sWinMessage* msg)
 		return -1;
 }
 
+FCT_ASM( caller_DontPrintBorder_114 )
+    MOV ESI, bDontPrintBorder
+    TEST ESI, ESI
+    JE printBorder
+    MOV bDontPrintBorder, 0
+    ADD DWORD PTR SS : [ESP], 0x14F
+    RETN
+printBorder :
+    MOV ESI, DWORD PTR DS : [0x7BEF18]
+    RETN
+}}
+
 FCT_ASM ( caller_DontPrintBorder_111 )
 	MOV ECX,bDontPrintBorder
 	TEST ECX,ECX
@@ -114,6 +130,30 @@ FCT_ASM ( caller_DontPrintBorder )
 printBorder:
 	MOV ECX,0x12
 	RETN
+}}
+
+FCT_ASM(caller_mouseCustomPageLeftDown_114)
+    PUSH EAX
+    PUSH ESI
+    CALL mouseCustomPageLeftDown
+    TEST EAX, EAX
+    POP EAX
+    JE end_mouseNewPageLDown
+    ;JG continue_mouseNewPageLDown
+    LEA ECX, DWORD PTR DS : [EAX + 0x80]
+    RETN
+continue_mouseNewPageLDown :
+    POP EAX
+    ADD EAX, 0x170
+    PUSH 0x4A7720
+    JMP EAX
+    RETN
+end_mouseNewPageLDown :
+    POP EDI
+    POP ESI
+    POP EBX
+    POP EBP
+    RETN 4
 }}
 
 
@@ -185,7 +225,27 @@ end_mouseNewPageLDown:
 	RETN 4
 }}
 
-
+FCT_ASM(caller_mouseCustomPageLeftUp_114)
+    PUSH EBP
+    CALL mouseCustomPageLeftUp
+    TEST EAX, EAX
+    JE end_mouseNewPageLUp
+    ;JG continue_mouseNewPageLUp
+    MOV EAX, DWORD PTR DS : [ptWindowStartX]
+    MOV EAX, DWORD PTR DS : [EAX]
+    RETN
+continue_mouseNewPageLUp :
+    ADD DWORD PTR SS : [ESP], 0x2C4
+    RETN
+end_mouseNewPageLUp :
+    ADD ESP, 4
+    POP EDI
+    POP ESI
+    POP EBX
+    MOV ESP, EBP
+    POP EBP
+    RETN 4
+}}
 
 FCT_ASM ( caller_mouseCustomPageLeftUp_111 )
 	PUSH EBP
@@ -257,7 +317,11 @@ end_mouseNewPageLUp:
 
 
 
-
+FCT_ASM( caller_resetSelectedPageByToolBar_114 )
+    MOV selectedPage, 0
+    MOV EDX, 2
+    RETN
+}}
 
 
 FCT_ASM ( caller_resetSelectedPageByToolBar )
@@ -268,6 +332,13 @@ FCT_ASM ( caller_resetSelectedPageByToolBar )
 noJump:
 	RETN
 }}
+
+FCT_ASM( caller_resetSelectedPageByKey_114 )
+    MOV selectedPage, 0
+    MOV EDX, DWORD PTR DS : [ECX * 4 + 0x712698]
+    RETN
+}}
+
 
 FCT_ASM ( caller_resetSelectedPageByKey )
 	MOV selectedPage,0
@@ -308,10 +379,10 @@ void Install_NewInterfaces()
 	{
 		if ( version_D2Client >= V111 )
 		{
-			//Reset selectedPage variable on opening stats page
-			mem_seek R7(D2Client, 0000, 0000, 0000, 4B79E, 8F73E, 55E0E, 65F5E, C41FE);
-			memt_byte( 0x83, 0xE8 );	// CALL caller_resetSelectedPage
-			MEMT_REF4( 0x1F7426F8, caller_resetSelectedPageByToolBar);
+			// Reset selectedPage variable on opening stats page
+			mem_seek R8(D2Client, 0000, 0000, 0000, 4B79E, 8F73E, 55E0E, 65F5E, C41FE, 7EC7A);
+			memt_byte( version_D2Client == V114d ? 0xBA : 0x83, 0xE8 );	// CALL caller_resetSelectedPage
+			MEMT_REF4( version_D2Client == V114d ? 0x00000002 : 0x1F7426F8, version_D2Client == V114d ? caller_resetSelectedPageByToolBar_114 : caller_resetSelectedPageByToolBar);
 			//6FAFB79E   > 83F8 26        CMP EAX,26
 			//6FAFB7A1   . 74 1F          JE SHORT D2Client.6FAFB7C2
 			//6FB3F73E   > 83F8 26        CMP EAX,26
@@ -323,9 +394,17 @@ void Install_NewInterfaces()
 			//6FB741FE   > 83F8 26        CMP EAX,26
 			//6FB74201   . 74 1F          JE SHORT D2Client.6FB05E32
 
-			mem_seek R7(D2Client, 0000, 0000, 0000, 1E55A, 6A8FA, A31DA, 3C5EA, 3E39A);
-			memt_byte( 0x55, 0xE8 );	// CALL caller_resetSelectedPage
-			MEMT_REF4( 0xD53BED33, caller_resetSelectedPageByKey);
+			mem_seek R8(D2Client, 0000, 0000, 0000, 1E55A, 6A8FA, A31DA, 3C5EA, 3E39A, 6A91D);
+            if (version_D2Client == V114d) {
+                memt_byte(0x8B, 0x90);
+                memt_byte(0x14, 0x90);
+                memt_byte(0x8D, 0xE8);
+                MEMT_REF4(0x00712698, caller_resetSelectedPageByKey_114);
+            }
+            else {
+                memt_byte(0x55, 0xE8);	// CALL caller_resetSelectedPage
+                MEMT_REF4(0xD53BED33, caller_resetSelectedPageByKey);
+            }
 			//6FACE55A   . 55             PUSH EBP
 			//6FACE55B   . 33ED           XOR EBP,EBP
 			//6FACE55D   . 3BD5           CMP EDX,EBP
@@ -358,7 +437,7 @@ void Install_NewInterfaces()
 			//6FB3EF92  |. 3928           CMP DWORD PTR DS:[EAX],EBP
 		} else {
 			//Reset selectedPage variable on opening stats page
-			mem_seek R7(D2Client, 88B58, 87ED8, 83478, A1FBE, 6571E, 8EF8E, 0000, 0000);//((DWORD)D2TogglePage+0x218);
+			mem_seek R8(D2Client, 88B58, 87ED8, 83478, A1FBE, 6571E, 8EF8E, 0000, 0000, 0000);//((DWORD)D2TogglePage+0x218);
 			memt_byte( 0x85, 0xE8 );	// CALL caller_resetSelectedPage
 			MEMT_REF4( 0xC2940FC0, caller_resetSelectedPage);
 			//6FB23478  |. 85C0           TEST EAX,EAX
@@ -368,8 +447,12 @@ void Install_NewInterfaces()
 	}
 
 	// Print custom page
-	mem_seek R7(D2Client, 87697, 86A17, 81FAB, A3759, 66B59, 902B9, C3B49, 1D549);
-	MEMC_REF4( D2PrintStatsPage, printCustomPage);
+	mem_seek R8(D2Client, 87697, 86A17, 81FAB, A3759, 66B59, 902B9, C3B49, 1D549, 57052);
+    if (version_D2Client == V114d) {
+        MEMT_REF4(0x00050CAA, printCustomPage);
+    } else {
+        MEMC_REF4(D2PrintStatsPage, printCustomPage);
+    }
 	//6FB21FAA   . E8 B1DDFAFF    CALL D2Client.6FACFD60
 	//6FB53758   . E8 43F1FDFF    CALL D2Client.6FB328A0
 	//6FB16B58  |. E8 C3270200    CALL D2Client.6FB39320
@@ -378,10 +461,11 @@ void Install_NewInterfaces()
 	//6FACD548  |. E8 F3200A00    CALL D2Client.6FB1B280
 
 	// Don't print Border
-	mem_seek R7(D2Client, 58EF6, 58EF6, 5F4C6, 2D366, B5A46, 82166, 271C6, 6D2B6);
-	memt_byte( 0xB9, 0xE8 );	// CALL caller_DontPrintBorder
-	MEMT_REF4( 0x00000012, version_D2Client >= V111 ? caller_DontPrintBorder_111 : caller_DontPrintBorder);
-	//6FAFF4C6   > B9 12000000    MOV ECX,12
+	mem_seek R8(D2Client, 58EF6, 58EF6, 5F4C6, 2D366, B5A46, 82166, 271C6, 6D2B6, 98707);
+	memt_byte( version_D2Client == V114d ? 0x8B : 0xB9, 0xE8 );	// CALL caller_DontPrintBorder
+	MEMT_REF4( version_D2Client == V114d ? 0x7BEF1835 : 0x00000012, version_D2Client == V114d ? caller_DontPrintBorder_114 : version_D2Client >= V111 ? caller_DontPrintBorder_111 : caller_DontPrintBorder);
+    if (version_D2Client == V114d) memt_byte(0x00, 0x90);
+    //6FAFF4C6   > B9 12000000    MOV ECX,12
 	//6FADD366  |. B9 12000000    MOV ECX,12
 	//6FB65A46  |. B9 12000000    MOV ECX,12
 	//6FB32166  |. B9 12000000    MOV ECX,12
@@ -389,9 +473,9 @@ void Install_NewInterfaces()
 	//6FB1D2B6  |. B9 12000000    MOV ECX,12
 
 	// Manage mouse down (Play sound)
-	mem_seek R7(D2Client, 2A9DC, 2A9CC, 312A5, 82736, 891B6, 6B116, BCD36, BF4D6);
+	mem_seek R8(D2Client, 2A9DC, 2A9CC, 312A5, 82736, 891B6, 6B116, BCD36, BF4D6, A7731);
 	memt_byte( 0x8D, 0xE8 );	// CALL
-	MEMT_REF4( 0x00008088, version_D2Client >= V111 ? caller_mouseCustomPageLeftDown_111 : version_D2Client == V110 ? caller_mouseCustomPageLeftDown : caller_mouseCustomPageLeftDown_9);
+	MEMT_REF4( 0x00008088, version_D2Client == V114d ? caller_mouseCustomPageLeftDown_114 : version_D2Client >= V111 ? caller_mouseCustomPageLeftDown_111 : version_D2Client == V110 ? caller_mouseCustomPageLeftDown : caller_mouseCustomPageLeftDown_9);
 	memt_byte( 0x00, 0x90 );	// NOP
 	//6FAD12A5   . 8D88 80000000     LEA ECX,DWORD PTR DS:[EAX+80]
 	//6FB32736   . 8D88 80000000     LEA ECX,DWORD PTR DS:[EAX+80]
@@ -401,9 +485,9 @@ void Install_NewInterfaces()
 	//6FB6F4D6   . 8D88 80000000     LEA ECX,DWORD PTR DS:[EAX+80]
 
 	// Manage mouse up
-	mem_seek R7(D2Client, 2ABBB, 2ABAB, 3148D, 836D9, 8A159, 6C0B9, BDCB9, C0459);
+	mem_seek R8(D2Client, 2ABBB, 2ABAB, 3148D, 836D9, 8A159, 6C0B9, BDCB9, C0459, A78DA);
 	memt_byte( 0xA1, 0xE8 );	// CALL caller_mouseCustomPageLeftUp
-	MEMT_REF4( ptWindowStartX, version_D2Client >= V111 ? caller_mouseCustomPageLeftUp_111 : version_D2Client == V110 ? caller_mouseCustomPageLeftUp : caller_mouseCustomPageLeftUp_9);
+	MEMT_REF4( ptWindowStartX, version_D2Client == V114d ? caller_mouseCustomPageLeftUp_114 : version_D2Client >= V111 ? caller_mouseCustomPageLeftUp_111 : version_D2Client == V110 ? caller_mouseCustomPageLeftUp : caller_mouseCustomPageLeftUp_9);
 	//6FAD148D   . A1 48A7BB6F       MOV EAX,DWORD PTR DS:[6FBBA748]
 	//6FB336D9   . A1 24BDBC6F       MOV EAX,DWORD PTR DS:[6FBCBD24]
 	//6FB3A159   . A1 F8BEBC6F       MOV EAX,DWORD PTR DS:[6FBCBEF8]

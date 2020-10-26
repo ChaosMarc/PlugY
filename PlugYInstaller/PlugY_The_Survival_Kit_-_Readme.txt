@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  by Yohann Nicolas                                   ;
 ;                                                                                      ;
-;                                     version 11.02                                    ;
+;                                     version 12.00                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -68,9 +68,12 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
 
 
+v12.00 changes :
+- Compatibily with 1.14d (thanks to haxifix)
+
 v11.02 changes :
-Add command /setmainindex : Set the current stash page as main index (shift + prev/next index button go to an main index if exists)
-Current number of simulated players use with /players command is save with the player and set on game loading. NBPlayersByDefault must be different to 0 in PlugY.ini.
+- Add command /setmainindex : Set the current stash page as main index (shift + prev/next index button go to an main index if exists)
+- Current number of simulated players use with /players command is save with the player and set on game loading. NBPlayersByDefault must be different to 0 in PlugY.ini.
 
 v11.01 changes :
 - Compatibily with 1.13d (thanks to L'Autour)

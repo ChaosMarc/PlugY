@@ -1,6 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
+    Add support 1.14d by haxifix.
 
     @file D2wrapper.cpp
     @brief Main Diablo II extra DLL handler.
@@ -29,6 +30,7 @@
 #include "customLibraries.h"
 #include "common.h"
 
+#include "interface_Stash.h"
 
 int version_Game = UNKNOW;
 //int version_binkw32 = UNKNOW;
@@ -173,17 +175,21 @@ void hookLibraries()
 {
 	log_msg("***** Unprotect Libraries *****\n");
 
-	hookLibrary(S_D2Client,	offset_D2Client);
-//	hookLibrary(S_D2CMP,	offset_D2CMP);
-	hookLibrary(S_D2Common,	offset_D2Common);
-	hookLibrary(S_D2Game,	offset_D2Game);
-	hookLibrary(S_D2gfx,	offset_D2gfx);
-	hookLibrary(S_D2Lang,	offset_D2Lang);
-	hookLibrary(S_D2Launch,	offset_D2Launch);
-//	hookLibrary(S_D2Net,	offset_D2Net);
-//	hookLibrary(S_D2Win,	offset_D2Win);
-	hookLibrary(S_Fog,		offset_Fog);
-	hookLibrary(S_Storm,	offset_Storm);
+    if (version_Game == V114d) {
+        hookLibrary(S_Game, offset_Game);
+    } else {
+        hookLibrary(S_D2Client, offset_D2Client);
+        //	hookLibrary(S_D2CMP,	offset_D2CMP);
+        hookLibrary(S_D2Common, offset_D2Common);
+        hookLibrary(S_D2Game, offset_D2Game);
+        hookLibrary(S_D2gfx, offset_D2gfx);
+        hookLibrary(S_D2Lang, offset_D2Lang);
+        hookLibrary(S_D2Launch, offset_D2Launch);
+        //	hookLibrary(S_D2Net,	offset_D2Net);
+        //	hookLibrary(S_D2Win,	offset_D2Win);
+        hookLibrary(S_Fog, offset_Fog);
+        hookLibrary(S_Storm, offset_Storm);
+    }
 
 	log_msg("\n\n");
 }
@@ -192,17 +198,21 @@ void unhookLibraries()
 {
 	log_msg("***** Reprotect Libraries *****\n");
 
-	unhookLibrary(S_D2Client,	offset_D2Client);
-//	unhookLibrary(S_D2CMP,		offset_D2CMP);
-	unhookLibrary(S_D2Common,	offset_D2Common);
-	unhookLibrary(S_D2Game,		offset_D2Game);
-	unhookLibrary(S_D2gfx,		offset_D2gfx);
-	unhookLibrary(S_D2Lang,		offset_D2Lang);
-	unhookLibrary(S_D2Launch,	offset_D2Launch);
-//	unhookLibrary(S_D2Net,		offset_D2Net);
-//	unhookLibrary(S_D2Win,		offset_D2Win);
-	unhookLibrary(S_Fog,		offset_Fog);
-	unhookLibrary(S_Storm,		offset_Storm);
+    if (version_Game == V114d) {
+        unhookLibrary(S_Game, offset_Game);
+    } else {
+        unhookLibrary(S_D2Client, offset_D2Client);
+        //	unhookLibrary(S_D2CMP,		offset_D2CMP);
+        unhookLibrary(S_D2Common, offset_D2Common);
+        unhookLibrary(S_D2Game, offset_D2Game);
+        unhookLibrary(S_D2gfx, offset_D2gfx);
+        unhookLibrary(S_D2Lang, offset_D2Lang);
+        unhookLibrary(S_D2Launch, offset_D2Launch);
+        //	unhookLibrary(S_D2Net,		offset_D2Net);
+        //	unhookLibrary(S_D2Win,		offset_D2Win);
+        unhookLibrary(S_Fog, offset_Fog);
+        unhookLibrary(S_Storm, offset_Storm);
+    }
 
 	log_msg("\n\n");
 }
@@ -272,8 +282,8 @@ void loadCustomLibraries()
 			curString=strtok(NULL,"|");
 		}
 	}
-	if(dllFilenames)
-		D2FogMemDeAlloc(dllFilenames,__FILE__,__LINE__,0);
+  if (dllFilenames)
+    D2FogMemDeAlloc(dllFilenames, __FILE__, __LINE__, 0);
 
 	log_msg("\n\n");
 }
@@ -395,7 +405,7 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	initD2modules();
 
-	if (version_Game < V109 || version_Game > V113d)
+	if (version_Game < V109 || version_Game > V114d)
 	{
 		log_box("PlugY isn't compatible with this version : %s", GetVersionString(version_Game));
 		Release();
@@ -489,6 +499,9 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	if (active_EnabledCowPortalWhenCowKingWasKill)
 		Install_EnabledCowPortalWhenCowKingWasKill();
+
+    if (active_DoNotCloseNihlathakPortal)
+      Install_DoNotCloseNihlathakPortal();
 
 	log_msg("\nDLL patched sucessfully.\n\n\n");
 
