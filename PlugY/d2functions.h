@@ -1,25 +1,24 @@
 /*================================================
-	File created by Yohann NICOLAS.
-	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+  File created by Yohann NICOLAS.
+  Add support 1.13d by L'Autour.
+  Add support 1.14d by haxifix.
 
-    This file implements some common and useful
-    function related to some Diablo II mechanisms.
-
+  This file implements some common and useful
+  function related to some Diablo II mechanisms.
 ================================================*/
 #pragma once
 
 // Convertion to 1.09
 struct s_shifting {
-	DWORD ptInventory;
-	DWORD ptSpecificData;
-	DWORD ptPYPlayerData;
-	DWORD ptGame;
-	DWORD ptClientGame;
-	DWORD ptSkills;
-	DWORD ptImage;
-	DWORD ptFrame;
-};
+  DWORD ptInventory;
+  DWORD ptSpecificData;
+  DWORD ptPYPlayerData;
+  DWORD ptGame;
+  DWORD ptClientGame;
+  DWORD ptSkills;
+  DWORD ptImage;
+  DWORD ptFrame;
+  };
 extern s_shifting shifting;
 
 //#ifdef MSVC
@@ -57,7 +56,20 @@ extern s_shifting shifting;
 #define E2C(F, A, T, N)		extern T* pt##N;
 #define F8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
 #define A8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
-#define C8(Z, A,B,C,D,E,F,G,H,I, T, N)       extern T* pt##N;
+//#define C8(Z, A,B,C,D,E,F,G,H,I, T, N)       extern T* pt##N;
+
+extern DWORD* ptResolutionY;
+extern DWORD* ptResolutionX;
+extern DWORD* ptNegWindowStartY;
+extern DWORD* ptWindowStartX;
+extern NetClient** ptClientTable;
+extern DWORD*  ptIsLodGame;
+extern BYTE*   ptDifficultyLevel;
+extern DWORD*  ptMouseY;
+extern DWORD*  ptMouseX;
+extern Unit**  ptptClientChar;
+extern DWORD*  ptNbStatDesc;
+extern DWORD*  ptStatDescTable;
 
 #include "../Commons/D2Funcs.h"
 extern DataTables* SgptDataTables;
@@ -78,7 +90,7 @@ extern DataTables* SgptDataTables;
 
 #undef F8
 #undef A8
-#undef C8
+//#undef C8
 #undef D2S
 #undef D2F
 #undef E2S
@@ -89,11 +101,11 @@ extern TD2AddPlayerStat				V2AddPlayerStat;
 extern TD2GetGameByClientID			V2GetGameByClientID;
 extern TD2SpawnMonster				V2SpawnMonster;
 //extern TD2SetColorPopup			V2SetColorPopup;
-extern WORD (*getDescStrPos)	(DWORD statID);
+extern WORD(*getDescStrPos)	(DWORD statID);
 extern void* (STDCALL *compileTxtFile)(DWORD unused, const char* filename, BINField* ptFields, DWORD* ptRecordCount, DWORD recordLength);
 void setImage(sDrawImageInfo* data, void* image);
 void setFrame(sDrawImageInfo* data, DWORD frame);
-void __inline fillRect(DWORD x, DWORD y, DWORD Width, DWORD Height, DWORD color, DWORD transTbl){D2FillArea(x,y,x+Width,y+Height,color,transTbl);};
+void __inline fillRect(DWORD x, DWORD y, DWORD Width, DWORD Height, DWORD color, DWORD transTbl) { D2FillArea(x, y, x + Width, y + Height, color, transTbl); };
 
 //#define SgptDataTables (*ptSgptDataTables)
 #define ResolutionY (*ptResolutionY)
