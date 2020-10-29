@@ -58,6 +58,16 @@ void log_box( const char* pFormat, ... )
 	MessageBox(NULL, buffer, "PlugY, The Survival Kit", MB_OK|MB_ICONEXCLAMATION);
 }
 
+void debug_msg(const char* pFormat, ...)
+  {
+  char buffer[300];
+  va_list lArgs;
+  va_start(lArgs, pFormat);
+  vsprintf(&buffer[0], pFormat, lArgs);
+  va_end(lArgs);
+
+  OutputDebugString(buffer);
+  }
 
 void log_msg( const char* pFormat, ... )
 {
