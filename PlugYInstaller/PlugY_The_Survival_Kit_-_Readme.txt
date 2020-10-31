@@ -8,16 +8,16 @@
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
-Official website : http://plugy.free.fr
+Official website: http://plugy.free.fr
 You can make a donation if you want.
 
 
 ******** WARNING ********
-- This plug-in works with LoD version 1.09 to 1.13d and mods based on.
+- This plug-in works with LoD version 1.09 to 1.13d and 1.14d and mods based on.
 - This plug-in doesn't work on realms Battle.net.
 - All files may be changed since previous version, so uninstall any previous version.
 - PlugY.ini has changed since previous version, use the one in this package.
-- Don't forget to read the PlugY forum at :
+- Don't forget to read the PlugY forum at:
     http://d2mods.info/forum/viewforum.php?f=133
 
 
@@ -27,7 +27,7 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 - Infinite storage space in the stash.
 - Shared storage space in the stash.
 - Enabled the ladder only runewords out of realms.
-- Local World Event and Uber Quest for singleplayer and multiplayer off-realm !
+- Local World Event and Uber Quest for singleplayer and multiplayer off-realm!
 - Can open Cow Level Portal even when player have kill the Cow King in that difficulty.
 - Unassign assigned skills and stats points.
 - Change the selected language.
@@ -42,57 +42,57 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 - D2 can load all files, even those opened with Microsoft Excel (disabled by default).
 - Display the stats current value (without magical bonus) like Magic/gold find or maximum resistances.
 - Can launch game in windowed mode with some options (lock mouse/resize/on top/noborder).
-- Add following commands (see "COMMENTS ON THE CONFIGURATION FILE") :
-	/save : Save game without exit.
-	/page 1 : Show normal stats page (stats page must be opened).
-	/page 2 : Show extra stats page (stats page must be opened).
-	/page 3 : Show resistance stats page (stats page must be opened).
-	/page 4 : (beta) Show available runewords (stats page must be opened).
-	/lockmouse : Lock mouse cursor in the window.
-	/lock : Same as /lockmouse.
-	/unlockmouse : Unlock mouse cursor in the window.
-	/unlock : Same as /unlockmouse.
-	/renamechar newname : Rename your character and save it.
-	/renamepage name : Rename current page stash.
-	/setindex : Set current stash page as index.
-	/setmainindex : Set current stash page as main index.
-	/resetindex : Remove index flag on the current stash page.
-	/insertpage : Insert a new page after the current page.
-	/deletepage : Delete current page if empty.
-	/swap page : Swap the content of current stash page with the content of another page.
-	/toggle page : Swap the content of current stash page with the content of another page in opposing stash shared/personal.
-	/dlm : Toggle always display mana and life mode.
-	/dml : Same as /dlm.
-	/dl : Toggle always display life mode.
-	/dm : Toggle always display mana mode.
-	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
+- Add following commands (see "COMMENTS ON THE CONFIGURATION FILE"):
+	/save: Save game without exit.
+	/page 1: Show normal stats page (stats page must be opened).
+	/page 2: Show extra stats page (stats page must be opened).
+	/page 3: Show resistance stats page (stats page must be opened).
+	/page 4: (beta) Show available runewords (stats page must be opened).
+	/lockmouse: Lock mouse cursor in the window.
+	/lock: Same as /lockmouse.
+	/unlockmouse: Unlock mouse cursor in the window.
+	/unlock: Same as /unlockmouse.
+	/renamechar newname: Rename your character and save it.
+	/renamepage name: Rename current page stash.
+	/setindex: Set current stash page as index.
+	/setmainindex: Set current stash page as main index.
+	/resetindex: Remove index flag on the current stash page.
+	/insertpage: Insert a new page after the current page.
+	/deletepage: Delete current page if empty.
+	/swap page: Swap the content of current stash page with the content of another page.
+	/toggle page: Swap the content of current stash page with the content of another page in opposing stash shared/personal.
+	/dlm: Toggle always display mana and life mode.
+	/dml: Same as /dlm.
+	/dl: Toggle always display life mode.
+	/dm: Toggle always display mana mode.
+	/listcube: (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
 
 
-v12.00 changes :
+v12.00 changes:
 - Compatibily with 1.14d (thanks to haxifix)
 
-v11.02 changes :
-- Add command /setmainindex : Set the current stash page as main index (shift + prev/next index button go to an main index if exists)
+v11.02 changes:
+- Add command /setmainindex: Set the current stash page as main index (shift + prev/next index button go to an main index if exists)
 - Current number of simulated players use with /players command is save with the player and set on game loading. NBPlayersByDefault must be different to 0 in PlugY.ini.
 
-v11.01 changes :
+v11.01 changes:
 - Compatibily with 1.13d (thanks to L'Autour)
-- Add command /unlockmouse : Unlock the mouse
-- Add command /unlock : same as /unlockmouse
-- Add command /renamepage : stash page name are succefully saved.
-- Add command /setindex : Set the current stash page as index (prev/next index button go to an index if exists)
-- Add command /resetindex : Remove index flag on the current stash page (prev/next index button go to this index if exists).
-- Add command /insertpage : Insert a new page after the current page.
-- Add command /deletepage : Delete current page if empty.
+- Add command /unlockmouse: Unlock the mouse
+- Add command /unlock: same as /unlockmouse
+- Add command /renamepage: stash page name are succefully saved.
+- Add command /setindex: Set the current stash page as index (prev/next index button go to an index if exists)
+- Add command /resetindex: Remove index flag on the current stash page (prev/next index button go to this index if exists).
+- Add command /insertpage: Insert a new page after the current page.
+- Add command /deletepage: Delete current page if empty.
 - Add localizion in Russian and google traduction for not translated language. (thanks to L'Autour)
 - Add an option in PlugY.ini to select shared stash (instead of personal one) on character loading.
 - Rename command /rename to /renamechar.
 - Remove unfinished command /reload.
 
-v11.00 changes :
+v11.00 changes:
 - Unofficial version supporting LOD 1.13d
 
-v10.01 changes :
+v10.01 changes:
 - Add windowed mode.
 - Can lock mouse cursor in the window (windowed mode).
 - Can remove border (windowed mode).
@@ -103,31 +103,31 @@ v10.01 changes :
 - Add command "/toggle page" to swap the content of current stash page with the content of another page in opposing stash shared/personal.
 - Add command "/rename newname" to rename your character. This feature is still in beta and you must exit the game to update the stats page.
 
-v10.00 changes :
+v10.00 changes:
 - Disable access to Battle.net via main menu button.
 - PlugY works for 1.13c version of LoD too.
 - Fix shortcut in start menu
 
-v9.00 changes :
+v9.00 changes:
 - PlugY works for 1.12 version of LoD too.
 - Fix somes bugs.
 - Add option for unassign skill for mods.
 
-v8.00 changes :
-- Easier installation : New installer.
+v8.00 changes:
+- Easier installation: New installer.
 - Can open Cow Level Portal even when player have kill the Cow King in that difficulty.
 - Display the real version of LoD in the main screen. (v 1.09d or v 1.11b instead of v 1.09 or v 1.11)
 - Add the possibility to move the unassign skills button like stash buttons. (for modders)
 - Fix crash when meeting a superunique monsters in Lod v1.11.
 - Fix skills points lost when unasssign them in mods with special skills.
-- Multiplayer : Save stash files (with client's data like version before 5.00) when a deconnection or error happend during saving process.
+- Multiplayer: Save stash files (with client's data like version before 5.00) when a deconnection or error happend during saving process.
 - Remove the "check load memory failed" message when D2gfx.dll was patched.
 
-v7.01b changes :
+v7.01b changes:
 - Fix the ladder only runewords features in versions 1.11 and 1.10 of LoD.
 - Fix wierd characters in some text.
 
-v7.01 changes :
+v7.01 changes:
 - Enabled the ladder only runewords out of realms.
 - Fixed Uber Baal AI.
 - Remove all param options set by default in PlugY.ini (like windowed mode).
@@ -135,7 +135,7 @@ v7.01 changes :
 - Add an executable to launch PlugY (no more LoD's files modified) (RECALL)
 - Translation into spanish and polish.
 
-v7.00 changes :
+v7.00 changes:
 - PlugY works for 1.11b version of LoD too.
 - Add an executable to launch PlugY (no more LoD's files modified)
 - Add base value for each stat on assign buttons overtext.
@@ -143,75 +143,75 @@ v7.00 changes :
 - Fix features which stayed enabled on Battle.net.
 - Translation into italian.
 
-v6.01b changes :
+v6.01b changes:
 - Bug fix with the display of popup on stat assignment buttons.
 
-v6.01 changes :
-- Major fix : unique carry1 items don't disappear when they are cubbed in LoD 1.10
+v6.01 changes:
+- Major fix: unique carry1 items don't disappear when they are cubbed in LoD 1.10
 - Keys and Uber organs aren't destroyed when we try to open a Red Porpal out of Harrogath.
 - Fix conflict with D2Mod for the version display.
 
-v6.00 changes :
-- PlugY works for 1.11 version of LoD too !
+v6.00 changes:
+- PlugY works for 1.11 version of LoD too!
 - Enabled Uber Quest off realm (LoD 1.11 only).
 - Fixed crash on PlugY launch if LoD install isn't clean
 - Fixed some minor bugs and added some minor improvements.
 - Added command "/save" to save the game without exit (LoD 1.11 only).
 
-v5.06 changes :
+v5.06 changes:
 - Added buttons for shared gold.
 - Enabled shared gold in multiplayer.
 - Command "/DisplayLifeMana" is replaced by "/dlm".
 - Fixed some bugs.
 
-v5.05 changes :
+v5.05 changes:
 - Fixed bad default color in interface stats.
 - Added Shared gold via commands.
 - Command "/DisplayLifeAndMana" is now "/DisplayLifeMana".
 - Display green set item name in popup when it's in the shared stash.
 - Fixed multiplayer bugs by redoing multiplayer procedure.
 
-v5.04 changes :
-- Fixed : Stat/Skill points per level-up bug.
-- Fixed : Multiplayer bugs.
+v5.04 changes:
+- Fixed: Stat/Skill points per level-up bug.
+- Fixed: Multiplayer bugs.
 - PlugY/PlugYDefault.ini completed.
 
-v5.03 changes :
-- Fixed : Bug which sometimes swaps Hardcore and Softcore shared stash.
+v5.03 changes:
+- Fixed: Bug which sometimes swaps Hardcore and Softcore shared stash.
 - Added color on extra stats page.
 - Changed default values on extra stats page.
 - Set EnabledTXTFilesWhenMSExcelOpenIt=1 in PlugY.ini file.
 
-v5.02 changes :
-- Fixed : Previous bug fix which caused items to disappear.
+v5.02 changes:
+- Fixed: Previous bug fix which caused items to disappear.
 
-v5.01 changes :
-- Fixed : Major bugs in stash management.
-- Fixed : Set back PlugY.ini with ActiveLogFile=0 by default.
-- Fixed : bug when shared stash is disabled.
+v5.01 changes:
+- Fixed: Major bugs in stash management.
+- Fixed: Set back PlugY.ini with ActiveLogFile=0 by default.
+- Fixed: bug when shared stash is disabled.
 
-v5.00 changes :
-- PlugY works for 1.09, 1.09b, 1.09d versions of LoD, including mods based on these releases !
+v5.00 changes:
+- PlugY works for 1.09, 1.09b, 1.09d versions of LoD, including mods based on these releases!
 - PlugY can load D2Mod.dll.
 - D2 can load all files, even those openned with Microsoft Excel.
 - World Event monster can be changed.
 - Some stuff for modders.
-- Fixed : major bugs in Multiplayer : fingerprints reset, unidentified bugged items, etc.
-- Fixed : Typo error in PlugY.ini (Commands).
-- Fixed : No more case sensitive commands in game.
-- Fixed : Select Main Stat page bug on opening
-- Fixed : Replaced the display "Critical Strike/Deadly Strike" with Deadly Strike only.
-- Fixed : The spawn of DiabloClone at starting of a new game
-- Fixed : Some other small bugs.
+- Fixed: major bugs in Multiplayer: fingerprints reset, unidentified bugged items, etc.
+- Fixed: Typo error in PlugY.ini (Commands).
+- Fixed: No more case sensitive commands in game.
+- Fixed: Select Main Stat page bug on opening
+- Fixed: Replaced the display "Critical Strike/Deadly Strike" with Deadly Strike only.
+- Fixed: The spawn of DiabloClone at starting of a new game
+- Fixed: Some other small bugs.
 
-v4.04 changes :
-- Fixed : Display bug when statPerLevelUp enabled.
-- Fixed : Bug in saving procedure when the disk is full.
+v4.04 changes:
+- Fixed: Display bug when statPerLevelUp enabled.
+- Fixed: Bug in saving procedure when the disk is full.
 - New configuration system for modders.
 - Always display Mana and Life values above the globes.
 
-v4.03 changes :
-- Fixed : "carry 1" unique item (unique charm) when we drop the cube.
+v4.03 changes:
+- Fixed: "carry 1" unique item (unique charm) when we drop the cube.
 - Can go directly to first or last page of stash (shift + click on next/previous).
 - Second index added (shift + click on index buttons)
 - Added data to extra stats pages (2 pages now).
@@ -219,25 +219,25 @@ v4.03 changes :
 - Moved buttons in extra stats pages to same place as in main stats page (only in 800x600).
 - Can choose whether the main (first) page or the last selected page is displayed on opening the stats page.
 
-v4.02b changes :
-- Fixed : Features stay enabled in open Battle.net
+v4.02b changes:
+- Fixed: Features stay enabled in open Battle.net
 
 
-v4.02 changes :
-- Fixed : No more conflict with Battle.net (BigStash disabled on realms)
-- Fixed : Missing "d" in "SeparateHardcoreStash=1" from PlugY.ini
-- Fixed : By default in PlugY.ini, the language isn't changed.
-- Fixed : Item level display enabled correctly for all configurations of PlugY.
+v4.02 changes:
+- Fixed: No more conflict with Battle.net (BigStash disabled on realms)
+- Fixed: Missing "d" in "SeparateHardcoreStash=1" from PlugY.ini
+- Fixed: By default in PlugY.ini, the language isn't changed.
+- Fixed: Item level display enabled correctly for all configurations of PlugY.
 - Added data in the extra stats page.
 
-v4.01 changes :
-- Fixed : NbPlayers always set to 8 when active. 
+v4.01 changes:
+- Fixed: NbPlayers always set to 8 when active. 
 - Added data in the extra stats page.
 
-v4.00b changes :
-- Fixed : MSVCR70.dll not found bug.
+v4.00b changes:
+- Fixed: MSVCR70.dll not found bug.
 
-v4.00 changes :
+v4.00 changes:
 - Better optimization of the code.
 - Added some pages for displaying more characters stats like %MF.
 - Change the selected language (and for mod, default and available language).
@@ -248,62 +248,62 @@ v4.00 changes :
 - Change installation method (can be installed directly on linux now)
 - The item which triggers the World Event can be changed.
 - Any number of "carry 1 item" (like annihilus) can be put in the stash.
-- Fixed : Cannot put more than one "carry 1 item"  in others page than stash.
-- Fixed : display bug of socketed items in the stash.
-- Fixed : removed space bug in PlugY.ini.
-- Fixed : Diablo Clone can't spawn in normal and nightmare difficulty.
-- Fixed : Destruction of extra minions after unassignment if you have +x bonus to the skill.
+- Fixed: Cannot put more than one "carry 1 item"  in others page than stash.
+- Fixed: display bug of socketed items in the stash.
+- Fixed: removed space bug in PlugY.ini.
+- Fixed: Diablo Clone can't spawn in normal and nightmare difficulty.
+- Fixed: Destruction of extra minions after unassignment if you have +x bonus to the skill.
 
-v3.02 changes :
-- Fixed : Change the number of stats points gained when player gains a level.
-- Fixed : When the shared stash is disabled, you can load a game with your character.
-- Fixed : You can change parameters of World Event without activating skill per level up.
+v3.02 changes:
+- Fixed: Change the number of stats points gained when player gains a level.
+- Fixed: When the shared stash is disabled, you can load a game with your character.
+- Fixed: You can change parameters of World Event without activating skill per level up.
 
-v3.01 changes :
+v3.01 changes:
 - Change the number of stats points gained when player gains a level.
 - Fixed bugs which give extra points when skills points are unassigned.
 - Added parameters for the WorldEvent in configuration file.
 - By default, World Event only SHOWS "X SOJ Sold" in hell difficulty.
 
-v3.00 changes :
-- Local World Event for singleplayer and multiplayer off-realm !
+v3.00 changes:
+- Local World Event for singleplayer and multiplayer off-realm!
 - Unassign assigned skills points.
 - New background for the stash.
 - Can change the filename of the shared savefile.
 - Shared stash page number display are in red now.
 
-v2.05 changes :
-- major fix : bugs which cause D2 not to start are finally removed.
+v2.05 changes:
+- major fix: bugs which cause D2 not to start are finally removed.
 
-v2.04 changes :
+v2.04 changes:
 - Unassign stats points, skills on level up are disabled when you connect to realm (like stash).
 - Open a error message box instead of crash when PlugY.dll isn't found by D2.
 - Fixed some bugs in installation method.
 - Fixed bug display of buttons.
 - Fixed win95/98/Me saving.
 
-v2.03b changes :
+v2.03b changes:
 - Show PlugY version only in main screen.
 
-v2.03 changes :
-- Major fix : Correct and secure the saving procedure.
+v2.03 changes:
+- Major fix: Correct and secure the saving procedure.
 - No more crash of the host game when a character is unable to enter the game.
 - Unassign stats points button greyed when base stat is above 255 fixed. 
 - Change version printing on main screen (change color & PlugY version in right corner)
 - Character without PlugY can join game host with PlugY enabled.
 
-v2.02 changes :
+v2.02 changes:
 - PlugY doesn't use D2win.dll to launch PlugY anymore.
 - PlugY includes a patcher/unpatcher for editing D2gfx.dll to launch PlugY.
 - PlugY can be launched by D2Mod system of SVR.
 - The infinite storage sytem is automatically disabled on a realm game.
 - Fixed index button bugs.
 
-v2.01 changes :
+v2.01 changes:
 - Fixed skill per level up bug
 - Fixed bug display of text in the main menu
 
-v2.00 changes :
+v2.00 changes:
 - Localized in German.
 - Change the number of Skills points gained when player gains a level.
 - Launch any number of Diablo II game on the same computers.
@@ -317,22 +317,22 @@ v2.00 changes :
 - Removed page number bug when you switch between characters.
 - Removed set item's bug display.
 - Removed the bug of "carry 1"
-- Add other small improvements... :)
+- Add other small improvements...:)
 
-v1.03 changes :
+v1.03 changes:
 - Added French readme and ini files.
 - Removed bugs in D2Classic game (there is no multipage, it's not a bug)
 - Removed the bug when loading character from previous version.
  (like ShadowMaster character or 1.09 or D2Classic character)
 - Removed the bugged line in the text when you click on delete character.
-* must read : You can start any mods without moving SAVES files
+* must read: You can start any mods without moving SAVES files
      (you need to move dll files with classic script).
 
-v1.02 changes :
+v1.02 changes:
 - Re-changed name files due to an IE bug with colon in zip file.
 - Ability to change the version text print in the main menu (see ini file).
 
-v1.01 changes : 
+v1.01 changes: 
 - Localized for french version (wait for an french readme.txt) 
 - Changed filename from "PlugY, The Survival Kit.ini" to "PlugY,The_Survival_Kit". 
 - Added example for installation in the readme. 
@@ -341,18 +341,18 @@ v1.01 changes :
 (you can add it if you want but need to know what are you doing...) 
 - Released in .zip file instead of .rar 
 
-v1.00 features (can all be easily enabled or disabled) :
+v1.00 features (can all be easily enabled or disabled):
 - You can change the save path directory.
 - You can start any mods without moving saves files.
 - You can increase the stash to 10x10 squares.
-- Up to 4,294,967,296 pages in the stash (e.g. infinite storage space) !
-  note : for LOD1.10 character only.
+- Up to 4,294,967,296 pages in the stash (e.g. infinite storage space)!
+  note: for LOD1.10 character only.
 - Any of these pages can be shared by all of your characters!
 
 
 
 ******** CONTENTS ********
-19 files, 1 folder :
+19 files, 1 folder:
 - PlugY_The_Survival_Kit_-_Readme.txt
 - PlugY_The_Survival_Kit_-_LisezMoi.txt
 - PlugY_The_Survival_Kit_-_Liesmich.txt
@@ -377,23 +377,23 @@ v1.00 features (can all be easily enabled or disabled) :
 
 
 ******** INSTALLATION ********
-Normal Installation :
+Normal Installation:
 - Follow directive installer.
 
-note : You can choice "Diablo II" directory as install directory.
+note: You can choice "Diablo II" directory as install directory.
 
 Installation in another mod:
 - Copy PlugY.ini, PlugY.exe and PlugY folder (+its contents) in the targeted mod folder.
 - Edit PlugY.ini to configure some features (see section below).
-- Run PlugY.exe and enjoy :)
+- Run PlugY.exe and enjoy:)
 
-note : you can move the "PlugY" folder in "Diablo II" and it will be see by all PlugY installation.
+note: you can move the "PlugY" folder in "Diablo II" and it will be see by all PlugY installation.
 
-Example :
-You have installed Lord of Destruction here :  C:\Games\Diablo II\
-And the mod to add this plug-in is here : D:\D2Mod\MyMod\
-And the second mod to add this plug-in is here : D:\D2Mod\MyMod2\
-So the new installation is :
+Example:
+You have installed Lord of Destruction here: C:\Games\Diablo II\
+And the mod to add this plug-in is here: D:\D2Mod\MyMod\
+And the second mod to add this plug-in is here: D:\D2Mod\MyMod2\
+So the new installation is:
    C:\Games\Diablo II\PlugY.dll
    D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
    D:\D2Mod\MyMod\PlugY\PlugYFixed.ini
@@ -425,18 +425,18 @@ So the new installation is :
    D:\D2Mod\MyMod2\PlugY.exe
 
 
-Uninstallation : Use the uninstaller or if you have check this option, simply remove all PlugY files !
-Note : You can also move PlugY.dll in the mod folder but you must remove any on in D2 folder.
-Note : PlugY directory and its contents can be put in a mpq. 
+Uninstallation: Use the uninstaller or if you have check this option, simply remove all PlugY files!
+Note: You can also move PlugY.dll in the mod folder but you must remove any on in D2 folder.
+Note: PlugY directory and its contents can be put in a mpq. 
 
-------- D2gfx Patcher :
+------- D2gfx Patcher:
 
 If you have problem when you run PlugY.exe then use PatchD2gfxDll.exe. (It happend sometimes with Windows 2000)
 - Go in Diablo II directory.
 - Do a backup of D2gfx.dll (in the case, you remove PlugY before restore it)
 - Run PatchD2gfxDll.exe (which patches D2gfx.dll for launch PlugY)
-- Create a shortcut : Enter target mod directory in "start in" field of properties->shortcut. (unless you install PlugY in Diablo II directory)
-- Launch with the shorcut !!
+- Create a shortcut: Enter target mod directory in "start in" field of properties->shortcut. (unless you install PlugY in Diablo II directory)
+- Launch with the shorcut!
 
 Before uninstall PlugY Restore your D2gfx.dll with your backup file or run RestoreD2gfxDll.exe.
 
@@ -445,7 +445,7 @@ Before uninstall PlugY Restore your D2gfx.dll with your backup file or run Resto
 ******************** FAQ ******************
 
 => I can't find the PlugY.ini file, where is it ? 
->From kingpin :
+>From kingpin:
 Microsoft has in their OS hidden known extensions. This is to make sure newbie
 users do not delete those files by accident. You can, of course, turn this off by
 opening up your Windows Explorer, selecting Tools->Folder Options. Then choose View and
@@ -456,8 +456,8 @@ Then you will for sure see the ini file.
 => How do I Play sometimes on Battle.net when PlugY is installed ?
 PlugY automatically disables features on realm.
 But it's always recommended to disable any third software when you go on realm.
-Note : When bigStash is enabled, you must restart D2 for play in single/multi/open after playing in closed Bnet (and vice versa).
-Tips : Make a shorcut and add -skiptobnet at the of the "target" field for directly go to Battle.net.
+Note: When bigStash is enabled, you must restart D2 for play in single/multi/open after playing in closed Bnet (and vice versa).
+Tips: Make a shorcut and add -skiptobnet at the of the "target" field for directly go to Battle.net.
 
 
 => What do I do if I have an error like "Bad Generic File" on loading a new Character ? 
@@ -481,28 +481,28 @@ Thx
 
 ******** CONFIGURATION ********
 
-Configuration of this kit for a specified mod :
+Configuration of this kit for a specified mod:
 - Copy the PlugY.ini and PlugY.exe in the target mod directory (the directory where you start it, see it in the properties of the shortcut).
 - In most cases, you will change the save directory in the ini file.
 - Add all extra dll of the mod in PlugY.ini, if any.
 - Finally, activate any specific features you want such as MultiPageStash, SharedStash, etc.
 - Now, you can start the target mod using the classic method.
 
-D2Mod configuration :
-Just add the dll name in PlugY.ini, for example : "DllToLoad=D2Mod.dll"
+D2Mod configuration:
+Just add the dll name in PlugY.ini, for example: "DllToLoad=D2Mod.dll"
 
 Note:
 - Items in the Cube are always saved on the player, if you want these items shared, you must remove them from the Cube.
 
-Warning :
+Warning:
 - Be careful if you want to edit the configurations files after having played with the mod.
 - In multiplayer game, verify that the server has the same configuration.
-- Remember : PlugY doesn't support realms.
+- Remember: PlugY doesn't support realms.
 
 
 
 *** Configuration for modders ***
-There are 3 files with same structure to configure PlugY :
+There are 3 files with same structure to configure PlugY:
 - "PlugY/PlugYFixed.ini" in mpq or via the switch -direct
 All fields set parameters which can't be changed by users via PlugY.ini.
 Use it for enabling(disabling) wanted(unwanted) features.
@@ -531,7 +531,7 @@ Think about each features if you really must disable it.
 
 Modders can contact me, if they want help or more details about this system.
 
-WARNING : Don't forget, if it's misused, players will use old version of PlugY, and I will have no other choice than to disable it. 
+WARNING: Don't forget, if it's misused, players will use old version of PlugY, and I will have no other choice than to disable it. 
 
 
 
@@ -546,25 +546,25 @@ This section store info for PlugY.exe and don't work in PlugYDefault.ini and Plu
 Add params to transmit to LoD on his command line.
 Params give to PlugY.exe are also transmitted to LoD on his command line.
 By default no param are trasmited.
-Most common switch are (without quote) :
+Most common switch are (without quote):
 "-w" open LoD in windowed form. (See WINDOWED section instead)
 "-direct" use files in directory instead of those in mpq.
 "-txt" recompile txt files before launch a game.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 Param=				{-direct -txt -w: these 3 commands are passed on the command line}
 
 
 Select the library to load.
 The current directory are the one used by D2 (like set the "start in" field of a shorcut).
 If no library specify, it load LoD without PlugY.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 Library=			{PlugY.dll: Load PlugY.dll}
 
 
 [GENERAL]
 Enable or disable all selected features.
 Dlls from field "DllToLoad" aren't loaded anymore when ActivePlugin=0.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActivePlugin=0		{0:Don't load any features; 1:Plugin enabled}
 
 Enable or disable BattleNet Access.
@@ -580,29 +580,29 @@ Separate each dll file name by the character pipe (|)
 - DllToLoad2=			{(empty): Same as DlltoLoad}
 
 Activate some new commands in PlugY. In parenthesis is the condition to be able to use the command.
-/save : Save game without exit (LoD 1.11 minimum).
-/page 1 : Show normal stats page (stats page must be opened, space not mandatory).
-/page 2 : Show extra stats page (stats page must be opened, space not mandatory).
-/page 3 : Show resistance stats page (stats page must be opened, space not mandatory).
-/page 4 : (beta) Show available runewords (stats page must be opened, space not mandatory).
-/lockmouse : Lock mouse cursor in the window.
-/lock : Same as /lockmouse.
-/unlockmouse : Unlock mouse cursor in the window.
-/unlock : Same as /unlockmouse.
-/renamechar newname : Rename your character and save it. (You must exit the game to update the stats page.)
-/renamepage name : Rename current page stash (MultiStash activated).
-/setindex : Set current stash page as index (prev/next index button go to an index if exists) (MultiStash activated).
-/setmainindex : Set current stash page as main index (shift + prev/next index button go to an main index if exists) (MultiStash activated).
-/resetindex : Remove index flag on the current stash page (MultiStash activated).
-/insertpage : Insert a new page after the current page (MultiStash activated).
-/deletepage : Delete current page if empty (MultiStash activated).
-/swap page : Swap the content of current stash page with the content of another page (space not mandatory) (MultiStash activated).
-/toggle page : Swap the content of current stash page with the content of another page in opposing stash shared/personal (space not mandatory) (MultiStash activated).
-/dlm : Toggle always display mana and life mode. (Since 1.13c, you can click on the bottom of each orbs)
-/dml : Same as /dlm.
-/dl : Toggle always display life mode. (Since 1.13c, you can click on the bottom of the orb)
-/dm : Toggle always display mana mode. (Since 1.13c, you can click on the bottom of the orb)
-/listcube : (beta) Create a "cube.txt" file in current directory containing all cube's receipts (LoD 1.10 minimum).
+/save: Save game without exit (LoD 1.11 minimum).
+/page 1: Show normal stats page (stats page must be opened, space not mandatory).
+/page 2: Show extra stats page (stats page must be opened, space not mandatory).
+/page 3: Show resistance stats page (stats page must be opened, space not mandatory).
+/page 4: (beta) Show available runewords (stats page must be opened, space not mandatory).
+/lockmouse: Lock mouse cursor in the window.
+/lock: Same as /lockmouse.
+/unlockmouse: Unlock mouse cursor in the window.
+/unlock: Same as /unlockmouse.
+/renamechar newname: Rename your character and save it. (You must exit the game to update the stats page.)
+/renamepage name: Rename current page stash (MultiStash activated).
+/setindex: Set current stash page as index (prev/next index button go to an index if exists) (MultiStash activated).
+/setmainindex: Set current stash page as main index (shift + prev/next index button go to an main index if exists) (MultiStash activated).
+/resetindex: Remove index flag on the current stash page (MultiStash activated).
+/insertpage: Insert a new page after the current page (MultiStash activated).
+/deletepage: Delete current page if empty (MultiStash activated).
+/swap page: Swap the content of current stash page with the content of another page (space not mandatory) (MultiStash activated).
+/toggle page: Swap the content of current stash page with the content of another page in opposing stash shared/personal (space not mandatory) (MultiStash activated).
+/dlm: Toggle always display mana and life mode. (Since 1.13c, you can click on the bottom of each orbs)
+/dml: Same as /dlm.
+/dl: Toggle always display life mode. (Since 1.13c, you can click on the bottom of the orb)
+/dm: Toggle always display mana mode. (Since 1.13c, you can click on the bottom of the orb)
+/listcube: (beta) Create a "cube.txt" file in current directory containing all cube's receipts (LoD 1.10 minimum).
 - ActiveCommands=0 		{0:Disabled; 1:Enabled}
 
 Quit D2, if PlugY failed to installed all features.
@@ -645,7 +645,7 @@ All possibles languages: ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS
 - ActiveChangeLanguage=0	{0:Disabled; 1:Enabled}
 - SelectedLanguage=ENG		{FRA: Select French as language}
 
-For modders who want to restrict the available languages and the default language :
+For modders who want to restrict the available languages and the default language:
 - ActiveLanguageManagement=0	{0:Disabled; 1:Enabled}
 - DefaultLanguage=ENG		{empty:D2 default language; FRA:French is the default language}
 - AvailableLanguages=ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS	{ENG|FRA}
@@ -654,7 +654,7 @@ For modders who want to restrict the available languages and the default languag
 [SAVEPATH]
 This is where all of your characters and the shared stash is saved.
 You can use absolute or relative paths.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveSavePathChange=0	{0:Disabled; 1:Enabled, you must set "SavePath"}
 - SavePath=Save\		{Save\MyMod\  or D:\Save Games\diablo II\Current Mod\}
 
@@ -662,9 +662,9 @@ Following are default values, between {} are some examples values with descripti
 [MAIN SCREEN]
 Change the version text in the main menu (first menu)(instead of "v 1.10")
 Color is an integer which refers to defined D2 colors.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveVersionTextChange=0 	{0:Disabled; 1:Enabled}
-- VersionText=       		{Empty: Display the current version of LoD with the subversion letter (1.11b, 1.09d) ; Mod Name:Text with maximum length of 23 characters (ex : v 1.11b)}
+- VersionText=       		{Empty: Display the current version of LoD with the subversion letter (1.11b, 1.09d) ; Mod Name:Text with maximum length of 23 characters (ex: v 1.11b)}
 - ColorOfVersionText=0      	{0:white; 1:red; 4:gold; etc.}
 - ActivePrintPlugYVersion=1 	{0:Disabled; 1:Enabled)
 - ColorOfPlugYVersion=4     	{0:white; 1:red; 4:gold; etc.}
@@ -674,19 +674,19 @@ Following are default values, between {} are some examples values with descripti
 Increase the stash to 10x10 squares.
 Use PlugY\TradeStash.dc6 to change the background image.
 When bigStash is enabled, you must restart D2 for play in single/multi/open when you have started a game in closed Bnet previously (and vice versa).
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveBigStash=0	{0:Default stash size is used; 1: Enabled, Stash uses 10x10 squared}
 
-Use this for sharing and keep all of your items. :)
-There are 2 multipage stashes :
+Use this for sharing and keep all of your items.:)
+There are 2 multipage stashes:
 - one Personal, only seen by the Player;
 - one Shared between your Players in this mod.
 Use the Toggle Button to switch between stash.
 Use arrow buttons on bottom the stash (and shift key) for switching between the pages.
-Definition : The last page is the last page with an item in it.
+Definition: The last page is the last page with an item in it.
 The multipage stashes are inactive for Diablo II Classic Character and on realm.
 You can change the name of the shared filename.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveMultiPageStash=0	{0:Disabled; 1:Enabled}
 - NbPagesPerIndex=10		{10: Index page is 1,10,20,30,...,max}
 - NbPagesPerIndex2=100		{100: Index page (+shift) is 1,50,100,150,...,max}
@@ -707,21 +707,21 @@ Use for repairing a bad stat point assignment.
 For example, 30 points in energy for a barbarian!
 On the character stat page, press selected key and click on minus button.
 Select a key by setting KeyUsed (should choose 17 or 18).
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveStatsUnassignment=0		{0:Disabled 1:Enabled, press selected key when clicking}
 - KeyUsed=18				{17:Control key selected; 18:Alt key selected}
 
 Use the shift buton for assigning/unassigning all possible points in one click.
 You can define a limit value for points assigned/unassigned with shift.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveShiftClickLimit=0		{0:Disabled; 1:Enabled}
 - LimitValueToShiftClick=5		(10:Assign or unassign stats points, 10 by 10}
 
 
 [STAT ON LEVEL UP]
-WARNING : CHEAT, DON'T USE IN NORMAL GAME.
+WARNING: CHEAT, DON'T USE IN NORMAL GAME.
 Change the number of Stats Points you receive when your character gains a level.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveStatPerLevelUp=0		{0:Disabled; 1:Enabled}
 - StatPerLevelUp=5			{0:no points win;  11:eleven points win}
 
@@ -729,9 +729,9 @@ Following are default values, between {} are some examples values with descripti
 [SKILLS POINTS]
 Use for repairing a bad skill point assignment.
 Click on the button on skill page for unassigning all assigned skills points.
-Note : It verifies the real cost of each skill (can be greater than 1 in mod)
-Warning : There are few place where you can put this button without bugs.
-Following are default values, between {} are some examples values with descriptions :
+Note: It verifies the real cost of each skill (can be greater than 1 in mod)
+Warning: There are few place where you can put this button without bugs.
+Following are default values, between {} are some examples values with descriptions:
 - ActiveSkillsUnassignment=0	{0:Disabled; 1:Enabled}
 - ActiveSkillsUnassignmentOneByOne=0	{0:Normal; 1:Force the skill unassign 1 for 1 (for mods).}
 - PosXUnassignSkillBtn=-1 	{-1: Default position, 50: Put the button at the position 50 in X}
@@ -739,9 +739,9 @@ Following are default values, between {} are some examples values with descripti
 
 
 [SKILL ON LEVEL UP]
-WARNING : CHEAT, DON'T USE IN NORMAL GAME.
+WARNING: CHEAT, DON'T USE IN NORMAL GAME.
 Change the number of Skills Points you receive when your character gains a level.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveSkillPerLevelUp=0		{0:Disabled; 1:Enabled}
 - SkillPerLevelUp=1			{0:no point gained;  3:three points gained)
 
@@ -753,7 +753,7 @@ If the WE triggers when you aren't in the game, you lose it.
 From the moment you launch D2, the next WE will trigger between few seconds to 41:40 hours after.
 Keep in mind before editing it, World Event should be triggered rarely.
 The item to sell can be changed, the value expected is same as the cube input field.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveWorldEvent=0			{0:Disabled; 1:Enabled}
 - ShowCounterInAllDifficulty=0		{0:Show it "SOJ Sold" message only in Hell; 1:Show it in all difficulties}
 - ItemsToSell=The Stone of Jordan	{r01: rune EL;      cap,rar,upg: Any cap/war hat/shako rare}
@@ -772,7 +772,7 @@ Following are default values, between {} are some examples values with descripti
 Activate the Uber Quest in local.
 It works only in Hell.
 You must cube the 3 keys then the 3 organs in Harrogath.
-Note : This quest will be updated more later to be more similar with the one on realm.
+Note: This quest will be updated more later to be more similar with the one on realm.
 ActiveUberQuest=0				{0:Disabled; 1:Enabled}
 
 
@@ -791,9 +791,9 @@ Can choose whether to display the background of buttons (Use when a mod already 
 You can run any number of Diablo II games on one computer.
 For example, modder can test multiplayer game for their mod.
 To start the second game, you must start it with "game.exe" and not "Diablo II.exe".
-Warning : Don't start games with the same savepath when you use the Shared Stash.
+Warning: Don't start games with the same savepath when you use the Shared Stash.
 	  Don't use the same character in same time.
-Following are default values, between {} are some examples values with descriptions :
+Following are default values, between {} are some examples values with descriptions:
 - ActiveLaunchAnyNumberOfLOD=0		{0:Disabled; 1:Enabled}
 
 Regenerate the map each time you re-start a game (like in multiplayer).
@@ -816,21 +816,21 @@ Display the stats current value (without magical bonus) when mouse pass over ass
 
 Enabled the ladder only runewords out of realms.
 This is done by setting to 0 the column "server" in runes.txt file.
-So don't use this column in your mod with this funcion enabled !
+So don't use this column in your mod with this funcion enabled!
 - ActiveLadderRunewords=0		{0:Disabled; 1:Enabled}
 
 Enabled the ability to open the Cow Portal in a difficulty where the player have already killed the Cow King.
 - ActiveCowPortalWhenCowKingWasKilled=0 {0:Disabled; 1:Enabled}
 
 
-More features later... :)
+More features later...:)
 
 
-This is my email : ynicolas@worldonline.fr.
+This is my email: ynicolas@worldonline.fr.
 But I don't support PlugY anymore so don't hope any help from me if you have problems. Instead go on forums...
 
 
-PS : Sorry for english faults ;)
+PS: Sorry for english faults ;)
 
 ******** THANKS TO ********
 - Blizzard for making Diablo2 and Lord of Destruction.
@@ -844,13 +844,13 @@ PS : Sorry for english faults ;)
 - ItalianPlayer for italian translation.
 - All members of ProzenKeep chat and forums for their information and feedback.
 - PhrozenKeep team for all stuff they shared for us (including mine ;)
-- Translation :
-	* English : Yohann, Jurica.
-	* French : Yohann
-	* German : ChaosEnergy, TheMasterCaster.
-	* Italian : ItalianPlayer
-	* Spanish : Acrerune
-	* Polish : Serdel
-	* Russian : L'Autour
+- Translation:
+	* English: Yohann, Jurica.
+	* French: Yohann
+	* German: ChaosEnergy, TheMasterCaster.
+	* Italian: ItalianPlayer
+	* Spanish: Acrerune
+	* Polish: Serdel
+	* Russian: L'Autour
 
 ;--------------------------------------------------------------------------------------;
