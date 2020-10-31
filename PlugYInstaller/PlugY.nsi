@@ -2,7 +2,7 @@
 ;	Modified by L'Autour.
 !include "MUI2.nsh"
 
-!define VERSION "11.02"
+!define VERSION "12.00"
 !define D2FILES "."
 !define NAME "PlugY, The Survival Kit"
 !define MOD_DIR "Mod PlugY"
@@ -222,11 +222,11 @@ Section $(SECTION_NAME_UNINSTALLER) Uninstaller
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "NoRepair" 1
 SectionEnd
 
-Section $(SECTION_PATCH_FILE) PatchFile
-  SetOutPath $D2Path
-  File "${D2FILES}\PatchD2File.exe"
-  File "${D2FILES}\RestoreD2File.exe"
-SectionEnd
+;;;Section $(SECTION_PATCH_FILE) PatchFile
+  ;SetOutPath $D2Path
+  ;File "${D2FILES}\PatchD2File.exe"
+  ;File "${D2FILES}\RestoreD2File.exe"
+;SectionEnd
 
 ;--------------------------------
 ; Uninstall
