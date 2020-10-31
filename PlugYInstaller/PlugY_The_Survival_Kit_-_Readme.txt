@@ -733,7 +733,7 @@ Note : It verifies the real cost of each skill (can be greater than 1 in mod)
 Warning : There are few place where you can put this button without bugs.
 Following are default values, between {} are some examples values with descriptions :
 - ActiveSkillsUnassignment=0	{0:Disabled; 1:Enabled}
-- ActiveSkillsUnassignmentOneForOne=0	{0:Normal; 1:Force the skill unassign 1 for 1 (for mods).}
+- ActiveSkillsUnassignmentOneByOne=0	{0:Normal; 1:Force the skill unassign 1 for 1 (for mods).}
 - PosXUnassignSkillBtn=-1 	{-1: Default position, 50: Put the button at the position 50 in X}
 - PosYUnassignSkillBtn=-1 	{-1: Default position, 50: Put the button at the position 50 in Y}
 

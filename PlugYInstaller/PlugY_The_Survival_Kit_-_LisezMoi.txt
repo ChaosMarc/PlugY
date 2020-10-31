@@ -659,7 +659,7 @@ note : Prends le co�t r�el de chaque skills (qui peut �tre plus grand que 
 Attention : Il y a peux de place o� mettre se boutton sans bugs.
 Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
 - ActiveSkillsUnassignment=0 	{0:D�sactiv�; 1:Activ�}
-- ActiveSkillsUnassignmentOneForOne=0	{0:Normal; 1:Force la d�assignation 1 for 1 (pour mod sp�cifique).}
+- ActiveSkillsUnassignmentOneByOne=0	{0:Normal; 1:Force la d�assignation 1 for 1 (pour mod sp�cifique).}
 - PosXUnassignSkillBtn=-1 		{-1: Position par d�faut, 50: D�place le bouton � la position 50 en X}
 - PosYUnassignSkillBtn=-1 		{-1: Position par d�faut, 50: D�place le bouton � la position 50 en Y}
 

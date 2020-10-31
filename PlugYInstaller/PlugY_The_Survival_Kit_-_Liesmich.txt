@@ -706,7 +706,7 @@ Beispiel:
 Hinweis:  �berpr�ft die wahren "Kosten" f�r jede Fertigkeit ( kann gr�sser als 1 sein in einem MOD)
  Im folgenden die Standardwerte und in {}  einige Beispiel Werte mit Beschreibungen:
 - ActiveSkillsUnassignment=0 {0: Ausgeschaltet ; 1: Eingeschaltet }
-- ActiveSkillsUnassignmentOneForOne=0	{0:Normal; 1:Force the skill unassign 1 for 1 (for mods).}
+- ActiveSkillsUnassignmentOneByOne=0	{0:Normal; 1:Force the skill unassign 1 for 1 (for mods).}
 - PosXUnassignSkillBtn=-1 	{-1: Default position, 50: Put the button at the position 50 in X}
 - PosYUnassignSkillBtn=-1 	{-1: Default position, 50: Put the button at the position 50 in Y}
 
