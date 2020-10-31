@@ -1,5 +1,5 @@
-;	File created by Yohann NICOLAS.
-;	Modified by L'Autour.
+﻿Unicode True
+
 !include "MUI2.nsh"
 
 !define VERSION "12.00"
@@ -47,44 +47,55 @@ InstallDirRegKey HKLM "${REGKEY}" "InstallPath"
 ; Languages
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "French"
+!insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "Russian"
 
 LangString DESC_CORE ${LANG_ENGLISH} "Core files.$\nPlugY.dll will be installed in Diablo II directory."
+LangString DESC_CORE ${LANG_GERMAN} "Hauptdateien.$\nPlugY.dll wird in das Installationsverzeichnis von Diablo II installiert."
 LangString DESC_CORE ${LANG_FRENCH} "Fichiers n�cessaires.$\nPlugY.dll sera install� dans le r�pertoire de Diablo II."
 LangString DESC_CORE ${LANG_RUSSIAN} "�������� �����.$\nPlugY.dll ������ ���� ���������� � ������� Diablo II."
 LangString DESC_DESKTOP_SHORTCUTS ${LANG_ENGLISH} "Add shortcut on Desktop to launch Diablo II with ${NAME}."
+LangString DESC_DESKTOP_SHORTCUTS ${LANG_GERMAN} "Fügt eine Verknüpfung auf dem Desktop mit dem Namen ${NAME} hinzu mit der Diablo II gestartet werden kann."
 LangString DESC_DESKTOP_SHORTCUTS ${LANG_FRENCH} "Ajoute un raccourci pour d�marrer Diablo II avec ${NAME}."
 LangString DESC_DESKTOP_SHORTCUTS ${LANG_RUSSIAN} "�������� ����� �� ������� ���� ��� ������� Diablo II � ${NAME}."
 LangString DESC_MENU_SHORTCUTS ${LANG_ENGLISH} "Add shortcuts in start menu."
+LangString DESC_MENU_SHORTCUTS ${LANG_GERMAN} "Fügt Verknüpfungen im Startmenü hinzu."
 LangString DESC_MENU_SHORTCUTS ${LANG_FRENCH} "Ajoute des raccourcis dans le menu d�marrer."
 LangString DESC_MENU_SHORTCUTS ${LANG_RUSSIAN} "�������� ������ � ������� ����."
 LangString DESC_UNINSTALLER ${LANG_ENGLISH} "Create a Windows uninstall program.$\nAdding registry keys in Windows."
+LangString DESC_UNINSTALLER ${LANG_GERMAN} "Erzeugt ein Deinstallationsprogramm.$\nWindows Registrierungseinträge werden erstellt."
 LangString DESC_UNINSTALLER ${LANG_FRENCH} "Cr�e un programme Windows de d�sinstallation.$\nAjoute des cl�s de registres dans Windows."
 LangString DESC_UNINSTALLER ${LANG_RUSSIAN} "������� � Windows ������������ ���������.$\n��������� ����� ������� � Windows."
-LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
-LangString DESC_PATCH_FILE ${LANG_FRENCH} "Patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
-LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "��������� ���� ��� ������� PlugY ��� PlugY.exe. ��������� �������� � ����� Readme."
+;LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
+;LangString DESC_PATCH_FILE ${LANG_FRENCH} "Patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
+;LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "��������� ���� ��� ������� PlugY ��� PlugY.exe. ��������� �������� � ����� Readme."
 LangString SECTION_NAME_CORE ${LANG_ENGLISH} "${NAME} (required)"
+LangString SECTION_NAME_CORE ${LANG_GERMAN} "${NAME} (benötigt)"
 LangString SECTION_NAME_CORE ${LANG_FRENCH} "${NAME} (n�cessaire)"
 LangString SECTION_NAME_CORE ${LANG_RUSSIAN} "${NAME} (���������)"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_ENGLISH} "Desktop Shortcut"
+LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_GERMAN} "Desktopverknüpfung"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_FRENCH} "Raccourci sur le bureau"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_RUSSIAN} "����� �� ������� �����"
 LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_ENGLISH} "Start menu Shortcuts"
+LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_GERMAN} "Startmenüverknüpfungen"
 LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_FRENCH} "Raccourcis dans le Menu d�marrer"
 LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_RUSSIAN} "������ � � ������� ����"
 LangString SECTION_NAME_UNINSTALLER ${LANG_ENGLISH} "Uninstaller (add keys registers)"
+LangString SECTION_NAME_UNINSTALLER ${LANG_GERMAN} "Deinstallationsprogramm (Fügt Windows Registrierungseinträge hinzu)"
 LangString SECTION_NAME_UNINSTALLER ${LANG_FRENCH} "D�-installeur (ajoute cl�s de registre)"
 LangString SECTION_NAME_UNINSTALLER ${LANG_RUSSIAN} "������������� (��������� ����� �������)"
-LangString SECTION_PATCH_FILE ${LANG_ENGLISH} "File Patcher (advanced user only)"
-LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de fichier (utilisateur avanc� uniquement)"
-LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "���� ��� Patcher (��� ������� �������������)"
+;LangString SECTION_PATCH_FILE ${LANG_ENGLISH} "File Patcher (advanced user only)"
+;LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de fichier (utilisateur avanc� uniquement)"
+;LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "���� ��� Patcher (��� ������� �������������)"
 
 LangString README_FILENAME ${LANG_ENGLISH} "PlugY_The_Survival_Kit_-_Readme.txt"
+LangString README_FILENAME ${LANG_GERMAN} "PlugY_The_Survival_Kit_-_Liesmich.txt"
 LangString README_FILENAME ${LANG_FRENCH} "PlugY_The_Survival_Kit_-_LisezMoi.txt"
 LangString README_FILENAME ${LANG_RUSSIAN} "PlugY_The_Survival_Kit_-_Readme.txt"
 
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_ENGLISH} "Error : Diablo II install directory not found.$\nPlease re-install your copy of Diablo II - Lord of Destruction."
+LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_GERMAN} "Fehler : Diablo II Installationsverzeichnis nicht gefunden.$\nBitte installiere Diablo II - Lord of Destruction neu."
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_FRENCH} "Erreur : Le r�pertoire d'installation de Diablo II n'a pas �t� trouv�.$\nVeuillez r�-installer votre copie de Diablo II - Lord of Destruction."
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_RUSSIAN} "������ : ������� � ������������� ����� Diablo II �� ������.$\n���������� �������������� ���� ����� Diablo II - Lord of Destruction."
 
@@ -93,7 +104,7 @@ Var D2Path
 ; Initialisation
 Function .onInit
   !define MUI_LANGDLL_WINDOWTITLE "${NAME} v${VERSION}"
-  !define MUI_LANGDLL_INFO "Select your language:$\nChoisissez votre langue:"
+  !define MUI_LANGDLL_INFO "Select your language:"
   !insertmacro MUI_LANGDLL_DISPLAY
   !undef MUI_LANGDLL_WINDOWTITLE
   !undef MUI_LANGDLL_INFO
@@ -127,38 +138,6 @@ Function LaunchPlugY
 	SetOutPath "$INSTDIR"
 	ExecShell "" "$INSTDIR\PlugY.exe"
 FunctionEnd
-
-;--------------------------------
-; Custom Page
-;Function OptionsPage
-  ;StrCpy $INSTDIR "C:\temp\${NAME}"
-;	nsDialogs::Create /NOUNLOAD 1018
-	;Pop $D2Path
-
-	;GetFunctionAddress $D2Path OnBack
-	;nsDialogs::OnBack /NOUNLOAD $D2Path
-
-	;${NSD_CreateButton} 0 0 100% 12u Test
-	;Pop $BUTTON
-	;GetFunctionAddress $D2Path OnClick
-	;nsDialogs::OnClick /NOUNLOAD $BUTTON $D2Path
-
-	;${NSD_CreateText} 0 35 100% 12u hello
-	;Pop $EDIT
-	;GetFunctionAddress $D2Path OnChange
-	;nsDialogs::OnChange /NOUNLOAD $EDIT $D2Path
-
-	;${NSD_CreateCheckbox} 0 -50 100% 8u Test
-	;Pop $CHECKBOX
-	;GetFunctionAddress $D2Path OnCheckbox
-	;nsDialogs::OnClick /NOUNLOAD $CHECKBOX $D2Path
-
-	;${NSD_CreateLabel} 0 40u 75% 40u "* Type `hello there` above.$\n* Click the button.$\n* Check the checkbox.$\n* Hit the Back button."
-	;Pop $D2Path
-
-;	nsDialogs::Show
-;FunctionEnd
-
 
 InstType "Standard"
 InstType "Minimal"
@@ -222,11 +201,11 @@ Section $(SECTION_NAME_UNINSTALLER) Uninstaller
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "NoRepair" 1
 SectionEnd
 
-Section $(SECTION_PATCH_FILE) PatchFile
-  SetOutPath $D2Path
-  File "${D2FILES}\PatchD2File.exe"
-  File "${D2FILES}\RestoreD2File.exe"
-SectionEnd
+;Section $(SECTION_PATCH_FILE) PatchFile
+;  SetOutPath $D2Path
+;  File "${D2FILES}\PatchD2File.exe"
+;  File "${D2FILES}\RestoreD2File.exe"
+;SectionEnd
 
 ;--------------------------------
 ; Uninstall
@@ -242,8 +221,8 @@ Section "Uninstall" Uninstall
 
   ; Remove files and uninstaller
   Delete "$D2Path\PlugY.dll"
-  Delete "$D2Path\PatchD2File.exe"
-  Delete "$D2Path\RestoreD2File.exe"
+;  Delete "$D2Path\PatchD2File.exe"
+;  Delete "$D2Path\RestoreD2File.exe"
   Delete "$INSTDIR\PlugY.exe"
   Delete "$INSTDIR\PlugY.log"
   Delete "$INSTDIR\BnetLog.txt"
@@ -267,13 +246,11 @@ Section "Uninstall" Uninstall
   RMDir "$INSTDIR"
 SectionEnd
 
-
-
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT "${Core}" $(DESC_CORE)
   !insertmacro MUI_DESCRIPTION_TEXT "${DesktopShortcuts}" $(DESC_DESKTOP_SHORTCUTS)
   !insertmacro MUI_DESCRIPTION_TEXT "${MenuShortcuts}" $(DESC_MENU_SHORTCUTS)
-  !insertmacro MUI_DESCRIPTION_TEXT "${PatchFile}" $(DESC_PATCH_FILE)
+;  !insertmacro MUI_DESCRIPTION_TEXT "${PatchFile}" $(DESC_PATCH_FILE)
   !insertmacro MUI_DESCRIPTION_TEXT "${Uninstaller}" $(DESC_UNINSTALLER)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
