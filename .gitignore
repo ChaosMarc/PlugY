@@ -26,10 +26,11 @@
 *.exe
 *.out
 *.app
+**/*.zip
 
 .idea
 **/.vs
-/**/Release/
+**/Release/
 **/*.vcxproj
 **/*.vcxproj.filters
 **/*.vcxproj.user

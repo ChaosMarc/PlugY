@@ -132,7 +132,7 @@ struct Path //(8 dword)
 
 
 struct Inventory
-{                               		//Offset from Code.		Size: 30 à 40
+{                               		//Offset from Code.		Size: 30 ï¿½ 40
 	DWORD	tag;						//+00	= 0x01020304
 	BYTE	uk1[0x04];					//+04	=? 0
 	Unit*	ptChar;						//+08
@@ -274,16 +274,16 @@ ITEMFLAG_TAGETING               = 0x00000004,
 ITEMFLAG_UNIDENTIFIED               = 0x00000010,  
 ITEMFLAG_QUANTITY               = 0x00000020,  
 ITEMFLAG_Durability               = 0x00000100,  
-ITEMFLAG_UNKNOWN2               = 0x00000400,  
+ITEMFLAG_UNKNOWN2               = 0x00000400,
 ITEMFLAG_SOCKETED               = 0x00000800,  
 ITEMFLAG_NON_SELLABLE               = 0x00001000,  
 ITEMFLAG_NEWITEM2               = 0x00002000,  
-ITEMFLAG_UNKNOWN3               = 0x00004000,  
+ITEMFLAG_UNKNOWN3               = 0x00004000,
 ITEMFLAG_CHECKSECPRICE               = 0x00010000,  
 ITEMFLAG_CHECKGAMBLEPRICE          = 0x00020000,  
-ITEMFLAG_UNKNOWN4               = 0x00080000,  
+ITEMFLAG_UNKNOWN4               = 0x00080000,
 ITEMFLAG_INDESTRUCTIBLE(ETHERAL) = 0x00400000,  
-ITEMFLAG_UNKNOWN5               = 0x00800000,  
+ITEMFLAG_UNKNOWN5               = 0x00800000,
 ITEMFLAG_FROMPLAYER               = 0x01000000,  
 ITEMFLAG_RUNEWORD               = 0x04000000
 */
@@ -300,7 +300,7 @@ ITEMFLAG_RUNEWORD               = 0x04000000
 	WORD	prefix[3];					//+38
 	WORD	suffix[3];					//+3E
 	BYTE	equipLoc;					//+44
-    /*	emplacement si équipé
+    /*	emplacement si ï¿½quipï¿½
 	*	00 = noequip/inBelt
 	*   01 = head
 	*	02 = neck

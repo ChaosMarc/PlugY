@@ -32,29 +32,29 @@
 
 #include "interface_Stash.h"
 
-int version_Game = UNKNOW;
-//int version_binkw32 = UNKNOW;
-//int version_Bnclient = UNKNOW;
-int version_D2Client = UNKNOW;
-int version_D2CMP = UNKNOW;
-int version_D2Common = UNKNOW;
-//int version_D2DDraw = UNKNOW;
-//int version_D2Direct3D = UNKNOW;
-int version_D2Game = UNKNOW;
-//int version_D2Gdi = UNKNOW;
-int version_D2gfx = UNKNOW;
-//int version_D2Glide = UNKNOW;
-int version_D2Lang = UNKNOW;
-int version_D2Launch = UNKNOW;
-//int version_D2MCPClient = UNKNOW;
-//int version_D2Multi = UNKNOW;
-int version_D2Net = UNKNOW;
-//int version_D2sound = UNKNOW;
-int version_D2Win = UNKNOW;
-int version_Fog = UNKNOW;
-//int version_ijl11 = UNKNOW;
-//int version_SmackW32 = UNKNOW;
-int version_Storm = UNKNOW;
+int version_Game = UNKNOWN;
+//int version_binkw32 = UNKNOWN;
+//int version_Bnclient = UNKNOWN;
+int version_D2Client = UNKNOWN;
+int version_D2CMP = UNKNOWN;
+int version_D2Common = UNKNOWN;
+//int version_D2DDraw = UNKNOWN;
+//int version_D2Direct3D = UNKNOWN;
+int version_D2Game = UNKNOWN;
+//int version_D2Gdi = UNKNOWN;
+int version_D2gfx = UNKNOWN;
+//int version_D2Glide = UNKNOWN;
+int version_D2Lang = UNKNOWN;
+int version_D2Launch = UNKNOWN;
+//int version_D2MCPClient = UNKNOWN;
+//int version_D2Multi = UNKNOWN;
+int version_D2Net = UNKNOWN;
+//int version_D2sound = UNKNOWN;
+int version_D2Win = UNKNOWN;
+int version_Fog = UNKNOWN;
+//int version_ijl11 = UNKNOWN;
+//int version_SmackW32 = UNKNOWN;
+int version_Storm = UNKNOWN;
 
 DWORD	offset_Game = NULL;
 //DWORD	offset_binkw32 = NULL;
@@ -299,7 +299,7 @@ void loadLibrary(LPCSTR libName, int* libVersion, DWORD* libOffset, int shift, D
 	log_msg("%s loaded at:\t%08X (", libName, *libOffset);
 
 	DWORD addr = *(DWORD*)(*libOffset + shift);
-	if (version_Game != UNKNOW && (version_Game <= V108 || version_Game >= V113d))
+	if (version_Game != UNKNOWN && (version_Game <= V108 || version_Game >= V113d))
 		*libVersion = version_Game;
 	else if (addr==v109b)
 		*libVersion = V109b;
@@ -316,8 +316,8 @@ void loadLibrary(LPCSTR libName, int* libVersion, DWORD* libOffset, int shift, D
 	else if (addr==v113c)
 		*libVersion = V113c;
 	else {
-		*libVersion = version_Game != UNKNOW ? version_Game : V113d;
-		log_msg("unknow, try with ");
+		*libVersion = version_Game != UNKNOWN ? version_Game : V113d;
+		log_msg("unknown, try with ");
 	}
 	log_msg("%s)\n", GetVersionString(*libVersion));
 }
@@ -374,7 +374,7 @@ void initD2modules()
 		GET_VERSION(D2Win,		1699,	88686F8C, 84686F8C, D094686F, F0030000, 001435E8, 8B088F44, 0013F5E8);	//0x19000	0x6F8A0000 Already Loaded	0x1C000
 		GET_VERSION(Fog,		102,	D0000006, 10000001, 00000006, 000042E6, 00004302, 0000483C, 00004B95);	//0x20000	0x6FF50000 Already Loaded	0x1F000
 		GET_VERSION(Storm,		1190,	19E85082, 59E85082, 13C103F6, 0474F685, 8B000321, 3B1074C9, 0D896404);	//0x30000	0x6FFB0000 Already Loaded	-
-		if (version_Game == UNKNOW)
+		if (version_Game == UNKNOWN)
 			 version_Game = version_D2gfx;
 	}
 //	GET_VERSION(binkw32		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//

@@ -15,21 +15,21 @@ const char* VersionStrings[16] = { "1.00","1.07","1.08","1.09","1.09b","1.09d","
 const char* GetVersionString(int version)
 {
 	if (version < 0 || version >= sizeof(VersionStrings))
-		return "UNKNOW";
+		return "UNKNOWN";
 	return VersionStrings[version];
 }
 
 eGameVersion GetD2Version(LPCVOID pVersionResource)
 {
-	if (!pVersionResource) return UNKNOW;
+	if (!pVersionResource) return UNKNOWN;
 
 	UINT uLen;
 	VS_FIXEDFILEINFO* ptFixedFileInfo;
 	if (!VerQueryValue(pVersionResource, "\\", (LPVOID*)&ptFixedFileInfo, &uLen))
-		return UNKNOW;
+		return UNKNOWN;
 
 	if (uLen == 0)
-		return UNKNOW;
+		return UNKNOWN;
 
 	WORD major = HIWORD(ptFixedFileInfo->dwFileVersionMS);
 	WORD minor = LOWORD(ptFixedFileInfo->dwFileVersionMS);
@@ -37,7 +37,7 @@ eGameVersion GetD2Version(LPCVOID pVersionResource)
 	WORD subrevision = LOWORD(ptFixedFileInfo->dwFileVersionLS);
 
 	if (major != 1)
-		return UNKNOW;
+		return UNKNOWN;
 	if (minor == 0 && revision == 7 && subrevision == 0) return V107;
 	if (minor == 0 && revision == 8 && subrevision == 28) return V108;
 	if (minor == 0 && revision == 9 && subrevision == 19) return V109;
@@ -53,14 +53,14 @@ eGameVersion GetD2Version(LPCVOID pVersionResource)
 	if (minor == 14 && revision == 1 && subrevision == 68) return V114b;
 	if (minor == 14 && revision == 2 && subrevision == 70) return V114c;
 	if (minor == 14 && revision == 3 && subrevision == 71) return V114d;
-	return UNKNOW;
+	return UNKNOWN;
 }
 
 eGameVersion GetD2Version(char* gameExe)
 {
 	DWORD len = GetFileVersionInfoSize(gameExe, NULL);
 	if (len == 0)
-		return UNKNOW;
+		return UNKNOWN;
 
 	BYTE* pVersionResource = new BYTE[len];
 	GetFileVersionInfo(gameExe, NULL, len, pVersionResource);
@@ -73,9 +73,9 @@ eGameVersion GetD2Version(char* gameExe)
 eGameVersion GetD2Version(HMODULE hModule)
 {
 	HRSRC hResInfo = FindResource(hModule, MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
-	if (!hResInfo) return UNKNOW;
+	if (!hResInfo) return UNKNOWN;
 	HGLOBAL hResData = LoadResource(hModule, hResInfo);
-	if (!hResData) return UNKNOW;
+	if (!hResData) return UNKNOWN;
 	LPVOID pVersionResource = LockResource(hResData);
 	eGameVersion version = GetD2Version(pVersionResource);
 	FreeResource(hResData);

@@ -21,7 +21,7 @@
 //D2S(D2Common,11068,	DWORD,		D2InvAddItem, (Inventory* ptInventory, Unit* ptItem, DWORD posX, DWORD posY, DWORD vValueC, DWORD bIsClient, BYTE page));//ONLY 1.11b result : boolean 0=echec  ; vValueC = 0 for Game.dll, 1 for Clientdll
 //D2S(D2Common,10250,	DWORD,		D2Common10250, (const char* file, DWORD line, Inventory* ptInventory, DWORD posX, DWORD posY, DWORD vValueC, DWORD bIsClient, BYTE page));// result : boolean 0=echec  ; vValueC = 0 for Game.dll, 1 for Clientdll
 ////D2S(D2Common,10257,	Unit*,		D2GetItemFromBodyLoc, (Inventory* ptInventory, DWORD bodyloc));
-//D2S(D2Common,10273,	DWORD,		D2Common10273, (Inventory* ptInventory, void* unknow));
+//D2S(D2Common,10273,	DWORD,		D2Common10273, (Inventory* ptInventory, void* unknown));
 //D2S(D2Common,10535,	Unit*,		D2InventoryGetFirstItem, (Inventory* ptInventory));//ONLY 1.11b
 //D2S(D2Common,11140,	Unit*,		D2UnitGetNextItem, (Unit* ptItem));//ONLY 1.11b
 //D2S(D2Common,10748,	Unit*,		D2GetRealItem, (Unit* ptUnit));//ONLY 1.11b
@@ -160,7 +160,7 @@ F8(STD,  D2Common,10243,10243,10243,10461,10827,10936,10646,10490, 23AD90, Unit*
 F8(STD,  D2Common,10249,10249,10249,10880,11068,10436,11107,10963, 23BCC0, DWORD,		D2InvAddItem, (Inventory* ptInventory, Unit* ptItem, DWORD posX, DWORD posY, DWORD vValueC, DWORD bIsClient, BYTE page));//result : boolean 0=echec  ; vValueC = 0 for Game.dll, 1 for Clientdll
 F8(STD,  D2Common,10250,10250,10250,00000,00000,00000,00000,00000, 00000, DWORD,		D2Common10250, (const char* file, DWORD line, Inventory* ptInventory, DWORD posX, DWORD posY, DWORD vValueC, DWORD bIsClient, BYTE page));// result : boolean 0=echec  ; vValueC = 0 for Game.dll, 1 for Clientdll
 //F7(STD,  D2Common,10257,10257,10257,00000,00000,00000,00000,00000,	Unit*,		D2GetItemFromBodyLoc, (Inventory* ptInventory, DWORD bodyloc));
-F8(STD,  D2Common,10273,10273,10273,00000,00000,00000,00000,00000, 00000, DWORD,		D2Common10273, (Inventory* ptInventory, void* unknow));
+F8(STD,  D2Common,10273,10273,10273,00000,00000,00000,00000,00000, 00000, DWORD,		D2Common10273, (Inventory* ptInventory, void* unknown));
 F8(STD,  D2Common,10277,10277,10277,10402,10535,11151,10460,11040, 23B2C0, Unit*,		D2InventoryGetFirstItem, (Inventory* ptInventory));
 F8(STD,  D2Common,10304,10304,10304,10934,11140,10770,10464,10879, 23DFA0, Unit*,		D2UnitGetNextItem, (Unit* ptItem));
 F8(STD,  D2Common,10305,10305,10305,11095,10748,10852,11147,10897, 23DFD0, Unit*,		D2GetRealItem, (Unit* ptUnit));
@@ -438,7 +438,7 @@ F8(STD,  D2Net,	10006,10006,10006,10018,10018,10015,10002,10012, 12B330, DWORD,	
 ////D2S(Fog,10127,		DWORD,		D2GetBitFieldSize, (saveBitField* data));//6FF536C0
 ////D2S(Fog,10128,		void,		D2EncodeValue, (saveBitField* data, DWORD value, DWORD bitSize));//6FF536C0
 ////D2S(Fog,10130,		DWORD,		D2DecodeValue, (saveBitField* data,DWORD readingSize));//6FF53840
-//D2S(Fog,10212,		void,		D2Fog10212, (DWORD unknow));//1.11b
+//D2S(Fog,10212,		void,		D2Fog10212, (DWORD unknown));//1.11b
 ////D2S(Fog,10217,		int,		D2GetIDFromLookUpTable, (void* table, char* string, bool));//6FF53840
 //D2S(Fog,10265,		int,		D2GetInstructionPointer, ());//ONLY 1.11/1.11b NOT 1.10
 
@@ -458,7 +458,7 @@ F8(FAST, Fog,	10116,10116,10116,10116,10116,10116,10116,10116, 6BA0, void,		D2Fo
 //F7(STD,  Fog, 10127,10127,10127,10127,10127,10127,10127,10127,	DWORD,		D2GetBitFieldSize, (saveBitField* data));//6FF536C0
 //F7(STD,  Fog, 10128,10128,10128,10128,10128,10128,10128,10128,	void,		D2EncodeValue, (saveBitField* data, DWORD value, DWORD bitSize));//6FF536C0
 //F7(STD,  Fog, 10130,10130,10130,10130,10130,10130,10130,10130,	DWORD,		D2DecodeValue, (saveBitField* data,DWORD readingSize));//6FF53840
-F8(STD,  Fog,	10212,10212,10212,10212,10212,10212,10212,10212, 2BD0B0, void,		D2Fog10212, (DWORD unknow));
+F8(STD,  Fog,	10212,10212,10212,10212,10212,10212,10212,10212, 2BD0B0, void,		D2Fog10212, (DWORD unknown));
 //F7(STD,  Fog, 10217,10217,10217,10217,10217,10217,10217,10217,	int,		D2GetIDFromLookUpTable, (void* table, char* string, bool));//6FF53840
 F8(STD,  Fog,	00000,00000,00000,10265,10265,10265,10265,10265, 8090, int,		D2GetInstructionPointer, ());
 //Fog10213 getIndexFromLookupTable (&table,code,bool)

@@ -66,10 +66,10 @@ LangString DESC_UNINSTALLER ${LANG_ENGLISH} "Create a Windows uninstall program.
 LangString DESC_UNINSTALLER ${LANG_GERMAN} "Erzeugt ein Deinstallationsprogramm.$\nWindows Registrierungseinträge werden erstellt."
 LangString DESC_UNINSTALLER ${LANG_FRENCH} "Crée un programme Windows de désinstallation.$\nAjoute des clés de registres dans Windows."
 LangString DESC_UNINSTALLER ${LANG_RUSSIAN} "Создать в Windows деинстллятор программы.$\nДобавляет ключи реестра в Windows."
-;LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
-;LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher um PlugY ohne PlugY.exe zu starten. Die LiesMich Datei MUSS vor benutzung gelesen werden."
-;LangString DESC_PATCH_FILE ${LANG_FRENCH} "D2gfx.dll patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
-;LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "Применить патч для запуска PlugY без PlugY.exe. Подробнее смотреть в файле Readme."
+LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
+LangString DESC_PATCH_FILE ${LANG_GERMAN} "Patcher um PlugY ohne PlugY.exe zu starten.$\nDie LiesMich-Datei MUSS vor Benutzung gelesen werden."
+LangString DESC_PATCH_FILE ${LANG_FRENCH} "D2gfx.dll patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
+LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "Применить патч для запуска PlugY без PlugY.exe. Подробнее смотреть в файле Readme."
 LangString SECTION_NAME_CORE ${LANG_ENGLISH} "${NAME} (required)"
 LangString SECTION_NAME_CORE ${LANG_GERMAN} "${NAME} (benötigt)"
 LangString SECTION_NAME_CORE ${LANG_FRENCH} "${NAME} (nécessaire)"
@@ -86,10 +86,10 @@ LangString SECTION_NAME_UNINSTALLER ${LANG_ENGLISH} "Uninstaller (add keys regis
 LangString SECTION_NAME_UNINSTALLER ${LANG_GERMAN} "Deinstallationsprogramm (Fügt Windows Registrierungseinträge hinzu)"
 LangString SECTION_NAME_UNINSTALLER ${LANG_FRENCH} "Dé-installeur (ajoute clés de registre)"
 LangString SECTION_NAME_UNINSTALLER ${LANG_RUSSIAN} "Деинсталлятор (добавляет ключи реестра)"
-;LangString SECTION_PATCH_FILE ${LANG_ENGLISH} "File Patcher (advanced user only)"
-;LangString SECTION_PATCH_FILE ${LANG_GERMAN} "Datei Patcher (Für erfahrene Nutzer)"
-;LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de D2gfx.dll (utilisateur avancé uniquement)"
-;LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "Патч для Patcher (для опытных пользователей)"
+LangString SECTION_PATCH_FILE ${LANG_ENGLISH} "File Patcher (advanced user only)"
+LangString SECTION_PATCH_FILE ${LANG_GERMAN} "Datei Patcher (Für erfahrene Nutzer)"
+LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de D2gfx.dll (utilisateur avancé uniquement)"
+LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "Патч для Patcher (для опытных пользователей)"
 
 LangString README_FILENAME ${LANG_ENGLISH} "PlugY_The_Survival_Kit_-_Readme.txt"
 LangString README_FILENAME ${LANG_GERMAN} "PlugY_The_Survival_Kit_-_Liesmich.txt"
@@ -203,11 +203,12 @@ Section $(SECTION_NAME_UNINSTALLER) Uninstaller
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}" "NoRepair" 1
 SectionEnd
 
-;Section $(SECTION_PATCH_FILE) PatchFile
-;  SetOutPath $D2Path
-;  File "${D2FILES}\PatchD2File.exe"
-;  File "${D2FILES}\RestoreD2File.exe"
-;SectionEnd
+Section $(SECTION_PATCH_FILE) PatchFile
+  SectionIn 1
+  SetOutPath $D2Path
+  File "${D2FILES}\PatchD2File.exe"
+  File "${D2FILES}\RestoreD2File.exe"
+SectionEnd
 
 ;--------------------------------
 ; Uninstall
@@ -223,8 +224,8 @@ Section "Uninstall" Uninstall
 
   ; Remove files and uninstaller
   Delete "$D2Path\PlugY.dll"
-;  Delete "$D2Path\PatchD2File.exe"
-;  Delete "$D2Path\RestoreD2File.exe"
+  Delete "$D2Path\PatchD2File.exe"
+  Delete "$D2Path\RestoreD2File.exe"
   Delete "$INSTDIR\PlugY.exe"
   Delete "$INSTDIR\PlugY.log"
   Delete "$INSTDIR\BnetLog.txt"
@@ -252,7 +253,7 @@ SectionEnd
   !insertmacro MUI_DESCRIPTION_TEXT "${Core}" $(DESC_CORE)
   !insertmacro MUI_DESCRIPTION_TEXT "${DesktopShortcuts}" $(DESC_DESKTOP_SHORTCUTS)
   !insertmacro MUI_DESCRIPTION_TEXT "${MenuShortcuts}" $(DESC_MENU_SHORTCUTS)
-;  !insertmacro MUI_DESCRIPTION_TEXT "${PatchFile}" $(DESC_PATCH_FILE)
+  !insertmacro MUI_DESCRIPTION_TEXT "${PatchFile}" $(DESC_PATCH_FILE)
   !insertmacro MUI_DESCRIPTION_TEXT "${Uninstaller}" $(DESC_UNINSTALLER)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
