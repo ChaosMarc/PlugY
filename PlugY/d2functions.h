@@ -47,16 +47,70 @@ extern s_shifting shifting;
 #define RX(v) (WindowStartX+(v))
 #define RY(v) (ResolutionY+NegWindowStartY-(v))
 
-
-
 #define D2S(F, I, R, N, P)	typedef R (STDCALL  *T##N) P; extern T##N N;//static D N = (D)(A);
 #define D2F(F, I, R, N, P)	typedef R (FASTCALL *T##N) P; extern T##N N;//static D N = (D)(A);
 #define E2S(F, A, R, N, P)	typedef R (STDCALL  *T##N) P; extern T##N N;
 #define E2F(F, A, R, N, P)	typedef R (FASTCALL *T##N) P; extern T##N N;
 #define E2C(F, A, T, N)		extern T* pt##N;
 #define F8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
-#define A8(X, Z, A,B,C,D,E,F,G,H,I, R, N, P) typedef R (X##CALL  *T##N) P; extern T##N N;
-//#define C8(Z, A,B,C,D,E,F,G,H,I, T, N)       extern T* pt##N;
+
+// Common
+typedef CharStatsBIN*(FASTCALL *TD2GetCharStatsBIN) (DWORD charID); extern TD2GetCharStatsBIN D2GetCharStatsBIN;
+typedef DWORD(FASTCALL *TD2CompileCubeInput) (CubeInput* cubeinput, char* s, DWORD p1, DWORD p2); extern TD2CompileCubeInput D2CompileCubeInput;
+typedef DWORD(FASTCALL *TD2CompileCubeOutput) (CubeOutput* cubeoutput, char* s, DWORD p1, DWORD p2); extern TD2CompileCubeOutput D2CompileCubeOutput;
+typedef ItemTypesBIN*(FASTCALL *TD2GetItemTypesBIN) (DWORD itemTypesId); extern TD2GetItemTypesBIN D2GetItemTypesBIN;
+typedef ItemStatCostBIN*(FASTCALL *TD2GetItemStatCostBIN) (DWORD id); extern TD2GetItemStatCostBIN D2GetItemStatCostBIN;
+typedef void*(FASTCALL *TD2ReadFile)(DWORD unused, char* filename, DWORD* size, const char*, DWORD); extern TD2ReadFile D2ReadFile;
+typedef void(STDCALL *TD2LoadSuperuniques) (DWORD mempool); extern TD2LoadSuperuniques D2LoadSuperuniques;
+
+// Client
+typedef void*(FASTCALL *TD2LoadImage) (const char* filename, DWORD filetype); extern TD2LoadImage D2LoadImage;
+typedef void(FASTCALL *TD2FreeImage) (void* image); extern TD2FreeImage D2FreeImage;
+typedef void(FASTCALL *TD2SendMsgToAll) (BYTE* data); extern TD2SendMsgToAll D2SendMsgToAll;
+typedef DWORD(STDCALL *TD2GetLastMonsterIDFight) (); extern TD2GetLastMonsterIDFight D2GetLastMonsterIDFight;
+typedef void(STDCALL *TD2PrintStatsPage) (); extern TD2PrintStatsPage D2PrintStatsPage;
+typedef DWORD(FASTCALL *TD2PrintStat) (Unit* ptItem, Stats* ptStats, DWORD statID, DWORD statIndex, DWORD statValue, LPWSTR lpText); extern TD2PrintStat D2PrintStat;
+typedef LPWSTR(FASTCALL *TD2SetColorPopup) (LPWSTR popupText, DWORD color); extern TD2SetColorPopup D2SetColorPopup;
+typedef DWORD(FASTCALL *TD2PlaySound) (DWORD id, DWORD, DWORD, DWORD, DWORD); extern TD2PlaySound D2PlaySound;
+typedef Unit*(FASTCALL *TD2GetCurrentNPC) (); extern TD2GetCurrentNPC D2GetCurrentNPC;
+typedef void(FASTCALL *TD2SendToServerXX) (DWORD size, BYTE * data); extern TD2SendToServerXX D2SendToServerXX;
+typedef void(FASTCALL *TD2TogglePage) (DWORD a, DWORD b, DWORD c); extern TD2TogglePage D2TogglePage;
+typedef void(FASTCALL *TD2ClickOnStashButton) (DWORD x, DWORD y); extern TD2ClickOnStashButton D2ClickOnStashButton;
+typedef void*(STDCALL *TD2LoadBuySelBtn) (); extern TD2LoadBuySelBtn D2LoadBuySelBtn;
+typedef void(FASTCALL *TD2ReloadGambleScreen) (); extern TD2ReloadGambleScreen D2ReloadGambleScreen;
+// Old Client (Only Until 1.10)
+typedef DWORD(FASTCALL *TD2isLODGame) (); extern TD2isLODGame D2isLODGame;
+typedef BYTE(FASTCALL *TD2GetDifficultyLevel) (); extern TD2GetDifficultyLevel D2GetDifficultyLevel;
+typedef DWORD(STDCALL *TD2GetMouseX) (); extern TD2GetMouseX D2GetMouseX;
+typedef DWORD(STDCALL *TD2GetMouseY) (); extern TD2GetMouseY D2GetMouseY;
+typedef Unit*(STDCALL *TD2GetClientPlayer) (); extern TD2GetClientPlayer D2GetClientPlayer;
+typedef void(FASTCALL *TD2CleanStatMouseUp) (); extern TD2CleanStatMouseUp D2CleanStatMouseUp;
+typedef void(FASTCALL *TD2SendToServer3) (BYTE type, WORD p); extern TD2SendToServer3 D2SendToServer3;
+typedef NetClient*(FASTCALL *TD2GetClient) (Unit* ptUnit, char* lpszErrFile, DWORD ErrLine); extern TD2GetClient D2GetClient;
+
+// Game
+typedef void(FASTCALL *TD2AddClient) (DWORD clientID); extern TD2AddClient D2AddClient;
+typedef Game*(STDCALL *TD2GetGameByClientID) (DWORD clientID); extern TD2GetGameByClientID D2GetGameByClientID;
+typedef void(FASTCALL *TD2BroadcastFunction)(Game* ptGame, void* fct, void* param); extern TD2BroadcastFunction D2BroadcastFunction;
+typedef DWORD(FASTCALL *TD2SendPacket) (void* ptNetClient, LPVOID pData, DWORD size); extern TD2SendPacket D2SendPacket;
+typedef void(FASTCALL *TD2SetSkillBaseLevelOnClient) (void* ptClient, Unit* ptChar, DWORD skillID, DWORD sLvl, DWORD bRemove); extern TD2SetSkillBaseLevelOnClient D2SetSkillBaseLevelOnClient;
+typedef DWORD(STDCALL *TD2LinkPortal) (Game* ptGame, Unit* ptObject, DWORD levelEndID, DWORD levelStartID); extern TD2LinkPortal D2LinkPortal;
+typedef DWORD(FASTCALL *TD2VerifIfNotCarry1) (Unit* ptItem, ItemsBIN* itemsData, Unit* ptFirstItem); extern TD2VerifIfNotCarry1 D2VerifIfNotCarry1;
+typedef Room*(FASTCALL *TD2TestPositionInRoom) (Room* ptRoom, DWORD x, DWORD y); extern TD2TestPositionInRoom D2TestPositionInRoom;
+typedef DWORD(FASTCALL *TD2SpawnMonster) (Game* ptGame, Room* ptRoom, DWORD zero1, DWORD x, DWORD y, DWORD minusOne, DWORD superuniqueID, DWORD zero2); extern TD2SpawnMonster D2SpawnMonster;
+typedef void(STDCALL *TD2Game235C0) (Game* ptGame, Room* ptRoom); extern TD2Game235C0 D2Game235C0;
+typedef DWORD(FASTCALL *TD2LoadInventory) (Game* ptGame, Unit* pChar, saveBitField* pdata, DWORD p2, DWORD maxSize, DWORD p4, DWORD *ptNbBytesRead); extern TD2LoadInventory D2LoadInventory;
+typedef Unit*(FASTCALL *TD2GameGetObject) (Game* ptGame, DWORD type, DWORD itemNum); extern TD2GameGetObject D2GameGetObject;
+typedef Unit*(FASTCALL *TD2CreateUnit) (DWORD type, DWORD id, DWORD x, DWORD y, Game* ptGame, Room* ptRoom, DWORD uk1, DWORD uk2, DWORD uk3); extern TD2CreateUnit D2CreateUnit;
+typedef void(FASTCALL *TD2OpenPandPortal) (Game* ptGame, Unit* ptChar); extern TD2OpenPandPortal D2OpenPandPortal;
+typedef void(FASTCALL *TD2OpenPandFinalPortal) (Game* ptGame, Unit* ptChar); extern TD2OpenPandFinalPortal D2OpenPandFinalPortal;
+typedef void(FASTCALL *TD2MephIA) (Game* ptGame, Unit* ptMonster, DWORD*); extern TD2MephIA D2MephIA;
+typedef void(FASTCALL *TD2DiabloIA) (Game* ptGame, Unit* ptMonster, DWORD*); extern TD2DiabloIA D2DiabloIA;
+typedef void(FASTCALL *TD2BaalIA) (Game* ptGame, Unit* ptMonster, DWORD*); extern TD2BaalIA D2BaalIA;
+typedef void(FASTCALL *TD2UberMephIA) (Game* ptGame, Unit* ptMonster, DWORD*); extern TD2UberMephIA D2UberMephIA;
+typedef void(FASTCALL *TD2UberDiabloIA) (Game* ptGame, Unit* ptMonster, DWORD*); extern TD2UberDiabloIA D2UberDiabloIA;
+typedef void(FASTCALL *TD2UberBaalIA) (Game* ptGame, Unit* ptMonster, DWORD*); extern TD2UberBaalIA D2UberBaalIA;
+typedef void(STDCALL *TD2SaveGame) (Game* ptGame); extern TD2SaveGame D2SaveGame;
 
 extern DWORD* ptResolutionY;
 extern DWORD* ptResolutionX;
@@ -73,24 +127,8 @@ extern DWORD*  ptStatDescTable;
 
 #include "../Commons/D2Funcs.h"
 extern DataTables* SgptDataTables;
-//ONLY UNTIL 1.10 :
-//E2F(D2Client,0,	DWORD,		D2isLODGame, ());
-//E2F(D2Client,0,	BYTE,		D2GetDifficultyLevel, ());
-//E2S(D2Client,0,	DWORD,		D2GetMouseX, ());
-//E2S(D2Client,0,	DWORD,		D2GetMouseY, ());
-//E2S(D2Client,0,	Unit*,		D2GetClientPlayer, ());
-//E2F(D2Client,0,	void,		D2SendToServer3, (BYTE type, WORD p));
-////E2F(D2Client,0,	void,		D2SendToServer7, (BYTE type, WORD p1, WORD p2, WORD p3));
-////E2F(D2Client,0,	void,		D2SendToServer5, (BYTE type, DWORD p));
-////E2F(D2Client,0,	void,		D2SendToServer9, (BYTE type, DWORD p1, DWORD p2));
-////E2F(D2Client,0,	void,		D2SendToServer13,(BYTE type, DWORD p1, DWORD p2, DWORD p3));
-//E2F(D2Game,0,	NetClient*,	D2GetClient, (Unit* ptUnit, char* lpszErrFile, DWORD ErrLine));
-//E2F(D2Client,0,	void,		D2CleanStatMouseUp, ());
-
 
 #undef F8
-#undef A8
-//#undef C8
 #undef D2S
 #undef D2F
 #undef E2S

@@ -265,7 +265,7 @@ int main(int argc, char * argv[])
 	{
 		msgBox(boxName, MB_OK | MB_ICONEXCLAMATION,
 			"Current version of LoD (%s) isn't compatible with PlugY.\n\n"
-			"Please, install a patch between 1.09 and 1.13d.",
+			"Please, install a patch between 1.09 and 1.13d or 1.14.",
 			GetVersionString(version));
 		exit(0);
 	}

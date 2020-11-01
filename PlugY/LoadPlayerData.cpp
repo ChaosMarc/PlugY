@@ -107,12 +107,12 @@ return value :
 13:Unable to enter game, a normal character cannot join a game create an harcore character.
 14:Unable to enter game, an harcore character cannot join a game create by a normal character.
 15:A dead character cannot join or create any game
-16:unknow failure
+16:unknown failure
 17:Unable to enter game. A D2 Character cannot join an expansion character
 18:Expansion cannot join D2
 19:Failures to join game
 1A:Unable to enter game
-1B:unknow failure
+1B:unknown failure
 */
 enum {
 	TS_SAVE_PERSONAL=0,

@@ -8,340 +8,340 @@
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
-Offizielle website : http://plugy.free.fr
-Ihr dürft spenden, falls ihr möchtet.
+Offizielle website: http://plugy.free.fr
+Ihr dürft gerne spenden, falls ihr möchtet.
 
 
 WARNUNG:
-- Dieses Plug-In ist NUR f�r LOD 1.09 zu 1.13d !
+- Dieses Plug-In ist NUR für LOD 1.09 bis 1.13d und 1.14d!
 - Dieses Plug-In ist NICHT das closed Battle.net!
-- Alle Dateien k�nnen sich seit der letzten Version ver�ndert haben, benutzt keine alten Dateien!
-- PlugY.ini wurde stark ver�ndert, bitte nehmt die Neue!
+- Alle Dateien können sich seit der letzten Version verändert haben, benutzt keine alten Dateien!
+- PlugY.ini wurde stark verändert, bitte nehmt die Neue!
 - Bitte lest im PlugY-Forum: 
 	http://d2mods.info/forum/viewforum.php?f=133
 
 
 ******** ALLE FUNKTIONEN ********
-Jedes Feature kann via PlugY.ini an/ausgeschaltet werden (siehe "Kommentare aus der Konfigurations-Datei")
-- Battle.net LogIn via Hauptmenu deaktiviert.
+Jedes Feature kann via PlugY.ini an/ausgeschaltet werden (siehe "Kommentare aus der Konfigurationsdatei")
+- Battle.net LogIn via Hauptmenü deaktiviert.
 - Nahezu unbegrenzter Speicherplatz im Goldschatz.
 - Gemeinsam genutzter Speicherplatz im Goldschatz.
-- Die Ladder-Only Runenw�rter k�nnen f�r den Singleplayer aktivert werden. 
-- Lokaler World Event ! (nicht 1.09)
+- Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden. 
+- Lokaler World Event! (nicht 1.09)
 - Lokaler Uber Quest! (nicht 1.09 und 1.10)
-- Zur�cksetzen von Fertigkeitspunkten
-- Man kann die Skill- und Statuspunkte zur�cksetzen.
-- Man kann die gew�hlte Sprache ver�ndern
+- Zurücksetzen von Fertigkeitspunkten
+- Man kann die Skill- und Statuspunkte zurücksetzen.
+- Man kann die gewählte Sprache verändern
 - Man kann einstellen das im Einzelspieler-Modus die Karte mit jedem Spiel erneuert wird
-- Man kann /players X automatisch ausf�hren lassen
-- Es gibt eine weitere Charakter Anzeige Seite mit zus�tzlichen Informationen
+- Man kann /players X automatisch ausführen lassen
+- Es gibt eine weitere Charakter Anzeige Seite mit zusätzlichen Informationen
 - Anzeige des Itemlevel in der Gegenstandsinfo
 - Man kann beliebig oft Diablo II auf dem gleichen Computer starten.
 - Der Goldschatz hat 10x10 Felder.
-- Man kann das "SAVE" Verzeichnis �ndern.
+- Man kann das "SAVE" Verzeichnis ändern.
 - Man kann die Versionsanzeige im Hauptbildschirm anpassen.
-- Diablo kann nun auf Text-Dateien laden die von Microsoft Excel ge�ffnet sind.
-- Folgende Befehle hinzugef�gt (siehe "Kommentare aus der Konfigurations-Datei") :
-	/save : Speichert das Spiel ohne es zu beenden.
-	/page 1 : Zeigt die normale Spielerinfo-Seite (Die Spielerinfo-Seite muss ge�ffnet sein).
-	/page 2 : Zeigt die extra Spielerinfo-Seite (Die Spielerinfo-Seite muss ge�ffnet sein).
-	/page 3 : Zeigt die Resistenzen Spielerinfo-Seite (Die Spielerinfo-Seite muss ge�ffnet sein).
-	/page 4 : (Beta) Zeigt alle verf�gbaren Runenw�rter (Die Spielerinfo-Seite muss ge�ffnet sein).
-	/lockmouse : Begrenzt den Mauszeiger auf das Fenster.
-	/lock : Siehe /lockmouse.
-	/unlockmouse : Entfernt die Begrenzung des Mauszeigers auf das Fenster.
-	/unlock : Siehe /unlockmouse.
-	/renamechar newname : Speichert und benennt den Char um.
-	/renamepage name : Benennt die aktuelle Truhenseite um.
-	/setindex : F�gt einen Index f�r die aktuelle Truhenseite hinzu.
-    /setmainindex : F�gt einen Haupt-Index f�r die aktuelle Truhenseite hinzu.
-	/resetindex : Entfernt den Index von der aktuellen Truhenseite
-	/insertpage : F�gt eine neue Truhenseite hinter der aktuellen ein.
-	/deletepage : L�scht die aktuelle Truhenseite, sofern sie leer ist.
-	/swap page : Tauscht den Inhalt der aktuellen Truhenseite mit einer anderen.
-	/toggle page : Tauscht den Inhalt der aktuellen Truhenseite mit einer anderen aus der alternativen Truhe (Gemeinsam/Pers�nlich).
-	/dlm : Aktiviert/Deaktiviert die permanente Anzeige der Mana und Lebenanzeige.
-	/dml : Siehe /dlm.
-	/dl : Aktiviert/Deaktiviert die permanente Anzeige der Lebenanzeige.
-	/dm : Aktiviert/Deaktiviert die permanente Anzeige der Manaanzeige.
-	/listcube : (Beta) Erstellt eine "cube.txt" Datei im Savegame-Verzeichnis mit allen W�rfelrezepten.
+- Diablo kann nun auf Text-Dateien laden die von Microsoft Excel geöffnet sind.
+- Folgende Befehle hinzugefügt (siehe "Kommentare aus der Konfigurationsdatei"): 
+	/save: Speichert das Spiel ohne es zu beenden.
+	/page 1: Zeigt die normale Spielerinfo-Seite (Die Spielerinfo-Seite muss geöffnet sein).
+	/page 2: Zeigt die extra Spielerinfo-Seite (Die Spielerinfo-Seite muss geöffnet sein).
+	/page 3: Zeigt die Resistenzen Spielerinfo-Seite (Die Spielerinfo-Seite muss geöffnet sein).
+	/page 4: (Beta) Zeigt alle verfügbaren Runenwörter (Die Spielerinfo-Seite muss geöffnet sein).
+	/lockmouse: Begrenzt den Mauszeiger auf das Fenster.
+	/lock: Siehe /lockmouse.
+	/unlockmouse: Entfernt die Begrenzung des Mauszeigers auf das Fenster.
+	/unlock: Siehe /unlockmouse.
+	/renamechar newname: Speichert und benennt den Char um.
+	/renamepage name: Benennt die aktuelle Truhenseite um.
+	/setindex: Fügt einen Index für die aktuelle Truhenseite hinzu.
+	/setmainindex: Fügt einen Haupt-Index für die aktuelle Truhenseite hinzu.
+	/resetindex: Entfernt den Index von der aktuellen Truhenseite
+	/insertpage: Fügt eine neue Truhenseite hinter der aktuellen ein.
+	/deletepage: Löscht die aktuelle Truhenseite, sofern sie leer ist.
+	/swap page: Tauscht den Inhalt der aktuellen Truhenseite mit einer anderen.
+	/toggle page: Tauscht den Inhalt der aktuellen Truhenseite mit einer anderen aus der alternativen Truhe (Gemeinsam/Persönlich).
+	/dlm: Aktiviert/Deaktiviert die permanente Anzeige der Mana und Lebensanzeige.
+	/dml: Siehe /dlm.
+	/dl: Aktiviert/Deaktiviert die permanente Anzeige der Lebensanzeige.
+	/dm: Aktiviert/Deaktiviert die permanente Anzeige der Manaanzeige.
+	/listcube: (Beta) Erstellt eine "cube.txt" Datei im Savegame-Verzeichnis mit allen Würfelrezepten.
 
 
-v12.00 �nderungen :
-Kompatibilit�t mit 1.14d (Vielen Dank an haxifix)
+v12.00 Änderungen: 
+Kompatibilität mit 1.14d (Vielen Dank an haxifix)
 
-v11.02 �nderungen :
-Add command /setmainindex : Set the current stash page as main index (shift + prev/next index button go to an main index if exists)
-Current number of simulated players use with /players command is save with the player and set on game loading. NBPlayersByDefault must be different to 0 in PlugY.ini.
+v11.02 Änderungen: 
+Befehl /setmainindex hinzugefügt: Fügt einen Haupt-Index für die aktuelle Truhenseite hinzu (Shift + vorheriger/nächster Index Button springen zum nächsten Haupt-Index)
+Der aktuelle /players x Wert wird am Spielstand gespeichert und beim nächsten Spiel wieder angewandt. NBPlayersByDefault muss dafür in der PlugY.ini auf 0 konfiguriert sein.
 
-v11.01 �nderungen :
-- Kompatibilit�t mit 1.13d (Vielen Dank an L'Autour)
-- Befehl /unlockmouse hinzugef�gt : Entfernt die Begrenzung des Mauszeigers auf das Fenster
-- Befehl /unlock hinzugef�gt : Siehe /unlockmouse
-- Befehl /renamepage hinzugef�gt : Der Truhenname wird nun gespeichert.
-- Befehl /setindex hinzugef�gt : F�gt einen Index f�r die aktuelle Truhenseite hinzu (prev/next index button go to an index if exists)
-- Befehl /resetindex hinzugef�gt : Entfernt den Index von der aktuellen Truhenseite (prev/next index button go to this index if exists).
-- Befehl /insertpage hinzugef�gt : F�gt eine neue Truhenseite hinter der aktuellen ein.
-- Befehl /deletepage hinzugef�gt : L�scht die aktuelle Truhenseite, sofern sie leer ist.
-- �bersetzung f�r Russisch and Google-�bersetzungen f�r nicht-�bersetzte Sprachen hinzugef�gt. (Vielen Dank an L'Autour)
-- Eine Option wurde zur PlugY.ini hinzugef�gt um die gemeinsame Truhe beim Spielstart ausgew�hlt zu haben (statt der eigenen).
+v11.01 Änderungen: 
+- Kompatibilität mit 1.13d (Vielen Dank an L'Autour)
+- Befehl /unlockmouse hinzugefügt: Entfernt die Begrenzung des Mauszeigers auf das Fenster
+- Befehl /unlock hinzugefügt: Siehe /unlockmouse
+- Befehl /renamepage hinzugefügt: Der Truhenname wird nun gespeichert.
+- Befehl /setindex hinzugefügt: Fügt einen Index für die aktuelle Truhenseite hinzu (prev/next index button go to an index if exists)
+- Befehl /resetindex hinzugefügt: Entfernt den Index von der aktuellen Truhenseite (prev/next index button go to this index if exists).
+- Befehl /insertpage hinzugefügt: Fügt eine neue Truhenseite hinter der aktuellen ein.
+- Befehl /deletepage hinzugefügt: Löscht die aktuelle Truhenseite, sofern sie leer ist.
+- Übersetzung für Russisch and Google-Übersetzungen für nicht-übersetzte Sprachen hinzugefügt. (Vielen Dank an L'Autour)
+- Eine Option wurde zur PlugY.ini hinzugefügt um die gemeinsame Truhe beim Spielstart ausgewählt zu haben (statt der eigenen).
 - Der Befehl /rename wurde zu /renamechar umbenannt.
-- Der unvollst�ndige Befehl /reload wurde entfernt.
+- Der unvollständige Befehl /reload wurde entfernt.
 
-v11.00 �nderungen :
-- Inoffzielle Version mit Unterst�tzung f�r LOD 1.13d
+v11.00 Änderungen: 
+- Inoffizielle Version mit Unterstützung für LOD 1.13d
 
-v10.01 �nderungen :
-- Fenstermodus Konfiguration hinzugef�gt.
+v10.01 Änderungen: 
+- Fenstermodus Konfiguration hinzugefügt.
 - Der Mauszeiger kann auf das Fenster begrenzt werden (Fenstermodus).
 - Der Fensterrahmen kann entfernt werden (Fenstermodus).
-- Das Fenster kann vergr��ert oder maximiert werden (Fenstermodus).
-- Das Fenster kann �ber allen anderen Fenstern und der Startleiste fixiert werden (Fenstermodus).
+- Das Fenster kann vergrößert oder maximiert werden (Fenstermodus).
+- Das Fenster kann über allen anderen Fenstern und der Startleiste fixiert werden (Fenstermodus).
 - Der Mauszeiger kann bei Spielstart auf das Fenster begrenzt werden oder mit den Befehlen "/lockmouse" und "/lock" (Fenstermodus).
-- Befehl "/swap page" hinzugef�gt, der den Inhalt der aktuellen Truhenseite mit einer anderen tauscht.
-- Befehl "/toggle page" hinzugef�gt, der den Inhalt der aktuellen Truhenseite mit einer anderen aus der alternativen Truhe (Gemeinsam/Pers�nlich) tauscht.
-- Befehl "/rename newname" hinzugef�gt mit dem der Char umbenannt werden kann. Dieses Feature ist noch im Betastatus und um die Spielerinfo-Seite zu aktualisieren muss das Spiel verlassen werden.
+- Befehl "/swap page" hinzugefügt, der den Inhalt der aktuellen Truhenseite mit einer anderen tauscht.
+- Befehl "/toggle page" hinzugefügt, der den Inhalt der aktuellen Truhenseite mit einer anderen aus der alternativen Truhe (Gemeinsam/Persönlich) tauscht.
+- Befehl "/rename newname" hinzugefügt mit dem der Char umbenannt werden kann. Dieses Feature ist noch im Betastatus und um die Spielerinfo-Seite zu aktualisieren muss das Spiel verlassen werden.
 
-v10.00 �nderungen :
-- Battle.net LogIn via Hauptmenu deaktiviert.
+v10.00 Änderungen: 
+- Battle.net LogIn via Hauptmenü deaktiviert.
 - PlugY funktioniert nun auch mit LoD 1.13c Versionen.
 - Fix shortcut in start menu
 
-v9.00 �nderungen :
+v9.00 Änderungen: 
 - PlugY funktioniert nun auch mit LoD 1.12 Versionen.
 - Ein paar Bugs behoben.
-- Eine neue M�glichkeit zum Skills neuverteilen in Mods hinzugef�gt.
+- Eine neue Möglichkeit zum Skills neuverteilen in Mods hinzugefügt.
 
-v8.00 �nderungen :
-- Einfachere Installation : Neuer Installer.
-- Das Portal zum Cow-Level kann nun ge�ffnet werden auch wenn der Spieler den Cow-King in der aktuellen Schwierigkeit bereits get�tet hat.
+v8.00 Änderungen: 
+- Einfachere Installation: Neuer Installer.
+- Das Portal zum Cow-Level kann nun geöffnet werden auch wenn der Spieler den Cow-King in der aktuellen Schwierigkeit bereits getötet hat.
 - Die wirkliche Versionsnummer wird angezeigt (v 1.09d oder v 1.11b statt v 1.09 oder v 1.11)
-- Die M�glichkeit hinzugef�gt den Skill-Neuverteilungs-Button zu verschieben (f�r Modder).
-- Behoben : Absturz wenn man einem Superunique Monster in Lod v1.11 begegnet ist.
-- Behoben : Verlorene Skillpunkte beim neu verteilen in Mods mit speziellen Skills.
-- Multiplayer : Die Truhendaten werden jetzt korrekt gespeichert wenn es einen Disconnect oder einen Fehler w�hrend des Speicherns gibt.
-- Die "check load memory failed" Meldung, wenn die D2gfx.dll gepachtt war, wurde entfernt.
+- Die Möglichkeit hinzugefügt den Skill-Neuverteilungs-Button zu verschieben (für Modder).
+- Behoben: Absturz wenn man einem Superunique Monster in Lod v1.11 begegnet ist.
+- Behoben: Verlorene Skillpunkte beim neu verteilen in Mods mit speziellen Skills.
+- Multiplayer: Die Truhendaten werden jetzt korrekt gespeichert wenn es einen Disconnect oder einen Fehler während des Speicherns gibt.
+- Die "check load memory failed" Meldung, wenn die D2gfx.dll gepacht war, wurde entfernt.
 
-v7.01b �nderungen :
-- Behoben : Die Ladder-only Runenwortfeatures in den LoD-Versionen 1.11 und 1.10.
-- Behoben : Seltsame Zeichen in manchen Texten.
+v7.01b Änderungen: 
+- Behoben: Die Ladder-only Runenwort Features in den LoD-Versionen 1.11 und 1.10.
+- Behoben: Seltsame Zeichen in manchen Texten.
 
-v7.01 �nderungen :  
-- Die Ladder-Only Runenw�rter k�nnen f�r den Singleplayer aktivert werden. 
-- Fehler bei der AI des �berbaals behoben
-- Die Parameter in der PlugY.ini standaratm��ig entfernt (wie -w um im Fenster zu starten) 
+v7.01 Änderungen:
+- Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden. 
+- Fehler bei der AI des Überbaals behoben
+- Die Parameter in der PlugY.ini standardmäßig entfernt (wie -w um im Fenster zu starten) 
 - Die Basiswerte der Statuspunkte werden angezeigt (ohne magische Boni) auch wenn die Statneuverteilung deaktiviert ist 
-- Eine eigene EXE wurde hinzugef�gt um PlugY zu starten (es werden keine LoD-Dateien mehr ver�ndert)
-- Spanische und Polnische �bersetzung hinzugef�gt.
+- Eine eigene EXE wurde hinzugefügt um PlugY zu starten (es werden keine LoD-Dateien mehr verändert)
+- Spanische und Polnische Übersetzung hinzugefügt.
 
-V7.00 �nderungen :
+V7.00 Änderungen: 
 - PlugY funktioniert nun auch mit LoD 1.11b Versionen.
-- Den Basiswert f�r jeden Stat im Maus�bertext hinzugef�gt.
+- Den Basiswert für jeden Stat im Mausübertext hinzugefügt.
 - Behoben: Unendliche Statuspunkte bei der Neuverteilung 
 - Behoben: Einige Features blieben auch im Battle.net aktiviert
-- Italienische �bersetzung hinzugef�gt.
+- Italienische Übersetzung hinzugefügt.
 
-v6.01b �nderungen :
+v6.01b Änderungen: 
 - Fehler mit dem Popups der Statuspunktvergabe-Buttons behoben.
 
-v6.01 �nderungen :
-- Behoben : unique carry1 items verschwinden nicht wenn sie in LoD 1.10 gecubt werden 
-- Schl�ssel und Uber-Organe werden nicht mehr entfernt wenn man das rote Portal ausserhalb von Harrogath �ffnen wollte.
+v6.01 Änderungen: 
+- Behoben: unique carry1 items verschwinden nicht wenn sie in LoD 1.10 gecubt werden 
+- Schlüssel und Uber-Organe werden nicht mehr entfernt wenn man das rote Portal außerhalb von Harrogath öffnen wollte.
 - Fehler in der Versionsanzeige wegen einem Konflikt mit D2Mod behoben.
 
-V6.00 �nderungen :
+V6.00 Änderungen: 
 - PlugY funktioniert nun auch mit LoD 1.11 Versionen
-- Freischaltung des �ber-Quests ausserhalb von der Realm (LoD 1.11 only).
+- Freischaltung des über-Quests außerhalb von der Realm (LoD 1.11 only).
 - PlugY Start-Absturz behoben, wenn die LoD Installation unsauber war
 - Kleine Fehler behoben, und kleine Verbesserungen eingebaut
-- "/save"-Befehl hinzugef�gt um das Spiel zu speichern ohne es zu verlassen (nur LoD 1.11).
+- "/save"-Befehl hinzugefügt um das Spiel zu speichern ohne es zu verlassen (nur LoD 1.11).
 
-v5.06 �nderungen :
-- Kn�pf for gemeinsamen Goldvorrat hinzugef�gt.
-- Gemeinsamer Goldvorrat in Multiplayer hinzugef�gt.
+v5.06 Änderungen: 
+- Knopf for gemeinsamen Goldvorrat hinzugefügt.
+- Gemeinsamer Goldvorrat in Multiplayer hinzugefügt.
 - Befehl "/DisplayLifeMana" ersetzt durch "/dlm".
 - Diverse Fehler behoben.
 
-v5.05 �nderungen :
-- Standard Hintergrundfarbe im Status Interface ge�ndert
-- Gemeinsames Gold per Kommando hinzugef�gt.
+v5.05 Änderungen: 
+- Standard Hintergrundfarbe im Status Interface geändert
+- Gemeinsames Gold per Kommando hinzugefügt.
 - Kommando "/DisplayLifeAndMana" ist nun "/DisplayLifeMana".
-- M�glichkeit die Namen von Setgegenst�nd in Gr�n bei Mouseover in der gemeinsamen Kiste anzuzeigen
+- Möglichkeit die Namen von Setgegenständen in Grün bei Mouseover in der gemeinsamen Kiste anzuzeigen
 - Multiplayer Fehler behoben, indem der gesamte Prozess neu programmiert wurde
  
-v5.04 �nderungen :
-- Behoben : Status/Skill Punkte per Levelup bug.
-- Behoben : Multiplayer bugs.
-- PlugY/PlugYDefault.ini sind jetzt vollst�ndig.
+v5.04 Änderungen: 
+- Behoben: Status/Skill Punkte per Levelup bug.
+- Behoben: Multiplayer bugs.
+- PlugY/PlugYDefault.ini sind jetzt vollständig.
 
-v5.03 �nderungen :
-- Behoben : Bug der manchmal zwischen den Hardcore und Softcore gemeinsamen Truhen gewechselt hat.
-- Farb�nderung der Schrift in den Extra-Seiten m�glich.
-- Standartwerte in den Extra-Seiten ge�ndert.
-- EnabledTXTFilesWhenMSExcelOpenIt in der PlugY.ini ist nun standartm��ig aktiviert.
+v5.03 Änderungen: 
+- Behoben: Bug der manchmal zwischen den Hardcore und Softcore gemeinsamen Truhen gewechselt hat.
+- Farbänderung der Schrift in den Extra-Seiten möglich.
+- Standardwerte in den Extra-Seiten geändert.
+- EnabledTXTFilesWhenMSExcelOpenIt in der PlugY.ini ist nun standardmäßig aktiviert.
 
-v5.02 �nderungen :
-- Behoben : Bug der das Verschwinden von Gegenst�nden hervorgerufen hat.
+v5.02 Änderungen: 
+- Behoben: Bug der das Verschwinden von Gegenständen hervorgerufen hat.
 
-v5.01 �nderungen :
-- Behoben : Gr��ere bugs bei der gemeinsamen Truhe.
-- Behoben : ActiveLogFile ist jetzt in der PlugY.ini standartm��ig deaktiviert.
-- Behoben : Bug der auftrat wenn die gemeinsame Truhe deaktiviert war.
+v5.01 Änderungen: 
+- Behoben: Größere bugs bei der gemeinsamen Truhe.
+- Behoben: ActiveLogFile ist jetzt in der PlugY.ini standardmäßig deaktiviert.
+- Behoben: Bug der auftrat wenn die gemeinsame Truhe deaktiviert war.
 
 
-v5.00 �nderungen :
-- PlugY funktioniert jetzt mit den LoD Versionen 1.09, 1.09b, 1.09d, inklusive zus�tzlicher Mods !
+v5.00 Änderungen: 
+- PlugY funktioniert jetzt mit den LoD Versionen 1.09, 1.09b, 1.09d, inklusive zusätzlicher Mods!
 - PlugY kann jetzt das D2ModSystem (D2Mod.dll) laden.
-- Diablo kann nun auf Text-Dateien laden die von Microsoft Excel ge�ffnet sind.
-- Das World Event Monster kann jetzt ver�ndert werden.
-- Neue Einstellungsm�glichkeiten f�r Modder.
-- Behebt gr��ere Bugs im Multiplayer : Fingerprints zur�ckgesetzt, unidentifizierte Items Bug, etc.
-- Behoben : Schreibfehler in der PlugY.ini (Commands).
-- Behoben : Keine weiteren Gro�- und Kleinschreibungs Beschr�nkung f�r die Commands im Spiel.
-- Behoben : Character Seiten Auswahl beim �ffnen.
-- Behoben : Ersetzt die Anzeige von "Kritischer Schlag"/"T�tlicher Schlag" nur mit "T�tlicher Schlag".
-- Behoben : Das Erscheinen des Diablo Klones am Spielstart.
-- Behoben : Andere kleine Bugs.
+- Diablo kann nun auf Text-Dateien laden die von Microsoft Excel geöffnet sind.
+- Das World Event Monster kann jetzt verändert werden.
+- Neue Einstellungsmöglichkeiten für Modder.
+- Behebt größere Bugs im Multiplayer: Fingerprints zurückgesetzt, unidentifizierte Items Bug, etc.
+- Behoben: Schreibfehler in der PlugY.ini (Commands).
+- Behoben: Keine weiteren Groß- und Kleinschreibungs Beschränkung für die Commands im Spiel.
+- Behoben: Character Seiten Auswahl beim öffnen.
+- Behoben: Ersetzt die Anzeige von "Kritischer Schlag"/"Tödlicher Schlag" nur mit "Tödlicher Schlag".
+- Behoben: Das Erscheinen des Diablo Klones am Spielstart.
+- Behoben: Andere kleine Bugs.
 
-v4.04 �nderungen :
-- Behoben : Anzeige-bug wenn StatPerLevelUp aktiviert war.
-- Behoben : Fehler bei der Speicherprozedur wenn die Festplatte voll war.
-- Neues Konfigurations-System f�r Modder.
-- Man kann ausw�hlen, ob die Mana und Lebens Anzeige immer �ber den Kugeln erscheint.
+v4.04 Änderungen: 
+- Behoben: Anzeige-bug wenn StatPerLevelUp aktiviert war.
+- Behoben: Fehler bei der Speicherprozedur wenn die Festplatte voll war.
+- Neues Konfigurations-System für Modder.
+- Man kann auswählen, ob die Mana und Lebens Anzeige immer über den Kugeln erscheint.
 
-v4.03 �nderungen
-- Behoben: Wenn man einen "carry1" - einzigartigen Gegenstand (einzigartiger Zauber) in den W�rfel steckt
-- Man kann direkt zur ersten und letzten Seite der Kiste gehen (shift + klick auf N�chste/Vorherige Seite)
-- Zweiten Index hinzugef�gt (shift + klick auf den Index Knopf)
-- Weitere Status Informationen hinzugef�gt (Jetzt 2 Seiten)
-- Vorherige Seite - Button hinzugef�gt auf der Hauptstatusseite (nur in 800x600)
-- Button f�r die zus�tzlichen Status Seiten an die gleiche Stelle  verschoben, wie die original Buttons (nur in 800x600)
-- Man kann ausw�hlen, ob die zuletzt angezeigte Seite erscheint, oder die Hauptseite
+v4.03 Änderungen
+- Behoben: Wenn man einen "carry1" - einzigartigen Gegenstand (einzigartiger Zauber) in den Würfel steckt
+- Man kann direkt zur ersten und letzten Seite der Kiste gehen (shift + klick auf Nächste/Vorherige Seite)
+- Zweiten Index hinzugefügt (shift + Klick auf den Index Knopf)
+- Weitere Status Informationen hinzugefügt (Jetzt 2 Seiten)
+- Vorherige Seite - Button hinzugefügt auf der Hauptstatusseite (nur in 800x600)
+- Button für die zusätzlichen Status Seiten an die gleiche Stelle verschoben, wie die original Buttons (nur in 800x600)
+- Man kann auswählen, ob die zuletzt angezeigte Seite erscheint, oder die Hauptseite
 
-v4.02b �nderungen :
-- Behoben : Alle Funktionen bleiben im offenen Battle.net eingeschaltet.
+v4.02b Änderungen: 
+- Behoben: Alle Funktionen bleiben im offenen Battle.net eingeschaltet.
 
-v4.02 �nderungen :
-- Behoben : Das vergessene "d" in "SeparateHardcoreStash=1" in der PlugY.ini erg�nzt 
-- Behoben : Standardm�ssig wird dei Sprache in der PlugY.ini nicht ge�ndert. 
-- Behoben : Item Level sollte nun in allen Konfigurationen von PlugY korrekt angezeigt werden.  
-- Behoben : No more conflict with Battle.net (BigStash disabled on realms) 
-- Weitere Daten auf der zus�tzlichen Statusseite eingef�gt.  
+v4.02 Änderungen: 
+- Behoben: Das vergessene "d" in "SeparateHardcoreStash=1" in der PlugY.ini ergänzt 
+- Behoben: Standardmäßig wird die Sprache in der PlugY.ini nicht geändert. 
+- Behoben: Item Level sollte nun in allen Konfigurationen von PlugY korrekt angezeigt werden.
+- Behoben: No more conflict with Battle.net (BigStash disabled on realms) 
+- Weitere Daten auf der zusätzlichen Statusseite eingefügt.
 
-v4.01 �nderungen :
+v4.01 Änderungen: 
 - Behoben: NbPlayers Schalter stellte immer 8 Spieler ein.
-- Zus�tzliche Daten auf der neuen Status Seite hinzugef�gt.
+- Zusätzliche Daten auf der neuen Status Seite hinzugefügt.
 
-v4.00b �nderungen :
-- Behoben : Problem wenn MSVCR70.dll nicht gefunden wurde.
+v4.00b Änderungen: 
+- Behoben: Problem wenn MSVCR70.dll nicht gefunden wurde.
 
-v4.00 �nderungen :
-- Wechsel der ausgew�hlten Sprache (in MODs, default und verf�gbare Sprachen).
--  - Generiere die Karte im Einzelspieler immer neu, wie im MultiSpieler.
+v4.00 Änderungen: 
+- Wechsel der ausgewählten Sprache (in MODs, default und verfügbare Sprachen).
+- Generiere die Karte im Einzelspieler immer neu, wie im MultiSpieler.
 - Man kann einstellen das im Einzelspieler-Modus die Karte mit jedem Spiel erneuert wird
-- Man kann /players X automatisch ausf�hren lassen
-- Gemeinsame Kiste f�r Softcore und Hardcore getrennt
-- Installation ge�ndert (kann nun direkt unter Linux installiert werden)
-- Der World Event Gegenstand kann ausgew�hlt werden
-- Beliebig viele carry1 Gegenst�nde (wie Annihilus) k�nnen in die Kiste getan werden
-- Behoben : Man kann icht mehr als einen carry1 Gegenstand in andere Seiten legen ausser in die Kistenhauptseite
-- Behoben : Anzeigefehler von gesockelten Gegenst�nden in der Kiste
-- Behoben : Leerzeichenfehler in PlugY.ini behoben
-- Behoben : Diablo Clone kann nicht mehr in Normal und Albtraum erscheinen
-- Behoben : Zerst�rung von zus�tzlichen Minions wenn man Fertigkeitspukte zur�cksetzt
+- Man kann /players X automatisch ausführen lassen
+- Gemeinsame Kiste für Softcore und Hardcore getrennt
+- Installation geändert (kann nun direkt unter Linux installiert werden)
+- Der World Event Gegenstand kann ausgewählt werden
+- Beliebig viele carry1 Gegenstände (wie Annihilus) können in die Kiste getan werden
+- Behoben: Man kann nicht mehr als einen carry1 Gegenstand in andere Seiten legen außer in die Kistenhauptseite
+- Behoben: Anzeigefehler von gesockelten Gegenständen in der Kiste
+- Behoben: Leerzeichenfehler in PlugY.ini behoben
+- Behoben: Diablo Clone kann nicht mehr in Normal und Albtraum erscheinen
+- Behoben: Zerstörung von zusätzlichen Minions wenn man Fertigkeitspunkte zurücksetzt
 
-v3.02  �nderungen  :
+v3.02 Änderungen:
 - Fehler im Bereich Statuspunkte pro LevelUp behoben
-- Fehler behoben der verhinderte das bei abgeschalteter gemeinsamer Kiste ein Charkter nicht geladen werden konnte.
+- Fehler behoben der verhinderte das bei abgeschalteter gemeinsamer Kiste ein Charakter nicht geladen werden konnte.
 - Fehler behoben der es erlaubte Werte zu setzen, ohne das Fertigkeiten pro LevelUp aktiviert waren.
 
-v3.01  �nderungen  :
-- Man kann die Statuspunkte �ndern, die man beim LevelUp bekommt.
-- Problem mit fehlerhafter Menge der Fertigkeitspunkte beim zur�cksetzen behoben.
-- Konfigurationsparameter f�r den World Event hinzugef�gt
-- Standardm�ssig wird nur inH�lle der World Event Z�hler gezeigt "X SOJ verkauft".
+v3.01 Änderungen:
+- Man kann die Statuspunkte ändern, die man beim LevelUp bekommt.
+- Problem mit fehlerhafter Menge der Fertigkeitspunkte beim zurücksetzen behoben.
+- Konfigurationsparameter für den World Event hinzugefügt
+- Standardmäßig wird nur in Hölle der World Event Zähler gezeigt "X SOJ verkauft".
 
-v3.00  �nderungen  :
-- Lokaler  World Event !
-- Zur�cksetzen von Fertigkeitspunkten
+v3.00 Änderungen:
+- Lokaler World Event!
+- Zurücksetzen von Fertigkeitspunkten
 
-v2.05 �nderungen :
-- Wichtiger Ffix : Alle Fehler die einen Start von Diablo2 verhinderten sind entfernt
+v2.05 Änderungen: 
+- Wichtiger Fix: Alle Fehler die einen Start von Diablo2 verhinderten sind entfernt
 
-v2.04 �nderungen :
-- Das zur�cksetzen der Statuspunkte, sowie die Fertigkeiten pro LevelUp werden abgeschaltet, wenn man sich in ein Realm-Spiel einklinkt (wie bei der Goldkiste die Kn�pfe)
+v2.04 Änderungen: 
+- Das zurücksetzen der Statuspunkte, sowie die Fertigkeiten pro LevelUp werden abgeschaltet, wenn man sich in ein Realm-Spiel einklinkt (wie bei der Goldkiste die Knöpfe)
 - Es wird eine Fehlermeldung angezeigt, anstelle eines Absturzes, wenn PlugY.dll nicht gefunden werden kann
 - Einige Fehler in der Installationsroutine behoben
-- Einen Fehler bez�glich der verschwindenden Kn�pfe behoben
+- Einen Fehler bezüglich der verschwindenden Knöpfe behoben
 - Abspeicher-Problem unter Win95/98/Me behoben
 
-v2.03b �nderungen :
+v2.03b Änderungen: 
 - Anzeige der PlugY Version nur im Hauptbild
 
-v2.03 �nderungen :
-- Wichtigster Fix : Die Abspeicher-Routine ge�ndert, damit bei einem Spiel-Absturz keine Items in der Kiste verloren gehen, und der Charakter korrupt wird.
+v2.03 Änderungen: 
+- Wichtigster Fix: Die Abspeicher-Routine geändert, damit bei einem Spiel-Absturz keine Items in der Kiste verloren gehen, und der Charakter korrupt wird.
 - Kein Absturz des Host Spiels, wenn ein Charakter nicht ins Spiel kann.
 - Ausgegrauter Status-Knopf bei mehr als 255 Status-Punkten gefixed.
-- Die Versionsanzeige auf der Hauptseite ge�ndert (PlugY Version jetzt rechts, und Farben sind nun m�glich)
-- Charaktere ohne PlugY k�nnen nun an Spielen teilnehmen die gehosted werden von PlugY-Spilern.
+- Die Versionsanzeige auf der Hauptseite geändert (PlugY Version jetzt rechts, und Farben sind nun möglich)
+- Charaktere ohne PlugY können nun an Spielen teilnehmen die gehosted werden von PlugY-Spielern.
 
-v2.02 �nderungen :
+v2.02 Änderungen: 
 - PlugY nutzt die D2win.dll nicht mehr zum laden.
-- PlugY enth�lt einen Patcher/Ent-Patcher um die D2gfx.dll so zu ver�ndern, das PlugY gestartet wird.
-- PlugY kann von SVR�s D2Mod System gestartet werden.
+- PlugY enthält einen Patcher/Ent-Patcher um die D2gfx.dll so zu verändern, das PlugY gestartet wird.
+- PlugY kann von SVRs D2Mod System gestartet werden.
 - Die Goldkistenerweiterung wird bei Realm Spielen automatisch abgeschaltet.
 - Index Button Fehler behoben.
 
-v.2.01 �nderungen 
+v.2.01 Änderungen 
 - Fertigkeitsfehler beim LevelUp behoben.
 - Anzeigefehler im Hauptbildschirm behoben.
 
-v2.00 �nderungen :
-- Deutsche Lokalisierung hinzugef�gt.
-- Die Anzahl der Fertigkeitspunkte beim erreichen des n�chsten Levels ist einstellbar.
+v2.00 Änderungen: 
+- Deutsche Lokalisierung hinzugefügt.
+- Die Anzahl der Fertigkeitspunkte beim erreichen des nächsten Levels ist einstellbar.
 - Man kann beliebig oft das Spiel Diablo II auf einem Computer starten.
-- Man kann die Statuspunkte zur�cksetzen.
-- Es gibt 2 Kn�pfe um jeweils zur vorherigen/n�chsten Index-Seite zu springen.
+- Man kann die Statuspunkte zurücksetzen.
+- Es gibt 2 Knöpfe um jeweils zur vorherigen/nächsten Index-Seite zu springen.
 - Es wird nur noch der aktuelle Gold-Inhalt der Kiste angezeigt, der Maximal Wert wird als Pop-Up angezeigt.
-- Komplett �berarbeitete Konfigurationsdatei.
+- Komplett überarbeitete Konfigurationsdatei.
 - Die Ini-Datei kann in das MPQ gepackt werden (wie bereits die PlugY Grafik-Dateien)
-- Die Kompatibilit�t mit MODs wurde verbessert.
+- Die Kompatibilität mit MODs wurde verbessert.
 - Den TCP/IP Absturz korrigiert.
 - Den Fehler mit Seitennummern bei Charakterwechsel behoben.
-- Der Anzeige-Fehler von Set-Gegenst�nden wurde behoben
-- Der Fehler mir carry1 Gegenst�nden wurde behoben (Uniques die nur einaml getragen werden d�rfen)
+- Der Anzeige-Fehler von Set-Gegenständen wurde behoben
+- Der Fehler mir carry1 Gegenständen wurde behoben (Uniques die nur einmal getragen werden dürfen)
 - Weitere kleine Verbesserungen eingebaut.
 
-v1.03 �nderungen :
-- Franz�sische Liesmich- und Ini-Datei hinzugef�gt.
+v1.03 Änderungen: 
+- Französische Liesmich- und Ini-Datei hinzugefügt.
 - Fehler in D2Classic-Spielen entfernt (es gibt dort keine Seiten-Erweiterungen, dies ist kein Fehler)
 - Fehler behoben, der beim laden mit vor LOD 1.10 generierten Charakteren auftrat.
  (zB: ShadowMaster Charakter oder 1.09 oder D2Classic Charakter)
 
-v1.02 �nderungen :
-- Dateinamen ge�ndert wegen eines Fehlers mit dem IE und ZIP-Files
-- Man kann die Versions-Information im Hauptbildschirm �ndern (siehe Ini-Datei).
+v1.02 Änderungen: 
+- Dateinamen geändert wegen eines Fehlers mit dem IE und ZIP-Files
+- Man kann die Versions-Information im Hauptbildschirm ändern (siehe Ini-Datei).
 
-v1.01 �nderungen : 
-- Franz�sische Lokalisierung hinzugef�gt (Franz�sisches Liesmich.txt folgt) 
-- Dateinamen von "PlugY, The Survival Kit.ini" in "PlugY,The_Survival_Kit" ge�ndert.
-- Installationsbeispiele im Liesmich hinzugef�gt.
+v1.01 Änderungen: 
+- Französische Lokalisierung hinzugefügt (Französisches Liesmich.txt folgt) 
+- Dateinamen von "PlugY, The Survival Kit.ini" in "PlugY,The_Survival_Kit" geändert.
+- Installationsbeispiele im Liesmich hinzugefügt.
 - Fehlerhafte Installation beim PlugY-Aufruf eingebaut. 
 - Den Eintrag "[GENERAL]PlugYDirectory=PlugY\" aus der Ini-Datei entfernt
-  (Man kann ihn weiterhin hinzuf�gen, sollte aber wissen, was man tut...) 
+  (Man kann ihn weiterhin hinzufügen, sollte aber wissen, was man tut...) 
 - Paket von .rar auf .zip umgestellt
 
-v1.00 Funktionen (es k�nnen alle einfach ein- und ausgeschaltet werden) :
+v1.00 Funktionen (es können alle einfach ein- und ausgeschaltet werden): 
 - Man kann den "Save"-Pfad anpassen.
-- Man kann jeden MOD starten, ohne die gesicherten Spielst�nde verschieben zu m�ssen.
+- Man kann jeden MOD starten, ohne die gesicherten Spielstände verschieben zu müssen.
 - Der Goldschatz kann auf 10x10 Felder erweitert werden.
-- Bis zu 4,294,967,296 Seiten im Goldschatz m�glich (nahezu unbegrenzter Speicherplatz) !
-  Achtung : Dies ist nur f�r LOD1.10 charaktere.
-- Mit dem gemeinsamen Goldschatz kann man Gegenst�nde an andere Charaktere �bergeben
+- Bis zu 4,294,967,296 Seiten im Goldschatz möglich (nahezu unbegrenzter Speicherplatz)!
+  Achtung: Dies ist nur für LOD1.10 charaktere.
+- Mit dem gemeinsamen Goldschatz kann man Gegenstände an andere Charaktere übergeben
 
 
 ******** INHALT ********
-19 Dateien, 1 Ordner :
+19 Dateien, 1 Ordner: 
 - PlugY_The_Survival_Kit_-_Readme.txt
 - PlugY_The_Survival_Kit_-_LisezMoi.txt
 - PlugY_The_Survival_Kit_-_Liesmich.txt
@@ -366,16 +366,16 @@ v1.00 Funktionen (es k�nnen alle einfach ein- und ausgeschaltet werden) :
 
 
 ******** INSTALLATION ********
-Installation : 
+Installation: 
 - Entpacke alle Dateien in dein Diablo Verzeichnis. 
 - Kopiere die PlugY.ini und die PlugY.exe in das Verzeichnis in dem dein Mod ist. 
-- Bearbeite die PlugY.ini um die gew�nschten Features zu de/aktivieren (dazu weiter unten). 
-- Run PlugY.exe and enjoy :-) 
+- Bearbeite die PlugY.ini um die gewünschten Features zu de/aktivieren (dazu weiter unten). 
+- Run PlugY.exe and enjoy: -) 
 
-Beispiel : 
-Du hast LoD in folgendem Verzeichnis installiert :  C:\Games\Diablo II\ 
-Der Mod und PlugY befindet sich hier : D:\D2Mod\MyMod\ 
-Dann m�ssen die Einstellungen wie folgt lauten : 
+Beispiel: 
+Du hast LoD in folgendem Verzeichnis installiert: C:\Games\Diablo II\ 
+Der Mod und PlugY befindet sich hier: D:\D2Mod\MyMod\ 
+Dann müssen die Einstellungen wie folgt lauten: 
    C:\Games\Diablo II\PlugY.dll
    C:\Games\Diablo II\PlugY\EmptyPage.dc6
    C:\Games\Diablo II\PlugY\SharedGoldBtns.dc6
@@ -389,130 +389,130 @@ Dann m�ssen die Einstellungen wie folgt lauten :
    D:\D2Mod\MyMod\PlugY.ini
    D:\D2Mod\MyMod\PlugY.exe
 
-Deinstallation : Einfach alle PlugY-Dateien l�schen
+Deinstallation: Einfach alle PlugY-Dateien löschen
 
 
-Wenn Probleme auftreten beim Ausf�hren der PlugY.exe benutze einfach die alte Installation (PlugY_Installer.exe). 
+Wenn Probleme auftreten beim Ausführen der PlugY.exe benutze einfach die alte Installation (PlugY_Installer.exe). 
 Wenn das Spiel unter Windows 2000 nicht startet nimm auch die alte Installation.
-1. Entzippe das Paket in einen tempor�ren Ordner
-2. Entzippe das Manual_Installer.zip in das selbe Verzeichnis
+1. Entpacke das Paket in einen temporären Ordner
+2. Entpacke das Manual_Installer.zip in das selbe Verzeichnis
 3. Kopiere die PlugY.dll und PlugY_Install.exe in Dein D2 Installations-Verzeichnis.
-4. Kopiere das "PlugY\" Verzeichnis in Dein D2 Installations-Verzeichnis oder f�ge es Deiner MPQ-Datei direkt als PlugY\ hinzu (nicht unter "data\...")
-5. Kopiere die PlugY.ini in das MOD-Zielverzeichnis und konfiguriere sie nach Deinen W�nschen.
-6. Erzeuge eine Verkn�pfung : Gebe das MOD Ziel-Verzeichniss im "Ausf�hren in" Feld der Eigenschaften von ->xxx Verkn�pfung an 
+4. Kopiere das "PlugY\" Verzeichnis in Dein D2 Installations-Verzeichnis oder füge es Deiner MPQ-Datei direkt als PlugY\ hinzu (nicht unter "data\...")
+5. Kopiere die PlugY.ini in das MOD-Zielverzeichnis und konfiguriere sie nach Deinen Wünschen.
+6. Erzeuge eine Verknüpfung: Gebe das MOD Ziel-Verzeichnis im "Ausführen in" Feld der Eigenschaften von ->xxx Verknüpfung an
 
 
-Hinweis : Man kann ebenfalls die PlugY.dll in das Mod Verzeichnis installierne und die dc6 Dateien in das mpq.
+Hinweis: Man kann ebenfalls die PlugY.dll in das Mod Verzeichnis installieren und die dc6 Dateien in das mpq.
 
 
 ******** KONFIGURATION ********
 
-Wie konfiguriert man dieses Plug-In f�r einen MOD:
-- Kopiere die PlugY-Ini-Datei in das MOD-Zielverzeichnis. (Das Verzeichnis aus dem der MOD gestartet wird, beachte die Eigenschaften der Diablo Verkn�pfung).
-- In den meisten F�llen passt man das "SAVE"-Verzeichnis in der Ini-Datei an.
-- F�ge alle zus�tzlichen DLLs des MODs in der Ini-Datei hinzu (siehe .ini Datei) falls vorhanden.
-- Als letztes aktiviert man noch die gew�nschten Funktionen, wie zB: Gemeinesamer Goldschatz, Goldschatz-Zusatzseiten, usw.
+Wie konfiguriert man dieses Plug-In für einen MOD:
+- Kopiere die PlugY-Ini-Datei in das MOD-Zielverzeichnis. (Das Verzeichnis aus dem der MOD gestartet wird, beachte die Eigenschaften der Diablo Verknüpfung).
+- In den meisten Fällen passt man das "SAVE"-Verzeichnis in der Ini-Datei an.
+- Füge alle zusätzlichen DLLs des MODs in der Ini-Datei hinzu (siehe .ini Datei) falls vorhanden.
+- Als letztes aktiviert man noch die gewünschten Funktionen, wie zB: Gemeinsamer Goldschatz, Goldschatz-Zusatzseiten, usw.
 - Nun kann man den MOD auf klassische Art starten (mit oder ohne "-direct -txt", je nach MOD).
 
-D2Mod Konfiguration :
-Ihr k�nnt die Version des D2Mod-System (v1.02 und Folgende) nutzen um PlugY zu starten.
+D2Mod Konfiguration: 
+Ihr könnt die Version des D2Mod-System (v1.02 und Folgende) nutzen um PlugY zu starten.
 - Startet PlugY_Uninstall.bat um alles zu deinstallieren
-- F�gt die Zeile "PlugY=PlugY.dll" in den [D2MOD] Abschnitt der D2Mod.ini ein.
+- Fügt die Zeile "PlugY=PlugY.dll" in den [D2MOD] Abschnitt der D2Mod.ini ein.
 
 Achtung, 
-- Gegenst�nde im Horadrim-W�rfel werden immer im Spieler-Profil gespeichert. Wenn Ihr diese Gegenst�nde weitergeben wollt, m�sst Ihr sie in den Goldschatz umpacken.
+- Gegenstände im Horadrim-Würfel werden immer im Spieler-Profil gespeichert. Wenn Ihr diese Gegenstände weitergeben wollt, müsst Ihr sie in den Goldschatz umpacken.
 
-Warnung :
-- Editiere die Konfigurations-Datei nicht nachdem der MOD gestartet wurde.
-- Pr�fe bei Multiplayer-Spielen, dass alle die gleiche Konfiguration haben.than Clients.
-- Erinnerung : PlugY funktioniert nicht auf REALM-Servern, es kann dort zum Crash kommen
+Warnung: 
+- Editiere die Konfigurationsdatei nicht nachdem der MOD gestartet wurde.
+- Prüfe bei Multiplayer-Spielen, dass alle die gleiche Konfiguration haben.
+- Erinnerung: PlugY funktioniert nicht auf REALM-Servern, es kann dort zum Crash kommen
 
 
-*** Konfiguration f�r Modder ***
+*** Konfiguration für Modder ***
 Es gibt 3 Dateien mit dem selben Aufbau um PlugY zu konfigurieren:
 - "PlugY/PlugYFixed.ini" in einer Mpq oder im -direct Modus
-Alle Einstellungen in der PlugYFixed.ini k�nnen nicht von Benutzern in der PlugY.ini ver�ndert werden.
-Zum An und Ausschalten (un)gew�nschter Features.
+Alle Einstellungen in der PlugYFixed.ini können nicht von Benutzern in der PlugY.ini verändert werden.
+Zum An und Ausschalten (un)gewünschter Features.
 Achtung:
 1. ActivePlugin=0 funktioniert hier nicht (nur ActivePlugin=1)
-2. Speicherpfad�nderungen funktioniern hier nicht.
-3. �bertreibt es nicht, die meisten Einstllungen sollten vom Benutzer eingestellt werden d�rfen. (Anmerkung weiter unten)
+2. Speicherpfadänderungen funktionieren hier nicht.
+3. Übertreibt es nicht, die meisten Einstellungen sollten vom Benutzer eingestellt werden dürfen. (Anmerkung weiter unten)
 
 - "PlugY/PlugYDefault.ini" in einer Mpq oder im -direct Modus
-Alle Einstllellungen in der PlugYDefault.ini werden als Standart benutzt.
+Alle Einstellungen in der PlugYDefault.ini werden als Standard benutzt.
 Funktioniert wie die PlugY.ini in einer Mpq in der Version 4.03 und davor.
 Alle Einstellungen die nicht in der PlugYFixed.ini stehen (und schon geladen sind) sollten hier sein.
 Die meisten Einstellungen sollten hier sein.
 
-- "PlugY.ini" nur im Standartverzeichnis.
-F�r Benutzerkonfigurationen (wie in den voherigen Versionen).
-Einstellungen die nicht in der PlugYFixed.ini stehen m�ssen hier sein.
-In den meisten F�llen ist die "PlugY.ini" die selbe wie die PlugYDefault.ini nur das der Benutzer Einstellungen vornehmen kann.
+- "PlugY.ini" nur im Standardverzeichnis.
+Für Benutzerkonfigurationen (wie in den vorherigen Versionen).
+Einstellungen die nicht in der PlugYFixed.ini stehen müssen hier sein.
+In den meisten Fällen ist die "PlugY.ini" die selbe wie die PlugYDefault.ini nur das der Benutzer Einstellungen vornehmen kann.
 
 Anmerkung:
-�berlege bei jeder Einstlellung ob sie wirklich ausgeschaltet sein muss.
-- Die Speicherpfadeinstellungen funktionieren nicht in der Fixed.ini (Es sollte dem Benutzer �berlassen sein wo er seine Speicherst�nde ablegt)
-- Die Skill-Neuverteilung kann sehr n�tzlich sein umd neue Skills kennenzulernens. Ich habe aufgeh�rt manche Mods zu spielen weil ich nicht wusste welche Skills im High-Level Bereich n�tzlich sein w�rden und welche nicht. Es macht mehr Spass wenn man alle Skills ausprobieren kann und sich dann aussucht welche man benutzt. Also stellt es nicht in der PlugYFixed.ini ein.
+Überlege bei jeder Einstellung ob sie wirklich ausgeschaltet sein muss.
+- Die Speicherpfadeinstellungen funktionieren nicht in der Fixed.ini (Es sollte dem Benutzer überlassen sein wo er seine Speicherstände ablegt)
+- Die Skill-Neuverteilung kann sehr nützlich sein umd neue Skills kennenzulernen. Ich habe aufgehört manche Mods zu spielen weil ich nicht wusste welche Skills im High-Level Bereich nützlich sein würden und welche nicht. Es macht mehr Spaß wenn man alle Skills ausprobieren kann und sich dann aussucht welche man benutzt. Also stellt es nicht in der PlugYFixed.ini ein.
 - Das World Event sollte in jedem Mod in der Fixed.ini konfiguriert oder ausgeschaltet sein.
 - Die Extra Character Seiten sollten auch nicht in der Fixed.ini sein
 
-Modder k�nnen mich erreichen, wenn sie Hilfe brauchen oder mehr Details �ber das Konfigurations-System haben m�chten.
+Modder können mich erreichen, wenn sie Hilfe brauchen oder mehr Details über das Konfigurations-System haben möchten.
 
-WARNUNG : Vergesst nicht, dass wenn Konfigurations-System missbraucht wird werden die Benutzer auf alte PlugY Versionen zur�ckgreifen und ich werde kein andere M�glichkeit haben als es zu deaktivieren. 
+WARNUNG: Vergesst nicht, dass wenn Konfigurations-System missbraucht wird werden die Benutzer auf alte PlugY Versionen zurückgreifen und ich werde kein andere Möglichkeit haben als es zu deaktivieren. 
 
 
 ******************** FAQ ******************
 Ich kann die PlugY.ini nicht finden ? 
-�ffne im Explorer Extras/Ordneroptionen/Anzeige und nimm den Haken raus bei Erweiterung bekannter Dateien ausblenden
-Generell sehr sinnvoll, da man so leichter Viren identifiziert (zB virus.txt.exe da w�rde man sonst nur txt statt auch das exe sehen..) !
+Öffne im Explorer Extras/Ordneroptionen/Anzeige und nimm den Haken raus bei Erweiterung bekannter Dateien ausblenden
+Generell sehr sinnvoll, da man so leichter Viren identifiziert (zB virus.txt.exe da würde man sonst nur txt statt auch das exe sehen..)!
 
 Wie kann ich gelegentlich im Battle.net spielen, wenn PlugY aktiviert ist ? 
-2 M�glichkeiten:  
+2 Möglichkeiten: 
 1) Starte PlugY_Uninstall.bat bevor Du Diablo2 startest und starte PlugY_Install.exe danach wenn Du wieder Einzelspieler spielen willst 
-2) Nutze die klassische Installation. (Vergiss icht die PlugY.ini im Diablo2 Verziechniss zu entfernen)  
+2) Nutze die klassische Installation. (Vergiss nicht die PlugY.ini im Diablo2 Verzeichnis zu entfernen)
 
-Tips : Erzeuge eien Verkn�pfung und f�ge -skiptobnet im "Ziel" Feld mit einem Leerzeichen hinter dem Anf�hnrungszeichen hinzu, um direkt ins Battle.Net zu gelangen ohne die Videos. 
+Tips: Erzeuge eine Verknüpfung und füge -skiptobnet im "Ziel" Feld mit einem Leerzeichen hinter dem Anführungszeichen hinzu, um direkt ins Battle.Net zu gelangen ohne die Videos. 
 
 Was tun wenn man "Bad Generic File" mit einem neuen Charakter bekommt ?
 Dies passiert wenn man einen "schlechten" Gegenstand in der gemeinsamen Kiste hat
-Eine m�gliche Ursache ist das Du das SAVE Verzeichnis f�r mehrere MODs benutzt, in diesem Fall musst Du das SAVE Verzeichnis in der PlugY.ini �ndern.
+Eine mögliche Ursache ist das Du das SAVE Verzeichnis für mehrere MODs benutzt, in diesem Fall musst Du das SAVE Verzeichnis in der PlugY.ini ändern.
 
 I sehe "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" in der D2YYMMDD.txt ?
-Das sind nur Warnungen, die Ihr einfach ignorieren k�nnt
+Das sind nur Warnungen, die Ihr einfach ignorieren könnt
 
 Ich habe einen anderen Fehler, was kann ich tun ?
 1) Lies meinen Thread und poste eine Frage im PhrozenKeep member annoucement forum.
-2) Wenn dies Dir nicht weitergeholfen hat, sende mir eine email (at ynicolas@worldonline.fr) mit "PlugY bug" im Betreff und schreib auf Englisch oder Franz�sisch, da ich kein Deutsch spreche
-H�nge bitte folgende Dateien an:
+2) Wenn dir das nicht weitergeholfen hat, sende mir eine email (at ynicolas@worldonline.fr) mit "PlugY bug" im Betreff und schreib auf Englisch oder Französisch, da ich kein Deutsch spreche
+Hänge bitte folgende Dateien an:
 - PlugY.ini
 - PlugY.log (dazu muss active_logfile=1 in der plugY.ini aktiviert sein)
 - D2XXYYZZ.txt log Log Datei von Diablo
-- Beantworte die Fragen : wann,wo,wie,warum,... passiert das, und evtl mit welchem MOD ?
+- Beantworte die Fragen: wann,wo,wie,warum,... passiert das, und evtl. mit welchem MOD ?
 Danke
 
-Warum sind die fingerprint auf meinen Gegenst�nden auf 0 zur�ckgesetzt?
+Warum sind die fingerprint auf meinen Gegenständen auf 0 zurückgesetzt?
 - Anscheinend ein Bug, warnt mich bitte, falls ihr ihn habt.
 
 
-******** Kommentare aus der Konfigurations-Datei ********
-Standardwerte bedeuten, das sie auch benutzt werden, wenn Ihr die Zeilen in der PlugY.ini l�scht.
+******** Kommentare aus der Konfigurationsdatei ********
+Standardwerte bedeuten, das sie auch benutzt werden, wenn Ihr die Zeilen in der PlugY.ini löscht.
 Die Werte in der PlugY.ini (die dem ZIP beiliegt) sind ein Beispiel einer Konfiguration, nicht die Standardwerte.value.
 
 [LAUNCHING] 
-Dieser Abschnitt beinhaltet Informationen f�r die PlugY.exe und funktioniert nicht in der PlugYDefault.ini und PlugYFixed.ini
+Dieser Abschnitt beinhaltet Informationen für die PlugY.exe und funktioniert nicht in der PlugYDefault.ini und PlugYFixed.ini
  
-F�ge Parameter hinzu um LoD mit der gew�nschten Einstellung zu starten
-Parameter die der PlugY.exe hinzugef�gt wurden werden auch an LoD weitergeleitet
-Standartm��ig werden keine Parameter ausgef�hrt
-Die h�ufigsten Parameter sind (ohne Anf�hrungszeichen) :
+Füge Parameter hinzu um LoD mit der gewünschten Einstellung zu starten
+Parameter die der PlugY.exe hinzugefügt wurden werden auch an LoD weitergeleitet
+Standardmäßig werden keine Parameter ausgeführt
+Die häufigsten Parameter sind (ohne Anführungszeichen): 
 "-w" Starte LoD im Fenstermodus. (See WINDOWED section instead)
 "-direct" Die Dateien im data-Ordner werden anstatt der in den MPQ's enthaltenen verwendet
 "-txt" Wandelt beim Spielstart die txt-dateien im data-Ordner in bin-dateien um
-Zwischen den folgenden {} sind Beispielparameter mit Erkl�rung :
-Param=                    {-direct -txt -w: these 3 commands are passed on the command line}
+Zwischen den folgenden {} sind Beispielparameter mit Erklärung: 
+Param=                    {-direct -txt -w: Diese 3 Befehle werden an das Spiel weitergeleitet}
 
-W�hle die Dll aus die geladen werden soll.
-Das gew�hlte Verzeichnis wird von LoD benutzt (wie die "Ausf�hren in"-Zeile in einer Verkn�pfung).
+Wähle die Dll aus die geladen werden soll.
+Das gewählte Verzeichnis wird von LoD benutzt (wie die "Ausführen in"-Zeile in einer Verknüpfung).
 Wenn keine Dll angegeben ist startet LoD ohne PlugY
 Library=PlugY.dll 
 
@@ -520,15 +520,15 @@ Library=PlugY.dll
 [GENERAL]
 Ein- oder Ausschalten aller Funktionen.
 Beispiel:
-- ActivePlugin=0 (Deaktiviert, alle DLLs werden geladen ausser PlugY.dll)
+- ActivePlugin=0 (Deaktiviert, alle DLLs werden geladen außer PlugY.dll)
 - ActivePlugin=1 (Aktiviert, Standard)
 
 Erzeugen der Log-Datei "PlugY.log" im aktuellen Verzeichnis.
 Beispiel:
-- ActiveLogFile=0 (Deaktiviert, Standard, keine Informationen werden w�hrend des Spiels geschrieben)
+- ActiveLogFile=0 (Deaktiviert, Standard, keine Informationen werden während des Spiels geschrieben)
 - ActiveLogFile=1 (Aktiviert)
 
-Enable or disable BattleNet Access.
+Aktiviert oder deaktiviert den Battle.net Zugang.
 Beispiel:
 - DisableBattleNet=1	(Deaktiviert Battle.net access, Standard)
 - DisableBattleNet=0	(Aktiviert Battle.net access)
@@ -536,37 +536,37 @@ Beispiel:
 Laden von weiteren DLLs, wenn PlugY genutzt wird.
 Trenne jeden DLL-Namen durch das Zeichen Pipe (|)
 Alle Dateien im "DllToLoad"-Feld werden immer geladen.
-Beispiele um zwei DLLs f�r einen MOD zu laden, und der Standard:
+Beispiele um zwei DLLs für einen MOD zu laden, und der Standard:
 - DllToLoad=D2extra.dll|myDll.dll
 - DllToLoad=	(Keine DLL zu laden, Standard)
 - DllToLoad2=D2OtherExtra.dll|myDll2.dll
 - DllToLoad2=	(Keine DLL zu laden, Standard)
 
 
-Neue Kommandos in PlugY hinzugef�gt, diese k�nnen w�hrend des Spiels genutzt werden
-/save : Save game without exit (LoD 1.11 minimum).
-/page 1 : Show normal stats page (stats page must be opened, space not mandatory).
-/page 2 : Show extra stats page (stats page must be opened, space not mandatory).
-/page 3 : Show resistance stats page (stats page must be opened, space not mandatory).
-/page 4 : (beta) Show available runewords (stats page must be opened, space not mandatory).
-/lockmouse : Lock mouse cursor in the window.
-/lock : Same as /lockmouse.
-/unlockmouse : Unlock mouse cursor in the window.
-/unlock : Same as /unlockmouse.
-/renamechar newname : Rename your character and save it. (You must exit the game to update the stats page.)
-/renamepage name : Rename current page stash (MultiStash activated).
-/setindex : Set current stash page as index (prev/next index button go to an index if exists) (MultiStash activated).
-/setmainindex : Set current stash page as main index (shift + prev/next index button go to an main index if exists) (MultiStash activated).
-/resetindex : Remove index flag on the current stash page (MultiStash activated).
-/insertpage : Insert a new page after the current page (MultiStash activated).
-/deletepage : Delete current page if empty (MultiStash activated).
-/swap page : Swap the content of current stash page with the content of another page (space not mandatory) (MultiStash activated).
-/toggle page : Swap the content of current stash page with the content of another page in opposing stash shared/personal (space not mandatory) (MultiStash activated).
-/dlm : Toggle always display mana and life mode. (Since 1.13c, you can click on the bottom of each orbs)
-/dml : Same as /dlm.
-/dl : Toggle always display life mode. (Since 1.13c, you can click on the bottom of the orb)
-/dm : Toggle always display mana mode. (Since 1.13c, you can click on the bottom of the orb)
-/listcube : (beta) Create a "cube.txt" file in current directory containing all cube's receipts (LoD 1.10 minimum).
+Neue Kommandos in PlugY hinzugefügt, diese können während des Spiels genutzt werden
+/save: Save game without exit (LoD 1.11 minimum).
+/page 1: Show normal stats page (stats page must be opened, space not mandatory).
+/page 2: Show extra stats page (stats page must be opened, space not mandatory).
+/page 3: Show resistance stats page (stats page must be opened, space not mandatory).
+/page 4: (beta) Show available runewords (stats page must be opened, space not mandatory).
+/lockmouse: Lock mouse cursor in the window.
+/lock: Same as /lockmouse.
+/unlockmouse: Unlock mouse cursor in the window.
+/unlock: Same as /unlockmouse.
+/renamechar newname: Rename your character and save it. (You must exit the game to update the stats page.)
+/renamepage name: Rename current page stash (MultiStash activated).
+/setindex: Set current stash page as index (prev/next index button go to an index if exists) (MultiStash activated).
+/setmainindex: Set current stash page as main index (shift + prev/next index button go to an main index if exists) (MultiStash activated).
+/resetindex: Remove index flag on the current stash page (MultiStash activated).
+/insertpage: Insert a new page after the current page (MultiStash activated).
+/deletepage: Delete current page if empty (MultiStash activated).
+/swap page: Swap the content of current stash page with the content of another page (space not mandatory) (MultiStash activated).
+/toggle page: Swap the content of current stash page with the content of another page in opposing stash shared/personal (space not mandatory) (MultiStash activated).
+/dlm: Toggle always display mana and life mode. (Since 1.13c, you can click on the bottom of each orbs)
+/dml: Same as /dlm.
+/dl: Toggle always display life mode. (Since 1.13c, you can click on the bottom of the orb)
+/dm: Toggle always display mana mode. (Since 1.13c, you can click on the bottom of the orb)
+/listcube: (beta) Create a "cube.txt" file in current directory containing all cube's receipts (LoD 1.10 minimum).
 - ActiveCommands=0 (0=Aus; 1=Ein)
 
 Beendet D2, wenn PlugY nicht alle Features installieren konnte.
@@ -602,16 +602,16 @@ Lock cursor mouse in the window in windowed mode.
 
 
 [LANGUAGE]
-Wechselt die ausgew�hlte Sprache
-Ihr m�sst die Dateien der Sprache besitzen!!!
+Wechselt die ausgewählte Sprache
+Ihr müsst die Dateien der Sprache besitzen!
 Alle D2/LoD Versionen beinhalten Englisch (nur Text, kein TON).
-Alle m�glcihen Sprachen: ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS
+Alle möglichen Sprachen: ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS
 - ActiveChangeLanguage=1		{0:Ausgeschaltet; 1:Eingeschaltet}
-- SelectedLanguage=ENG		{FRA: W�hle Franz�sisch als SPrache}
+- SelectedLanguage=ENG		{FRA: Wähle Französisch als Sprache}
 
-F�r Modder die die m�glichen Sprachen einschr�nken wollen:
+Für Modder die die möglichen Sprachen einschränken wollen:
 - ActiveLanguageManagement=1	{0:Ausgeschaltet; 1:Eingeschaltet}
-- DefaultLanguage=ENG		{leer:D2 default Sprache; FRA:Franz�sisch ist default Sprache}
+- DefaultLanguage=ENG		{leer:D2 default Sprache; FRA:Französisch ist default Sprache}
 - AvailableLanguages=ENG|FRA	{ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS}
 
 
@@ -619,103 +619,103 @@ F�r Modder die die m�glichen Sprachen einschr�nken wollen:
 Hier werden alle Charaktere und der gemeinsame Goldschatz gespeichert.
 Man kann feste Pfade benutzen
 Beispiele:
-- ActiveSavePathChange=0	{0:Disabled; 1:Aktiviert, man muss "SavePath" ausf�llen}
-- SavePath=Save\		{Save\MyMod\  or D:\Save Games\diablo II\Current Mod\}
+- ActiveSavePathChange=0	{0:Disabled; 1:Aktiviert, man muss "SavePath" ausfüllen}
+- SavePath=Save\		{Save\MyMod\ or D:\Save Games\diablo II\Current Mod\}
 
 
 [MAIN SCREEN]
-Hier kann man die Versionsinfo des Hauptbildschirms �ndern (Original ist : v 1.10)
+Hier kann man die Versionsinfo des Hauptbildschirms ändern (Original ist: v 1.10)
 Die Farbcodes sind Integer,identisch zu den D2 Farben.
-Beispiele :
+Beispiele: 
 - ActiveVersionTextChange=0 {0:Deaktiviert; 1=Aktiviert}
-- VersionText=v 1.10        {Aktuelle Mod Version (Text links unten) :Textl�nge maximal 23 Zeichen}
+- VersionText=v 1.10        {Aktuelle Mod Version (Text links unten): Textlänge maximal 23 Zeichen}
 - ColorOfVersionText=0      {0:Weiss; 1:Rot; 4:Gold; usw.}
 - ActivePrintPlugYVersion=1 {0:Deaktiviert; 1=Aktiviert (Text rechts unten) )
 - ColorOfPlugYVersion=4     {0:Weiss; 1:Rot; 4:Gold; usw.}
 
 
 [STASH]
-Es gibt zwei Goldschatzkisten mit Mehrfach-Seiten :
-- eine pers�nliche die nur der Spieler sieht ;
+Es gibt zwei Goldschatzkisten mit Mehrfach-Seiten: 
+- eine persönliche die nur der Spieler sieht ;
 - eine gemeinsame die jeder Spieler sieht.
 Benutzt den "Goldschatz"-Knopf um zwischen den beiden Kisten zu wechseln (unten links).
 Benutze die Pfeiltasten am unteren Rand der Kiste (und die Shift Taste) um zwischen den Seiten umzuschalten 
-Definition: Die letzte Seite, ist die letzte Seite die einen Gegenstand enth�lt
-Die Mehrfach-Seiten sind deaktiviert f�r Diablo2 Classic Charaktere.
-Startet NIEMALS mehrere Spiele auf einem PC die den gleichen Speicherort f�r den gemeinsamen Goldschatz benutzen und in Realm Spielen.
+Definition: Die letzte Seite, ist die letzte Seite die einen Gegenstand enthält
+Die Mehrfach-Seiten sind deaktiviert für Diablo2 Classic Charaktere.
+Startet NIEMALS mehrere Spiele auf einem PC die den gleichen Speicherort für den gemeinsamen Goldschatz benutzen und in Realm Spielen.
 
-Beispiele f�r den Mehrfachseiten-Goldschatz:
+Beispiele für den Mehrfachseiten-Goldschatz:
 - ActiveMultiPageStash=0 (Deaktiviert, Standard)
 - ActiveMultiPageStash=1 (Aktiviert)
-- NbPagesPerIndex=10 (Standard, Index Seiten sind :1,10,20,30,...,max)
-- NbPagesPerIndex=5 (Index Seiten sind :1,5,10,15,...,max)
-- NbPagesPerIndex2=100  {50: Index Seite (+shift) ist 1, 50, 100, 150,...max)
+- NbPagesPerIndex=10 (Standard, Index Seiten sind: 1,10,20,30,...,max)
+- NbPagesPerIndex=5 (Index Seiten sind: 1,5,10,15,...,max)
+- NbPagesPerIndex2=100 {50: Index Seite (+shift) ist 1, 50, 100, 150,...max)
 
-Beispiel Konfiguration des pers�nlichen Goldschatz :
-- MaxPersonnalPages=0 (Standard, nahezu unbegrenzte Speicherseiten in dem pers�nlichen Goldschatz)
-- MaxPersonnalPages=1000 (Maximum von 1000 pers�nlichen Speicherseiten)
+Beispiel Konfiguration des persönlichen Goldschatz: 
+- MaxPersonnalPages=0 (Standard, nahezu unbegrenzte Speicherseiten in dem persönlichen Goldschatz)
+- MaxPersonnalPages=1000 (Maximum von 1000 persönlichen Speicherseiten)
 
-Beispiel Konfiguration des gemeinsamen Goldschatz :
+Beispiel Konfiguration des gemeinsamen Goldschatz: 
 - ActiveSharedStash=0 (Deaktiviert, Standard)
 - ActiveSharedStash=1 (Aktiviert, nur wenn auch ActiveMultiPageStash=1 ist, sonst deaktiviert)
 - MaxSharedPages=0 (Standard, nahezu unbegrenzte Speicherseiten in dem gemeinsamen Goldschatz)
-- MaxSharedPages=50000 (Maximum von 50000 gemeinsamen Seicherseiten)
-- SeparateHardcoreStash=1	{0:Same shared stash for HC and SC; 1:Use 2 differents stashes}
-- OpenSharedStashOnLoading=0	{0:Disabled; 1:Select shared stash (instead of personal one) on character loading}
-- SharedStashFilename=SharedStashSave	{Die Datei heisst dann:  _LOD_MeinGemeinsamerGoldSchatz.sss}
-- ActiveSharedGold=1          {0:Abschalten; 1:Schaltet die Kommandos frei, um Gold in der gemeinsame Kiste nutzen zu k�nnen (siehe Kommando-Abschnitt)}
+- MaxSharedPages=50000 (Maximum von 50000 gemeinsamen Speicherseiten)
+- SeparateHardcoreStash=1	{0:HC und SC teilen sich die selbe Truhe; 1:HC und SC haben getrennte Truhen}
+- OpenSharedStashOnLoading=0	{0:Deaktiviert; 1:Standardmäßig wird die gemeinsame Truhe geöffnet statt der persönlichen}
+- SharedStashFilename=MeinGemeinsamerGoldSchatz	{Die Datei heißt dann: _LOD_MeinGemeinsamerGoldSchatz.sss}
+- ActiveSharedGold=1          {0:Deaktiviert; 1:Schaltet die Kommandos frei, um Gold in der gemeinsame Kiste nutzen zu können (siehe Kommando-Abschnitt)}
 
-Gr�ssen�nderung des Goldschatz auf 10x10 Felder.
-Benutze PlugY\TradeStash.dc6 um das Hintergrundbild zu �ndern.
+Größenänderung des Goldschatz auf 10x10 Felder.
+Benutze PlugY\TradeStash.dc6 um das Hintergrundbild zu ändern.
 Beispiel:
-- ActiveBigStash=0 (Deaktiviert, Standard, original GOldkistengr�sse aus der MPQ wird benutzt)
+- ActiveBigStash=0 (Deaktiviert, Standard, original Goldkistengröße aus der MPQ wird benutzt)
 - ActiveBigStash=1 (Aktiviert)
 
 
 [STATS POINTS]
 Dies kann man nutzen, um versehentlich vergebene Status-Punkte neu zu verteilen.
-Zum Beispiel wenn man 30 Punkte in Energie f�r Barbaren vergeben hat!)
-Auf der Charakter Status Seite, dr�ckt die ausgew�hlte Taste und klickt mit der Maus auf den "Minus"-Knopf.
+Zum Beispiel wenn man 30 Punkte in Energie für Barbaren vergeben hat!)
+Auf der Charakter Status Seite, drückt die ausgewählte Taste und klickt mit der Maus auf den "Minus"-Knopf.
 Festlegen der Taste mit KeyUsed (entweder 17 oder 18).
-Settings example to unassign stats points :
+Beispielkonfigurationen um Status-Punkte neu zu verteilen:
 - ActiveStatsUnassignment=0 (Deaktiviert, Standard)
-- ActiveStatsUnassignment=1 (Aktiviert, dr�cke die Taste beim klicken)
-- KeyUsed=17 (Steuerungs-Taste (Strg oder Ctrl), Standard)
+- ActiveStatsUnassignment=1 (Aktiviert, drücke die Taste beim klicken)
+- KeyUsed=17 (Steuerung-Taste (Strg/Ctrl), Standard)
 - KeyUsed=18 (Alt Taste)
 
 
-Mit der "Shift"-Taste k�nnt Ihr die Status-Punkte in gr�sseren Stufen vergeben/zur�cksetzen (maximal alles mt einem Klick).
+Mit der "Shift"-Taste könnt Ihr die Status-Punkte in größeren Stufen vergeben/zurücksetzen (maximal alles mt einem Klick).
 Man kann ein Limit setzen.
 Beispiel:
-- ActiveShiftCkickLimit=0 (Deaktiviert, Standard)
-- ActiveShiftCkickLimit=1 (Aktiviert)
-- LimitValueToShiftClick=5 (Standard, es werden maximal 5 Statuspunkte auf einmal ver�ndert)
+- ActiveShiftClickLimit=0 (Deaktiviert, Standard)
+- ActiveShiftClickLimit=1 (Aktiviert)
+- LimitValueToShiftClick=5 (Standard, es werden maximal 5 Statuspunkte auf einmal verändert)
 
 
 [STAT ON LEVEL UP]
-WARNING : CHEAT, DON'T USE IN NORMAL GAME.
-�ndert die Anzahl der Statuspunkte beim LevelUp
+ACHTUNG: CHEAT, NICHT IM NORMALEN SPIEL BENUTZEN.
+Ändert die Anzahl der Statuspunkte beim LevelUp
 Beispiel:
 - ActiveStatPerLevelUp=0 {0:Deaktiviert; 1:Aktiviert}
-- StatPerLevelUp=11 {0:keine Statuspunkte beim LevelUp;  11:elf Punkte beim LevelUp}
+- StatPerLevelUp=11 {0:keine Statuspunkte beim LevelUp; 11:elf Punkte beim LevelUp}
 
 
 [SKILLS POINTS]
- Kann genutzt werden um versehentlich gesetzte Fertigkeitspunkte zu korrigieren
- Klickt auf den Knopf auf der Fertigkeits-Seite, um alle Punkte zur�ckzusetzen .
-Hinweis:  �berpr�ft die wahren "Kosten" f�r jede Fertigkeit ( kann gr�sser als 1 sein in einem MOD)
- Im folgenden die Standardwerte und in {}  einige Beispiel Werte mit Beschreibungen:
+Kann genutzt werden um versehentlich gesetzte Fertigkeitspunkte zu korrigieren
+Klickt auf den Knopf auf der Fertigkeits-Seite, um alle Punkte zurückzusetzen .
+Hinweis: überprüft die wahren "Kosten" für jede Fertigkeit (kann größer als 1 sein in einem MOD)
+ Im folgenden die Standardwerte und in {} einige Beispiel Werte mit Beschreibungen:
 - ActiveSkillsUnassignment=0 {0: Ausgeschaltet ; 1: Eingeschaltet }
-- ActiveSkillsUnassignmentOneForOne=0	{0:Normal; 1:Force the skill unassign 1 for 1 (for mods).}
-- PosXUnassignSkillBtn=-1 	{-1: Default position, 50: Put the button at the position 50 in X}
-- PosYUnassignSkillBtn=-1 	{-1: Default position, 50: Put the button at the position 50 in Y}
+- ActiveSkillsUnassignmentOneByOne=0	{0:Normal; 1:Das Zurücksetzen wird für jeden Punkt einzeln durchgeführt (für Mods).}
+- PosXUnassignSkillBtn=-1 	{-1: Standardposition, 50: Platziert den Knopf an der X-Position 50}
+- PosYUnassignSkillBtn=-1 	{-1: Standardposition, 50: Platziert den Knopf an der Y-Position 50}
 
 
 [SKILL ON LEVEL UP]
-WARNING : CHEAT, DON'T USE IN NORMAL GAME.
-�ndert die Menge der Fertigkeitspunkte beim LevelUp.
-Beispiel :
-- ActiveSkillPerLevelUp=0 (Deakiviert, Standard)
+WARNING: CHEAT, DON'T USE IN NORMAL GAME.
+Ändert die Menge der Fertigkeitspunkte beim LevelUp.
+Beispiel: 
+- ActiveSkillPerLevelUp=0 (Deaktiviert, Standard)
 - ActiveSkillPerLevelUp=1 (Aktiviert)
 - SkillPerLevelUp=0 (man bekommt keinen Punkt beim LevelUp)
 - SkillPerLevelUp=1 (Standard)
@@ -724,54 +724,54 @@ Beispiel :
 
 [WORLD EVENT]
 Aktiviert den lokalen World Event 
-World Event  kann nur in H�lle und nur einmal pro Spiel aktiviert werden.
-WorldEvent  wird alle 75-125  verkauften  SOJ  aktivert 
-Der Verkauf eines echten SOJ  erh�ht den Z�hler um 100 
-Bei Start eines D2 Spiels ist der SOJ  Z�hler  zwischen 200-3000  
-Der SOJ  Z�hler wird alle 10-20 Minuten um 1  erh�ht, auch wenn man nicht in einem Spiel ist.
-When der World Event ausgel�st wird, und man nicht in einem Spiel ist, verliert man ihn.
-Hinweis 1:  Es besteht eine Chance von 1/12  einen WE in der ersten Spielstunde zu erhalten
-Hinweis 2:  Von Beginn eines neuen Spiels kommt der n�chste WE wird innerhalb weniger Sekunden bis 41:40  Stunden danach
+World Event kann nur in Hölle und nur einmal pro Spiel aktiviert werden.
+World Event wird alle 75-125 verkauften SOJ aktivert
+Der Verkauf eines echten SOJ erhöht den Zähler um 100
+Bei Start eines D2 Spiels ist der SOJ Zähler zwischen 200-3000
+Der SOJ Zähler wird alle 10-20 Minuten um 1 erhöht, auch wenn man nicht in einem Spiel ist.
+When der World Event ausgelöst wird, und man nicht in einem Spiel ist, verliert man ihn.
+Hinweis 1: Es besteht eine Chance von 1/12 einen WE in der ersten Spielstunde zu erhalten
+Hinweis 2: Von Beginn eines neuen Spiels kommt der nächste WE wird innerhalb weniger Sekunden bis 41:40 Stunden danach
 Im folgenden die Standardwerte und in {} einige Beispiel Werte mit Beschreibungen:
 - ActiveWorldEvent=0 {0: Ausgeschaltet ; 1: Eingeschaltet }
-- ShowCounterInAllDifficulty=0	{0:Zeige die Meldung "SOJ verkauft" nur in H�lle; 1:Zeige es in allen Schwierigkeitsgraden}
-- ItemsToSell=The Stone of Jordan	{r01: rune EL;      cap,rar,upg: Jede cap/war hat/shako rare}
+- ShowCounterInAllDifficulty=0	{0:Zeige die Meldung "SOJ verkauft" nur in Hölle; 1:Zeige es in allen Schwierigkeitsgraden}
+- ItemsToSell=The Stone of Jordan	{r01: rune EL; cap,rar,upg: Jede cap/war hat/shako rare}
 - MonsterID=333					{333: DiabloKlon erscheint}
-- OwnSOJSoldChargeFor=100	{100:Wenn Du einen SOJ verkaufst wird der SOJ Z�hler um 100 erh�ht}
-- InititalSOJSoldMin=200		{200:Der SOJ Z�hler ist mindestens bei 200 wenn Du D2 startest}
-- InititalSOJSoldMax=3000		{3000:Der SOJ Z�hler ist maximal bei 3000 wenn Du D2 startest}
+- OwnSOJSoldChargeFor=100	{100:Wenn Du einen SOJ verkaufst wird der SOJ Zähler um 100 erhöht}
+- InititalSOJSoldMin=200		{200:Der SOJ Zähler ist mindestens bei 200 wenn Du D2 startest}
+- InititalSOJSoldMax=3000		{3000:Der SOJ Zähler ist maximal bei 3000 wenn Du D2 startest}
 - TriggerAtEachSOJSoldMin=75	{75:Man muss mindestens 75 SOJ verkaufen zwischen zwei World Event}
 - TriggerAtEachSOJSoldMax=125	{125:Man muss maximal 125 SOJ verkaufen zwischen zwei World Event}
-- ActiveAutoSell=1			{0:Deaktiviert; 1:Aktiviert das automatische erh�hen des SOJ Z�hlers um 1}
-- TimeBeforeAutoSellMin=0		{50:Es dauert mindestens 0 Sekunden zwischen 2 Hintergrund Verk�ufen}
-- TimeBeforeAutoSellMin=1200	{1200:Es dauert maximal 20 Minuten (1200 Sekunden) zwischen 2 Hintergrund Verk�ufen}
+- ActiveAutoSell=1			{0:Deaktiviert; 1:Aktiviert das automatische erhöhen des SOJ Zählers um 1}
+- TimeBeforeAutoSellMin=0		{50:Es dauert mindestens 0 Sekunden zwischen 2 Hintergrundverkäufen}
+- TimeBeforeAutoSellMin=1200	{1200:Es dauert maximal 20 Minuten (1200 Sekunden) zwischen 2 Hintergrundverkäufen}
 
 
 [UBER QUEST]
-Aktiviert den �ber-Quest im Single-Player
-Du musst die 3 Schl�ssel, danach die 3 Organe verwandeln.
+Aktiviert den über-Quest im Single-Player
+Du musst die 3 Schlüssel, danach die 3 Organe verwandeln.
 Dies muss jeweils in Harrogath erfolgen
-Notiz: Dieser Quest wird in einer sp�teren PlugY Version mehr dem Verhalten im Battle.net angepasst
-Warnung: Aktuell sind die �ber-Monster direkt neben dem Portal, also sei vorsichtig, wenn Du durch das Portal gehst!!!
+Notiz: Dieser Quest wird in einer späteren PlugY Version mehr dem Verhalten im Battle.net angepasst
+Warnung: Aktuell sind die über-Monster direkt neben dem Portal, also sei vorsichtig, wenn Du durch das Portal gehst!
 ActiveUberQuest=0                {0:Deaktiviert; 1:Aktiviert}
 
 
 [INTERFACE]
-F�gt eine zus�tzliche Charakter Info Seite hinzu
-Man kann ausw�hlen, ob die zuletzt angezeigte Seite erscheint, oder die Hauptseite 
-Die Eigenschaften die in den Extraseiten angezeigt werden k�nnen in der PlugY\statsinterface.txt ver�ndert werden (Mit MS Excel �ffnen)
+Fügt eine zusätzliche Charakter Info Seite hinzu
+Man kann auswählen, ob die zuletzt angezeigte Seite erscheint, oder die Hauptseite 
+Die Eigenschaften die in den Extraseiten angezeigt werden können in der PlugY\statsinterface.txt verändert werden (Mit MS Excel öffnen)
 Es gibt kein Seitenlimit.
-Unterdr�ckt den Hintergrund von Schaltfl�chen, wenn der MOD diese bereits �ndert 
+Unterdrückt den Hintergrund von Schaltflächen, wenn der MOD diese bereits ändert 
 - ActiveNewStatsInterface=0	 {0:Deaktiviert ; 1: Aktiviert}
-- SelectMainPageOnOpenning=1 {0:Zuletzt ausgew�hlte Seite wird angezeigt; 1: Hauptseite wird angezeigt} 
+- SelectMainPageOnOpenning=1 {0:Zuletzt ausgewählte Seite wird angezeigt; 1: Hauptseite wird angezeigt} 
 - PrintButtonsBackgroundOnMainStatsPage=1 {0: Zeigt nicht den Hintergrund an ; 1: Zeigt ihn an }
 
 
 
 [EXTRA]
-Man kann LOD beliebig oft auf einem Comuter starten.
-Zum Beispiel k�nnen Modder Multiplayer-Spiele auf einem PC testen.
-Warnung : 
+Man kann LOD beliebig oft auf einem Computer starten.
+Zum Beispiel können Modder Multiplayer-Spiele auf einem PC testen.
+Warnung: 
 Startet keine Spiele mit dem gleichen Speicherort (SavePath), wenn Ihr den gemeinsamen Goldschatz aktiviert habt.
 Benutzt nicht zweimal den gleichen Charakter zur gleichen Zeit.
 - ActiveLaunchAnyNumberOfLOD=0		{0:Deaktiviert ; 1: Aktiviert}
@@ -788,41 +788,41 @@ Anzeige des ItemLevels im Gegenstandsinfobereich
 Dauerhafte Anzeige der Mana/Lebens- Werte oberhalb der Kugeln
 - AlwaysDisplayLifeAndManaValues=0	{0:Deaktiviert ; 1: Aktiviert; 2:Ausgeschaltet, kann per Kommando eingeschaltet werden}
 
-Behebt den Bug der verhindert das von Microsoft Excel ge�ffnete Text-Dateien nich geladen werden konnten.
-- EnabledTXTFilesWhenMSExcelOpenIt=0	{0:Deaktivert; 1:Aktiviert}
+Behebt den Bug der verhindert das von Microsoft Excel geöffnete Text-Dateien nicht geladen werden konnten.
+- EnabledTXTFilesWhenMSExcelOpenIt=0	{0:Deaktiviert; 1:Aktiviert}
 
-Die Ladder-Only Runenw�rter k�nnen f�r den Singleplayer aktivert werden. 
-Das wird erm�glicht indem die Spalte "Server" in der runes.txt deaktiviert wird. 
-Benutze diese Spalte also nicht in deinem Mod wenn diese Funktion aktivert ist. 
-- ActiveLadderRunewords=0     {0:Deaktivert; 1:Aktiviert}
+Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden.
+Das wird ermöglicht indem die Spalte "Server" in der runes.txt deaktiviert wird. 
+Benutze diese Spalte also nicht in deinem Mod wenn diese Funktion aktiviert ist.
+- ActiveLadderRunewords=0     {0:Deaktiviert; 1:Aktiviert}
 
 
-Weitere Funktionen folgen... :)
+Weitere Funktionen folgen...: )
 
 
 Wenn Ihr Anregungen habt, Fehler findet oder Konflikte mit MODs feststellt, schickt eine eMail an ynicolas@worldonline.fr mit "DiabloII" als Betreffzeile!
-Zur Korrektur der deutschen �bersetzung bitte eine eMail an ChaosEnergy@planetdiablo.com
+Zur Korrektur der deutschen Übersetzung bitte eine eMail an ChaosEnergy@planetdiablo.com
 
 
 ******** Dank geht an: ********
-- Blizzard f�r Diablo2 und Lord of Destruction.
-- Kingpin, Afj666, Joel, SVR, Myrdinn f�r Ihre Hilfe.
-- Pralinor fo his help in the convertion to 1.12.
-- L'Autour fo his help in the convertion to 1.13d.
-- ChaosEnergy f�r Beta-Tests und die deutsche �bersetzung.
-- Char & Darque f�r die Hilfe bei der englischen �bersetzung.
-- Shaitane, K&V, TheMasterCaster, raspa und onyx f�r Tests.
-- Golvmopp, Dark Spot in the Corner, Megalixir und Athara f�r ihr Hilfe.
-- ItalianPlayer f�r Italienisch �bersetzung.
-- Alle Mitglieder des ProzenKeep Chat und Forum f�r Ihre Informationen und das Feedback.
-- PhrozenKeep f�r alle Dinge die sie mit uns teilen (inklusive meinen ;)
-- �bersetzung :
-	* Englisch : Yohann, Jurica.
-	* Franz�sisch : Yohann
-	* Deutch : ChaosEnergy, TheMasterCaster.
-	* Italienisch : ItalianPlayer
-	* Spanish : Acrerune
-	* Polnisch : Serdel
-	* Russisch : L'Autour
+- Blizzard für Diablo2 und Lord of Destruction.
+- Kingpin, Afj666, Joel, SVR, Myrdinn für Ihre Hilfe.
+- Pralinor für die Unterstützung bei der Portierung zu 1.12.
+- L'Autour für die Unterstützung bei der Portierung zu 1.13d.
+- ChaosEnergy für Beta-Tests und die deutsche Übersetzung.
+- Char & Darque für die Hilfe bei der englischen Übersetzung.
+- Shaitane, K&V, TheMasterCaster, raspa und onyx für Tests.
+- Golvmopp, Dark Spot in the Corner, Megalixir und Athara für ihr Hilfe.
+- ItalianPlayer für Italienisch Übersetzung.
+- Alle Mitglieder des ProzenKeep Chat und Forum für Ihre Informationen und das Feedback.
+- PhrozenKeep für alle Dinge die sie mit uns teilen (inklusive meinen ;)
+- Übersetzung: 
+	* Englisch: Yohann, Jurica.
+	* Französisch: Yohann
+	* Deutsch: ChaosEnergy, TheMasterCaster.
+	* Italienisch: ItalianPlayer
+	* Spanish: Acrerune
+	* Polnisch: Serdel
+	* Russisch: L'Autour
 
 ;--------------------------------------------------------------------------------------;

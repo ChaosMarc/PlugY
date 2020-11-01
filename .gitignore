@@ -26,6 +26,7 @@
 *.exe
 *.out
 *.app
+*.zip
 
 # Visual Studio
 Release
@@ -33,3 +34,9 @@ Debug
 .vs
 *.user
 *.aps
+*.tlog
+*.ipdb
+*.iobj
+*.bak
+*.pdb
+/PlugYInstall/Restore/*.log

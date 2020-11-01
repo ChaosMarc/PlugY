@@ -172,6 +172,7 @@ void Install_DisplayItemLevel()
 	if (isInstalled) return;
 
 	log_msg("Patch D2Client to display item popup. (DisplayPopup)\n");
+  debug_msg("Patch D2Client to display item popup. (DisplayPopup)\n");
 
 	// print the text in the final buffer
 	mem_seek R8(D2Client,	3D47C,	3D47C,	438A1, ADD0A, 789DA, AE0AA, 941C0, 98590, 8E983);
@@ -196,6 +197,7 @@ void Install_DisplayItemLevel()
 	//6FB473B3  |. 68 00010000    PUSH 100
 
 	log_msg("\n");
+  debug_msg("\n");
 
 	isInstalled = true;
 }

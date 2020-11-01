@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+  Add support 1.14d by haxifix.
 
 	Updating server.
 

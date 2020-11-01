@@ -1,5 +1,5 @@
-;	File created by Yohann NICOLAS.
-;	Modified by L'Autour.
+п»їUnicode True
+
 !include "MUI2.nsh"
 
 !define VERSION "12.00"
@@ -46,54 +46,67 @@ InstallDirRegKey HKLM "${REGKEY}" "InstallPath"
 ;--------------------------------
 ; Languages
 !insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "Russian"
 
 LangString DESC_CORE ${LANG_ENGLISH} "Core files.$\nPlugY.dll will be installed in Diablo II directory."
-LangString DESC_CORE ${LANG_FRENCH} "Fichiers nйcessaires.$\nPlugY.dll sera installй dans le rйpertoire de Diablo II."
-LangString DESC_CORE ${LANG_RUSSIAN} "Основные файлы.$\nPlugY.dll должен быть установлен в каталог Diablo II."
+LangString DESC_CORE ${LANG_GERMAN} "Hauptdateien.$\nPlugY.dll wird in das Installationsverzeichnis von Diablo II installiert."
+LangString DESC_CORE ${LANG_FRENCH} "Fichiers nГ©cessaires.$\nPlugY.dll sera installГ© dans le rГ©pertoire de Diablo II."
+LangString DESC_CORE ${LANG_RUSSIAN} "РћСЃРЅРѕРІРЅС‹Рµ С„Р°Р№Р»С‹.$\nPlugY.dll РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СѓСЃС‚Р°РЅРѕРІР»РµРЅ РІ РєР°С‚Р°Р»РѕРі Diablo II."
 LangString DESC_DESKTOP_SHORTCUTS ${LANG_ENGLISH} "Add shortcut on Desktop to launch Diablo II with ${NAME}."
-LangString DESC_DESKTOP_SHORTCUTS ${LANG_FRENCH} "Ajoute un raccourci pour dйmarrer Diablo II avec ${NAME}."
-LangString DESC_DESKTOP_SHORTCUTS ${LANG_RUSSIAN} "Добавить ярлык на рабочий стол для запуска Diablo II с ${NAME}."
+LangString DESC_DESKTOP_SHORTCUTS ${LANG_GERMAN} "FГјgt eine VerknГјpfung auf dem Desktop mit dem Namen ${NAME} hinzu mit der Diablo II gestartet werden kann."
+LangString DESC_DESKTOP_SHORTCUTS ${LANG_FRENCH} "Ajoute un raccourci pour dГ©marrer Diablo II avec ${NAME}."
+LangString DESC_DESKTOP_SHORTCUTS ${LANG_RUSSIAN} "Р”РѕР±Р°РІРёС‚СЊ СЏСЂР»С‹Рє РЅР° СЂР°Р±РѕС‡РёР№ СЃС‚РѕР» РґР»СЏ Р·Р°РїСѓСЃРєР° Diablo II СЃ ${NAME}."
 LangString DESC_MENU_SHORTCUTS ${LANG_ENGLISH} "Add shortcuts in start menu."
-LangString DESC_MENU_SHORTCUTS ${LANG_FRENCH} "Ajoute des raccourcis dans le menu dйmarrer."
-LangString DESC_MENU_SHORTCUTS ${LANG_RUSSIAN} "Добавить ярлыки в главное меню."
+LangString DESC_MENU_SHORTCUTS ${LANG_GERMAN} "FГјgt VerknГјpfungen im StartmenГј hinzu."
+LangString DESC_MENU_SHORTCUTS ${LANG_FRENCH} "Ajoute des raccourcis dans le menu dГ©marrer."
+LangString DESC_MENU_SHORTCUTS ${LANG_RUSSIAN} "Р”РѕР±Р°РІРёС‚СЊ СЏСЂР»С‹РєРё РІ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ."
 LangString DESC_UNINSTALLER ${LANG_ENGLISH} "Create a Windows uninstall program.$\nAdding registry keys in Windows."
-LangString DESC_UNINSTALLER ${LANG_FRENCH} "Crйe un programme Windows de dйsinstallation.$\nAjoute des clйs de registres dans Windows."
-LangString DESC_UNINSTALLER ${LANG_RUSSIAN} "Создать в Windows деинстллятор программы.$\nДобавляет ключи реестра в Windows."
+LangString DESC_UNINSTALLER ${LANG_GERMAN} "Erzeugt ein Deinstallationsprogramm.$\nWindows RegistrierungseintrГ¤ge werden erstellt."
+LangString DESC_UNINSTALLER ${LANG_FRENCH} "CrГ©e un programme Windows de dГ©sinstallation.$\nAjoute des clГ©s de registres dans Windows."
+LangString DESC_UNINSTALLER ${LANG_RUSSIAN} "РЎРѕР·РґР°С‚СЊ РІ Windows РґРµРёРЅСЃС‚Р»Р»СЏС‚РѕСЂ РїСЂРѕРіСЂР°РјРјС‹.$\nР”РѕР±Р°РІР»СЏРµС‚ РєР»СЋС‡Рё СЂРµРµСЃС‚СЂР° РІ Windows."
 LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
-LangString DESC_PATCH_FILE ${LANG_FRENCH} "Patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
-LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "Применить патч для запуска PlugY без PlugY.exe. Подробнее смотреть в файле Readme."
+LangString DESC_PATCH_FILE ${LANG_GERMAN} "Patcher um PlugY ohne PlugY.exe zu starten.$\nDie LiesMich-Datei MUSS vor Benutzung gelesen werden."
+LangString DESC_PATCH_FILE ${LANG_FRENCH} "D2gfx.dll patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
+LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "РџСЂРёРјРµРЅРёС‚СЊ РїР°С‚С‡ РґР»СЏ Р·Р°РїСѓСЃРєР° PlugY Р±РµР· PlugY.exe. РџРѕРґСЂРѕР±РЅРµРµ СЃРјРѕС‚СЂРµС‚СЊ РІ С„Р°Р№Р»Рµ Readme."
 LangString SECTION_NAME_CORE ${LANG_ENGLISH} "${NAME} (required)"
-LangString SECTION_NAME_CORE ${LANG_FRENCH} "${NAME} (nйcessaire)"
-LangString SECTION_NAME_CORE ${LANG_RUSSIAN} "${NAME} (требуется)"
+LangString SECTION_NAME_CORE ${LANG_GERMAN} "${NAME} (benГ¶tigt)"
+LangString SECTION_NAME_CORE ${LANG_FRENCH} "${NAME} (nГ©cessaire)"
+LangString SECTION_NAME_CORE ${LANG_RUSSIAN} "${NAME} (С‚СЂРµР±СѓРµС‚СЃСЏ)"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_ENGLISH} "Desktop Shortcut"
+LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_GERMAN} "DesktopverknГјpfung"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_FRENCH} "Raccourci sur le bureau"
-LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_RUSSIAN} "Ярлык на рабочем столе"
+LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_RUSSIAN} "РЇСЂР»С‹Рє РЅР° СЂР°Р±РѕС‡РµРј СЃС‚РѕР»Рµ"
 LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_ENGLISH} "Start menu Shortcuts"
-LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_FRENCH} "Raccourcis dans le Menu dйmarrer"
-LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_RUSSIAN} "Ярлыки в в главном меню"
+LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_GERMAN} "StartmenГјverknГјpfungen"
+LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_FRENCH} "Raccourcis dans le Menu dГ©marrer"
+LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_RUSSIAN} "РЇСЂР»С‹РєРё РІ РІ РіР»Р°РІРЅРѕРј РјРµРЅСЋ"
 LangString SECTION_NAME_UNINSTALLER ${LANG_ENGLISH} "Uninstaller (add keys registers)"
-LangString SECTION_NAME_UNINSTALLER ${LANG_FRENCH} "Dй-installeur (ajoute clйs de registre)"
-LangString SECTION_NAME_UNINSTALLER ${LANG_RUSSIAN} "Деинсталлятор (добавляет ключи реестра)"
+LangString SECTION_NAME_UNINSTALLER ${LANG_GERMAN} "Deinstallationsprogramm (FГјgt Windows RegistrierungseintrГ¤ge hinzu)"
+LangString SECTION_NAME_UNINSTALLER ${LANG_FRENCH} "DГ©-installeur (ajoute clГ©s de registre)"
+LangString SECTION_NAME_UNINSTALLER ${LANG_RUSSIAN} "Р”РµРёРЅСЃС‚Р°Р»Р»СЏС‚РѕСЂ (РґРѕР±Р°РІР»СЏРµС‚ РєР»СЋС‡Рё СЂРµРµСЃС‚СЂР°)"
 LangString SECTION_PATCH_FILE ${LANG_ENGLISH} "File Patcher (advanced user only)"
-LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de fichier (utilisateur avancй uniquement)"
-LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "Патч для Patcher (для опытных пользователей)"
+LangString SECTION_PATCH_FILE ${LANG_GERMAN} "Datei Patcher (FГјr erfahrene Nutzer)"
+LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de D2gfx.dll (utilisateur avancГ© uniquement)"
+LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "РџР°С‚С‡ РґР»СЏ Patcher (РґР»СЏ РѕРїС‹С‚РЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№)"
 
 LangString README_FILENAME ${LANG_ENGLISH} "PlugY_The_Survival_Kit_-_Readme.txt"
+LangString README_FILENAME ${LANG_GERMAN} "PlugY_The_Survival_Kit_-_Liesmich.txt"
 LangString README_FILENAME ${LANG_FRENCH} "PlugY_The_Survival_Kit_-_LisezMoi.txt"
 LangString README_FILENAME ${LANG_RUSSIAN} "PlugY_The_Survival_Kit_-_Readme.txt"
 
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_ENGLISH} "Error : Diablo II install directory not found.$\nPlease re-install your copy of Diablo II - Lord of Destruction."
-LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_FRENCH} "Erreur : Le rйpertoire d'installation de Diablo II n'a pas йtй trouvй.$\nVeuillez rй-installer votre copie de Diablo II - Lord of Destruction."
-LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_RUSSIAN} "Ошибка : каталог с установленной игрой Diablo II не найден.$\nПожалуйста переустановите вашу копию Diablo II - Lord of Destruction."
+LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_GERMAN} "Fehler : Diablo II Installationsverzeichnis nicht gefunden.$\nBitte installiere Diablo II - Lord of Destruction neu."
+LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_FRENCH} "Erreur : Le rГ©pertoire d'installation de Diablo II n'a pas Г©tГ© trouvГ©.$\nVeuillez rГ©-installer votre copie de Diablo II - Lord of Destruction."
+LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_RUSSIAN} "РћС€РёР±РєР° : РєР°С‚Р°Р»РѕРі СЃ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ РёРіСЂРѕР№ Diablo II РЅРµ РЅР°Р№РґРµРЅ.$\nРџРѕР¶Р°Р»СѓР№СЃС‚Р° РїРµСЂРµСѓСЃС‚Р°РЅРѕРІРёС‚Рµ РІР°С€Сѓ РєРѕРїРёСЋ Diablo II - Lord of Destruction."
 
 Var D2Path
 ;--------------------------------
 ; Initialisation
 Function .onInit
   !define MUI_LANGDLL_WINDOWTITLE "${NAME} v${VERSION}"
-  !define MUI_LANGDLL_INFO "Select your language:$\nChoisissez votre langue:"
+  !define MUI_LANGDLL_INFO "Select your language:"
   !insertmacro MUI_LANGDLL_DISPLAY
   !undef MUI_LANGDLL_WINDOWTITLE
   !undef MUI_LANGDLL_INFO
@@ -127,38 +140,6 @@ Function LaunchPlugY
 	SetOutPath "$INSTDIR"
 	ExecShell "" "$INSTDIR\PlugY.exe"
 FunctionEnd
-
-;--------------------------------
-; Custom Page
-;Function OptionsPage
-  ;StrCpy $INSTDIR "C:\temp\${NAME}"
-;	nsDialogs::Create /NOUNLOAD 1018
-	;Pop $D2Path
-
-	;GetFunctionAddress $D2Path OnBack
-	;nsDialogs::OnBack /NOUNLOAD $D2Path
-
-	;${NSD_CreateButton} 0 0 100% 12u Test
-	;Pop $BUTTON
-	;GetFunctionAddress $D2Path OnClick
-	;nsDialogs::OnClick /NOUNLOAD $BUTTON $D2Path
-
-	;${NSD_CreateText} 0 35 100% 12u hello
-	;Pop $EDIT
-	;GetFunctionAddress $D2Path OnChange
-	;nsDialogs::OnChange /NOUNLOAD $EDIT $D2Path
-
-	;${NSD_CreateCheckbox} 0 -50 100% 8u Test
-	;Pop $CHECKBOX
-	;GetFunctionAddress $D2Path OnCheckbox
-	;nsDialogs::OnClick /NOUNLOAD $CHECKBOX $D2Path
-
-	;${NSD_CreateLabel} 0 40u 75% 40u "* Type `hello there` above.$\n* Click the button.$\n* Check the checkbox.$\n* Hit the Back button."
-	;Pop $D2Path
-
-;	nsDialogs::Show
-;FunctionEnd
-
 
 InstType "Standard"
 InstType "Minimal"
@@ -266,8 +247,6 @@ Section "Uninstall" Uninstall
   Delete "$INSTDIR\${UNINSTALL_FILE}"
   RMDir "$INSTDIR"
 SectionEnd
-
-
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT "${Core}" $(DESC_CORE)

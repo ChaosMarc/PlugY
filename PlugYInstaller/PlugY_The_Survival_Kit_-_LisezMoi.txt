@@ -9,297 +9,297 @@
 ;--------------------------------------------------------------------------------------;
 
 
-Site officiel : http://plugy.free.fr
+Site officiel: http://plugy.free.fr
 Vous pouvez y faire un don si vous le souhaitez.
 
 
 ******** ATTENTION ********
-- Ce plugin fonctionne sur LoD version 1.09 � 1.13d et sur leurs mods.
+- Ce plugin fonctionne sur LoD version 1.09 à 1.13d et 1.14d et sur leurs mods.
 - Ce plugin ne fonctionne pas sur les royaumes Battle.net.
-- Tous les fichiers ont chang�s depuis les versions pr�c�dentes, donc d�installer toutes les versions pr�c�dentes.
-- PlugY.ini a �t� modifi� depuis les versions pr�c�dentes, utiliser celui fourni dans cette archive.
-- N'oubliez pas de lire les forums :
+- Tous les fichiers ont changés depuis les versions précédentes, donc déinstaller toutes les versions précédentes.
+- PlugY.ini a été modifié depuis les versions précédentes, utiliser celui fourni dans cette archive.
+- N'oubliez pas de lire les forums:
     http://forum.judgehype.com/judgehype/ModsetModding/liste_sujet-1.htm
     http://d2mods.info/forum/viewforum.php?f=133 (anglais)
 
 
 ******** CARACTERISTIQUES ********
-Toutes ces fonctions peuvent �tre activ�/d�sactiv� via PlugY.ini (voir "COMMENTAIRES SUR LE FICHIER DE CONFIGURATION")
-- D�sactive l'acc�s � Battle.net
-- Espace de stockage infini dans le coffre !
-- Espace de stockage partag� dans le coffre !
+Toutes ces fonctions peuvent être activé/désactivé via PlugY.ini (voir "COMMENTAIRES SUR LE FICHIER DE CONFIGURATION")
+- Désactive l'accès à Battle.net
+- Espace de stockage infini dans le coffre!
+- Espace de stockage partagé dans le coffre!
 - Active les mots runiques du ladder en dehors des royaumes.
-- World Event et Uber Quest en Local pour le monojoueur et le multijoueur hors royaumes !
-- Permet d'ouvrir le portail vers le Cow Level m�me quand on a tuer le Cow King dans cette difficult�.
-- D�salloue les points de capacit�s(skills) et de statistiques pr�c�demment allou�es.
+- World Event et Uber Quest en Local pour le monojoueur et le multijoueur hors royaumes!
+- Permet d'ouvrir le portail vers le Cow Level même quand on a tuer le Cow King dans cette difficulté.
+- Désalloue les points de capacités(skills) et de statistiques précédemment allouées.
 - Change la langue du jeu.
-- R�g�n�re toujours la carte en monojoueur comme en multijoueur.
-- Ex�cute automatiquement la comande /players X au lancement d'une partie.
-- Ajoute des pages suppl�mentaires pour l'affichage de plus de statistiques du perso comme le %MF.
+- Régénère toujours la carte en monojoueur comme en multijoueur.
+- Exécute automatiquement la comande /players X au lancement d'une partie.
+- Ajoute des pages supplémentaires pour l'affichage de plus de statistiques du perso comme le %MF.
 - Affiche le niveau de l'objet dans son popup.
-- Permet de lancer autant de fois que l'on veut Diablo II sur le m�me ordinateur.
+- Permet de lancer autant de fois que l'on veut Diablo II sur le même ordinateur.
 - Le coffre contient 10x10 cases.
-- Change le r�pertoire de sauvegarde.
-- Affiche toujours les valeurs num�riques de mana et de vie au-dessus des globes correspondants.
-- D2 peut charger tout les fichiers, m�me ceux ouvert par Microsoft Excel (d�sactiv� par defaut).
+- Change le répertoire de sauvegarde.
+- Affiche toujours les valeurs numériques de mana et de vie au-dessus des globes correspondants.
+- D2 peut charger tout les fichiers, même ceux ouvert par Microsoft Excel (désactivé par defaut).
 - Affiche la valeur courante des caracs (sans les bonus magiques).
-- Localis� en fran�ais, anglais, allemand, italien, espagnol et polonais.
-- Ajout des commandes suivantes (voir "COMMENTAIRES SUR LE FICHIER DE CONFIGURATION") :
-	/save : Sauvegarde la partie sans quitter.
-	/page 1 : Affiche la page des stats de base (la page des stats doit �tre ouverte).
-	/page 2 : Affiche la page des stats en plus (la page des stats doit �tre ouverte).
-	/page 3 : Affiche la page des stats de resistances (la page des stats doit �tre ouverte).
-	/page 4 : (b�ta) Affiche la page des mots runiques actifs (la page des stats doit �tre ouverte).
-	/lockmouse : Bloque le curseur de la souris dans la fen�tre.
-	/lock : Identique � /lockmouse.
-	/unlockmouse : Lib�re le curseur de la souris de la fen�tre.
-	/unlock : Identique � /unlockmouse.
-	/renamechar newname : Renomme la personnage et le sauvegarde.
-	/renamepage name : Renomme la page courante du coffre.
-	/setindex : La page courante devient un index.
-	/setmainindex : La page courante devient un index principal.
-	/resetindex : Retire la page courante des index.
-	/insertpage : Ins�re une nouvelle page apr�s la page courante.
-	/deletepage : Supprime la page courante si elle est vide.
-	/swap page : Echange le contenu de la page actuelle du coffre avec le contenu d'une autre "page".
-	/toggle page : Echanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre oppos� partag�/personnel (espace non obligatoire).
-	/dlm : Inverse le mode d'affichage: Toujours afficher les valeurs de vie et de mana.
-	/dml : Identique � /dlm.
-	/dl : Inverse le mode d'affichage: Toujours afficher les valeurs de vie.
-	/dm : Inverse le mode d'affichage: Toujours afficher les valeurs de mana.
-	/listcube : (b�ta) Cr�e un fichier "cube.txt" dans le r�pertoire de sauvegarde contenant toutes les formules actives du cube.
+- Localisé en français, anglais, allemand, italien, espagnol et polonais.
+- Ajout des commandes suivantes (voir "COMMENTAIRES SUR LE FICHIER DE CONFIGURATION"):
+	/save: Sauvegarde la partie sans quitter.
+	/page 1: Affiche la page des stats de base (la page des stats doit être ouverte).
+	/page 2: Affiche la page des stats en plus (la page des stats doit être ouverte).
+	/page 3: Affiche la page des stats de resistances (la page des stats doit être ouverte).
+	/page 4: (bêta) Affiche la page des mots runiques actifs (la page des stats doit être ouverte).
+	/lockmouse: Bloque le curseur de la souris dans la fenêtre.
+	/lock: Identique à /lockmouse.
+	/unlockmouse: Libère le curseur de la souris de la fenêtre.
+	/unlock: Identique à /unlockmouse.
+	/renamechar newname: Renomme la personnage et le sauvegarde.
+	/renamepage name: Renomme la page courante du coffre.
+	/setindex: La page courante devient un index.
+	/setmainindex: La page courante devient un index principal.
+	/resetindex: Retire la page courante des index.
+	/insertpage: Insère une nouvelle page après la page courante.
+	/deletepage: Supprime la page courante si elle est vide.
+	/swap page: Echange le contenu de la page actuelle du coffre avec le contenu d'une autre "page".
+	/toggle page: Echanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre opposé partagé/personnel (espace non obligatoire).
+	/dlm: Inverse le mode d'affichage: Toujours afficher les valeurs de vie et de mana.
+	/dml: Identique à /dlm.
+	/dl: Inverse le mode d'affichage: Toujours afficher les valeurs de vie.
+	/dm: Inverse le mode d'affichage: Toujours afficher les valeurs de mana.
+	/listcube: (bêta) Crée un fichier "cube.txt" dans le répertoire de sauvegarde contenant toutes les formules actives du cube.
 
 
-Changements apport�s par la v12.00 :
-- Ajout de la compatibilit� avec la version 1.14d de LOD. (merci � haxifix)
+Changements apportés par la v12.00:
+- Ajout de la compatibilité avec la version 1.14d de LOD. (merci à haxifix)
 
-Changements apport�s par la v11.02 :
-- Ajout de la commande /setmainindex : La page courante devient un index principal.
-- Le nombre de joueurs simul� grace � la commande /players est sauvegard� avec le joueur et r�activ� lors du chargement d'une partie. NBPlayersByDefault doit �tre diff�rent de 0 dans PlugY.ini.
+Changements apportés par la v11.02:
+- Ajout de la commande /setmainindex: La page courante devient un index principal.
+- Le nombre de joueurs simulé grace à la commande /players est sauvegardé avec le joueur et réactivé lors du chargement d'une partie. NBPlayersByDefault doit être différent de 0 dans PlugY.ini.
 
-Changements apport�s par la v11.01 :
-- Ajout de la compatibilit� avec la version 1.13d de LOD. (merci � L'Autour)
-- Ajout de la commande /unlockmouse : Lib�re le curseur de la souris de la fen�tre.
-- Ajout de la commande /unlock : Identique � /unlockmouse.
-- Ajout de la commande /renamepage name : Renomme la page courante du coffre.
-- Ajout de la commande /setindex : La page courante devient un index.
-- Ajout de la commande /resetindex : Retire la page courante des index.
-- Ajout de la commande /insertpage : Ins�re une nouvelle page apr�s la page courante.
-- Ajout de la commande /deletepage : Supprime la page courante si elle est vide.
-- Ajout de la localisation en russe ainsi qu'une traduction Google pour les langue non traduite. (merci � L'Autour)
-- Ajout d'une option dans PlugY.ini pour s�lectionner le coffre partag� (au lieu du personnel) lors du chargement d'un persos.
+Changements apportés par la v11.01:
+- Ajout de la compatibilité avec la version 1.13d de LOD. (merci à L'Autour)
+- Ajout de la commande /unlockmouse: Libère le curseur de la souris de la fenêtre.
+- Ajout de la commande /unlock: Identique à /unlockmouse.
+- Ajout de la commande /renamepage name: Renomme la page courante du coffre.
+- Ajout de la commande /setindex: La page courante devient un index.
+- Ajout de la commande /resetindex: Retire la page courante des index.
+- Ajout de la commande /insertpage: Insère une nouvelle page après la page courante.
+- Ajout de la commande /deletepage: Supprime la page courante si elle est vide.
+- Ajout de la localisation en russe ainsi qu'une traduction Google pour les langue non traduite. (merci à L'Autour)
+- Ajout d'une option dans PlugY.ini pour sélectionner le coffre partagé (au lieu du personnel) lors du chargement d'un persos.
 - Renomme la commande /rename en /renamechar.
-- Suppression de la commande non termin� : /reload.
+- Suppression de la commande non terminé: /reload.
 
-Changements apport�s par la v11.00 :
+Changements apportés par la v11.00: 
 - Version non officielle ajoutant le support pour LoD 1.13d
 
-Changements apport�s par la v10.01 :
-- Ajout du mode fen�tr�.
-- Peut bloquer le curseur de la souris dans la fen�tre. (mode fen�tr�).
-- Peut supprimer les bordure de la fen�tre (mode fen�tr�).
-- Peut redimensionner ou maximiser la fen�tre (mode fen�tr�).
-- Peut mettre la fen�tre au-dessus de toutes les autres fen�tres, y compris la barre des t�ches (mode fen�tr�).
-- Permet de verrouiller le curseur de la souris dans les fen�tres au d�marrage et avec la commande "/lockmouse" ou "/lock" (mode fen�tr�).
-- Ajout de la commande "/swap page" pour �changer le contenu de la page actuelle du coffre avec le contenu d'une autre "page".
-- Ajout de la commande "/toggle page" pour �changer le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre oppos� (partag�/personnel).
-- Ajout de la commande "/rename newname" pour renommer son personnage. Cette fonctionnalit� est en b�ta et vous devez quitter la partie pour mettre � jour la page des stats.
+Changements apportés par la v10.01:
+- Ajout du mode fenêtré.
+- Peut bloquer le curseur de la souris dans la fenêtre. (mode fenêtré).
+- Peut supprimer les bordure de la fenêtre (mode fenêtré).
+- Peut redimensionner ou maximiser la fenêtre (mode fenêtré).
+- Peut mettre la fenêtre au-dessus de toutes les autres fenêtres, y compris la barre des tâches (mode fenêtré).
+- Permet de verrouiller le curseur de la souris dans les fenêtres au démarrage et avec la commande "/lockmouse" ou "/lock" (mode fenêtré).
+- Ajout de la commande "/swap page" pour échanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page".
+- Ajout de la commande "/toggle page" pour échanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre opposé (partagé/personnel).
+- Ajout de la commande "/rename newname" pour renommer son personnage. Cette fonctionnalité est en bêta et vous devez quitter la partie pour mettre à jour la page des stats.
 
-Changements apport�s par la v10.00 :
-- D�sactive l'acc�s � Battle.net par le bouton du menu principal.
+Changements apportés par la v10.00:
+- Désactive l'accès à Battle.net par le bouton du menu principal.
 - PlugY fonctionne aussi la version 1.13c de LOD.
-- Corrige le raccourci dans le menu d�marrer.
+- Corrige le raccourci dans le menu démarrer.
 
-Changements apport�s par la v9.00 :
+Changements apportés par la v9.00:
 - PlugY fonctionne aussi la version 1.12 de LOD.
-- Corrige diff�rents bugs.
-- Ajout d'une option pour le d�assignement des skill dans les mods.
+- Corrige différents bugs.
+- Ajout d'une option pour le déassignement des skill dans les mods.
 
-Changements apport�s par la v8.00 :
-- Installation plus ais�e : Nouvel installeur.
-- Permet d'ouvrir le portail vers le Cow Level m�me quand on a tuer le Cow King dans cette difficult�.
+Changements apportés par la v8.00:
+- Installation plus aisée: Nouvel installeur.
+- Permet d'ouvrir le portail vers le Cow Level même quand on a tuer le Cow King dans cette difficulté.
 - Affiche la version courante de LoD avec la lettre de sous-version (1.11b, 1.09d) dans le menu principal.
-- Ajout de la possibilit� de d�placer le boutton de skills comme les boutons du stash. (pour moddeurs)
+- Ajout de la possibilité de déplacer le boutton de skills comme les boutons du stash. (pour moddeurs)
 - Corrige le crash quand le joueur rencontrait un monstre superunique avec LoD 1.11.
-- Corrige la perte de points de skills quand on les d�sassign dans un mod qui contient des skills sp�ciaux?
-- Multiplayer : Sauvegarde les fichiers du stash (avec les donn�es du client comme avec les versions d'avant 5.00) quand il y a une d�connection ou une erreur apparait durant la proc�dure de sauvegarde.
+- Corrige la perte de points de skills quand on les désassign dans un mod qui contient des skills spéciaux?
+- Multiplayer: Sauvegarde les fichiers du stash (avec les données du client comme avec les versions d'avant 5.00) quand il y a une déconnection ou une erreur apparait durant la procédure de sauvegarde.
 - Remove the "check load memory failed" message when D2gfx.dll was patched.
 
-Changements apport�s par la v7.02 :
-- Corrige la perte de points de skills quand on les d�salloue dans les mods contenant des skills sp�ciaux.
+Changements apportés par la v7.02:
+- Corrige la perte de points de skills quand on les désalloue dans les mods contenant des skills spéciaux.
 
-Changements apport�s par la v7.01b :
+Changements apportés par la v7.01b:
 - Corrige l'activation des mots runiques du ladder dans les versions 1.11 and 1.10 de LoD.
-- Corrige les caract�res �tranges de quelques texts.
+- Corrige les caractères étranges de quelques texts.
 
-Changements apport�s par la v7.01 :
+Changements apportés par la v7.01:
 - Active les mots runiques du ladder en dehors des royaumes.
 - Corrige le bug avec l'IA de Uber Baal.
-- Retire les options de param�tres mis par defaut dans PlugY.ini (comme le mode fen�tr�)
-- Affiche la valeur courante des caracs (sans les bonus magiques) m�me quand la d�sallocation des caracs est d�sactiv�e. 
-- Ajout d'un ex�cutable pour lancer Plugy (plus aucun fichier de LoD modifi�). (RAPPEL)
+- Retire les options de paramètres mis par defaut dans PlugY.ini (comme le mode fenêtré)
+- Affiche la valeur courante des caracs (sans les bonus magiques) même quand la désallocation des caracs est désactivée.
+- Ajout d'un exécutable pour lancer Plugy (plus aucun fichier de LoD modifié). (RAPPEL)
 - Traduction en espagnol et polonais.
 
-Changements apport�s par la v7.00 :
+Changements apportés par la v7.00:
 - PlugY fonctionne aussi la version 1.11b de LOD.
-- Ajout d'un ex�cutable pour lancer Plugy (plus aucun fichier de LoD modifi�).
+- Ajout d'un exécutable pour lancer Plugy (plus aucun fichier de LoD modifié).
 - Ajout des valeurs de base des caracs sur les bouttons d'allocations.
-- Corrige le bug des caracs infinie durant la d�sallocation.
+- Corrige le bug des caracs infinie durant la désallocation.
 - Corrige les fonctions qui restais active sur Battle.net.
 - Traduction en italien.
 
-Changements apport�s par la v6.01b :
+Changements apportés par la v6.01b:
 - Correction d'un bug avec l'affichage du popup sur les bouttons d'assignement des points de stats.
 
-Changements apport�s par la v6.01 :
-- Corrige le bug qui cause la disparition des items "carry1" du stash quand ils sont cubb�s dans LoD 1.10
-- Cl�s et organes des uber ne sont plus d�truit quant on essaie d'ouvrir le portail en dehors d'Harrogath.
+Changements apportés par la v6.01:
+- Corrige le bug qui cause la disparition des items "carry1" du stash quand ils sont cubbés dans LoD 1.10
+- Clés et organes des uber ne sont plus détruit quant on essaie d'ouvrir le portail en dehors d'Harrogath.
 - Corrige le conflit avec D2Mod pour l'affichage de la version.
 
-Changements apport�s par la v6.00 :
+Changements apportés par la v6.00:
 - PlugY fonctionne aussi la version 1.11 de LOD.
 - Active la Uber Quest hors des Royaumes. (uniquement LoD 1.11).
 - Corrige le crash au lancement de PlugY si l'installation de LoD n'est pas clean.
-- Corrige quelques bugs mineurs et ajoute des am�liorations mineurs.
+- Corrige quelques bugs mineurs et ajoute des améliorations mineurs.
 - Ajoute la commande "/save" pour sauvegarder la partie sans quitter (uniquement LoD 1.11).
 
-Changements apport�s par la v5.06 :
+Changements apportés par la v5.06:
 - Ajoute des bouttons pour le partage de l'or.
-- Active l'or partag� en multijoueur.
-- La commande "/DisplayLifeMana" est remplac�e par "/dlm".
+- Active l'or partagé en multijoueur.
+- La commande "/DisplayLifeMana" est remplacée par "/dlm".
 - Corrige quelques bugs.
 
-Changements apport�s par la v5.05 :
-- Corrige les couleurs par d�fauts dans l'interface des stats.
-- Ajoute de l'or partag�e via des commandes.
+Changements apportés par la v5.05:
+- Corrige les couleurs par défauts dans l'interface des stats.
+- Ajoute de l'or partagée via des commandes.
 - La commande "/DisplayLifeAndMana" deviens "/DisplayLifeMana".
-- Possiblit� d'afficher ou non les nom des objets de set dans le popup quand ceux-ci sont dans le coffre partag�e.
-- Correction des bugs du multiplayer (r��criture de ces fonctions).
+- Possiblité d'afficher ou non les nom des objets de set dans le popup quand ceux-ci sont dans le coffre partagée.
+- Correction des bugs du multiplayer (réécriture de ces fonctions).
 
-Changements apport�s par la v5.04 :
+Changements apportés par la v5.04:
 - Corrige Stat/Skill points par levelup
 - Corrige des bugs en Multiplayer.
-- PlugY/PlugYDefault.ini complet�.
+- PlugY/PlugYDefault.ini completé.
 
-Changements apport�s par la v5.03 :
-- Corrige le bug qui �change quelques fois les coffres partag�s Hardcore et Softcore.
+Changements apportés par la v5.03:
+- Corrige le bug qui échange quelques fois les coffres partagés Hardcore et Softcore.
 - Ajoute de la couleur sur les nouvelles pages de stats.
-- Change les valeurs par d�faut des nouvelles pages de stats.
+- Change les valeurs par défaut des nouvelles pages de stats.
 - Mets EnabledTXTFilesWhenMSExcelOpenIt=1 dans le fichier PlugY.ini.
 
-Changements apport�s par la v5.02 :
-- Corrige la correction d'un bug pr�c�dent qui engendre la disparition d'objets.
+Changements apportés par la v5.02:
+- Corrige la correction d'un bug précédent qui engendre la disparition d'objets.
 
-Changements apport�s par la v5.01 :
+Changements apportés par la v5.01:
 - Corrige les bugs importants dans la gestion du stash.
-- Remets ActiveLogFile=0 par d�faut dans le fichier PlugY.ini.
-- Corrige : Bug quand le stash partag� est d�sactiv�.
+- Remets ActiveLogFile=0 par défaut dans le fichier PlugY.ini.
+- Corrige: Bug quand le stash partagé est désactivé.
 
-Changements apport�s par la v5.00 :
+Changements apportés par la v5.00:
 - PlugY fonctionne sur les mods des versions 1.09, 1.09b, 1.09d et 1.10 de LOD.
 - PlugY peut lancer D2Mod.dll.
-- D2 peut ouvrir tous les fichiers m�me quand ils sont d�j� ouverts dans Microsoft Excel.
-- Le monstre du World Event peut �tre chang�.
+- D2 peut ouvrir tous les fichiers même quand ils sont déjà ouverts dans Microsoft Excel.
+- Le monstre du World Event peut être changé.
 - Plusieurs trucs pour les moddeurs.
-- Importante Correction en Multijoueur : fingerprints � 0, objets non identifi� bugg�, etc.
+- Importante Correction en Multijoueur: fingerprints à 0, objets non identifié buggé, etc.
 - Correction d'une erreur de syntaxe dans PlugY.ini (Commands).
-- Les commandes ne sont plus d�pendantes de la casse des caract�res.
-- Corrige le bug dans la s�lection automatique de la principale page de stats.
+- Les commandes ne sont plus dépendantes de la casse des caractères.
+- Corrige le bug dans la sélection automatique de la principale page de stats.
 - Remplace l'affichage de "Coup critique/Coup mortel" par Coup mortel uniquement.
-- Corrige la g�n�ration de DiabloClone au d�marrage d'une nouvelle partie.
+- Corrige la génération de DiabloClone au démarrage d'une nouvelle partie.
 - Corrige plusieurs autres bugs.
 
-Changements apport�s par la v4.04 :
-- Corrige le bug d'affichage quand statPerLevelUp est activ�
+Changements apportés par la v4.04:
+- Corrige le bug d'affichage quand statPerLevelUp est activé
 - Corrige le bug de sauvegarde quand le disque dur est plein.
-- Nouveau syst�me de configuration pour les moddeurs.
-- Affiche toujours les valeurs num�riques de mana et de vie au-dessus des globes correspondants.
+- Nouveau système de configuration pour les moddeurs.
+- Affiche toujours les valeurs numériques de mana et de vie au-dessus des globes correspondants.
 
-Changements apport�s par la v4.03 :
+Changements apportés par la v4.03:
 - Corrige le bug des objets uniques carry1 (charme unique) quand on drop le cube.
-- Possibilit� d'aller directement � la premi�re ou derni�re page du coffre (shift + clic sur pr�c�dent/suivant).
+- Possibilité d'aller directement à la première ou dernière page du coffre (shift + clic sur précédent/suivant).
 - Utilisation d'un second index dans le coffre (shift + clic sur boutons d'index)
-- Ajouts d'infos sur les pages de stats suppl�mentaires (2 pages maintenant).
-- Ajoute un bouton "page pr�c�dente" sur la principale page de stats (uniquement en 800x600).
-- D�place les boutons des pages de stats suppl�mentaire aux m�me emplacements que ceux de la page principale (uniquement en 800x600).
-- Possibilit� de choisir si la page affich�e quand on ouvre la page des stats est la page principale ou celle s�lectionn�e pr�c�demment
+- Ajouts d'infos sur les pages de stats supplémentaires (2 pages maintenant).
+- Ajoute un bouton "page précédente" sur la principale page de stats (uniquement en 800x600).
+- Déplace les boutons des pages de stats supplémentaire aux même emplacements que ceux de la page principale (uniquement en 800x600).
+- Possibilité de choisir si la page affichée quand on ouvre la page des stats est la page principale ou celle sélectionnée précédemment
 
-Changements apport�s par la v4.02b :
-- Les fonctionnalit�s restent activ�es sur Battle.net ouvert.
+Changements apportés par la v4.02b:
+- Les fonctionnalités restent activées sur Battle.net ouvert.
 
-Changements apport�s par la v4.02 :
-- Corrige le conflit avec Battle.net (BigStash d�sactiv� sur les royaumes)
+Changements apportés par la v4.02:
+- Corrige le conflit avec Battle.net (BigStash désactivé sur les royaumes)
 - Corrige l'oublie du "d" de "SeparateHardcoreStash=1" de PlugY.ini
-- Corrige la valeur par d�faut dans PlugY.ini, du changement de langage.
+- Corrige la valeur par défaut dans PlugY.ini, du changement de langage.
 - Corrige l'activation de l'affichage de l'item level pour toutes les configurations de PlugY.
-- Ajouts d'infos sur la 2�me page de stats.
+- Ajouts d'infos sur la 2ème page de stats.
 
-Changements apport�s par la v4.01 :
-- Corrige le bug du MSVCR70.dll non trouv�.
-- Ajouts d'infos sur la 2�me page de stats.
+Changements apportés par la v4.01:
+- Corrige le bug du MSVCR70.dll non trouvé.
+- Ajouts d'infos sur la 2ème page de stats.
 
-Changements apport�s par la v4.00b :
-- Corrige le bug du MSVCR70.dll non trouv�.
+Changements apportés par la v4.00b:
+- Corrige le bug du MSVCR70.dll non trouvé.
 
-Changements apport�s par la v4.00 :
+Changements apportés par la v4.00:
 - Meilleure optimisation du code.
-- Ajoute des pages suppl�mentaires pour l'affichage de plus de statistiques du perso comme le %MF.
-- Change la langue du jeu (et pour les modders: les langues accessibles et la langue par d�faut).
-- R�g�n�re toujours la carte en Monojoueur comme en Multijoueur.
-- Ex�cute automatiquement la commande /players X au lancement d'une partie.
+- Ajoute des pages supplémentaires pour l'affichage de plus de statistiques du perso comme le %MF.
+- Change la langue du jeu (et pour les modders: les langues accessibles et la langue par défaut).
+- Régénère toujours la carte en Monojoueur comme en Multijoueur.
+- Exécute automatiquement la commande /players X au lancement d'une partie.
 - Affiche le niveau de l'objet dans son popup.
-- S�pare le coffre partag� des persos Hardcore et Softcore.
-- Change la m�thode d'installation (peut �tre install� directement sur linux maintenant)
-- Les objets qui d�clenche le WorldEvent peut-�tre chang�.
-- Plusieurs objets "carry1" (comme l'Annihilus) peuvent �tre mis dans le coffre.
-- Corrige : Impossibilit� de mettre plusieurs m�me objets "carry1" dans d'autre page que le coffre.
-- Corrige : Le bug d'affiche des objets sertis dans le coffre.
-- Corrige : Le bug des espaces dans PlugY.ini.
-- Corrige : Diablo Clone ne peut pas appara�tre en mode normal et cauchemar.
-- Corrige : D�truit les minions(par exemple les squelettes) en trop pr�s la d�sallocation si on a un bonus +x dans cette skill.
+- Sépare le coffre partagé des persos Hardcore et Softcore.
+- Change la méthode d'installation (peut être installé directement sur linux maintenant)
+- Les objets qui déclenche le WorldEvent peut-être changé.
+- Plusieurs objets "carry1" (comme l'Annihilus) peuvent être mis dans le coffre.
+- Corrige: Impossibilité de mettre plusieurs même objets "carry1" dans d'autre page que le coffre.
+- Corrige: Le bug d'affiche des objets sertis dans le coffre.
+- Corrige: Le bug des espaces dans PlugY.ini.
+- Corrige: Diablo Clone ne peut pas apparaître en mode normal et cauchemar.
+- Corrige: Détruit les minions(par exemple les squelettes) en trop près la désallocation si on a un bonus +x dans cette skill.
 
-Changements apport�s par la v3.02 :
-- Corrige : le changement du nombre de points de Stats re�us � chaque gain de niveau.
-- Corrige : Quand le coffre partag� est d�sactiv� vous pouvez charger vos persos.
-- Corrige : Vous pouvez changer les param�tres du World Event sans activer les skill re�us � chaque gain de niveau.
+Changements apportés par la v3.02:
+- Corrige: le changement du nombre de points de Stats reçus à chaque gain de niveau.
+- Corrige: Quand le coffre partagé est désactivé vous pouvez charger vos persos.
+- Corrige: Vous pouvez changer les paramètres du World Event sans activer les skill reçus à chaque gain de niveau.
 
-Changements apport�s par la v3.01 :
-- Change le nombre de points de Stats re�us � chaque gain de niveau.
-- Corrige les bugs qui donnent des points suppl�mentaires quand on d�sallouent les skills.
-- Ajoutent les param�tres du WorldEvent dans le fichier de configuration.
-- Par d�faut, Le WorldEvent AFFICHE "X SOJ vendu" uniquement dans la difficult� enfer.
+Changements apportés par la v3.01:
+- Change le nombre de points de Stats reçus à chaque gain de niveau.
+- Corrige les bugs qui donnent des points supplémentaires quand on désallouent les skills.
+- Ajoutent les paramètres du WorldEvent dans le fichier de configuration.
+- Par défaut, Le WorldEvent AFFICHE "X SOJ vendu" uniquement dans la difficulté enfer.
 
-Changements apport�s par la v3.00 :
-- World Event en Local pour le monojoueur et le multijoueur hors royaumes !
-- D�salloue les points de capacit�s(skills) pr�c�demment allou�es.
+Changements apportés par la v3.00:
+- World Event en Local pour le monojoueur et le multijoueur hors royaumes!
+- Désalloue les points de capacités(skills) précédemment allouées.
 - Nouvelle image de fond pour le coffre.
 - On peut changer le nom du fichier de sauvegarde.
-- L'affichage du numero de page pour le coffre partag� est en rouge maintenant.
+- L'affichage du numero de page pour le coffre partagé est en rouge maintenant.
 
-Changements apport�s par la v2.05 :
-- Correction importante : Le bug qui faisais que D2 ne d�marrais est d�finitivement corrig�.
+Changements apportés par la v2.05:
+- Correction importante: Le bug qui faisais que D2 ne démarrais est définitivement corrigé.
 
-Changements apport�s par la v2.04 :
-- La d�sallocation des points de stats, les points de skills gagn�s � chaque niveau
-    sont quand on se connecte � un royaume automatiquement d�sactiv�s (comme le stash).
-- Ouvre un message d'erreur quand PlugY.dll n'est pas trouv�.
+Changements apportés par la v2.04:
+- La désallocation des points de stats, les points de skills gagnés à chaque niveau
+    sont quand on se connecte à un royaume automatiquement désactivés (comme le stash).
+- Ouvre un message d'erreur quand PlugY.dll n'est pas trouvé.
 - Corrige plusieurs bugs dans l'installation de PlugY.
 - Corrige le bug d'affichage des boutons.
 - Corrige la sauvegarde sous win95/98/Me.
 
-Changements apport�s par la v2.03b :
-- Affiche la version de PlugY uniquement � l'�cran principal.
+Changements apportés par la v2.03b:
+- Affiche la version de PlugY uniquement à l'écran principal.
 
-Changements apport�s par la v2.03 :
-- Correction importante : Les fonctions de sauvegardes sont plus s�curis�es et d�bugg�es.
-- Le serveur ne plante plus quand un personnage refus� tente de joindre la partie.
-- Les boutons de d�sallocation ne deviennent plus gris quand les points de stats de base d�passent 255.
-- Change l'affichage des versions sur le menu principal (changement des couleurs + la version de PlugY � droite).
-- Les personnages sans PlugY peuvent joindre les parties avec PlugY activ�.
+Changements apportés par la v2.03:
+- Correction importante: Les fonctions de sauvegardes sont plus sécurisées et débuggées.
+- Le serveur ne plante plus quand un personnage refusé tente de joindre la partie.
+- Les boutons de désallocation ne deviennent plus gris quand les points de stats de base dépassent 255.
+- Change l'affichage des versions sur le menu principal (changement des couleurs + la version de PlugY à droite).
+- Les personnages sans PlugY peuvent joindre les parties avec PlugY activé.
 
 
 ******** CONTENU ********
-19 fichiers, 1 r�pertoire :
+19 fichiers, 1 répertoire:
 - PlugY_The_Survival_Kit_-_Readme.txt
 - PlugY_The_Survival_Kit_-_LisezMoi.txt
 - PlugY_The_Survival_Kit_-_Liesmich.txt
@@ -317,31 +317,31 @@ Changements apport�s par la v2.03 :
 - PlugY\UnassignSkillsBtns.dc6
 - PlugY\UnassignStatsBtns.dc6
 - PlugY\statsinterface.txt
-- PlugY Uninstaller.exe (avec l'option d�-installeur)
-- PatchD2gfxDll.exe (dans le r�pertoire de Diablo II avec l'option Patcheur D2gfxDll)
-- RestoreD2gfxDll.exe (dans le r�pertoire de Diablo II avec l'option Patcheur D2gfxDll)
+- PlugY Uninstaller.exe (avec l'option dé-installeur)
+- PatchD2gfxDll.exe (dans le répertoire de Diablo II avec l'option Patcheur D2gfxDll)
+- RestoreD2gfxDll.exe (dans le répertoire de Diablo II avec l'option Patcheur D2gfxDll)
 
 
 
 ******** INSTALLATION ********
-Installation normale :
+Installation normale:
 - Suivre les directives de l'installeur.
 
-note : Vous pouvez choisir le r�pertoire de "Diablo II" comme r�pertoire d'installation.
+note: Vous pouvez choisir le répertoire de "Diablo II" comme répertoire d'installation.
 
-Installation dans un autre mod 
-- Copier PlugY.ini, PlugY.exe et PlugY folder (+son sontenu) dans le r�pertoire du mod cibl�.
+Installation dans un autre mod
+- Copier PlugY.ini, PlugY.exe et PlugY folder (+son sontenu) dans le répertoire du mod ciblé.
 - Editer PlugY.ini pour configurer les options (voir section plus bas).
-- Lancer le jeu PlugY.exe et amusez-vous :)
+- Lancer le jeu PlugY.exe et amusez-vous:)
 
-note : Vous pouvez d�placer le r�pertoire "PlugY" dans celui de "Diablo II" et il sera vu par toutes les installation.
+note: Vous pouvez déplacer le répertoire "PlugY" dans celui de "Diablo II" et il sera vu par toutes les installation.
 
 
-Exemple :
-Si vous avez install� Lord of Destruction ici : C:\Jeux\Diablo II\Diablo II.exe
-Et que le mod cibl� se trouve dans : D:\D2Mod\MyMod\
-Et qu'un second mod se trouve dans : D:\D2Mod\MyMod2\
-Alors la configuration classique est ceci :
+Exemple:
+Si vous avez installé Lord of Destruction ici: C:\Jeux\Diablo II\Diablo II.exe
+Et que le mod ciblé se trouve dans: D:\D2Mod\MyMod\
+Et qu'un second mod se trouve dans: D:\D2Mod\MyMod2\
+Alors la configuration classique est ceci:
    C:\Jeux\Diablo II\PlugY.dll
    D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
    D:\D2Mod\MyMod\PlugY\PlugYFixed.ini
@@ -373,86 +373,86 @@ Alors la configuration classique est ceci :
    D:\D2Mod\MyMod2\PlugY.exe
 
 
-D�sinstallation : Run uninstaller ou si vous n'avez pas activ� cette options, supprimer semplement tous les fichiers de PlugY.
-NOTE : Vous pouvez aussi d�placer PlugY.dll dans le r�pertoire du mod mais vous devez le supprimer du r�pertoire de D2.
-Note : Le r�pertoire "PlugY" et son contenu peut �tre plac� dans un mpq.
+Désinstallation: Run uninstaller ou si vous n'avez pas activé cette options, supprimer semplement tous les fichiers de PlugY.
+NOTE: Vous pouvez aussi déplacer PlugY.dll dans le répertoire du mod mais vous devez le supprimer du répertoire de D2.
+Note: Le répertoire "PlugY" et son contenu peut être placé dans un mpq.
 
-------- D2gfx Patcher :
+------- D2gfx Patcher:
 
 If you have problem when you run PlugY.exe then use PatchD2gfxDll.exe. (It happend sometimes with Windows 2000)
 - Go in Diablo II directory.
 - Do a backup of D2gfx.dll (in the case, you remove PlugY before restore it)
 - Run PatchD2gfxDll.exe (which patches D2gfx.dll for launch PlugY, you can backup this file before)
-- Create a shortcut : Enter target mod directory in "start in" field of properties->shortcut. (unless you install PlugY in Diablo II directory)
-- Launch with the shorcut !!
+- Create a shortcut: Enter target mod directory in "start in" field of properties->shortcut. (unless you install PlugY in Diablo II directory)
+- Launch with the shorcut!
 
 Before uninstall PlugY Restore your D2gfx.dll with your backup file or run RestoreD2gfxDll.exe.
 
 
-Si vous avez des probl�me pour �x�cuter PlugY.exe alors utiliser PatchD2gfxDll.exe. (Ca arrive quelque fois avec Windows 2000)
-- Aller dans le r�pertoire de Diablo II.
-- Fa�tes un une sauvegarde du fichier D2gfx.dll (dans le cas, o� vous supprimiez PlugY avant de le restaurer).
+Si vous avez des problème pour éxécuter PlugY.exe alors utiliser PatchD2gfxDll.exe. (Ca arrive quelque fois avec Windows 2000)
+- Aller dans le répertoire de Diablo II.
+- Faîtes un une sauvegarde du fichier D2gfx.dll (dans le cas, où vous supprimiez PlugY avant de le restaurer).
 - Lancer PatchD2gfxDll.exe (qui patchera D2gfx.dll pour lancer PlugY)
-- Cr�er un raccourci de Diablo II.exe, entrer le r�pertoire du mod voulu dans "d�marrer dans" de propri�t�->raccourci. (sauf si vous avez install� PlugY dans le r�pertoire de Diablo II)
-- Lancer Diablo II !
+- Créer un raccourci de Diablo II.exe, entrer le répertoire du mod voulu dans "démarrer dans" de propriété->raccourci. (sauf si vous avez installé PlugY dans le répertoire de Diablo II)
+- Lancer Diablo II!
 
 
 
 ******************** FAQ ******************
 
-=> Je ne troue pas le fichier PlugY.ini, o� est-il ? 
+=> Je ne troue pas le fichier PlugY.ini, où est-il ?
 De kingpin (traduit de l'anglais):
-Microsoft a dans Windows cach� les extensions des fichiers connu. Ceci pour �tre
-s�r que les nouveaux utilisateurs ne supprime pas ces fichiers par accidents. Vous
-pouvez bien s�r le d�sactiver en ouvrant votre l'explorateur Windows, aller dans
-outils->Options des dossiers->affichage, D�cocher "Masquer les extensions des
-fichiers dont le type est connu". Alors, vous verrez le fichier s�rement le fichier ini.
+Microsoft a dans Windows caché les extensions des fichiers connu. Ceci pour être
+sûr que les nouveaux utilisateurs ne supprime pas ces fichiers par accidents. Vous
+pouvez bien sûr le désactiver en ouvrant votre l'explorateur Windows, aller dans
+outils->Options des dossiers->affichage, Décocher "Masquer les extensions des
+fichiers dont le type est connu". Alors, vous verrez le fichier sûrement le fichier ini.
 
 
-=> Comment jouer sur Battle.net avec PlugY install� ?
-PlugY automatiquement d�sactive tous quand on va en ferm�.
-Mais il est recommand� de toujours retirer tous les programmes tiers quand on a va sur les royaumes.
-Note : Quand bigStash est activ�, vous devez red�marrer D2 pour jouer en solo/multi/ouvert apr�s avoir jouer en ferm� (et vice versa).
-Astuce : Cr�er un raccourci et ajouter -skiptobnet � la fin du champ "cible" pour aller directement sur Battle.net.
+=> Comment jouer sur Battle.net avec PlugY installé ?
+PlugY automatiquement désactive tous quand on va en fermé.
+Mais il est recommandé de toujours retirer tous les programmes tiers quand on a va sur les royaumes.
+Note: Quand bigStash est activé, vous devez redémarrer D2 pour jouer en solo/multi/ouvert après avoir jouer en fermé (et vice versa).
+Astuce: Créer un raccourci et ajouter -skiptobnet à la fin du champ "cible" pour aller directement sur Battle.net.
 
 
 => Que faire si j'ai une erreur comme "Bad Generic File" au chargement d'un nouveau joueur ?
-Ceci peut appara�tre quand vous avez de mauvais objets dans le fichier du coffre partag�.
-Une cause possible est l'utilisation du m�me r�pertoire de sauvegarde pour des mods diff�rents,
-il suffit alors de changer ce r�pertoire dans PlugY.ini.
+Ceci peut apparaître quand vous avez de mauvais objets dans le fichier du coffre partagé.
+Une cause possible est l'utilisation du même répertoire de sauvegarde pour des mods différents,
+il suffit alors de changer ce répertoire dans PlugY.ini.
 
 
-=> Je vois "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" dans D2YYMMDD.txt, que dois-je faire ? 
-Ceci est juste un avertissement sans cons�quence sur le jeu, ne vous inqui�ter pas.
+=> Je vois "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" dans D2YYMMDD.txt, que dois-je faire ?
+Ceci est juste un avertissement sans conséquence sur le jeu, ne vous inquiéter pas.
 
 
 => J'ai un autre bug, que dois-je faire ?
 1) Aller sur les forums de Phrozen-keep et Judgehype et lire les forums.
 
-2) Fa�tes des recherche sur google, demander � des amis, etc. mais ne me demander pas, je n'ai plus le temps pour faire le support de PlugY.
-Si un jour, j'ai assez de temps, (comme pour la version 8.00) je lirai les forums pour connaitre les probl�mes les plus communs.
+2) Faîtes des recherche sur google, demander à des amis, etc. mais ne me demander pas, je n'ai plus le temps pour faire le support de PlugY.
+Si un jour, j'ai assez de temps, (comme pour la version 8.00) je lirai les forums pour connaitre les problèmes les plus communs.
 
 
 
 ******** CONFIGURATION ********
 
-Configuration pour un mod pr�cis :
-- Copier PlugY.ini dans le r�pertoire du mod choisi (le r�pertoire d'o� vous le lancez le mod, voir dans propri�t�s du raccourci).
-- Dans la plupart dans cas changer le r�pertoire de sauvegarde.
-- Ajouter toutes les dll suppl�mentaires dans PlugY.ini si besoin est.
-- Finalement activer ou d�sactiver les options que vous souhaitez comme MultiPageStash, SharedStash, etc.
-- Maintenant vous pouvez lancez le mod de mani�re classique.
+Configuration pour un mod précis:
+- Copier PlugY.ini dans le répertoire du mod choisi (le répertoire d'où vous le lancez le mod, voir dans propriétés du raccourci).
+- Dans la plupart dans cas changer le répertoire de sauvegarde.
+- Ajouter toutes les dll supplémentaires dans PlugY.ini si besoin est.
+- Finalement activer ou désactiver les options que vous souhaitez comme MultiPageStash, SharedStash, etc.
+- Maintenant vous pouvez lancez le mod de manière classique.
 
-D2Mod configuration :
-Ajouter simplement le nom de la dll dans PlugY.ini, par exemple : "DllToLoad=D2Mod.dll"
+D2Mod configuration:
+Ajouter simplement le nom de la dll dans PlugY.ini, par exemple: "DllToLoad=D2Mod.dll"
 
 Notes:
-- Les objets dans le Cube sont toujours sauvegard�s dans le personnage, si vous voulez les partager vous devez les retirer du cube.
+- Les objets dans le Cube sont toujours sauvegardés dans le personnage, si vous voulez les partager vous devez les retirer du cube.
 
-Attention :
-- Ne pas �diter le fichier de configuration apr�s avoir utilis� le mod.
-- Dans des parties Multiplayers, v�rifier qu'il y a la m�me configuration sur le serveur et les clients.
-- Rappel : PlugY ne fonctionne pas sur les royaumes.
+Attention:
+- Ne pas éditer le fichier de configuration après avoir utilisé le mod.
+- Dans des parties Multiplayers, vérifier qu'il y a la même configuration sur le serveur et les clients.
+- Rappel: PlugY ne fonctionne pas sur les royaumes.
 
 
 Lire le readme pour les moddeurs.
@@ -460,303 +460,303 @@ Lire le readme pour les moddeurs.
 
 ******** COMMENTAIRES SUR LE FICHIER DE CONFIGURATION ********
 
-Toutes les valeurs par D�faut signifie que si on supprime cette ligne, PlugY utilise cette valeur.
-Les valeurs dans PlugY.ini (inclus dans le zip) est un exemple de configuration, pas les valeurs par d�faut.
+Toutes les valeurs par Défaut signifie que si on supprime cette ligne, PlugY utilise cette valeur.
+Les valeurs dans PlugY.ini (inclus dans le zip) est un exemple de configuration, pas les valeurs par défaut.
 
 [LAUNCHING]
 Cette section contient les informations de PlugY.exe et ne fonctionne pas dans les fichiers PlugYDefault.ini et PlugYFixed.ini.
 
-Ajoute les param�tres transmis � LoD par sa ligne de commande.
-Les param�tres pass� � PlugY.exe sont aussi transmis � LoD par sa ligne de commande.
-Par d�faut aucun param�ters ne sont transmis.
-Les param�tres les plus courant sont (sans les guillemets) :
-"-w" lance la LoD en version fen�tr�e. (Voir la section WINDOWED � la place)
-"-direct" utilise les fichiers du r�pertoire � la place des mpq.
-"-txt" recompile les fichiers .txt avant d'antr�e dans une partie.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-Param=				{-direct -txt -w: Ces 3 commandes sont pass�s � LoD par la ligne de commande}
+Ajoute les paramètres transmis à LoD par sa ligne de commande.
+Les paramètres passé à PlugY.exe sont aussi transmis à LoD par sa ligne de commande.
+Par défaut aucun paramèters ne sont transmis.
+Les paramètres les plus courant sont (sans les guillemets):
+"-w" lance la LoD en version fenêtrée. (Voir la section WINDOWED à la place)
+"-direct" utilise les fichiers du répertoire à la place des mpq.
+"-txt" recompile les fichiers .txt avant d'antrée dans une partie.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+Param=				{-direct -txt -w: Ces 3 commandes sont passés à LoD par la ligne de commande}
 
 
-S�lectionne la dll � charger.
-Le r�pertoire courant est celui utilis� par D2 (comme modifier le champ "d�marrer dans" d'un raccourci).
-Si auncune dll n'est sp�cifi�, LoD est charg� sans PlugY.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
+Sélectionne la dll à charger.
+Le répertoire courant est celui utilisé par D2 (comme modifier le champ "démarrer dans" d'un raccourci).
+Si auncune dll n'est spécifié, LoD est chargé sans PlugY.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
 Library=			{PlugY.dll: Charger PlugY.dll}
 
 
 [GENERAL]
-Active ou d�sactive PlugY
-Les dll des champs "DllToLoad" ne sont plus charg�s quand ActivePlugin=0. 
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActivePlugin=0		{0:Charge aucunes fonctions; 1:Plugin activ�}
+Active ou désactive PlugY
+Les dll des champs "DllToLoad" ne sont plus chargés quand ActivePlugin=0.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActivePlugin=0		{0:Charge aucunes fonctions; 1:Plugin activé}
 
-Active ou d�sactive l'acc�s � BattleNet.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- DisableBattleNet=1		{0:acc�s � Battle.net activ�; 1:acc�s � Battle.net d�sctiv�}
+Active ou désactive l'accès à BattleNet.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- DisableBattleNet=1		{0:accès à Battle.net activé; 1:accès à Battle.net désctivé}
 
-Enregistre le log dans le fichier "The PlugY.log" dans le r�pertoire courant.
+Enregistre le log dans le fichier "The PlugY.log" dans le répertoire courant.
 Cette fonction peut ralentir le jeu.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveLogFile=0 		{0:D�sactiv�, aucune information n'est �crite pendant le jeu; 1:toujours activ�}
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveLogFile=0 		{0:Désactivé, aucune information n'est écrite pendant le jeu; 1:toujours activé}
 
-Charge les dll suppl�mentaires du mod pour les utiliser en m�me temps que PlugY.
-S�parer chaque dll par le caract�re pipe (|)
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- DllToLoad=			{(vide): rien � charger; D2extra.dll|myDll.dll: Charge D2extra.dll et myDll.dll}
-- DllToLoad2=			{(vide): M�me chose que DlltoLoad}
+Charge les dll supplémentaires du mod pour les utiliser en même temps que PlugY.
+Séparer chaque dll par le caractère pipe (|)
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- DllToLoad=			{(vide): rien à charger; D2extra.dll|myDll.dll: Charge D2extra.dll et myDll.dll}
+- DllToLoad2=			{(vide): Même chose que DlltoLoad}
 
 Active les nouvelles commandes de PlugY.
-/save : Sauvegarde la partie sans quitter (LoD 1.11 minimum).
-/page 1 : Affiche la page des stats de base (la page des stats doit �tre ouverte)(espace non obligatoire).
-/page 2 :Affiche la page des stats en plus (la page des stats doit �tre ouverte).
-/page 3 : Show resistance stats page Affiche la page des stats de resistances (la page des stats doit �tre ouverte)(espace non obligatoire).
-/page 4 :  (b�ta) Affiche la page des mots runiques actifs (la page des stats doit �tre ouverte)(espace non obligatoire).
-/lockmouse : Bloque le curseur de la souris dans la fen�tre.
-/lock : Identique � /lockmouse.
-/unlockmouse : Lib�re le curseur de la souris de la fen�tre.
-/unlock : Identique � /unlockmouse.
-/renamechar newname : Renomme la personnage et le sauvegarde. (Vous devez quittez la partie pour mettre � jour la page des stats).
-/renamepage name : Renomme la page courante du coffre (MultiStash activ�).
-/setindex : La page courante devient un index (Les boutons d'index vont jusqu'au prochain index s'il en existe un) (MultiStash activ�).
-/setmainindex : La page courante devient un index principal (Les boutons d'index +shift vont jusqu'au prochain index s'il en existe un) (MultiStash activ�).
-/resetindex : Retire la page courante des index (MultiStash activ�).
-/insertpage : Ins�re une nouvelle page apr�s la page courante (MultiStash activ�).
-/deletepage : Supprime la page courante si elle est vide (MultiStash activ�).
-/swap page : Echange le contenu de la page actuelle du coffre avec le contenu d'une autre "page" (espace non obligatoire) (MultiStash activ�).
-/toggle page : Echanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre oppos� partag�/personnel (espace non obligatoire) (MultiStash activ�).
-/dlm : Inverse le mode d'affichage: Toujours afficher les valeurs de vie et de mana. (Depuis LoD 1.13c, vous pouvez cliquer sur la partie inf�rieure des orbes)
-/dml : Identique � /dlm.
-/dl : Inverse le mode d'affichage: Toujours afficher les valeurs de vie. (Depuis LoD 1.13c, vous pouvez cliquer sur la partie inf�rieure des orbes)
-/dm : Inverse le mode d'affichage: Toujours afficher les valeurs de mana. (Depuis LoD 1.13c, vous pouvez cliquer sur la partie inf�rieure des orbes)
-/listcube : (b�ta) Cr�e un fichier "cube.txt" dans le r�pertoire de sauvegarde contenant toutes les formules actives du cube. (LoD 1.10 minimum).
-- ActiveCommands=0 		{0:D�sactiv�; 1:Activ�}
+/save: Sauvegarde la partie sans quitter (LoD 1.11 minimum).
+/page 1: Affiche la page des stats de base (la page des stats doit être ouverte)(espace non obligatoire).
+/page 2:Affiche la page des stats en plus (la page des stats doit être ouverte).
+/page 3: Show resistance stats page Affiche la page des stats de resistances (la page des stats doit être ouverte)(espace non obligatoire).
+/page 4: (bêta) Affiche la page des mots runiques actifs (la page des stats doit être ouverte)(espace non obligatoire).
+/lockmouse: Bloque le curseur de la souris dans la fenêtre.
+/lock: Identique à /lockmouse.
+/unlockmouse: Libère le curseur de la souris de la fenêtre.
+/unlock: Identique à /unlockmouse.
+/renamechar newname: Renomme la personnage et le sauvegarde. (Vous devez quittez la partie pour mettre à jour la page des stats).
+/renamepage name: Renomme la page courante du coffre (MultiStash activé).
+/setindex: La page courante devient un index (Les boutons d'index vont jusqu'au prochain index s'il en existe un) (MultiStash activé).
+/setmainindex: La page courante devient un index principal (Les boutons d'index +shift vont jusqu'au prochain index s'il en existe un) (MultiStash activé).
+/resetindex: Retire la page courante des index (MultiStash activé).
+/insertpage: Insère une nouvelle page après la page courante (MultiStash activé).
+/deletepage: Supprime la page courante si elle est vide (MultiStash activé).
+/swap page: Echange le contenu de la page actuelle du coffre avec le contenu d'une autre "page" (espace non obligatoire) (MultiStash activé).
+/toggle page: Echanger le contenu de la page actuelle du coffre avec le contenu d'une autre "page" du coffre opposé partagé/personnel (espace non obligatoire) (MultiStash activé).
+/dlm: Inverse le mode d'affichage: Toujours afficher les valeurs de vie et de mana. (Depuis LoD 1.13c, vous pouvez cliquer sur la partie inférieure des orbes)
+/dml: Identique à /dlm.
+/dl: Inverse le mode d'affichage: Toujours afficher les valeurs de vie. (Depuis LoD 1.13c, vous pouvez cliquer sur la partie inférieure des orbes)
+/dm: Inverse le mode d'affichage: Toujours afficher les valeurs de mana. (Depuis LoD 1.13c, vous pouvez cliquer sur la partie inférieure des orbes)
+/listcube: (bêta) Crée un fichier "cube.txt" dans le répertoire de sauvegarde contenant toutes les formules actives du cube. (LoD 1.10 minimum).
+- ActiveCommands=0 		{0:Désactivé; 1:Activé}
 
-Quitte D2, si PlugY if PlugY �choue lors de l'installation de toutes les fonctions.
-D�sactivez-le seulement si vous savez ce que vous faites.
-- ActiveCheckMemory=1 		{0:D�sactiv�; 1:Activ�}
+Quitte D2, si PlugY if PlugY échoue lors de l'installation de toutes les fonctions.
+Désactivez-le seulement si vous savez ce que vous faites.
+- ActiveCheckMemory=1 		{0:Désactivé; 1:Activé}
 
-Active les fonctions cach�s ou non finis. (ne pas utiliser)
-- ActiveAllOthersFeatures=0 	{0:D�sactiv�; 1:Activ�}
+Active les fonctions cachés ou non finis. (ne pas utiliser)
+- ActiveAllOthersFeatures=0 	{0:Désactivé; 1:Activé}
 
 
 [WINDOWED]
-Lancement en mode fen�tr�.
-- ActiveWindowed=0 		{0:D�sactiv�; 1:Activ�}
+Lancement en mode fenêtré.
+- ActiveWindowed=0 		{0:Désactivé; 1:Activé}
 
-Supprime le cadre de la fen�tre en mode fen�tr�.
-- RemoveBorder=0 		{0:D�sactiv�; 1:Activ�}
+Supprime le cadre de la fenêtre en mode fenêtré.
+- RemoveBorder=0 		{0:Désactivé; 1:Activé}
 
-Met la fen�tre au plus haut (au-dessus de la barre des t�ches) en mode fen�tr�.
-- WindowOnTop=0 		{0:D�sactiv�; 1:Activ�}
+Met la fenêtre au plus haut (au-dessus de la barre des tâches) en mode fenêtré.
+- WindowOnTop=0 		{0:Désactivé; 1:Activé}
 
-Fen�tre centr�e et maximis�e (ratio maintenu � 4/3) en mode fen�tr� (si SetWindowPos = 0).
-- Maximized=0 			{0:D�sactiv�; 1:Activ�}
+Fenêtre centrée et maximisée (ratio maintenu à 4/3) en mode fenêtré (si SetWindowPos = 0).
+- Maximized=0 			{0:Désactivé; 1:Activé}
 
-D�finie la position et la taille de la fen�tre en mode fen�tr�.
-- SetWindowPos=0 		{0:D�sactiv�; 1:Activ�}
-- X=0 				{0:Position X de la fen�tre}
-- Y=0 				{0:Position Y de la fen�tre}
-- Width=0 			{0:Largeur de la fen�tre}
-- Height=0 			{0:Hauteur de la fen�tre}
+Définie la position et la taille de la fenêtre en mode fenêtré.
+- SetWindowPos=0 		{0:Désactivé; 1:Activé}
+- X=0 				{0:Position X de la fenêtre}
+- Y=0 				{0:Position Y de la fenêtre}
+- Width=0 			{0:Largeur de la fenêtre}
+- Height=0 			{0:Hauteur de la fenêtre}
 
-Verrouiller le curseur da la souris dans la fen�tre en mode fen�tr�.
-- LockMouseOnStartup=0		{0:D�sactiv�; 1:Activ�}
+Verrouiller le curseur da la souris dans la fenêtre en mode fenêtré.
+- LockMouseOnStartup=0		{0:Désactivé; 1:Activé}
 
 
 [LANGUAGE]
 Change la langue du jeu.
 Vous devez avoir les fichiers de langue choisi.
 Toutes les versions de D2 et LOD contiennent les fichiers en anglais (sauf les voix).
-Toutes les langues possibles : ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS
-- ActiveChangeLanguage=0	{0:D�sactiv�; 1:Activ�}
-- SelectedLanguage=ENG		{FRA: Fran�ais s�lectionn�}
+Toutes les langues possibles: ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS
+- ActiveChangeLanguage=0	{0:Désactivé; 1:Activé}
+- SelectedLanguage=ENG		{FRA: Français sélectionné}
 
-Pour les moddeurs qui veulent limit�s les languages accessibles etle language par d�fauts :
-- ActiveLanguageManagement=0	{0:D�sactiv�; 1:Activ�}
-- DefaultLanguage=ENG		{empty:Langue par d�fault de D2; FRA: Le fran�ais est la langue par d�faut}
+Pour les moddeurs qui veulent limités les languages accessibles etle language par défauts:
+- ActiveLanguageManagement=0	{0:Désactivé; 1:Activé}
+- DefaultLanguage=ENG		{empty:Langue par défault de D2; FRA: Le français est la langue par défaut}
 - AvailableLanguages=ENG|FRA	{ENG|ESP|DEU|FRA|POR|ITA|JPN|KOR|SIN|CHI|POL|RUS}
 
 
 [SAVEPATH]
-Mettez dans cette variable le chemin d'acc�s des fichiers de sauvegarde.
+Mettez dans cette variable le chemin d'accès des fichiers de sauvegarde.
 Vous pouvez aussi bien utiliser un chemin absolu ou relatif.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveSavePathChange=0	{0:D�sactiv�; 1=Activ�, vous devez initialiser "SavePath"}
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveSavePathChange=0	{0:Désactivé; 1=Activé, vous devez initialiser "SavePath"}
 - SavePath=Save\		{Save\MyMod\  ou D:\Save Games\diablo II\Current Mod\}
 
 
 [MAIN SCREEN]
-Change le texte affich� dans le menu principal (premier menu) (� la place de "v 1.10")
-Les couleurs sont des entiers faisant r�f�rence aux couleurs d�finies de D2.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveVersionTextChange=0	{0:D�sactiv�; 1=Activ�}
-- VersionText=       		{Vide: Affiche la version courante de LoD avec la lettre de sous-version (1.11b, 1.09d) ; Nom du Mod:Texte avec une longueur maximale d'environ 23 caract�res (ex : v 1.11b)}
+Change le texte affiché dans le menu principal (premier menu) (à la place de "v 1.10")
+Les couleurs sont des entiers faisant référence aux couleurs définies de D2.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveVersionTextChange=0	{0:Désactivé; 1=Activé}
+- VersionText=       		{Vide: Affiche la version courante de LoD avec la lettre de sous-version (1.11b, 1.09d) ; Nom du Mod:Texte avec une longueur maximale d'environ 23 caractères (ex: v 1.11b)}
 - ColorOfVersionText=0      	{0:blanc; 1:rouge; 4:or; etc.}
-- ActivePrintPlugYVersion=1 	{0:D�sactiv�; 1=Activ�)
+- ActivePrintPlugYVersion=1 	{0:Désactivé; 1=Activé)
 - ColorOfPlugYVersion=4     	{0:blanc; 1:rouge; 4:or; etc.}
 
 
 [STASH]
 Ajuste le coffre pour avoir 10x10 cases.
-Quand bigStash est activ�, vou devez red�marrer D2 pour jouer en solo/multi/ouvert apr�s avoir jouer en ferm� (et vice versa).
+Quand bigStash est activé, vou devez redémarrer D2 pour jouer en solo/multi/ouvert après avoir jouer en fermé (et vice versa).
 Utilise PlugY\TradeStash.dc6 pour changer l'image de fond.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveBigStash=0			{0:Taille du coffre par d�faut utilis�; 1:Activ�, coffre utilise 10x10 cases}
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveBigStash=0			{0:Taille du coffre par défaut utilisé; 1:Activé, coffre utilise 10x10 cases}
 
-Utilisez cette fonction pour partager et garder tous vos objets. :)
-Il y a 2 coffres � pages multiples possibles :
+Utilisez cette fonction pour partager et garder tous vos objets.:)
+Il y a 2 coffres à pages multiples possibles:
 - un personnel accessible uniquement par le personnage;
-- un partag� entre tous vos personnages.
+- un partagé entre tous vos personnages.
 Utilisez le bouton "Voir coffre..." pour changer de coffre.
-Utilisez les boutons fl�ch�s (et le bouton shift) pour passer d'une page � l'autre.
-D�finition : La derni�re page est la derni�re page qui contient un objet.
-Ces coffres � pages multiples ne fonctionne pas avec des personnages Diablo II classiques ou sur les royaumes.
-Vous pouvez changez le nom du fichier partag�.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveMultiPageStash=0	{0:D�sactiv�; 1:Activ�}
-- NbPagesPerIndex=10		{10: Les pages index�es sont 1,10,20,30,...,max}
-- NbPagesPerIndex2=100		{50: Les pages index�es (+shift) sont 1,50,100,150,...,max}
-- MaxPersonnalPages=0 		{0:Nombre de pages personnelles illimit�es; 1000: Maximum de 1000 pages personnelles}
-- ActiveSharedStash=0		{0:D�sactiv�; 1:Activ� si ActiveMultiPageStash=1}
-- OpenSharedStashOnLoading=0	{0:D�sactiv�; 1:S�lectionne le coffre partag�e (au lieu du personnel) au chargement du perso}
-- SeparateHardcoreStash=1	{0:M�me coffre partag� en HC et SC; 1:utilise 2 coffres diff�rents}
-- SharedStashFilename=SharedStashSave	{xxx : Le nom du fichier sera _LOD_xxx.sss}
-- displaySharedSetItemNameInGreen=1 	{0:D�sactiv�; 1:Activ�, Les noms des objets de sets dans le stash sont affich�s en vert sur les autres objets de sets.}
-- MaxSharedPages=0		{0:Nombre de pages partag�es illimit�es; 5000: Maximum de 5000 pages partag�es )
-- ActiveSharedGold=1		{0:D�sactiv�; 1:Activ�, utiliser les commands pour y ajouter ou retirer de l'or (voir Command section)}
-- PosXPreviousBtn=-1		{-1: Position par d�faut, 50: D�place le bouton � la position 50 en abscisse}
+Utilisez les boutons fléchés (et le bouton shift) pour passer d'une page à l'autre.
+Définition: La dernière page est la dernière page qui contient un objet.
+Ces coffres à pages multiples ne fonctionne pas avec des personnages Diablo II classiques ou sur les royaumes.
+Vous pouvez changez le nom du fichier partagé.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveMultiPageStash=0	{0:Désactivé; 1:Activé}
+- NbPagesPerIndex=10		{10: Les pages indexées sont 1,10,20,30,...,max}
+- NbPagesPerIndex2=100		{50: Les pages indexées (+shift) sont 1,50,100,150,...,max}
+- MaxPersonnalPages=0 		{0:Nombre de pages personnelles illimitées; 1000: Maximum de 1000 pages personnelles}
+- ActiveSharedStash=0		{0:Désactivé; 1:Activé si ActiveMultiPageStash=1}
+- OpenSharedStashOnLoading=0	{0:Désactivé; 1:Sélectionne le coffre partagée (au lieu du personnel) au chargement du perso}
+- SeparateHardcoreStash=1	{0:Même coffre partagé en HC et SC; 1:utilise 2 coffres différents}
+- SharedStashFilename=SharedStashSave	{xxx: Le nom du fichier sera _LOD_xxx.sss}
+- displaySharedSetItemNameInGreen=1 	{0:Désactivé; 1:Activé, Les noms des objets de sets dans le stash sont affichés en vert sur les autres objets de sets.}
+- MaxSharedPages=0		{0:Nombre de pages partagées illimitées; 5000: Maximum de 5000 pages partagées )
+- ActiveSharedGold=1		{0:Désactivé; 1:Activé, utiliser les commands pour y ajouter ou retirer de l'or (voir Command section)}
+- PosXPreviousBtn=-1		{-1: Position par défaut, 50: Déplace le bouton à la position 50 en abscisse}
 Idem pour PosYPreviousBtn, PosXNextBtn, PosYNextBtn, PosXSharedBtn, PosYSharedBtn, PosXPreviousIndexBtn, PosYPreviousIndexBtn, PosXNextIndexBtn, PosYNextIndexBtn, PosXPutGoldBtn, PosYPutGoldBtn, PosXTakeGoldBtn, PosYTakeGoldBtn.
 
 
 [STATS POINTS]
-Utiles pour r�parer des erreurs dans l'allocation de points de caract�ristiques.
-Par exemple 30 points d'�nergie pour un barbare !
-Sur la page des statistiques, appuyer sur la touche s�lectionn�e et cliquer sur le bouton "moins".
-S�lectionner une touche en changeant la valeur de KeyUsed (devriez choisi 17 ou 18)
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveStatsUnassignment=0		{0:D�sactiv�; 1:Activ�, appuyer sur la touche s�lectionn�e en cliquant}
-- KeyUsed=18					{17:touche Contr�le s�lectionn�e; 18:touche Alt s�lecttionn�e}
+Utiles pour réparer des erreurs dans l'allocation de points de caractéristiques.
+Par exemple 30 points d'énergie pour un barbare!
+Sur la page des statistiques, appuyer sur la touche sélectionnée et cliquer sur le bouton "moins".
+Sélectionner une touche en changeant la valeur de KeyUsed (devriez choisi 17 ou 18)
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveStatsUnassignment=0		{0:Désactivé; 1:Activé, appuyer sur la touche sélectionnée en cliquant}
+- KeyUsed=18					{17:touche Contrôle sélectionnée; 18:touche Alt sélecttionnée}
 
-Utilisez la touche shift pour allouer/d�sallouer tous les points possibles en un click.
-Vous pouvez limiter le nombre de points allou�/d�sallou�.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveShiftCkickLimit=0		{0:D�sactiv�; 1:Activ�}
-- LimitValueToShiftClick=5		(10: Alloue ou d�salloue les points de stats 10 par 10}
+Utilisez la touche shift pour allouer/désallouer tous les points possibles en un click.
+Vous pouvez limiter le nombre de points alloué/désalloué.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveShiftCkickLimit=0		{0:Désactivé; 1:Activé}
+- LimitValueToShiftClick=5		(10: Alloue ou désalloue les points de stats 10 par 10}
 
 
 [STAT ON LEVEL UP]
-ATTENTION : CHEAT, NE PAS UTILISER EN PARTIE NORMAL.
-Change le nombre de points de Stats re�us lors d'un gain de niveau.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveStatPerLevelUp=0		{0:D�sactiv�; 1:Activ�}
-- StatPerLevelUp=5			{0:aucun points gagn�s;  11:onze points gagn�s}
+ATTENTION: CHEAT, NE PAS UTILISER EN PARTIE NORMAL.
+Change le nombre de points de Stats reçus lors d'un gain de niveau.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveStatPerLevelUp=0		{0:Désactivé; 1:Activé}
+- StatPerLevelUp=5			{0:aucun points gagnés;  11:onze points gagnés}
 
 
 [SKILLS POINTS]
-Utiles pour r�parer des erreurs dans l'allocation de points de skills.
-Cliquer sur le bouton de la page des skills pour d�sallouer tous les points de skills.
-note : Prends le co�t r�el de chaque skills (qui peut �tre plus grand que 1 dans les mods).
-Attention : Il y a peux de place o� mettre se boutton sans bugs.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveSkillsUnassignment=0 	{0:D�sactiv�; 1:Activ�}
-- ActiveSkillsUnassignmentOneForOne=0	{0:Normal; 1:Force la d�assignation 1 for 1 (pour mod sp�cifique).}
-- PosXUnassignSkillBtn=-1 		{-1: Position par d�faut, 50: D�place le bouton � la position 50 en X}
-- PosYUnassignSkillBtn=-1 		{-1: Position par d�faut, 50: D�place le bouton � la position 50 en Y}
+Utiles pour réparer des erreurs dans l'allocation de points de skills.
+Cliquer sur le bouton de la page des skills pour désallouer tous les points de skills.
+note: Prends le coût réel de chaque skills (qui peut être plus grand que 1 dans les mods).
+Attention: Il y a peux de place où mettre se boutton sans bugs.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveSkillsUnassignment=0 	{0:Désactivé; 1:Activé}
+- ActiveSkillsUnassignmentOneForOne=0	{0:Normal; 1:Force la déassignation 1 for 1 (pour mod spécifique).}
+- PosXUnassignSkillBtn=-1 		{-1: Position par défaut, 50: Déplace le bouton à la position 50 en X}
+- PosYUnassignSkillBtn=-1 		{-1: Position par défaut, 50: Déplace le bouton à la position 50 en Y}
 
 
 [SKILL ON LEVEL UP]
-ATTENTION : CHEAT, NE PAS UTILISER EN PARTIE NORMAL.
-Change le nombre de points de skills re�us lors d'un gain de niveau.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveSkillPerLevelUp=0		{0:D�sactiv�; 1:Activ�}
-- SkillPerLevelUp=1				{0:aucun points gagn�s;  3:trois points gagn�s)
+ATTENTION: CHEAT, NE PAS UTILISER EN PARTIE NORMAL.
+Change le nombre de points de skills reçus lors d'un gain de niveau.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveSkillPerLevelUp=0		{0:Désactivé; 1:Activé}
+- SkillPerLevelUp=1				{0:aucun points gagnés;  3:trois points gagnés)
 
 
 [WORLD EVENT]
 Active le World Event en local.
-Le World Event peut se d�clencher uniquement en difficult� enfer et seulement une fois par partie.
-Si le WorldEvent se d�clenche et qu'on n'est pas dans une partie, on le perd.
-A partir du lancement de D2, le prochain WorldEvent peut s'enclencher entre  quelques secondes et 41:40 heures apr�s.
-Gardez en m�moire avant d'�diter ces variables que le World Event devrait toujours �tre rare.
-L'objet � vendre peut �tre chang�, la valeur attendu est la m�me que les entr�es du cube.
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveWorldEvent=0			{0:D�sactiv�; 1:Activ�}
+Le World Event peut se déclencher uniquement en difficulté enfer et seulement une fois par partie.
+Si le WorldEvent se déclenche et qu'on n'est pas dans une partie, on le perd.
+A partir du lancement de D2, le prochain WorldEvent peut s'enclencher entre  quelques secondes et 41:40 heures après.
+Gardez en mémoire avant d'éditer ces variables que le World Event devrait toujours être rare.
+L'objet à vendre peut être changé, la valeur attendu est la même que les entrées du cube.
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveWorldEvent=0			{0:Désactivé; 1:Activé}
 - ShowCounterInAllDifficulty=0		{0:Affiche le message "SOJ vendu" seulement en mode enfer; 1:L'affiche dans tous les modes}
 - ItemsToSell=The Stone of Jordan	{r01: rune EL;  cap,rar,upg: N'importe quel Capuchon de mailles/Capuchon de guerre/shako rare}
-- MonsterID=333				{333: DiabloClone s�lectionn�}
-- OwnSOJSoldChargeFor=100		{100: Quand on vend une SOJ ,le compteur de SOJ est augment� de 100}
-- InititalSOJSoldMin=200		{200: Le compteur de SOJ est initialis� a au moins 20 au lancement de D2}
-- InititalSOJSoldMax=3000		{3000: Le compteur de SOJ est initialis� a au plus 3000 au lancement de D2}
+- MonsterID=333				{333: DiabloClone sélectionné}
+- OwnSOJSoldChargeFor=100		{100: Quand on vend une SOJ ,le compteur de SOJ est augmenté de 100}
+- InititalSOJSoldMin=200		{200: Le compteur de SOJ est initialisé a au moins 20 au lancement de D2}
+- InititalSOJSoldMax=3000		{3000: Le compteur de SOJ est initialisé a au plus 3000 au lancement de D2}
 - TriggerAtEachSOJSoldMin=75		{75: Obligation d'avoir au moins 75 SOJ vendu entre 2 World Event}
 - TriggerAtEachSOJSoldMax=125		{125: Obligation d'avoir au plus 125 SOJ vendu entre 2 World Event}
-- ActiveActiveAutoSell=1		{0:D�sactiv�; 1:Le compteur de SOJ est automatiquement incr�ment� de 1}
-- TimeBeforeAutoSellMin=0		{50: Obligation d'avoir au moins 50 secondes entre 2 auto-incr�mentation}
-- TimeBeforeAutoSellMin=1200		{1200: Obligation d'avoir au plus 20 minutes (1200 secondes) entre 2 auto-incr�mentation}
+- ActiveActiveAutoSell=1		{0:Désactivé; 1:Le compteur de SOJ est automatiquement incrémenté de 1}
+- TimeBeforeAutoSellMin=0		{50: Obligation d'avoir au moins 50 secondes entre 2 auto-incrémentation}
+- TimeBeforeAutoSellMin=1200		{1200: Obligation d'avoir au plus 20 minutes (1200 secondes) entre 2 auto-incrémentation}
 
 
 [UBER QUEST]
 Active la Uber Quest en local.
 Fonctionne uniquement en Hell.
-Vous devez cuber les 3 cl�s puis les 3 organs � Harrogath.
-Note : Cette qu�te sera mise � jour plustard pour ressembler plus � celle des royaumes.
+Vous devez cuber les 3 clés puis les 3 organs à Harrogath.
+Note: Cette quête sera mise à jour plustard pour ressembler plus à celle des royaumes.
 ActiveUberQuest=0				{0:Disabled; 1:Enabled}
 
 
 [INTERFACE]
-Ajoute des pages suppl�mentaires pour l'affichage de plus de stats du perso.
-Possibilit� de choisir si la page affich�e quand on ouvre la page des stats est la page principale ou celle s�lectionn�e pr�c�demment.
-Possibilit� de changer l'affichage des stats via le fichier PlugY\statsinterface.txt (� ouvrir avec MS Excel).
+Ajoute des pages supplémentaires pour l'affichage de plus de stats du perso.
+Possibilité de choisir si la page affichée quand on ouvre la page des stats est la page principale ou celle sélectionnée précédemment.
+Possibilité de changer l'affichage des stats via le fichier PlugY\statsinterface.txt (à ouvrir avec MS Excel).
 Il n'y a pas de limite pour le nombre de page.
-Possibilit� de ne pas afficher l'arri�re plan des boutons (� utiliser si un mod le change d�j�).
-- ActiveNewStatsInterface=0			{0:D�sactiv�; 1:Activ�}
-- SelectMainPageOnOpenning=1			{0:Pr�c�dente page s�lectionn�e affich�e; 1:Page principale affich�e}
-- PrintButtonsBackgroundOnMainStatsPage=1	{0:N'affiche pas l'arri�re plan; 1:L'affiche}
+Possibilité de ne pas afficher l'arrière plan des boutons (à utiliser si un mod le change déjà).
+- ActiveNewStatsInterface=0			{0:Désactivé; 1:Activé}
+- SelectMainPageOnOpenning=1			{0:Précédente page sélectionnée affichée; 1:Page principale affichée}
+- PrintButtonsBackgroundOnMainStatsPage=1	{0:N'affiche pas l'arrière plan; 1:L'affiche}
 
 
 [EXTRA]
 Vous pouvez lancer plusieurs parties Diablo II sur un seul ordinateur.
 Par exemple, les moddeurs peuvent tester leurs mod avec des parties multijoueurs.
-Attention :
-  Ne pas lancer des parties avec le m�me chemin de sauvegarde quand vous utiliser le coffre partag�.
-  Ne pas utiliser le m�me personnage en m�me temps bien s�r !
-Ci-dessous, les valeurs par d�fauts et entre {} des exemples avec leurs significations :
-- ActiveLaunchAnyNumberOfLOD=0 		{0:D�sactiv�; 1:Activ�}
+Attention:
+  Ne pas lancer des parties avec le même chemin de sauvegarde quand vous utiliser le coffre partagé.
+  Ne pas utiliser le même personnage en même temps bien sûr!
+Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations:
+- ActiveLaunchAnyNumberOfLOD=0 		{0:Désactivé; 1:Activé}
 
-R�g�n�re la carte � chaque nouvelle partie (comme en multijoueur).
-- AlwaysRegenMapInSP=0			{0:D�sactiv�; 1:Activ�}
+Régénère la carte à chaque nouvelle partie (comme en multijoueur).
+- AlwaysRegenMapInSP=0			{0:Désactivé; 1:Activé}
 
-Change le nombre de joueurs �mul�s (comme /players x) � chaque d�but de nouvelle partie.
-- NBPlayersByDefault=0			{0:D�sactiv�; 1:1 joueur �mul� (normal); 8: 8 joueurs �mul�s (maximum)}
+Change le nombre de joueurs émulés (comme /players x) à chaque début de nouvelle partie.
+- NBPlayersByDefault=0			{0:Désactivé; 1:1 joueur émulé (normal); 8: 8 joueurs émulés (maximum)}
 
 Affiche toujours le niveau des items.
-- ActiveDisplayItemLevel=0		{0:D�sactiv�; 1:Activ�}
+- ActiveDisplayItemLevel=0		{0:Désactivé; 1:Activé}
 
-Affiche toujours les valeurs num�riques de mana et de vie au-dessus des globes correspondants.
-- AlwaysDisplayLifeAndManaValues=0	{0:D�sactiv�; 1:Activ�; 2:D�sactiv� mais peut �tre activ� par commande}
+Affiche toujours les valeurs numériques de mana et de vie au-dessus des globes correspondants.
+- AlwaysDisplayLifeAndManaValues=0	{0:Désactivé; 1:Activé; 2:Désactivé mais peut être activé par commande}
 
 Corrige le bug qui bloque l'ouverture des fichiers .txt quand ils sont ouverts dans Microsoft Excel.
-- EnabledTXTFilesWhenMSExcelOpenIt=0	{0:D�sactiv�; 1:Activ�}
+- EnabledTXTFilesWhenMSExcelOpenIt=0	{0:Désactivé; 1:Activé}
 
 Affiche la valeur courante des caracs (sans les bonus magiques) quand la souris passse sur le bouton d'assignation.
-- ActiveDisplayBaseStatsValue=0		{0:D�sactiv�; 1:Activ�}
+- ActiveDisplayBaseStatsValue=0		{0:Désactivé; 1:Activé}
 
 Active les mots runiques du ladder en dehors des royaumes.
-Ceci est fait par la mise � 0 de la colonne "server" du fichier runes.txt.
-Donc n'utilisez pas cette colonne dans votre mod en m�me temps que cette fonction !
-- ActiveLadderRunewords=0		{0:D�sactiv�; 1:Activ�}
+Ceci est fait par la mise à 0 de la colonne "server" du fichier runes.txt.
+Donc n'utilisez pas cette colonne dans votre mod en même temps que cette fonction!
+- ActiveLadderRunewords=0		{0:Désactivé; 1:Activé}
 
-Active la capacit" d'ouvrir l portail vers le Cow Level dans la difficult� o� le joueur � d�j� tuer le Cow King.
-- ActiveCowPortalWhenCowKingWasKilled=0 {0:D�sactiv�; 1:Activ�}
-
-
-Plus d'options dans de futures versions... :)
+Active la capacit" d'ouvrir l portail vers le Cow Level dans la difficulté où le joueur à déjà tuer le Cow King.
+- ActiveCowPortalWhenCowKingWasKilled=0 {0:Désactivé; 1:Activé}
 
 
-Mon mail � ynicolas@worldonline.fr.
-Mais je ne fais plus le support de PlugY donc n'attendez pas de l'aide de ma part si vous avez des probl�mes. A la place faites des recherches sur les forums.
+Plus d'options dans de futures versions...:)
 
 
-PS : D�sol� pour les f�tes mais je n'ai pas envie de corriger ;)
+Mon mail à ynicolas@worldonline.fr.
+Mais je ne fais plus le support de PlugY donc n'attendez pas de l'aide de ma part si vous avez des problèmes. A la place faites des recherches sur les forums.
+
+
+PS: Désolé pour les fôtes mais je n'ai pas envie de corriger ;)
 
 ******** THANKS TO ********
 - Blizzard pour avoir fait Diablo II et Lord of Destruction.
@@ -764,19 +764,19 @@ PS : D�sol� pour les f�tes mais je n'ai pas envie de corriger ;)
 - Pralinor pour son aide dans la convertion en 1.12.
 - L'Autour pour son aide dans la convertion en 1.13d.
 - ChaosEnergY pour ses beta tests et sa traduction en allemand.
-- Char & Darque pour avoir corrig� mon anglais.
+- Char & Darque pour avoir corrigé mon anglais.
 - Shaitane, K&V, themastercaster, raspa et onyx pour leurs tests.
 - Golvmopp, Dark Spot in the Corner, Megalixir et Athara pour leurs aides.
 - ItalianPlayer pour la traduction en italien.
 - Tous les membres du Chat de ProzenKeep.
 - PhrozenKeep pour tout ce qu'ils partagent pour nous (y-compris le mien ;)
-- Traduction :
-	* Anglais : Yohann, Jurica.
-	* Fran�ais : Yohann
-	* Allemand : ChaosEnergy, TheMasterCaster.
-	* Italien : ItalianPlayer
-	* Espagnol : Acrerune
-	* Polonais : Serdel
-	* Russe : L'Autour
+- Traduction:
+	* Anglais: Yohann, Jurica.
+	* Français: Yohann
+	* Allemand: ChaosEnergy, TheMasterCaster.
+	* Italien: ItalianPlayer
+	* Espagnol: Acrerune
+	* Polonais: Serdel
+	* Russe: L'Autour
 
 ;--------------------------------------------------------------------------------------;
