@@ -470,7 +470,7 @@ FCT_ASM ( D2GetClient_111 )
 
 FCT_ASM( D2SetSkillBaseLevelOnClient_114 )
     PUSH EBX
-    PUSH EBX
+    PUSH EDX
     PUSH ESI
     PUSH DWORD PTR SS : [ESP + 0x14]
     PUSH DWORD PTR SS : [ESP + 0x14]
