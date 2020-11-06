@@ -268,7 +268,7 @@ DWORD loadStash(Unit* ptChar, Stash* ptStash, BYTE data[], DWORD startSize, DWOR
 //	if (strlen((char *)&data[curSize]) > 0xF)
 //		*(char *)&data[curSize+0xF] = NULL;
 	if (strlen((char *)&data[curSize]))
-		ptStash->name = (char*)malloc(strlen((char *)&data[curSize]));//D2AllocMem(PCGame->memoryPool, strlen((char *)&data[curSize]),__FILE__,__LINE__,0);
+		ptStash->name = (char*)malloc(strlen((char *)&data[curSize]) + 1);//D2AllocMem(PCGame->memoryPool, strlen((char *)&data[curSize]),__FILE__,__LINE__,0);
 	if (ptStash->name)
 		strcpy(ptStash->name, (char *)&data[curSize]);
 	curSize += strlen((char *)&data[curSize]) + 1;
@@ -543,7 +543,7 @@ void renameCurrentStash(Unit* ptChar, char* name)
 	log_msg("renameCurrentStash 3\n");
 	if (len > 0)
 	{
-		stash->name = (char *)malloc(len);//D2FogMemAlloc(len,__FILE__,__LINE__,0);
+		stash->name = (char *)malloc(len + 1);//D2FogMemAlloc(len,__FILE__,__LINE__,0);
 		strcpy(stash->name, name);
 	}
 	else
