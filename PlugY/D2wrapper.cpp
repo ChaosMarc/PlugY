@@ -231,7 +231,14 @@ void freeCustomLibraries()
 		dll->release();
 		freeLibrary(dll->offset);
 		nextDll = dll->nextDll;
-		D2FogMemDeAlloc(dll,__FILE__,__LINE__,0);
+		if (version_D2Game == V114d)
+		{
+			delete dll;
+		}
+		else
+		{
+			D2FogMemDeAlloc(dll, __FILE__, __LINE__, 0);
+		}
 		dll = nextDll;
 	}
 }
