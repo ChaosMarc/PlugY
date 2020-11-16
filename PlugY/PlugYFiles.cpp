@@ -85,8 +85,11 @@ FCT_ASM( caller_isModFile_114 )
     CALL isModFile
     TEST EAX, EAX
     JE ISNOTMODDATA
-    MOV EDX, 0x1
+    MOV EDX, 0x00100001
+JMP ALLDONE
 ISNOTMODDATA :
+    MOV EDX, DWORD PTR SS : [EBP + 0x10]
+ALLDONE :
     LEA EAX, DWORD PTR SS : [EBP - 0x108]
     RETN
 }}
@@ -102,11 +105,14 @@ void Install_PlugYFiles()
 	mem_seek R8(Storm,	192C6, 19296, 18677, 2CC69, 14259, 121E9, 28D89, 2DA79, 19369);//( (DWORD)D2Storm268 + V7(Storm, 01A8, 01A8, 01AB, 0429, 0429, 0429, 0000) );
 	memt_byte( version_D2Client == V114d ? 0x8D : 0xFF ,0x90); // NOP
 	memt_byte( version_D2Client == V114d ? 0x85 : 0x15 ,0xE8); // CALL
-    if (version_Storm == V114d) {
-        MEMT_REF4(0xFFFFFEF8, caller_isModFile_114);
-    } else {
-        MEMD_REF4(LeaveCriticalSection, version_Storm == V114d ? caller_isModFile_114 : version_Storm >= V111 ? caller_isModFile_111 : caller_isModFile);
-    }
+    if (version_Storm == V114d)
+      {
+      MEMT_REF4(0xFFFFFEF8, caller_isModFile_114);
+      }
+    else
+      {
+      MEMD_REF4(LeaveCriticalSection, version_Storm >= V111 ? caller_isModFile_111 : caller_isModFile);
+      }
 	//6FFC8677  |. FF15 F411FE6F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
 	//6FC1CC69  |. FF15 3832C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
 	//6FC04259  |. FF15 3832C36F  CALL DWORD PTR DS:[<&KERNEL32.LeaveCriti>; \LeaveCriticalSection
