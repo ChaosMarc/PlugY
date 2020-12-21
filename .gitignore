@@ -31,10 +31,12 @@
 .idea
 **/.vs
 **/Release/
+**/Debug/
+**/Restore
 **/*.vcxproj
 **/*.vcxproj.filters
 **/*.vcxproj.user
 **/*.VC.db
 **/*.VC.VC.opendb
 **/UpgradeLog*
-/PlugYRun/PlugYRun.aps
+*.aps
