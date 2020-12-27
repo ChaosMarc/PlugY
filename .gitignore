@@ -40,3 +40,4 @@
 **/*.VC.VC.opendb
 **/UpgradeLog*
 *.aps
+*.bak

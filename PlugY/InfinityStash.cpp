@@ -2,6 +2,7 @@
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
     Add support 1.14d by haxifix.
+	Modified by Mark Mohr
 
 	Gestion of the infinity and shared Stash.
 
@@ -473,9 +474,22 @@ void swapStash(Unit* ptChar, DWORD page, bool toggle)
 	Stash* swpStash = curStash->isShared == toggle ? PCPY->selfStash : PCPY->sharedStash;
 	for (DWORD i = 0; i < page; i++)
 	{
-		if (curStash->nextStash == NULL)
-			addStash(ptChar, swpStash->isShared);
-		swpStash = swpStash->nextStash;
+        if (swpStash)
+        {
+            if (curStash->nextStash == nullptr)
+            {
+			    addStash(ptChar, swpStash->isShared);
+            }
+    
+            if (swpStash->nextStash != nullptr)
+            {
+		        swpStash = swpStash->nextStash;
+            }
+            else
+            {
+                swpStash = nullptr;
+            }
+        }
 	}
 	swapStash(ptChar, curStash, swpStash);
 }

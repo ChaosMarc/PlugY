@@ -1,7 +1,8 @@
 /*=================================================================
-	File created by Yohann NICOLAS.
+  File created by Yohann NICOLAS.
+  Modified by Mark Mohr
 
-	Interface functions
+  Interface functions
 
 =================================================================*/
 
@@ -12,34 +13,91 @@
 #include "common.h"
 #include <stdio.h>
 
-#define NB_RUNES_PER_PAGE 25
+int NB_RUNES_PER_PAGE = 25;
 
-#define	getXCloseBtn()			360
-#define	getLCloseBtn()			32
-#define	getYCloseBtn()			(ResolutionY - 60)
-#define	getHCloseBtn()			32
-#define isOnCloseBtn(x,y) isOnRect(x, y, getXCloseBtn(), getYCloseBtn(), getLCloseBtn(), getHCloseBtn())
+// Close Button
+// -----------------------------------------------------------
+DWORD getXCloseBtn() { return 360; }
+DWORD getLCloseBtn() { return 32; }
 
-#define	getXNextPageBtn()		120
-#define	getLNextPageBtn()		32
-#define	getYNextPageBtn()		(ResolutionY - 60)
-#define	getHNextPageBtn()		32
-#define isOnNextPageBtn(x,y)	isOnRect(x, y, getXNextPageBtn(), getYNextPageBtn(), getLNextPageBtn(), getHNextPageBtn())
+DWORD getYCloseBtn() 
+{ 
+  if (version_D2Client == V114d)
+  {
+    return RY(0x31);
+  }
+  else
+  {
+    return (ResolutionY - 60);
+  }
+}
 
-#define	getXPrevRunesBtn()		168
-#define	getLPrevRunesBtn()		32
-#define	getYPrevRunesBtn()		(ResolutionY - 60)
-#define	getHPrevRunesBtn()		32
-#define isOnPrevRunesBtn(x,y)	isOnRect(x, y, getXPrevRunesBtn(), getYPrevRunesBtn(), getLPrevRunesBtn(), getHPrevRunesBtn())
+DWORD getHCloseBtn() { return 32; }
 
-#define	getXNextRunesBtn()		200
-#define	getLNextRunesBtn()		32
-#define	getYNextRunesBtn()		(ResolutionY - 60)
-#define	getHNextRunesBtn()		32
-#define isOnNextRunesBtn(x,y)	isOnRect(x, y, getXNextRunesBtn(), getYNextRunesBtn(), getLNextRunesBtn(), getHNextRunesBtn())
+bool isOnCloseBtnRunewords(DWORD x, DWORD y) { return isOnRect(x, y, getXCloseBtn(), getYCloseBtn(), getLCloseBtn(), getHCloseBtn()); }
 
-int curRunesPage=0;
-int maxRunesPage=0xFFFF;
+// -----------------------------------------------------------
+
+// NextPage Button
+// -----------------------------------------------------------
+DWORD getXNextPageBtn() { return 120; }
+DWORD getLNextPageBtn() { return 32; }
+DWORD getYNextPageBtn() 
+{ 
+  if (version_D2Client == V114d)
+  {
+    return RY(0x31);
+  }
+  else
+  {
+    return (ResolutionY - 60);
+  }
+}
+
+DWORD getHNextPageBtn() { return 32; }
+bool isOnNextPageBtnRunewords(DWORD x, DWORD y) { return isOnRect(x, y, getXNextPageBtn(), getYNextPageBtn(), getLNextPageBtn(), getHNextPageBtn()); }
+// -----------------------------------------------------------
+
+// Previous Rune Button
+// -----------------------------------------------------------
+DWORD getXPrevRunesBtn() { return 168; }
+DWORD getLPrevRunesBtn() { return 32; }
+DWORD getYPrevRunesBtn() 
+{ 
+  if (version_D2Client == V114d)
+  {
+    return RY(0x31);
+  }
+  else
+  {
+    return (ResolutionY - 60);
+  }
+}
+DWORD getHPrevRunesBtn() { return 32; }
+bool isOnPrevRunesBtn(DWORD x, DWORD y) { return isOnRect(x, y, getXPrevRunesBtn(), getYPrevRunesBtn(), getLPrevRunesBtn(), getHPrevRunesBtn()); }
+// -----------------------------------------------------------
+
+// Next Rune Button
+// -----------------------------------------------------------
+DWORD getXNextRunesBtn() { return 200; }
+DWORD getLNextRunesBtn() { return 32; }
+DWORD getYNextRunesBtn() 
+{ 
+  if (version_D2Client == V114d)
+  {
+    return RY(0x31);
+  }
+  else
+  {
+    return (ResolutionY - 60);
+  }
+}
+DWORD getHNextRunesBtn() { return 32; }
+bool isOnNextRunesBtn(DWORD x, DWORD y) { return isOnRect(x, y, getXNextRunesBtn(), getYNextRunesBtn(), getLNextRunesBtn(), getHNextRunesBtn()); }
+// -----------------------------------------------------------
+
+int curRunesPage = 0;
+int maxRunesPage = 0xFFFF;
 
 static struct
 {
@@ -64,7 +122,14 @@ void printRuneword(RunesBIN* runesData, DWORD pos)
 	D2SetFont(6);
 	DWORD nbPixel = D2GetPixelLen(lpText);
 	DWORD x1 = (nbPixel >= 195) ? 0 : 195-nbPixel;
-	D2PrintString(lpText, x1, 10 + pos*20, GOLD, 0);//MILIEU(0x00,0x70,nbPixel)
+    if (version_D2Client == V114d)
+    {
+      D2PrintString(lpText, x1, 70 + pos * 20, GOLD, 0);//MILIEU(0x00,0x70,nbPixel)
+    }
+    else
+    {
+	  D2PrintString(lpText, x1, 10 + pos*20, GOLD, 0);//MILIEU(0x00,0x70,nbPixel)
+    }
 
 	typesList[0]=L'\0';
 	DWORD numItype=0;
@@ -80,7 +145,14 @@ void printRuneword(RunesBIN* runesData, DWORD pos)
 	}
 	nbPixel = D2GetPixelLen(typesList);
 	x1 = (nbPixel >= 195) ? 0 : 195-nbPixel;
-	D2PrintString(typesList, x1, 20 + pos*20, WHITE, 0);//MILIEU(0x70,0xA0,nbPixel)
+    if (version_D2Client == V114d)
+    {
+      D2PrintString(typesList, x1, 80 + pos * 20, WHITE, 0);//MILIEU(0x70,0xA0,nbPixel)
+    }
+    else
+    {
+	  D2PrintString(typesList, x1, 20 + pos*20, WHITE, 0);//MILIEU(0x70,0xA0,nbPixel)
+    }
 
 	runesList[0]=L'\0';
 	DWORD numRune=0;
@@ -89,30 +161,60 @@ void printRuneword(RunesBIN* runesData, DWORD pos)
 	{
 		ItemsBIN* itemsData = D2GetItemsBIN(curRuneID);
 		d2_assert( !itemsData , "itemsData", __FILE__, __LINE__);
-		GemsBIN* gemData = D2GetGemsBIN(itemsData->GemOffset);
+        GemsBIN* gemData = nullptr;
+        if (itemsData)
+          gemData = D2GetGemsBIN(itemsData->GemOffset);
+
 		if (gemData) {
 		d2_assert( !gemData , "gemData", __FILE__, __LINE__);
 		mbstowcs(temp, gemData->letter, 50);
 		if (numRune) wcscat(runesList,L" ");
 //		else wcscat(runesList,L"");
-		wcscat(runesList,temp);}
+      wcscat(runesList, temp);
+    }
 		numRune++;
 		curRuneID = runesData->Runes[numRune];
 	}
 //	wcscat(runesList,L"");
-	D2SetFont(1);
+    if (version_D2Client == V114d)
+    {
+      D2SetFont(6);
+    }
+    else
+    {
+	  D2SetFont(1);
+    }
+
 	DWORD y1;
 	nbPixel = D2GetPixelLen(runesList);
 	if (nbPixel>195)
 	{
+
 		D2SetFont(6);
+
 		nbPixel = D2GetPixelLen(runesList);
-		y1=16;
+        if (version_D2Client == V114d)
+        {
+            y1 = 76;
+        }
+        else
+        {
+		    y1=16;
+        }
 		x1 = nbPixel>195 ? 395-nbPixel : 204;
-	} else {
-		x1=205;
-		y1=18;
-	}
+    }
+    else 
+    {
+	    x1=205;
+        if (version_D2Client == V114d)
+        {
+          y1 = 78;
+        }
+        else
+        {
+		    y1=18;
+	    }
+    }
 
 //	x1 = (nbPixel < 145) ? 155 : 300-nbPixel;
 	D2PrintString(runesList, x1, y1 + pos*20, WHITE, 0);//MILIEU(0xD0,0xA0,nbPixel)
@@ -124,9 +226,14 @@ void printRuneword(RunesBIN* runesData, DWORD pos)
 void STDCALL printRunewordsPage()
 {
 	if (!D2isLODGame() || !D2GetResolution()) return D2PrintStatsPage();
-	
+
+    if (version_D2Client == V114d)
+    {
+      NB_RUNES_PER_PAGE = 20;
+    }
+
 	LPWSTR lpText;
-	bDontPrintBorder = true;
+	bDontPrintBorder = false;
 
 	//Init data for print image
 	sDrawImageInfo data;
@@ -193,11 +300,11 @@ void STDCALL printRunewordsPage()
 	DWORD x = D2GetMouseX();
 	DWORD y = D2GetMouseY();
 
-	if (isOnCloseBtn(x,y))			// print popup "close"
+  if (isOnCloseBtnRunewords(x, y))			// print popup "close"
 	{
 		D2PrintPopup(D2GetStringFromIndex(0x1030), getXCloseBtn()+getLCloseBtn()/2, getYCloseBtn()-getHCloseBtn(), WHITE, 1);
 	}
-	else if (isOnNextPageBtn(x,y))	// print popup "next page"
+  else if (isOnNextPageBtnRunewords(x, y))	// print popup "next page"
 	{
 		lpText = getLocalString(STR_NEXT_PAGE);
 		D2PrintPopup(lpText, getXNextPageBtn()+getLNextPageBtn()/2, getYNextPageBtn()-getHNextPageBtn(), WHITE, 1);
@@ -210,27 +317,29 @@ DWORD STDCALL mouseRunewordsPageLeftDown(sWinMessage* msg)
 {
 	if (!D2isLODGame() || !D2GetResolution()) return -1;
 
-	if (!isOnStatsPage(msg->x,msg->y)) return 1;
+  DWORD x = D2GetMouseX();
+  DWORD y = D2GetMouseY();
+  if (!isOnStatsPage(x, y)) return 1;
 
-	if (isOnCloseBtn(msg->x,msg->y))
+  if (isOnCloseBtnRunewords(x, y))
 	{
 		log_msg("push down left button close\n");
 		isDownBtn.close = 1;
 		D2PlaySound(4,0,0,0,0);
 	}
-	else if (isOnNextPageBtn(msg->x,msg->y))
+  else if (isOnNextPageBtnRunewords(x, y))
 	{
 		log_msg("push down left button next page\n");
 		isDownBtn.nextPage = 1;
 		D2PlaySound(4,0,0,0,0);
 	}
-	else if (isOnPrevRunesBtn(msg->x,msg->y))
+  else if (isOnPrevRunesBtn(x, y))
 	{
 		log_msg("push down left button prev page\n");
 		isDownBtn.prevRunes = 1;
 		D2PlaySound(4,0,0,0,0);
 	}
-	else if (isOnNextRunesBtn(msg->x,msg->y))
+  else if (isOnNextRunesBtn(x, y))
 	{
 		log_msg("push down left button next runes\n");
 		isDownBtn.nextRunes = 1;
@@ -246,15 +355,17 @@ DWORD STDCALL mouseRunewordsPageLeftUp(sWinMessage* msg)
 {
 	if (!D2isLODGame() || !D2GetResolution()) return -1;
 
-	if (!isOnStatsPage(msg->x,msg->y)) return 1;
+  DWORD x = D2GetMouseX();
+  DWORD y = D2GetMouseY();
+  if (!isOnStatsPage(x, y)) return 1;
 
-	if (isOnCloseBtn(msg->x,msg->y))
+  if (isOnCloseBtnRunewords(x, y))
 	{
 		log_msg("push up left button close\n");
 		if (isDownBtn.close)
 			D2TogglePage(2,1,0);
 	}
-	else if (isOnNextPageBtn(msg->x,msg->y))
+  else if (isOnNextPageBtnRunewords(x, y))
 	{
 		log_msg("push up left button next page\n");
 		if (isDownBtn.nextPage)
@@ -263,7 +374,7 @@ DWORD STDCALL mouseRunewordsPageLeftUp(sWinMessage* msg)
 			log_msg("next page press\n");
 		}
 	}
-	else if (isOnPrevRunesBtn(msg->x,msg->y))
+  else if (isOnPrevRunesBtn(x, y))
 	{
 		log_msg("push up left button prev runes\n");
 		if (isDownBtn.prevRunes)
@@ -271,7 +382,7 @@ DWORD STDCALL mouseRunewordsPageLeftUp(sWinMessage* msg)
 			if (curRunesPage) curRunesPage--;
 		}
 	}
-	else if (isOnNextRunesBtn(msg->x,msg->y))
+  else if (isOnNextRunesBtn(x, y))
 	{
 		log_msg("push up left button next runes\n");
 		if (isDownBtn.nextRunes)

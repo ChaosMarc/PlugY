@@ -2,6 +2,7 @@
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
     Add support 1.14d by haxifix.
+    Modified by Mark Mohr
 
 	Interface functions
 
@@ -139,13 +140,13 @@ FCT_ASM(caller_mouseCustomPageLeftDown_114)
     TEST EAX, EAX
     POP EAX
     JE end_mouseNewPageLDown
-    ;JG continue_mouseNewPageLDown
+    JG continue_mouseNewPageLDown
     LEA ECX, DWORD PTR DS : [EAX + 0x80]
     RETN
 continue_mouseNewPageLDown :
     POP EAX
     ADD EAX, 0x170
-    PUSH 0x4A7720
+    PUSH EDI
     JMP EAX
     RETN
 end_mouseNewPageLDown :
@@ -230,7 +231,7 @@ FCT_ASM(caller_mouseCustomPageLeftUp_114)
     CALL mouseCustomPageLeftUp
     TEST EAX, EAX
     JE end_mouseNewPageLUp
-    ;JG continue_mouseNewPageLUp
+    JG continue_mouseNewPageLUp
     MOV EAX, DWORD PTR DS : [ptWindowStartX]
     MOV EAX, DWORD PTR DS : [EAX]
     RETN
