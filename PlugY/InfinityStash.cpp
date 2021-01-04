@@ -92,7 +92,7 @@ Stash* addStash(Unit* ptChar, bool isShared, bool autoSetIndex, Stash* previous)
 	previous = getLastStash(previous ? previous : isShared ? PCPY->sharedStash : PCPY->selfStash);
 	if (previous)
 		isShared = previous->isShared;
-	
+
 	Stash* stash = newStash(isShared ? PCPY->nbSharedPages++ : PCPY->nbSelfPages++);
 	stash->isShared = isShared;
 	stash->previousStash = previous;
@@ -100,8 +100,11 @@ Stash* addStash(Unit* ptChar, bool isShared, bool autoSetIndex, Stash* previous)
 	if (previous)
 	{
 		previous->nextStash = stash;
-		stash->isIndex = ((stash->id + 1) % nbPagesPerIndex) == 0;
-		stash->isMainIndex = ((stash->id + 1) % nbPagesPerIndex2) == 0;
+		if (autoSetIndex)
+		{
+			stash->isIndex = ((stash->id + 1) % nbPagesPerIndex) == 0;
+			stash->isMainIndex = ((stash->id + 1) % nbPagesPerIndex2) == 0;
+		}
 	}
 	else if (isShared)
 	{
@@ -286,19 +289,21 @@ DWORD loadStash(Unit* ptChar, Stash* ptStash, BYTE data[], DWORD startSize, DWOR
 	return ret;
 }
 
-void autoSetIndex(Stash* fistStash)
+void autoSetIndex(Stash* firstStash)
 {
-	if (!fistStash)
+	if (!firstStash)
 		return;
-	Stash* stash = fistStash;
+	log_msg("autoSetIndex\n");
+	Stash* stash = firstStash;
 	while (stash)
 	{
 		if (stash->isIndex || stash->isMainIndex)
 			return;
 		stash = stash->nextStash;
 	}
-	stash = fistStash;
+	stash = firstStash;
 	stash->isIndex = 1;
+	stash->isMainIndex = 1;
 	stash = stash->nextStash;
 	while (stash)
 	{
@@ -326,11 +331,6 @@ DWORD loadStashList(Unit* ptChar, BYTE* data, DWORD maxSize, DWORD* curSize, boo
 		if (ret) return ret;
 		curStash++;
 	}
-	if (nbStash <2)
-	{
-		newStash = addStash(ptChar, isShared, false, newStash);
-		changeToSelectedStash(ptChar, newStash, 0, false);
-	}
 
 	if (!isShared)
 	{
@@ -353,6 +353,12 @@ DWORD loadStashList(Unit* ptChar, BYTE* data, DWORD maxSize, DWORD* curSize, boo
 			if (!PCPY->currentStash)
 				PCPY->currentStash = newStash;
 		}
+	}
+
+	if (nbStash == 1)
+	{
+		newStash = addStash(ptChar, isShared, true, newStash);
+		changeToSelectedStash(ptChar, newStash, 0, false);
 	}
 
 	return 0;
@@ -452,7 +458,7 @@ void setSelectedStashClient(DWORD stashId, DWORD stashFlags, DWORD flags, bool b
 	Unit* ptChar = D2GetClientPlayer();
 	Stash* newStash = getStash(ptChar, (stashFlags & 1) == 1, stashId);
 	if (!newStash) do
-		newStash = addStash(ptChar, (stashFlags & 1) == 1, true, newStash);
+		newStash = addStash(ptChar, (stashFlags & 1) == 1, false, newStash);
 	while (newStash->id < stashId);
 	newStash->flags = stashFlags;
 	changeToSelectedStash(ptChar, newStash, bOnlyItems, 1);
@@ -466,7 +472,7 @@ void selectStash(Unit* ptChar, Stash* newStash, bool forceUpdate)
 		return;
 	if (!forceUpdate && newStash == PCPY->currentStash)
 		return;
-	log_msg("selectStash ID:%d\tshared:%d\tonlyItems:%d\tclient:%d\n", newStash->id, newStash->isShared, 0, 0);
+	log_msg("selectStash ID:%d\tshared:%d\tforceUpdate:%d\n", newStash->id, newStash->isShared, forceUpdate);
 	changeToSelectedStash(ptChar, newStash, 0, 0);
 	updateSelectedStashClient(ptChar);
 }
@@ -522,7 +528,7 @@ void swapStash(Unit* ptChar, DWORD page, bool toggle)
 	{
 		log_msg("swap stash : %i\n", i);
 		if (swpStash->nextStash == NULL)
-			addStash(ptChar, swpStash->isShared, true, swpStash);
+			addStash(ptChar, swpStash->isShared, false, swpStash);
 		swpStash = swpStash->nextStash;
 	}
 	swapStash(ptChar, curStash, swpStash);

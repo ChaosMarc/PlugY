@@ -3,7 +3,7 @@ Unicode True
 
 !include "MUI2.nsh"
 
-!define VERSION "v14.00"
+!define VERSION "v14.01"
 !define D2FILES "."
 !define NAME "PlugY, The Survival Kit"
 !define MOD_DIR "Mod PlugY"

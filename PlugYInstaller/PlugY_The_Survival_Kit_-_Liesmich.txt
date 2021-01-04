@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  von Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 14.00                                    ;
+;                                     version 14.01                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -75,6 +75,8 @@ Jedes Feature kann via PlugY.ini an/ausgeschaltet werden (siehe "Kommentare aus 
 	/listcube: (Beta) Erstellt eine "cube.txt" Datei im Savegame-Verzeichnis mit allen Würfelrezepten.
 	/renamechar newname: (Beta) Speichert und benennt den Char um.
 
+v14.01 Änderungen :
+- Fix stash items lost on loading a character for the first time.
 
 v14.00 Änderungen :
 - Kompatibilität mit 1.14d (Vielen Dank an Haxifix)
@@ -697,7 +699,7 @@ Beispiele:
 Active autobackup save file just before the save.
 The backup will be store in a folder name "backup" in the save folder.
 - ActiveAutoBackup=0		{0:Disabled; 1:Enabled}
-- MaxBackupPerCharacter=5	{5: Number of backup to keep before delete; 0:No backup purge}
+- MaxBackupPerCharacter=20	{20: Number of backup to keep before delete; 0:No backup purge}
 
 
 [MAIN SCREEN]

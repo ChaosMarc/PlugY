@@ -64,7 +64,7 @@ Unit* FASTCALL updateItem(Game* ptGame, DWORD type, DWORD itemNum, Unit* ptChar)
 	{
 		Stash* ptStash = getStashFromItem(ptChar, ptItem);
 		if (!ptStash) return NULL;
-		selectStash(ptChar, ptStash);
+		selectStash(ptChar, ptStash, ptStash->id == 0);
 	}
 	return ptItem;
 }
@@ -75,7 +75,7 @@ void FASTCALL updateItem_111(Unit* ptItem, Unit* ptChar)
 	{
 		Stash* ptStash = getStashFromItem(ptChar, ptItem);
 		if (ptStash)
-			selectStash(ptChar, ptStash);
+			selectStash(ptChar, ptStash, ptStash->id == 0);
 	}
 }
 

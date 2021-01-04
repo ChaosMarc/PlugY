@@ -14,7 +14,7 @@
 #include "common.h"
 
 bool active_AutoBackup = false;
-int maxBackupPerCharacter = 5;
+int maxBackupPerCharacter = 20;
 
 /*backup
 Save SP :

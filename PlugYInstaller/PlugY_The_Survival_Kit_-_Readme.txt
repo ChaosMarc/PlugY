@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  by Yohann Nicolas                                   ;
 ;                                                                                      ;
-;                                     version 14.00                                    ;
+;                                     version 14.01                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -75,6 +75,8 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
 	/renamechar newname : (beta) Rename your character and save it.
 
+v14.01 changes :
+- Fix stash items lost on loading a character for the first time.
 
 v14.00 changes :
 - Add compatibility with LOD 1.14d. (Thanks to Haxifix)
@@ -674,7 +676,7 @@ Following are default values, between {} are some examples values with descripti
 Active autobackup save file just before the save.
 The backup will be store in a folder name "backup" in the save folder.
 - ActiveAutoBackup=0		{0:Disabled; 1:Enabled}
-- MaxBackupPerCharacter=5	{5: Number of backup to keep before delete; 0:No backup purge}
+- MaxBackupPerCharacter=20	{20: Number of backup to keep before delete; 0:No backup purge}
 
 
 [MAIN SCREEN]
@@ -917,6 +919,7 @@ Move Cain near Harrogath waypoint.
 	* Spanish: Acrerune
 	* Polish: Serdel
 	* Russian: L'Autour
-	* Chinese: Nagahaku
+	* Chinese (Traditional): Nagahaku
+	* Japanase : CaiMiao
 
 ;--------------------------------------------------------------------------------------;

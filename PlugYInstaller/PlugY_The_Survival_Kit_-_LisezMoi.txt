@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  par Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 14.00                                    ;
+;                                     version 14.01                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -75,6 +75,8 @@ Toutes ces fonctions peuvent être activé/désactivé via PlugY.ini (voir "COMM
 	/listcube : (beta) Crée un fichier "cube.txt" dans le répertoire de sauvegarde contenant toutes les formules du cube.
 	/renamechar newname : (beta) Renomme la personnage et le sauvegarde.
 
+Changements apportés par la v14.01 :
+- Corrige la perte des objets du coffre lors du chargement d'un personnage pour la première fois.
 
 Changements apportés par la v14.00:
 - Ajout de la compatibilité avec la version 1.13d de LOD. (merci à Haxifix)
@@ -603,7 +605,7 @@ Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs signifi
 ACtive le backup des fichiers de sauvegardes avant la sauvegarde.
 Les fichiers de backup sont sauvegardé dans un répertoire nommé "backup" dans le répertoire de sauvegarde.
 - ActiveAutoBackup=0		{0:Désactivé; 1:Activé}
-- MaxBackupPerCharacter=5	{5: Nombre de backup à conserver avant suppression; 0:Pas de purge des backups}
+- MaxBackupPerCharacter=20	{20: Nombre de backup à conserver avant suppression; 0:Pas de purge des backups}
 
 
 [MAIN SCREEN]
@@ -831,6 +833,7 @@ Déplace Deckar Cain à coté du portail d'Harrogath.
 	* Espagnol : Acrerune
 	* Polonais : Serdel
 	* Russe : L'Autour
-	* Chinois: Nagahaku
+	* Chinois (Traditionnel): Nagahaku
+	* Japanase : CaiMiao
 
 ;--------------------------------------------------------------------------------------;

@@ -500,7 +500,7 @@ void init_SavePath(INIFile* iniFile, INIFile* iniFixedFile, INIFile* iniDefaultF
 	active_AutoBackup = atoi(buffer) != 0;
 	log_msg("active_autoBackup\t\t= %u\n", active_AutoBackup);
 
-	GET_PRIVATE_PROFILE_STRING3(S_SAVEPATH, S_maxBackupPerCharacter, "5");
+	GET_PRIVATE_PROFILE_STRING3(S_SAVEPATH, S_maxBackupPerCharacter, "20");
 	maxBackupPerCharacter = atoi(buffer);
 	log_msg("maxBackupPerCharacter\t\t= %u\n", maxBackupPerCharacter);
 
