@@ -1,7 +1,7 @@
 /*================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
     This file implements some common and useful
     function related to some Diablo II mechanisms.
@@ -23,13 +23,14 @@ struct s_shifting {
 extern s_shifting shifting;
 
 //#ifdef MSVC
-#define FASTCALL __fastcall 
+#define FASTCALL __fastcall
 //#else
-//#define FASTCALL __msfastcall 
+//#define FASTCALL __msfastcall
 //#endif
 #define STDCALL		__stdcall
 #define FCT_ASM(N) __declspec(naked) void N() {__asm{
 #define RANDOM(V) ((int)(rand()/(RAND_MAX+1.0)*(V)))
+#define RANDOMF() ((double)rand() / (double)RAND_MAX)
 //#define RANDOM(V) (rand()%(V))
 
 //#define PY(C) (*(PYPlayerData**)((BYTE*)(ptChar)+shifting.ptPYPlayerData))
@@ -87,7 +88,10 @@ extern DataTables* SgptDataTables;
 
 extern TD2AddPlayerStat				V2AddPlayerStat;
 extern TD2GetGameByClientID			V2GetGameByClientID;
+extern TD2SpawnSuperUnique			V2SpawnSuperUnique;
 extern TD2SpawnMonster				V2SpawnMonster;
+extern TD2Game235C0					V2Game235C0;
+extern TD2ReadFile					V2ReadFile;
 //extern TD2SetColorPopup			V2SetColorPopup;
 extern WORD (*getDescStrPos)	(DWORD statID);
 extern void* (STDCALL *compileTxtFile)(DWORD unused, const char* filename, BINField* ptFields, DWORD* ptRecordCount, DWORD recordLength);
@@ -102,13 +106,14 @@ void __inline fillRect(DWORD x, DWORD y, DWORD Width, DWORD Height, DWORD color,
 #define WindowStartX (*ptWindowStartX)
 #define GameTypeMode (*ptGameTypeMode)
 #define ClientTable (*ptClientTable)
-
+//#define CurrentNPCNum (*ptCurrentNPCNum)
 #define IsLodGame (*ptIsLodGame)
 #define DifficultyLevel (*ptDifficultyLevel)
 #define MouseY (*ptMouseY)
 #define MouseX (*ptMouseX)
 #define ptClientChar (*ptptClientChar)
-//#define CurrentNPCNum (*ptCurrentNPCNum)
+#define InputCommandLen (*ptInputCommandLen)
+#define InputCommand (*ptInputCommand)
 
 void initD2functions();
 

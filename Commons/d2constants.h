@@ -1,15 +1,15 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Constants of D2
-  NOT TESTED IN 1.10 (from 1.09b)
+	Constants of D2
+	NOT TESTED IN 1.10 (from 1.09b)
 
 =================================================================*/
 
 #pragma once
 
 /*==================================================================================*/
-/*		
+/*
  *      Constants & Enumerations.
  */
 /*==================================================================================*/
@@ -18,29 +18,29 @@ enum D2TypeSize         { D2TS_UNITSIZE = 0x011C };
 enum D2DifficultyModes  { D2DM_NORMAL, D2DM_NIGHTMARE, D2DM_HELL };
 enum D2PlayerClass      { D2PC_AMAZON, D2PC_SORCERESS, D2PC_NECROMANCER, D2PC_PALADIN, D2PC_BARBARIAN, D2PC_DRUID, D2PC_ASSASSIN };
 
+// add the prefix "ÿc" before the number directly in the text.
 enum D2Color
 {
+	BLACK=6,
+//	BLACK_BIS=14,
+	DARK_GRAY=5,
+	GRAY=16,
+	LIGHT_GRAY=15,
+//	WHITE_BIS=13,
 	WHITE=0,
-	RED=1,
+	BRIGHT_WHITE=18,
+	GOLD=4,
+	DARK_YELLOW=7,
+	YELLOW=9,
+	ORANGE=8,
+	DARKEST_GREEN=10,
+	DARK_GREEN=12,
 	GREEN=2,
 	BLUE=3,
-	GOLD=4,
-	DARK_GRAY=5,
-//	INVISIBLE=6,
-	DARK_YELLOW=7,
-	ORANGE=8,
-	YELLOW=9,
-	DARKEST_GREEN=0xA,
-	PURPLE=0xB,
-	DARK_GREEN=0xC,
-//	WHITE_BIS=0xD,
-//	INVISIBLE2=0xE,
-	LIGHT_GRAY=0xF,
-	GRAY=0x10,
-//	VERY_WIERD=0x11,
-	BRIGHT_WHITE=0x12,
-	CRYSTAL_RED=0x13,
-//	WIERD_YELLOW=0x14
+	PURPLE=11,
+	RED=1,
+	CRYSTAL_RED=19,
+//	VERY_WIERD=17,
 };
 
 enum D2Lang
@@ -52,8 +52,8 @@ enum D2Lang
 	LNG_POR,// Portuguese
 	LNG_ITA,// Italian
 	LNG_JPN,// Japanese
-	LNG_KOR,// Korean 
-	LNG_SIN,// 
+	LNG_KOR,// Korean
+	LNG_SIN,//
 	LNG_CHI,// Chinese
 	LNG_POL,// Polish
 	LNG_RUS,// Russian
@@ -445,7 +445,7 @@ enum D2Mod
 	DEXTERITY,
 	VITALITY,
 	ENERGY,
-	MAXMANA, 
+	MAXMANA,
 	MAXMANA_PERCENT,
 	MAXHP,
 	MAXHP_PERCENT,
@@ -822,6 +822,30 @@ enum D2UnitType
 	UNIT_MISSILE,
 	UNIT_ITEM,
 	UNIT_ROOMTILE
+};
+
+enum D2UnitMode
+{
+	UNIT_MODE_DEATH = 0,
+	UNIT_MODE_NEUTRAL,
+	UNIT_MODE_WALK,
+	UNIT_MODE_RUN,
+	UNIT_MODE_GET_HIT,
+	UNIT_MODE_TOWN_NEUTRAL,
+	UNIT_MODE_TOWN_WALK,
+	UNIT_MODE_ATTACK1,
+	UNIT_MODE_ATTACK2,
+	UNIT_MODE_BLOCK,
+	UNIT_MODE_CAST,
+	UNIT_MODE_THROW,
+	UNIT_MODE_KICK,
+	UNIT_MODE_SKILL1,
+	UNIT_MODE_SKILL2,
+	UNIT_MODE_SKILL3,
+	UNIT_MODE_SKILL4,
+	UNIT_MODE_DEAD,
+	UNIT_MODE_SEQUENCE,
+	UNIT_MODE_KNOCK_BACK
 };
 
 enum D2BodyLoc

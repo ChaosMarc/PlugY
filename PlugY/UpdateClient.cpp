@@ -1,10 +1,10 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
 	Updating client.
- 
+
 =================================================================*/
 
 #include "updateClient.h"
@@ -44,10 +44,10 @@ void updateClient(Unit* ptChar, DWORD mFunc, char* msg)
 	packet.mFunc = (BYTE)mFunc;
 	packet.mSize = sizeof(DataPacket);
 	packet.mPlayerID = ptChar->nUnitId;
-	if (msg != NULL && strlen(msg) >= 20)
+	if (msg != NULL && strlen(msg) > 20)
 		return;
 	if (msg != NULL)
-		strcpy((char*)&packet.mItemID, msg);
+		strncpy((char*)&packet.mItemID, msg, 20);
 
 	ptNetClient = D2GetClient(ptChar, __FILE__, __LINE__);
 
@@ -60,21 +60,25 @@ DWORD FASTCALL handleClientUpdate(DataPacket* packet)
 	log_msg("[CLIENT] Received custom message: %d with param: %08X , %08X , %08X\n",packet->mFunc,packet->mParam1,packet->mParam2,packet->mParam3);
 	switch (packet->mFunc)
 	{
-	case UC_SELECT_STASH:	 setSelectedStashClient(packet->mParam1, packet->mParam2, packet->mParam3, (packet->mParam2 & 8) == 8); return 1;
-	case UC_SHARED_GOLD :	 updateSharedGold(packet->mParam1); return 1;
-	case UC_PAGE_NAME:		 renameCurrentStash(D2GetClientPlayer(), (char*)&packet->mItemID); return 1;
+	case UC_SELECT_STASH: setSelectedStashClient(packet->mParam1, packet->mParam2, packet->mParam3, (packet->mParam2 & 8) == 8); return 1;
+	case UC_SHARED_GOLD : updateSharedGold(packet->mParam1); return 1;
+	case UC_PAGE_NAME:
+		{
+			char pageName[21];
+			strncpy(pageName, (char*)&packet->mItemID, 20);
+			pageName[20] = NULL;
+			renameCurrentStash(D2GetClientPlayer(), pageName); return 1;
+		}
 	default : return 0;
 	}
 }
 
-FCT_ASM( caller_handleClientUpdate_114 )
-    LEA ECX, DWORD PTR SS : [ESP]
-    CALL handleClientUpdate
-    POP EDI
-    POP ESI
-    MOV ESP, EBP
-    POP EBP
-    RETN
+FCT_ASM ( caller_handleClientUpdate_114 )
+	LEA ECX,DWORD PTR SS:[ESP]
+	CALL handleClientUpdate
+	MOV ESP,EBP
+	POP EBP
+	RETN
 }}
 
 FCT_ASM ( caller_handleClientUpdate_111 )
@@ -99,18 +103,19 @@ void Install_UpdateClient()
 {
 	static int isInstalled = false;
 	if (isInstalled) return;
-	
+
 	log_msg("Patch D2Client for received Item packet. (UpdateClient)\n");
 
 	// execute if it's our packet else continue
 	mem_seek R8(D2Client, 14236, 14226, 145B6, 9C6B6, BFE86, 66E06, AE896, 84D96, 5EC99);
-	MEMT_REF4( version_D2Client == V114d ? 0x000000CE : version_D2Client >= V111  ? 0x000000CF : 0x000000D6, version_D2Client == V114d ? caller_handleClientUpdate_114 : version_D2Client >= V111 ? caller_handleClientUpdate_111 : caller_handleClientUpdate);
+	MEMT_REF4( version_D2Client >= V114d ? 0x000000CE : version_D2Client >= V111  ? 0x000000CF : 0x000000D6, version_D2Client >= V114d ? caller_handleClientUpdate_114 : version_D2Client >= V111 ? caller_handleClientUpdate_111 : caller_handleClientUpdate);
 	//6FAB45B4  |. 0F87 D6000000  JA D2Client.6FAB4690
 	//6FB4C6B4  |. 0F87 CF000000  JA D2Client.6FB4C789
 	//6FB6FE84  |. 0F87 CF000000  JA D2Client.6FB6FF59
 	//6FB16E04  |. 0F87 CF000000  JA D2Client.6FB16ED9
 	//6FB5E894  |. 0F87 CF000000  JA D2Client.6FB5E969
 	//6FB34D94  |. 0F87 CF000000  JA D2Client.6FB34E69
+	//0045EC97  |. 0F87 CE000000  JA Game.0045ED6B
 
 	log_msg("\n");
 

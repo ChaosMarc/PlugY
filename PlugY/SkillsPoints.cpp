@@ -10,7 +10,7 @@
 #include "common.h"
 
 bool active_SkillsPoints=0;
-bool unassignSkillsPointsOneByOne=0;
+bool unassignSkillsPointsOneForOne=0;
 
 int (*getskPoint)(SkillData* ptSkill);
 int (*getCharClass)(SkillData* ptSkill);
@@ -40,9 +40,9 @@ void UnassignAllSkillsPoints(Unit* ptChar)
 	DWORD skillID, keepBonus, maxSkillLevel;
 	int skpoints;
 	DWORD nbPoints = 0;
+
 	void* ptClient = D2GetClient(ptChar,__FILE__,__LINE__);
 	SkillData* ptSkill = PCSkills->ptFirstSkill;
-    log_msg("\n\nUNASSIGN SKILL POINTS\n\n");
 
 	while (ptSkill)
 	{
@@ -53,7 +53,7 @@ void UnassignAllSkillsPoints(Unit* ptChar)
 			keepBonus = !getSingleSkillValue(ptChar, STATS_ITEM_SINGLESKILL, skillID);
 			maxSkillLevel = D2GetSkillLevel(ptChar, ptSkill, 0);
 			skpoints = getskPoint(ptSkill);
-			if (skpoints == -1 || unassignSkillsPointsOneByOne)
+			if (skpoints == -1 || unassignSkillsPointsOneForOne)
 			{
 				D2SetSkillBaseLevel(ptChar, skillID, 0, keepBonus, __FILE__, __LINE__);
 				nbPoints += maxSkillLevel;

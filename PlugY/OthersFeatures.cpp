@@ -9,7 +9,6 @@
 
 bool active_othersFeatures = false;
 
-
 /*
 	// Remove protect on the save file .d2s
 	mem_seek( offset_D2Game + 0x77080);//6FC8DD5E-6FAA0000
@@ -22,7 +21,7 @@ void Install_ChangeResolution()
 {
 	static int isInstalled = false;
 	if (isInstalled) return;
-	
+
 	log_msg("Patch D2gfx for . (ChangeResolution)\n");
 
 	// execute if it's our packet else continue
@@ -98,7 +97,7 @@ void Install_Test2()
 {
 	static int isInstalled = false;
 	if (isInstalled) return;
-	
+
 	log_msg("Patch D2Game. (Test)\n");
 
 	// Test
@@ -111,8 +110,6 @@ void Install_Test2()
 	isInstalled = true;
 }*/
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
-
 void Install_OthersFeatures()
 {
 	static int isInstalled = false;
@@ -120,6 +117,7 @@ void Install_OthersFeatures()
 
 	log_msg("Patch. (OthersFeatures)\n");
 
+//	Install_RemoveExperienceDiminushingReturn();
 //	Install_ChangeResolution();
 //	Install_Test();
 

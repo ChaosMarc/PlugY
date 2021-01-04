@@ -9,11 +9,10 @@
 #include "parameters.h"
 #include "modifMemory.h"
 
-const char* MSG_ERROR_READ_MEMORY = "Error : Read access missing to patch memory at %08X.\nPlease install a clean version of Lord of Destruction\n\n"
-				"You can avoid this error message by setting ActiveCkeckMemory=0 in PlugY.ini\n(WARNING: Be careful when you use it, it shouldn't be used by common user)";
-const char* MSG_CRITICAL_WRITE_MEMORY = "Error.\nWrite access missing to patch memory at %08X.\n\nPlease install a clean version of Lord of Destruction\n";
-const char* ERROR_TESTING1 = "Error : BYTE %02X wanted but %02X found to change memory at %08X\n\n";
-const char* ERROR_TESTING4 = "Error : DWORD %08X wanted but %08X found to change memory at %08X\n\n";
+const char* MSG_ERROR_READ_MEMORY = "Error : Read access missing to patch memory at %08X.\n\nAn option in PlugY.ini is incompatible with another mod.";
+const char* MSG_CRITICAL_WRITE_MEMORY = "Error.\nWrite access missing to patch memory at %08X.\n\nAn option in PlugY.ini is incompatible with another mod.";
+const char* ERROR_TESTING1 = "Error : BYTE %02X wanted but %02X found to change memory at %08X.\n\nAn option in PlugY.ini is incompatible with another mod.";
+const char* ERROR_TESTING4 = "Error : DWORD %08X wanted but %08X found to change memory at %08X.\n\nAn option in PlugY.ini is incompatible with another mod.";
 
 
 void* currentMemoryPos = 0;
@@ -102,11 +101,13 @@ bool testIfAlreadySet(DWORD current, DWORD wanted)
 void testMemory4(DWORD old, DWORD found)
 {
 	if (old != found)
+	{
 		if (active_CheckMemory)
 		{
 			log_box(ERROR_TESTING4, old, found, currentMemoryPos);
 			exit(1);
 		} else log_msg(ERROR_TESTING4, old, found, currentMemoryPos);
+	}
 }
 
 void memt_dword(DWORD old, DWORD val)

@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Data added to D2 base-stucture
+	Data added to D2 base-stucture
 
 =================================================================*/
 #pragma once

@@ -2,9 +2,6 @@
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
 
-  this file implements some common and useful
-  function related to some Diablo II mechanisms.
-
 /*============================================*/
 #pragma once
 

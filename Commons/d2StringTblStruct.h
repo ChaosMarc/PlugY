@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  @brief Diablo II Tbl Structures definitions.
+	@brief Diablo II Tbl Structures definitions.
 
 =================================================================*/
 

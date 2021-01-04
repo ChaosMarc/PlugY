@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Error Logger implementation.
+	Error Logger implementation.
 
 =================================================================*/
 
@@ -13,29 +13,28 @@
 #include <string.h>			// strlen() strcat()
 #include <direct.h>			// _getcwd()
 
-DWORD active_logFile = 1;
+int active_logFile = 1;
 
 static char log_file[MAX_PATH] = "";
 static bool log_init = false;
-
+static FILE* fLogFile = NULL;
 
 void log_initfile()
 {
 	if (log_init) return;
-	
+
 	_getcwd( log_file, MAX_PATH );
 	if( log_file[strlen(log_file)] != '\\')
 		strcat(log_file, "\\");
 	strcat(log_file, "PlugY.log");
-	
-	FILE* lLog = fopen( log_file, "w" );
-	
-	if( lLog != NULL )
-    {
-	    fclose(lLog);
-	    log_init = true;
-	}
-	
+
+	fLogFile = fopen( log_file, "w" );
+
+	if( fLogFile == NULL )
+		return;
+
+	log_init = true;
+
 	log_msg("<----------------------------------------------->\n"
 			"\n"
 			"\t\tA Plugin by Yohann\n"
@@ -44,6 +43,15 @@ void log_initfile()
 			"\n"
 			"<---------- Starting Diablo II Plugin ---------->\n\n\n"
 			,PLUGY_VERSION);
+}
+
+void log_close()
+{
+	if (fLogFile)
+	{
+		fclose(fLogFile);
+		fLogFile = NULL;
+	}
 }
 
 void log_box( const char* pFormat, ... )
@@ -61,7 +69,8 @@ void log_box( const char* pFormat, ... )
 
 void log_msg( const char* pFormat, ... )
 {
-	if (!active_logFile) return;
+	if (!active_logFile)
+		return;
 
 	if( !log_init )
 		log_initfile();
@@ -71,13 +80,14 @@ void log_msg( const char* pFormat, ... )
 		va_list lArgs;
 		va_start( lArgs, pFormat );
 
-		FILE *lDebug = fopen( log_file, "a" );
+		if ( fLogFile == NULL )
+			fLogFile = fopen( log_file, "a" );
 
-		if( lDebug != NULL )
+		if( fLogFile != NULL )
 		{
-			vfprintf( lDebug, pFormat, lArgs );
-			fclose( lDebug );
-	    }
+			vfprintf( fLogFile, pFormat, lArgs );
+			fflush(fLogFile);
+		}
 		else
 			log_init = false;
 

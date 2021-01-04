@@ -39,7 +39,7 @@ BYTE loadDll[] = {
 	0x74,0x04,						//JE SHORT d2gfx.6FA7BDC1
 	0x6A,0x00,						//PUSH 0
 	0xEB,0x13,						//JMP SHORT d2gfx.6FA7BDC1
-	0x68,0x10,0x27,0x00,0x00,		//PUSH 2710	                                     ;Init Ordinal(10000)
+	0x68,0x10,0x27,0x00,0x00,		//PUSH 2710                                      ;Init Ordinal(10000)
 	0xFF,0x74,0x24,0x04,			//PUSH DWORD PTR SS:[ESP+4]
 	0xFF,0x15,0x3C,0xC0,0xA7,0x6F,	//CALL DWORD PTR DS:[<&KERNEL32.GetProcAddress>]    ; kernel32.GetProcAddress
 	0x85,0xC0,						//TEST EAX,EAX
@@ -67,7 +67,7 @@ BYTE freeDll[] = {
 	0xFF,0x15,0x3C,0xC0,0xA7,0x6F,	//CALL DWORD PTR DS:[<&KERNEL32.GetProcAdd>; kernel32.GetProcAddress
 	0x85,0xC0,						//TEST EAX,EAX
 	0x75,0x13,						//JNZ SHORT d2gfx.6FA7BDEF
-	0x68,0x11,0x27,0x00,0x00,		//PUSH 2711	                                     ;Release Ordinal(10001)
+	0x68,0x11,0x27,0x00,0x00,		//PUSH 2711                                      ;Release Ordinal(10001)
 	0xFF,0x74,0x24,0x04,			//PUSH DWORD PTR SS:[ESP+4]
 	0xFF,0x15,0x3C,0xC0,0xA7,0x6F,	//CALL DWORD PTR DS:[<&KERNEL32.GetProcAdd>; kernel32.GetProcAddress
 	0x85,0xC0,						//TEST EAX,EAX
@@ -265,7 +265,7 @@ int main(int argc, char * argv[])
 	{
 		msgBox(boxName, MB_OK | MB_ICONEXCLAMATION,
 			"Current version of LoD (%s) isn't compatible with PlugY.\n\n"
-			"Please, install a patch between 1.09 and 1.13d or 1.14.",
+			"Please, install a patch between 1.09 and 1.13d or 1.14d.",
 			GetVersionString(version));
 		exit(0);
 	}

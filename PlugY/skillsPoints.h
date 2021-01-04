@@ -9,7 +9,7 @@
 #include "common.h"
 
 extern bool active_SkillsPoints;
-extern bool unassignSkillsPointsOneByOne;
+extern bool unassignSkillsPointsOneForOne;
 extern int posXUnassignSkillBtn, posYUnassignSkillBtn;
 
 void UnassignAllSkillsPoints(Unit* ptChar);

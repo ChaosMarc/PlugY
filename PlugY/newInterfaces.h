@@ -12,6 +12,7 @@
 #define isOnStatsPage(x,y)		((x<400) && (y<553))
 
 extern DWORD bDontPrintBorder;
+extern int extraHiddenPage;
 
 void GoNextStatPage();
 void GoPreviousStatPage();

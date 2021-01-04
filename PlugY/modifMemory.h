@@ -2,7 +2,7 @@
 	File created by Yohann NICOLAS.
 
 	Modification of code in memory functions.
- 
+
 /*============================================*/
 #pragma once
 
@@ -20,7 +20,7 @@ void memt_dword(DWORD old, DWORD val);
 void memt_ref4(DWORD old, DWORD ref);
 
 //CALL <JMP.&D2gfx.#10047>
-#define MEMJ_REF4(O, R) memj_ref4((DWORD)(O), (DWORD)(R))
+#define MEMJ_REF4(O, R) if (version_Game < V114a) memj_ref4((DWORD)(O), (DWORD)(R)); else memc_ref4((DWORD)(O), (DWORD)(R))
 void memj_ref4(DWORD old, DWORD ref);
 
 //CALL D2Common.6FD5F500
@@ -30,7 +30,5 @@ void memc_ref4(DWORD old, DWORD ref);
 //CALL DWORD PTR DS:[<&USER32.GetKeyState>]
 #define MEMD_REF4(O, R) memd_ref4((DWORD)(O), (DWORD)(R))
 void memd_ref4(DWORD old, DWORD ref);
-
-void patchMemory4(DWORD value);
 
 /*================================= END OF FILE =================================*/

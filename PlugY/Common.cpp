@@ -2,7 +2,7 @@
 	File created by Yohann NICOLAS.
 
 	Common functions.
- 
+
 =================================================================*/
 
 #include "common.h"

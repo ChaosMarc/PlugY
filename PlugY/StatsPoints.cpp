@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
 	Unassign Stats Point for futher re-assignment.
 
@@ -10,6 +10,7 @@
 #include "plugYFiles.h"			// Install_PlugYImagesFiles()
 #include "interface_Stats.h"	// Install_InterfaceStats()
 #include "updateServer.h"
+#include "extraOptions.h"
 #include "common.h"
 #include <stdio.h>
 
@@ -41,7 +42,7 @@ void UnassignDex(Unit* ptChar, int nb)
 
 	int currentDex, removePtsNb;
 	CharStatsBIN* charStats = D2GetCharStatsBIN(ptChar->nPlayerClass);
-	
+
 	currentDex = D2GetPlayerBaseStat( ptChar, STATS_DEXTERITY, 0 );
 	if (currentDex <= charStats->baseDEX) return;
 	removePtsNb = currentDex - charStats->baseDEX >= nb ? nb : currentDex - charStats->baseDEX;
@@ -58,14 +59,14 @@ void UnassignVit(Unit* ptChar, int nb)
 
 	int currentVit, removePtsNb, removeVitNb, removeStaNb;
 	CharStatsBIN* charStats = D2GetCharStatsBIN(ptChar->nPlayerClass);
-	
+
 	currentVit = D2GetPlayerBaseStat( ptChar, STATS_VITALITY, 0 );
 	if (currentVit <= charStats->baseVIT) return;
 	removePtsNb = currentVit - charStats->baseVIT >= nb ? nb : currentVit - charStats->baseVIT;
 	if (currentVit - removePtsNb < 1) removePtsNb = currentVit - 1;
 	removeVitNb = removePtsNb * (charStats->lifePerVitality << 6);
 	removeStaNb = removePtsNb * (charStats->staminaPerVitality << 6);
-	
+
 	log_msg("Start Unassign Vitality (cur %d, base %d, rem %d)\n",currentVit,charStats->baseVIT,removePtsNb);
 	D2AddPlayerStat( ptChar, STATS_VITALITY,	-removePtsNb ,0 );
 	D2AddPlayerStat( ptChar, STATS_MAXHP,		-removeVitNb ,0 );
@@ -79,13 +80,13 @@ void UnassignEne(Unit* ptChar, int nb)
 
 	int currentEne, removePtsNb, removeManNb;
 	CharStatsBIN* charStats = D2GetCharStatsBIN(ptChar->nPlayerClass);
-	
+
 	currentEne = D2GetPlayerBaseStat( ptChar, STATS_ENERGY, 0);
 	if (currentEne <= charStats->baseENE) return;
 	removePtsNb = currentEne - charStats->baseENE >= nb ? nb : currentEne - charStats->baseENE;
 	if (currentEne - removePtsNb < 1) removePtsNb = currentEne - 1;
 	removeManNb = removePtsNb * (charStats->manaPerMagic << 6);
-	
+
 	log_msg("Start Unassign Energy (cur %d, base %d, rem %d)\n",currentEne,charStats->baseENE,removePtsNb);
 	D2AddPlayerStat( ptChar, STATS_ENERGY,		-removePtsNb ,0 );
 	D2AddPlayerStat( ptChar, STATS_MAXMANA,		-removeManNb ,0 );
@@ -163,9 +164,12 @@ void STDCALL printDisabledStatsBtn(WORD statID, sDrawImageInfo* data, DWORD x, D
 			_snwprintf(text, sizeof(text) - 1, getLocalString(STR_STATS_UNASSIGN_WITH_LIMIT), limitValueToShiftClick);
 		else
 			_snwprintf(text, sizeof(text) - 1, getLocalString(STR_STATS_UNASSIGN_WITHOUT_LIMIT));
-		wcscat(text,L"\n");
-		int len = wcslen(text);
-		_snwprintf(text + len, sizeof(text) - len, getLocalString(STR_STATS_BASE_MIN), statValue, minValue);
+		if (active_DisplayBaseStatsValue)
+		{
+			wcscat(text,L"\n");
+			int len = wcslen(text);
+			_snwprintf(text + len, sizeof(text) - len, getLocalString(STR_STATS_BASE_MIN), statValue, minValue);
+		}
 		D2SetFont(1);
 		D2PrintPopup(text, x+18, y-32, WHITE, 1);
 	}
@@ -250,12 +254,12 @@ END_UNASSGNSTATS:
 	RETN
 }}
 
-FCT_ASM( caller_setValue_114 )
-    MOV CL, 0x3A
-    OR DX, WORD PTR DS : [ESI]
-    ADD DL, currentMsgID
-    MOV CH, DL
-    RETN
+FCT_ASM ( caller_setValue_114 )
+	MOV CL,0x3A
+	OR DX,WORD PTR DS:[ESI]
+	ADD DL, currentMsgID
+	MOV CH, DL
+	RETN
 }}
 
 FCT_ASM ( caller_setValue_111 )
@@ -297,18 +301,18 @@ DWORD STDCALL pushDown (DWORD num)
 }
 
 FCT_ASM( caller_pushDown_114 )
-    PUSH EDX
-    PUSH DWORD PTR SS : [EBP + 0x8]
-    CALL pushDown
-    POP EDX
-    TEST EAX, EAX
-    JNZ end_pushDown
-    SUB DWORD PTR SS : [ESP], 0x22
-    RETN
+	PUSH EDX
+	PUSH DWORD PTR SS:[EBP+0x8]
+	CALL pushDown
+	POP EDX
+	TEST EAX, EAX
+	JNZ end_pushDown
+	SUB DWORD PTR SS:[ESP],0x22
+	RETN
 end_pushDown :
-    MOV EAX, DWORD PTR SS : [EBP + 0x8]
-    LEA ECX, DWORD PTR DS : [EAX * 8]
-    RETN
+	MOV EAX, DWORD PTR SS:[EBP+8]
+	LEA ECX, DWORD PTR DS:[EAX*8]
+	RETN
 }}
 
 FCT_ASM ( caller_pushDown_111 )
@@ -356,56 +360,58 @@ void Install_StatsPoints()
 	memt_byte( 0x8B, 0xEB );	// JMP SHORT D2Client.6FAD0088
 	memt_byte( version_D2Client == V114d ? 0x4D : 0x4C, V8(D2Client, 12, 12, 13, 13, 13, 13, 13, 13, 12) );
 	memt_byte( version_D2Client == V114d ? 0xF8 : 0x24, 0x90 );	// NOP
-	if (version_D2Client < V114d) memt_byte( V8(D2Client, 20, 20, 14, 1C, 1C, 1C, 1C, 1C, 1C), 0x90 );			// NOP (V109d:0x20 , V110:0x14
+	if (version_D2Client < V114a) memt_byte( V8(D2Client, 20, 20, 14, 1C, 1C, 1C, 1C, 1C, 53), 0x90 );			// NOP (V109d:0x20 , V110:0x14
 	//6FAD0073     8B4C24 14      MOV ECX,DWORD PTR SS:[ESP+14]
 	//6FB32BBA   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB3963A   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB1B59A   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB6D1B5  |> 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
 	//6FB6F955   > 8B4C24 1C      MOV ECX,DWORD PTR SS:[ESP+1C]
+	//004A7FFB   > 8B4D F8        MOV ECX,DWORD PTR SS:[EBP-8]
+	//004A7FFE   . 53             PUSH EBX                                 ; /Arg3
 
 	//print our buttons
 	mem_seek R8(D2Client, 29B9D, 29B8D, 300FD, 82C54, 896D4, 6B637, BD23E, BF9DE, A808C);
-    if (version_D2Client == V114d) {
-        MEMT_REF4(0x0004E3F0, caller_printUnassignStatsBtn);
-    } else {
-        MEMJ_REF4(D2PrintImage, caller_printUnassignStatsBtn);
-    }
+	MEMJ_REF4( D2PrintImage, caller_printUnassignStatsBtn);
 	//6FB32C53   . E8 82A3F8FF    CALL <JMP.&D2gfx.#10047>
 	//6FB396D3   . E8 D238F8FF    CALL <JMP.&D2gfx.#10044>
 	//6FB1B636   . E8 431AFAFF    CALL <JMP.&D2gfx.#10024>
 	//6FB6D23D   . E8 54FEF4FF    CALL <JMP.&D2gfx.#10041>
 	//6FB6F9DD   . E8 ECD5F4FF    CALL <JMP.&D2gfx.#10042>
+	//004A808B   . E8 F0E30400    CALL Game.004F6480                       ; \Game.004F6480
 
 	// Always manage push down.
-    mem_seek R8(D2Client, 2AA7B, 2AA6B, 3134D, 827D9, 89259, 6B1B9, BCDD9, BF579, A77E4);
+	mem_seek R8(D2Client, 2AA7B, 2AA6B, 3134D, 827D9, 89259, 6B1B9, BCDD9, BF579, A77E4);
 	memt_byte( 0x74, 0x90 );	// NOP
-    memt_byte(version_D2Client == V114d ? 0x62 : 0x4E, 0x90);	// NOP
-
+	memt_byte( version_D2Client == V114d ? 0x62 : 0x4E, 0x90 );	// NOP
 	//6FAD134D     74 4E          JE SHORT D2Client.6FAD139D
 	//6FB327D9   . 74 4E          JE SHORT D2Client.6FB32829
 	//6FB39259   . 74 4E          JE SHORT D2Client.6FB392A9
 	//6FB1B1B9     74 4E          JE SHORT D2Client.6FB1B209
 	//6FB6CDD9   . 74 4E          JE SHORT D2Client.6FB6CE29
 	//6FB6F579   . 74 4E          JE SHORT D2Client.6FB6F5C9
+	//004A77E4   . 74 62          JE SHORT Game.004A7848
 
-	if ( version_D2Client >= V111 )
+	if ( version_D2Client >= V114d )
 	{
 		// On Push down.
 		mem_seek R8(D2Client, 2AAE6, 2AAD6, 313B8, 82844, 892C4, 6B224, BCE44, BF5E4, A7863);
-        if (version_D2Client == V114d) {
-            memt_byte(0x8B, 0xE8);
-            MEMT_REF4(0x0C8D0845, caller_pushDown_114);
-            memt_byte(0xC5, 0x90);
-            memt_dword(0x00000000, 0x90909090);
-        } else {
-            memt_byte(0x6B, 0xE8);
-            MEMT_REF4(0x01BF0ED2, caller_pushDown_111);
-            memt_byte(0x00, 0x6B);	// IMUL EDX,EDX,0E
-            memt_byte(0x00, 0xD2);
-            memt_byte(0x00, 0x0E);
-        }
-
+		memt_byte(0x8B, 0xE8);
+		MEMT_REF4(0x0C8D0845, caller_pushDown_114);
+		memt_byte(0xC5, 0x90);
+		memt_dword(0x00000000, 0x90909090);
+		//004A7863   > 8B45 08        MOV EAX,DWORD PTR SS:[EBP+8]
+		//004A7866   . 8D0CC5 0000000>LEA ECX,DWORD PTR DS:[EAX*8]
+	}
+	else if ( version_D2Client >= V111 )
+	{
+		// On Push down.
+		mem_seek R8(D2Client, 2AAE6, 2AAD6, 313B8, 82844, 892C4, 6B224, BCE44, BF5E4, A7863);
+		memt_byte( 0x6B, 0xE8 );
+		MEMT_REF4( 0x01BF0ED2, caller_pushDown_111);
+		memt_byte( 0x00, 0x6B );	// IMUL EDX,EDX,0E
+		memt_byte( 0x00, 0xD2 );
+		memt_byte( 0x00, 0x0E );
 		//6FB32844   > 6BD2 0E        IMUL EDX,EDX,0E
 		//6FB32847   . BF 01000000    MOV EDI,1
 		//6FB392C4   > 6BD2 0E        IMUL EDX,EDX,0E
@@ -427,21 +433,21 @@ void Install_StatsPoints()
 		//6FAD13B8   8D04D5 00000000  LEA EAX,DWORD PTR DS:[EDX*8]
 	}
 
+
 	if ( version_D2Client >= V110 )
 	{
 		// Always manage push up.
 		mem_seek R8(D2Client, 0000, 0000, 3152E, 83869, 8A2E9, 6C249, BDE49, C05E9, A7976);
 		memt_byte( version_D2Client == V114d ? 0x0F : 0x74, 0x90 );	// NOP
-		memt_byte(version_D2Client == V114d ? 0x84 : version_D2Client >= V111 ? 0x65 : 0x68, 0x90 );	// NOP
-        if (version_D2Client == V114d) {
-            memt_dword(0x000000BB, 0x90909090);
-        }
+		memt_byte( version_D2Client == V114d ? 0x84 : version_D2Client >= V111 ? 0x65 : 0x68, 0x90 );	// NOP
+		if (version_D2Client == V114d) memt_dword(0x000000BB, 0x90909090);
 		//6FAD152E     74 68          JE SHORT D2Client.6FAD1598
 		//6FB33869   . 74 65          JE SHORT D2Client.6FB338D0
 		//6FB3A2E9   . 74 65          JE SHORT D2Client.6FB3A350
 		//6FB1C249     74 65          JE SHORT D2Client.6FB1C2B0
 		//6FB6DE49   . 74 65          JE SHORT D2Client.6FB6DEB0
 		//6FB705E9   . 74 65          JE SHORT D2Client.6FB70650
+		//004A7976  |. 0F84 BB000000  JE Game.004A7A37
 
 		// Unassign stats point when ctrl is push.
 		mem_seek R8(D2Client, 0000, 0000, 315D3, 8391B, 8A39B, 6C2FB, BDEFB, C069B, A79F2);
@@ -459,6 +465,8 @@ void Install_StatsPoints()
 		//6FB6DEFE   . 7C 07          JL SHORT D2Client.6FB6DF07
 		//6FB7069B   . 66:85C0        TEST AX,AX
 		//6FB7069E   . 7C 07          JL SHORT D2Client.6FB706A7
+		//004A79F2  |. 66:85C0        TEST AX,AX
+		//004A79F5  |. 7C 07          JL SHORT Game.004A79FE
 	} else {
 		// Always manage push up.
 		mem_seek R8(D2Client, 2AC55, 2AC45, 0000, 0000, 0000, 0000, 0000, 0000, 0000);
@@ -478,16 +486,14 @@ void Install_StatsPoints()
 	mem_seek R8(D2Client, 2AD02, 2ACF2, 31611, 8395E, 8A3DE, 6C33E, BDF3E, C06DE, A7A29);
 	if ( version_D2Client >= V111 ) {
 		memt_byte( version_D2Client == V114d ? 0xB1 : 0x66, 0xE8 );	// CALL
-        if (version_D2Client == V114d) {
-            MEMT_REF4(0x160B663A, caller_setValue_114);
-        } else {
-            MEMT_REF4(0x15244C89, caller_setValue_111);
-        }
+		MEMT_REF4( version_D2Client == V114d ? 0x160B663A : 0x15244C89, version_D2Client == V114d ? caller_setValue_114 : caller_setValue_111);
 		//6FB3395E   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX
 		//6FB3A3DE   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX
 		//6FB1C33E   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX              ; |
 		//6FB6DF3E   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX              ; |
 		//6FB706DE   . 66:894C24 15   MOV WORD PTR SS:[ESP+15],CX              ; |
+		//004A7A29  |. B1 3A          |MOV CL,3A
+		//004A7A2B  |. 66:0B16        |OR DX,WORD PTR DS:[ESI]
 	} else {
 		MEMC_REF4( D2SendToServer3, caller_setValue);
 		//6FAD1610   . E8 7BC3FDFF    CALL D2Client.6FAAD990
@@ -534,6 +540,7 @@ void Install_StatsLimitShiftClick()
 	//6FB1C2F5   . FF15 10F1B76F  CALL DWORD PTR DS:[<&USER32.GetKeyState>>; \GetKeyState
 	//6FB6DEF5   . FF15 04F1B76F  CALL DWORD PTR DS:[<&USER32.GetKeyState>>; \GetKeyState
 	//6FB70695   . FF15 2001B86F  CALL DWORD PTR DS:[<&USER32.GetKeyState>>; \GetKeyState
+	//004A79EC  |. FF15 5CC46C00  CALL DWORD PTR DS:[<&USER32.GetKeyState>>; \GetKeyState
 
 	log_msg("\n");
 

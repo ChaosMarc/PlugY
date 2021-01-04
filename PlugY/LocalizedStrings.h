@@ -1,9 +1,9 @@
 /*==============================================
-File created by Yohann NICOLAS.
-Add support 1.13d by L'Autour.
+	File created by Yohann NICOLAS.
+	Add support 1.13d by L'Autour.
 
-this file implements some common and useful
-function related to some Diablo II mechanisms.
+	this file implements some common and useful
+	function related to some Diablo II mechanisms.
 
 /*============================================*/
 #pragma once
@@ -26,6 +26,7 @@ enum eStringList
 	STR_STASH_NEXT_PAGE,
 	STR_TOGGLE_TO_PERSONAL,
 	STR_TOGGLE_TO_SHARED,
+	STR_TOGGLE_MULTI_DISABLED,
 	STR_STASH_PREVIOUS_INDEX,
 	STR_STASH_NEXT_INDEX,
 	STR_PUT_GOLD,
@@ -37,6 +38,7 @@ enum eStringList
 	STR_PREVIOUS_PAGE,
 	STR_NEXT_PAGE,
 	STR_ITEM_LEVEL,
+	STR_PAGE_TYPE_CHANGE,
 	//
 	STR_COW_PORTAL,
 	STR_PANDEMONIUM_PORTAL,
@@ -74,6 +76,26 @@ enum eStringList
 	STR_ONLY_N_H,
 	STR_ONLY_HELL,
 	STR_ONLY_CLASS,
+
+	STR_MERCENARIES,
+	STR_MERC_ACT_1,
+	STR_MERC_ACT_2,
+	STR_MERC_ACT_3,
+	STR_MERC_ACT_5,
+	STR_BREAKPOINT,
+	STR_BREAKPOINTS,
+	STR_BLOCK_FRAMES,
+	STR_CASTING_FRAMES,
+	STR_HIT_RECOVERY_FRAMES,
+	STR_1H_SWINGING_WEAPON,
+	STR_OTHER_WEAPONS,
+	STR_HUMAN_FORM,
+	STR_BEAR_FORM,
+	STR_WOLF_FORM,
+	STR_VAMPIRE_FORM,
+	STR_SPEARS_AND_STAVES,
+	STR_LIGHTNING_CHAIN_LIGHTNING,
+	STR_OTHER_SPELLS
 };
 
 /*================================= END OF FILE =================================*/

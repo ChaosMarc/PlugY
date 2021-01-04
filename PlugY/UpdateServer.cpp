@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
 	Updating server.
 
@@ -14,8 +14,16 @@
 #include "commands.h"
 #include "common.h"
 
+
+void updateServer(WORD p)
+{
+	if (!onRealm)
+		D2SendToServer3(0x3A, p);
+}
+
+
 int renameIndex = 0;
-char renameString[16];
+char renameString[21];
 DWORD PageSwap;
 
 int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
@@ -62,25 +70,27 @@ int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
 		case US_SWAP0:					swapStash(ptChar, PageSwap | arg, false); PageSwap = 0; return 1;
 		case US_SWAP0_TOGGLE :			swapStash(ptChar, PageSwap | arg, true); PageSwap = 0; return 1;
 		case US_RENAME :
-				if (renameIndex == 0)
-					for (int i = 0; i < 16; i++)
-						renameString[i] = 0;
+			if (renameIndex == 0)
+				ZeroMemory(renameString, sizeof(renameString));
+			if (arg != NULL && renameIndex < 15)
 				renameString[renameIndex++] = (char)arg;
-				if (arg == 0)
-				{
-					renameIndex = 0;
-					log_msg("Rename on Server : %s -> %s\n", ptChar->ptPlayerData->name, renameString);
-					strcpy(ptChar->ptPlayerData->name, renameString);
-					strcpy(ptChar->ptPlayerData->ptNetClient->name, renameString);
-				}
+			if (arg == NULL)
+			{
+				renameString[renameIndex] = NULL;
+				renameIndex = 0;
+				log_msg("Rename on Server : %s -> %s\n", PCPlayerData->name, renameString);
+				strcpy(PCPlayerData->name, renameString);
+				strcpy(PCPlayerData->ptNetClient->name, renameString);
+			}
 			return 1;
 		case US_PAGENAME:
 			if (renameIndex == 0)
-				for (int i = 0; i < 16; i++)
-					renameString[i] = 0;
-			renameString[renameIndex++] = (char)arg;
-			if (arg == 0)
+				ZeroMemory(renameString, sizeof(renameString));
+			if (arg != NULL && renameIndex < 20)
+				renameString[renameIndex++] = (char)arg;
+			if (arg == NULL)
 			{
+				renameString[renameIndex] = NULL;
 				renameIndex = 0;
 				log_msg("Rename current page on Server : %s -> %s\n", PCPY->currentStash->name, renameString);
 				renameCurrentStash(ptChar, renameString);
@@ -91,24 +101,24 @@ int STDCALL handleServerUpdate(Unit* ptChar, WORD param)
 	}
 }
 
-FCT_ASM( caller_handleServerUpdate_114 )
-    PUSH ESI
-    PUSH EBX
-    CALL handleServerUpdate
-    TEST EAX, EAX
-    JNZ END_RCM
-    MOV EAX, ESI
-    AND EAX, 0xFF
-    SHR ESI, 8
-    MOV EDI, EAX
-    RETN
-END_RCM :
-    ADD ESP, 8
-    POP EDI
-    POP ESI
-    XOR EAX, EAX
-    POP EBX
-    RETN 8
+FCT_ASM( caller_handleServerUpdate_114)
+	PUSH ESI
+	PUSH EBX
+	CALL handleServerUpdate
+	TEST EAX,EAX
+	JNZ END_RCM
+	MOV EAX,ESI
+	AND EAX,0xFF
+	SHR ESI,8
+	MOV EDI,EAX
+	RETN
+END_RCM:
+	ADD ESP,8
+	POP EDI
+	POP ESI
+	XOR EAX,EAX
+	POP EBX
+	RETN 8
 }}
 
 FCT_ASM( caller_handleServerUpdate)
@@ -180,6 +190,9 @@ void Install_UpdateServer()
 		//066A76C3  |.  C1EE 08       SHR ESI,8
 		//066A76C6  |.  57            PUSH EDI
 		//066A76C7  |.  8BF8          MOV EDI,EAX
+		//0054BD38  |. C1EE 08        SHR ESI,8
+		//0054BD3B  |. 57             PUSH EDI
+		//0054BD3C  |. 8BF8           MOV EDI,EAX
 	} else if (version_D2Game == V110) {
 		memt_byte( 0xC1, 0xE8 );	// CALL caller_handleServerUpdate
 		MEMT_REF4( 0xF88B08EE, caller_handleServerUpdate);

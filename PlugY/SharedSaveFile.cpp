@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Add an extra save file shared by all own characters.
+	Add an extra save file shared by all own characters.
 
 =================================================================*/
 
@@ -15,9 +15,7 @@
 #define BUFFER_SIZE 0x4000
 #define FILE_VERSION 0x3230			//"02"
 
-//6FC8CE8A  |. E8 A16BFAFF    CALL D2Game.6FC33A30
-//$+C0     >            1F 00 00 00 03 00 00 06                  .....
-// 28  0010 1000
+
 BYTE* readSharedSaveFile(char* name, DWORD* size)
 {
 	char filename[512];
@@ -151,45 +149,11 @@ void writeSharedSaveFile(char* name, BYTE* data, DWORD size, bool isHardcore)
 	strcat(szSaveName,".sss");
 	log_msg("Shared file for saving : %s\n", szSaveName);
 
-//	if (!MoveFileEx(szTempName, szSaveName, MOVEFILE_WRITE_THROUGH|MOVEFILE_REPLACE_EXISTING)) 
+//	if (!MoveFileEx(szTempName, szSaveName, MOVEFILE_WRITE_THROUGH|MOVEFILE_REPLACE_EXISTING))
 	DeleteFile(szSaveName);
 	if (!MoveFile(szTempName, szSaveName))
 		log_box("Could not create the shared save file.");
 }
-
-void backupSharedSaveFile()
-{
-	char szBackupName[MAX_PATH];
-	char szSaveName[MAX_PATH];
-
-	D2FogGetSavePath( szSaveName, MAX_PATH-30);
-	strcat(szSaveName, "_LOD_");
-	strcat(szSaveName, sharedStashFilename);
-	strcat(szSaveName,".sss");
-
-	D2FogGetSavePath( szBackupName, MAX_PATH-30);
-	strcat(szBackupName, "_LOD_");
-	strcat(szBackupName, sharedStashFilename);
-	strcat(szBackupName,".sss.backup");
-
-	CopyFile(szSaveName, szBackupName, true);
-
-	if (separateHardSoftStash)
-	{
-		D2FogGetSavePath( szSaveName, MAX_PATH-30);
-		strcat(szSaveName, "_LOD_HC_");
-		strcat(szSaveName, sharedStashFilename);
-		strcat(szSaveName,".sss");
-
-		D2FogGetSavePath( szBackupName, MAX_PATH-30);
-		strcat(szBackupName, "_LOD_HC_");
-		strcat(szBackupName, sharedStashFilename);
-		strcat(szBackupName,".sss.backup");
-
-		CopyFile(szSaveName, szBackupName, true);
-	}
-}
-
 
 void saveSharedSaveFile(Unit* ptChar, BYTE** data, DWORD* maxSize, DWORD* curSize)
 {

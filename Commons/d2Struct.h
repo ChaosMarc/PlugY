@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
- NOT TESTED IN 1.10 (1.09b)
+	NOT TESTED IN 1.10 (1.09b)
 
 =================================================================*/
 
@@ -15,15 +15,15 @@ struct Room;
 #pragma pack(1)
 struct sWinMessage
 {
-	void*	msg;
+	DWORD	msg;
 	DWORD	type;
-	DWORD	uk1;
+	DWORD	key;
 	WORD	x;
 	WORD	y;
 	DWORD	uk3;
 	DWORD	uk4;
 	DWORD	managed;
-	DWORD	unmanaged;	
+	DWORD	unmanaged;
 };
 #pragma pack()
 
@@ -60,11 +60,11 @@ struct saveBitField
 
 struct BINField
 {
-   char*	fieldName;  
-   int		type;  
-   DWORD	strLength;  
-   DWORD	offset;  
-   void*	lookup; 
+   char*	fieldName;
+   int		type;
+   DWORD	strLength;
+   DWORD	offset;
+   void*	lookup;
 };
 
 struct ItemGenerationData //size=0x84
@@ -95,6 +95,17 @@ struct ItemGenerationData //size=0x84
 	};
 };
 
+struct AIParam {
+	void*			control;            //+0x00
+	void*			u_0x04;             //+0x04
+	Unit*			target;				//+0x08
+	void*			u_0x0C;             //+0x0C
+	void*			u_0x10;             //+0x10
+	DWORD			distanceToTarget;   //+0x14
+	BOOL			engagedInCombat;    //+0x18
+	MonStatsBIN*	ptMonStatsBIN;		//+0x1C
+	void*			ptMonStats2BIN;		//+0x20
+};
 
 /*=================================================================*/
 /*   Data Structure to Update Client                               */

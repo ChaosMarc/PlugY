@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Add an extra save file for each characters.
+	Add an extra save file for each characters.
 
 =================================================================*/
 
@@ -17,7 +17,7 @@
 #define FILE_EXTENDED 0x4D545343	//"CSTM"
 
 
-BYTE * readExtendedSaveFile(char* name, DWORD* size)//WORKS
+BYTE * readExtendedSaveFile(char* name, DWORD* size)
 {
 	char filename[512];
 	BYTE* data;
@@ -45,7 +45,7 @@ BYTE * readExtendedSaveFile(char* name, DWORD* size)//WORKS
 		*size = 14;
 		*((DWORD*)&data[0])  = FILE_EXTENDED; //"CSTM"
 		*((WORD *)&data[4])  = FILE_VERSION;
-		*((DWORD*)&data[6])  = nbPlayersCommandByDefault - 1;
+		*((DWORD*)&data[6])  = (BYTE)(nbPlayersCommandByDefault == 0 ? 0 : nbPlayersCommandByDefault - 1);
 		*((DWORD*)&data[10]) = 0;// number of stash
 
 		TCustomDll* currentDll = customDlls;
@@ -59,7 +59,7 @@ BYTE * readExtendedSaveFile(char* name, DWORD* size)//WORKS
 }
 
 
-int loadExtendedSaveFile(Unit* ptChar, BYTE data[], DWORD maxSize)//WORKS
+int loadExtendedSaveFile(Unit* ptChar, BYTE data[], DWORD maxSize)
 {
 	if (!ptChar || !PCPY || !data) return 0;
 
@@ -99,7 +99,6 @@ int loadExtendedSaveFile(Unit* ptChar, BYTE data[], DWORD maxSize)//WORKS
 }
 
 
-
 void writeExtendedSaveFile(char* name, BYTE* data, DWORD size)
 {
 	char szTempName[MAX_PATH];
@@ -122,26 +121,10 @@ void writeExtendedSaveFile(char* name, BYTE* data, DWORD size)
 	strcat(szSaveName, ".d2x");
 	log_msg("Extended file for saving : %s\n",szSaveName);
 
-//	if (!MoveFileEx(szTempName, szSaveName, MOVEFILE_WRITE_THROUGH|MOVEFILE_REPLACE_EXISTING)) 
+//	if (!MoveFileEx(szTempName, szSaveName, MOVEFILE_WRITE_THROUGH|MOVEFILE_REPLACE_EXISTING))
 	DeleteFile(szSaveName);
 	if (!MoveFile(szTempName, szSaveName))
 		log_box("Could not create the extended save file.");
-}
-
-void backupExtendedSaveFile(char* name)
-{
-	char szBackupName[MAX_PATH];
-	char szSaveName[MAX_PATH];
-
-	D2FogGetSavePath(szSaveName, MAX_PATH);
-	strcat(szSaveName, name);
-	strcat(szSaveName, ".d2x");
-
-	D2FogGetSavePath(szBackupName, MAX_PATH);
-	strcat(szBackupName, name);
-	strcat(szBackupName, ".d2x.backup");
-
-	CopyFile(szSaveName, szBackupName, true);
 }
 
 
@@ -151,7 +134,7 @@ void saveExtendedSaveFile(Unit* ptChar, BYTE** data, DWORD* maxSize, DWORD* curS
 	*curSize += 4;
 	*(WORD *)(*data + *curSize) = FILE_VERSION;
 	*curSize += 2;
-	*(DWORD *)(*data + *curSize) = (BYTE)(nbPlayersCommand - 1);
+	*(DWORD *)(*data + *curSize) = (BYTE)(nbPlayersCommand == 0 ? 0 : nbPlayersCommand - 1);
 	*curSize += 4;
 
 	saveStashList(ptChar, PCPY->selfStash, data, maxSize, curSize);

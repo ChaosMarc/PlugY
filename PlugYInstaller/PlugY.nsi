@@ -1,8 +1,9 @@
-﻿Unicode True
+﻿;	File created by Yohann NICOLAS.
+Unicode True
 
 !include "MUI2.nsh"
 
-!define VERSION "12.00"
+!define VERSION "v14.00"
 !define D2FILES "."
 !define NAME "PlugY, The Survival Kit"
 !define MOD_DIR "Mod PlugY"
@@ -10,6 +11,7 @@
 !define UNINSTALL_FILE "PlugY Uninstaller.exe"
 
 !define MUI_COMPONENTSPAGE_SMALLDESC
+!define MUI_ICON "..\PlugYRun\PlugY.ico"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP "PlugYInstallerHeader.bmp"
 !define MUI_LANGDLL_REGISTRY_ROOT HKLM
@@ -25,8 +27,8 @@
 !define MUI_ABORTWARNING
 ;!define MUI_UNABORTWARNING
 
-Name "${NAME} v${VERSION}"
-OutFile "PlugY_The_Survival_Kit_v${VERSION}.exe"
+Name "${NAME} ${VERSION}"
+OutFile "PlugY_The_Survival_Kit_${VERSION}_Installer.exe"
 InstallDirRegKey HKLM "${REGKEY}" "InstallPath"
 
 ;--------------------------------
@@ -46,66 +48,79 @@ InstallDirRegKey HKLM "${REGKEY}" "InstallPath"
 ;--------------------------------
 ; Languages
 !insertmacro MUI_LANGUAGE "English"
-!insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "French"
+!insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "Russian"
+!insertmacro MUI_LANGUAGE "TradChinese"
 
 LangString DESC_CORE ${LANG_ENGLISH} "Core files.$\nPlugY.dll will be installed in Diablo II directory."
-LangString DESC_CORE ${LANG_GERMAN} "Hauptdateien.$\nPlugY.dll wird in das Installationsverzeichnis von Diablo II installiert."
 LangString DESC_CORE ${LANG_FRENCH} "Fichiers nécessaires.$\nPlugY.dll sera installé dans le répertoire de Diablo II."
+LangString DESC_CORE ${LANG_GERMAN} "Hauptdateien.$\nPlugY.dll wird in das Installationsverzeichnis von Diablo II installiert."
 LangString DESC_CORE ${LANG_RUSSIAN} "Основные файлы.$\nPlugY.dll должен быть установлен в каталог Diablo II."
+LangString DESC_CORE ${LANG_TRADCHINESE} "核心檔案。$\nPlugY.dll 將被安裝於 Diablo II 目錄。"
 LangString DESC_DESKTOP_SHORTCUTS ${LANG_ENGLISH} "Add shortcut on Desktop to launch Diablo II with ${NAME}."
-LangString DESC_DESKTOP_SHORTCUTS ${LANG_GERMAN} "Fügt eine Verknüpfung auf dem Desktop mit dem Namen ${NAME} hinzu mit der Diablo II gestartet werden kann."
 LangString DESC_DESKTOP_SHORTCUTS ${LANG_FRENCH} "Ajoute un raccourci pour démarrer Diablo II avec ${NAME}."
+LangString DESC_DESKTOP_SHORTCUTS ${LANG_GERMAN} "Fügt eine Verknüpfung auf dem Desktop mit dem Namen ${NAME} hinzu mit der Diablo II gestartet werden kann."
 LangString DESC_DESKTOP_SHORTCUTS ${LANG_RUSSIAN} "Добавить ярлык на рабочий стол для запуска Diablo II с ${NAME}."
+LangString DESC_DESKTOP_SHORTCUTS ${LANG_TRADCHINESE} "在桌面新增捷徑以藉由 ${NAME} 執行 Diablo II。"
 LangString DESC_MENU_SHORTCUTS ${LANG_ENGLISH} "Add shortcuts in start menu."
-LangString DESC_MENU_SHORTCUTS ${LANG_GERMAN} "Fügt Verknüpfungen im Startmenü hinzu."
 LangString DESC_MENU_SHORTCUTS ${LANG_FRENCH} "Ajoute des raccourcis dans le menu démarrer."
+LangString DESC_MENU_SHORTCUTS ${LANG_GERMAN} "Fügt Verknüpfungen im Startmenü hinzu."
 LangString DESC_MENU_SHORTCUTS ${LANG_RUSSIAN} "Добавить ярлыки в главное меню."
+LangString DESC_MENU_SHORTCUTS ${LANG_TRADCHINESE} "新增「開始」功能表捷徑"
 LangString DESC_UNINSTALLER ${LANG_ENGLISH} "Create a Windows uninstall program.$\nAdding registry keys in Windows."
-LangString DESC_UNINSTALLER ${LANG_GERMAN} "Erzeugt ein Deinstallationsprogramm.$\nWindows Registrierungseinträge werden erstellt."
 LangString DESC_UNINSTALLER ${LANG_FRENCH} "Crée un programme Windows de désinstallation.$\nAjoute des clés de registres dans Windows."
+LangString DESC_UNINSTALLER ${LANG_GERMAN} "Erzeugt ein Deinstallationsprogramm.$\nWindows Registrierungseinträge werden erstellt."
 LangString DESC_UNINSTALLER ${LANG_RUSSIAN} "Создать в Windows деинстллятор программы.$\nДобавляет ключи реестра в Windows."
+LangString DESC_UNINSTALLER ${LANG_TRADCHINESE} "建立 Windows 解除安裝程式。$\n加入 Windows 登錄訊息。"
 LangString DESC_PATCH_FILE ${LANG_ENGLISH} "Patcher to run PlugY without PlugY.exe. Before use it, you MUST read the readme."
+LangString DESC_PATCH_FILE ${LANG_FRENCH} "Patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
 LangString DESC_PATCH_FILE ${LANG_GERMAN} "Patcher um PlugY ohne PlugY.exe zu starten.$\nDie LiesMich-Datei MUSS vor Benutzung gelesen werden."
-LangString DESC_PATCH_FILE ${LANG_FRENCH} "D2gfx.dll patcheur pour lancer PlugY sans PlugY.exe. Avant de l'utiliser, vous DEVEZ lire le LISEZ-MOI."
 LangString DESC_PATCH_FILE ${LANG_RUSSIAN} "Применить патч для запуска PlugY без PlugY.exe. Подробнее смотреть в файле Readme."
+LangString DESC_PATCH_FILE ${LANG_TRADCHINESE} "更改遊戲檔案以不藉由 PlugY.exe 而執行 PlugY。使用前，您「必須」閱讀「讀我檔案」。"
 LangString SECTION_NAME_CORE ${LANG_ENGLISH} "${NAME} (required)"
-LangString SECTION_NAME_CORE ${LANG_GERMAN} "${NAME} (benötigt)"
 LangString SECTION_NAME_CORE ${LANG_FRENCH} "${NAME} (nécessaire)"
+LangString SECTION_NAME_CORE ${LANG_GERMAN} "${NAME} (benötigt)"
 LangString SECTION_NAME_CORE ${LANG_RUSSIAN} "${NAME} (требуется)"
+LangString SECTION_NAME_CORE ${LANG_TRADCHINESE} "${NAME} (必要)"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_ENGLISH} "Desktop Shortcut"
-LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_GERMAN} "Desktopverknüpfung"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_FRENCH} "Raccourci sur le bureau"
+LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_GERMAN} "Desktopverknüpfung"
 LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_RUSSIAN} "Ярлык на рабочем столе"
+LangString SECTION_NAME_DESKTOP_SHORTCUT ${LANG_TRADCHINESE} "桌面捷徑"
 LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_ENGLISH} "Start menu Shortcuts"
-LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_GERMAN} "Startmenüverknüpfungen"
 LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_FRENCH} "Raccourcis dans le Menu démarrer"
+LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_GERMAN} "Startmenüverknüpfungen"
 LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_RUSSIAN} "Ярлыки в в главном меню"
+LangString SECTION_NAME_STARTMENU_SHORTCUTS ${LANG_TRADCHINESE} "「開始」功能表捷徑"
 LangString SECTION_NAME_UNINSTALLER ${LANG_ENGLISH} "Uninstaller (add keys registers)"
-LangString SECTION_NAME_UNINSTALLER ${LANG_GERMAN} "Deinstallationsprogramm (Fügt Windows Registrierungseinträge hinzu)"
 LangString SECTION_NAME_UNINSTALLER ${LANG_FRENCH} "Dé-installeur (ajoute clés de registre)"
-LangString SECTION_NAME_UNINSTALLER ${LANG_RUSSIAN} "Деинсталлятор (добавляет ключи реестра)"
+LangString SECTION_NAME_UNINSTALLER ${LANG_GERMAN} "Deinstallationsprogramm (Fügt Windows Registrierungseinträge hinzu)"
+LangString SECTION_NAME_UNINSTALLER ${LANG_RUSSIAN}  "Деинсталлятор (добавляет ключи реестра)"
+LangString SECTION_NAME_UNINSTALLER ${LANG_TRADCHINESE} "移除工具 (加入登錄訊息)"
 LangString SECTION_PATCH_FILE ${LANG_ENGLISH} "File Patcher (advanced user only)"
+LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de fichier (utilisateur avancé uniquement)"
 LangString SECTION_PATCH_FILE ${LANG_GERMAN} "Datei Patcher (Für erfahrene Nutzer)"
-LangString SECTION_PATCH_FILE ${LANG_FRENCH} "Patcheur de D2gfx.dll (utilisateur avancé uniquement)"
 LangString SECTION_PATCH_FILE ${LANG_RUSSIAN} "Патч для Patcher (для опытных пользователей)"
+LangString SECTION_PATCH_FILE ${LANG_TRADCHINESE} "檔案級補釘 (限高級用戶)"
 
 LangString README_FILENAME ${LANG_ENGLISH} "PlugY_The_Survival_Kit_-_Readme.txt"
-LangString README_FILENAME ${LANG_GERMAN} "PlugY_The_Survival_Kit_-_Liesmich.txt"
 LangString README_FILENAME ${LANG_FRENCH} "PlugY_The_Survival_Kit_-_LisezMoi.txt"
+LangString README_FILENAME ${LANG_GERMAN} "PlugY_The_Survival_Kit_-_Liesmich.txt"
 LangString README_FILENAME ${LANG_RUSSIAN} "PlugY_The_Survival_Kit_-_Readme.txt"
+LangString README_FILENAME ${LANG_TRADCHINESE} "PlugY_The_Survival_Kit_-_讀我檔案"
 
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_ENGLISH} "Error : Diablo II install directory not found.$\nPlease re-install your copy of Diablo II - Lord of Destruction."
-LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_GERMAN} "Fehler : Diablo II Installationsverzeichnis nicht gefunden.$\nBitte installiere Diablo II - Lord of Destruction neu."
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_FRENCH} "Erreur : Le répertoire d'installation de Diablo II n'a pas été trouvé.$\nVeuillez ré-installer votre copie de Diablo II - Lord of Destruction."
+LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_GERMAN} "Fehler : Diablo II Installationsverzeichnis nicht gefunden.$\nBitte installiere Diablo II - Lord of Destruction neu."
 LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_RUSSIAN} "Ошибка : каталог с установленной игрой Diablo II не найден.$\nПожалуйста переустановите вашу копию Diablo II - Lord of Destruction."
+LangString ERROR_NO_D2_DIRECTORY_FOUND ${LANG_TRADCHINESE} "錯誤: 找不到 Diablo II 安裝目錄$\n請重新安裝「暗黑破壞神II：毀滅之王」"
 
 Var D2Path
 ;--------------------------------
 ; Initialisation
 Function .onInit
-  !define MUI_LANGDLL_WINDOWTITLE "${NAME} v${VERSION}"
+  !define MUI_LANGDLL_WINDOWTITLE "${NAME} ${VERSION}"
   !define MUI_LANGDLL_INFO "Select your language:"
   !insertmacro MUI_LANGDLL_DISPLAY
   !undef MUI_LANGDLL_WINDOWTITLE
@@ -154,7 +169,8 @@ Section "!$(SECTION_NAME_CORE)" Core
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Readme.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_LisezMoi.txt"
   File "${D2FILES}\PlugY_The_Survival_Kit_-_Liesmich.txt"
-  setOutPath "$D2Path\PlugY"
+  File "${D2FILES}\PlugY_The_Survival_Kit_-_讀我檔案.txt"
+  setOutPath "$INSTDIR\PlugY"
   File "${D2FILES}\PlugY\EmptyPage.dc6"
   File "${D2FILES}\PlugY\PlugYDefault.ini"
   File "${D2FILES}\PlugY\PlugYFixed.ini"
@@ -204,7 +220,6 @@ Section $(SECTION_NAME_UNINSTALLER) Uninstaller
 SectionEnd
 
 Section $(SECTION_PATCH_FILE) PatchFile
-  SectionIn 1
   SetOutPath $D2Path
   File "${D2FILES}\PatchD2File.exe"
   File "${D2FILES}\RestoreD2File.exe"
@@ -233,6 +248,7 @@ Section "Uninstall" Uninstall
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Readme.txt"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_LisezMoi.txt"
   Delete "$INSTDIR\PlugY_The_Survival_Kit_-_Liesmich.txt"
+  Delete "$INSTDIR\PlugY_The_Survival_Kit_-_讀我檔案.txt"
   Delete "$D2Path\PlugY\EmptyPage.dc6"
   Delete "$D2Path\PlugY\PlugYDefault.ini"
   Delete "$D2Path\PlugY\PlugYFixed.ini"

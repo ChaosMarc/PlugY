@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
 	Interface functions
 
@@ -16,7 +16,7 @@
 int posXUnassignSkillBtn=-1;
 int posYUnassignSkillBtn=-1;
 
-DWORD	btnSkillIsDown;
+DWORD	btnSkillIsDown=0;
 DWORD	getXSkillBtn()			{return RX(posXUnassignSkillBtn<0? 0x243 : posXUnassignSkillBtn);}
 #define	getLSkillBtn()			32
 DWORD	getYSkillBtn()			{return RY(posYUnassignSkillBtn<0 ? 0x1B1 : posYUnassignSkillBtn);}
@@ -29,7 +29,7 @@ void STDCALL printSkillsPageBtns()
 	if (active_SkillsPoints && !onRealm && D2isLODGame())
 	{
 		sDrawImageInfo data;
-		ZeroMemory(&data, sizeof(data));
+		ZeroMemory(&data,sizeof(data));
 		setImage(&data, unassignSkillsBtnImages);
 		setFrame(&data, btnSkillIsDown);
 		D2PrintImage(&data, getXSkillBtn(), getYSkillBtn(), -1, 5, 0);
@@ -45,9 +45,8 @@ void STDCALL printSkillsPageBtns()
 Unit* STDCALL skillsPageMouseDown(sWinMessage* msg)
 {
 	Unit* ptChar = D2GetClientPlayer();
-    log_msg("push down left button\n");
-    log_msg("type=%u\nx=%u\ny=%u\n\n", msg->type, msg->x, msg->y);
-	if ( active_SkillsPoints && !onRealm && D2isLODGame() && isOnButtonUnassignSkill(D2GetMouseX(),D2GetMouseY()))
+
+	if (active_SkillsPoints && !onRealm && D2isLODGame() && isOnButtonUnassignSkill(D2GetMouseX(),D2GetMouseY()))
 	{
 		log_msg("push down left button unassign skill\n");
 		btnSkillIsDown = 1;
@@ -61,8 +60,7 @@ Unit* STDCALL skillsPageMouseDown(sWinMessage* msg)
 
 void STDCALL skillsPageMouseUp()
 {
-  log_msg("push up left button\n");
-	if ( active_SkillsPoints && !onRealm && D2isLODGame() && isOnButtonUnassignSkill(D2GetMouseX(),D2GetMouseY()))
+	if (active_SkillsPoints && !onRealm && D2isLODGame() && isOnButtonUnassignSkill(D2GetMouseX(),D2GetMouseY()))
 	{
 		log_msg("push up left button unassign skill\n");
 		if (btnSkillIsDown)
@@ -91,22 +89,22 @@ FCT_ASM ( caller_printSkillsPageBtns )
 	RETN
 }}
 
-FCT_ASM( caller_DontPrintSkillPointsRemaining_114 )
-    MOV AL, BYTE PTR DS : [onRealm]
-    TEST AL, AL
-    JNZ dontPrint
-    ADD DWORD PTR SS : [ESP], 0x97
-    RETN
-    dontPrint :
-    MOV ECX, 0x1083
-    RETN
+FCT_ASM ( caller_DontPrintSkillPointsRemaining_114 )
+	MOV AL,BYTE PTR DS:[onRealm]
+	TEST AL,AL
+	JNZ dontPrint
+	ADD DWORD PTR SS:[ESP],0x97
+	RETN
+dontPrint:
+	MOV ECX,0x1083
+	RETN
 }}
 
-FCT_ASM(caller_DontPrintSkillPointsRemaining_111)
-    MOV AL, BYTE PTR DS : [onRealm]
-    TEST AL, AL
-    JNZ dontPrint
-    ADD DWORD PTR SS : [ESP], 0xF2
+FCT_ASM ( caller_DontPrintSkillPointsRemaining_111 )
+	MOV AL,BYTE PTR DS:[onRealm]
+	TEST AL,AL
+	JNZ dontPrint
+	ADD DWORD PTR SS:[ESP],0xF2
 	RETN
 dontPrint:
 	MOV ECX,0x1083
@@ -124,10 +122,10 @@ dontPrint:
 	RETN
 }}
 
-FCT_ASM( caller_skillsPageMouseDown_114 )
-  PUSH ESI
-  CALL skillsPageMouseDown
-  RETN
+FCT_ASM ( caller_skillsPageMouseDown_114 )
+	PUSH ESI
+	CALL skillsPageMouseDown
+	RETN
 }}
 
 FCT_ASM ( caller_skillsPageMouseDown_111 )
@@ -188,6 +186,11 @@ void Install_InterfaceSkills()
 		//6FADF382  |. 5B             POP EBX
 		//6FADF383  \. C3             RETN
 		//6FADF384     CC             INT3
+		//004AB7A5  |> 5F             POP EDI
+		//004AB7A6  |. 5E             POP ESI
+		//004AB7A7  |. 5B             POP EBX
+		//004AB7A8  \. C3             RETN
+		//004AB7A9     CC             INT3
 	} else {
 		MEMT_REF4( 0x835B5D5E, caller_printSkillsPageBtns);
 		memt_byte( 0xC4, 0x90 );	// NOP
@@ -206,42 +209,40 @@ void Install_InterfaceSkills()
 		// Don't print "Skill Points Remaining"
 		mem_seek R8(D2Client, 7AC30, 7AC30, 77080, 16294, 8AC74, 7ECF4, 78334, 2F7E4, AACE0);
 		memt_byte( 0xB9, 0xE8 );
-		MEMT_REF4( 0x00001083, version_D2Client == V114d ? caller_DontPrintSkillPointsRemaining_114 : version_D2Client >= V111 ? caller_DontPrintSkillPointsRemaining_111 : caller_DontPrintSkillPointsRemaining);
+		MEMT_REF4( 0x00001083, version_D2Client >= V114d ? caller_DontPrintSkillPointsRemaining_114 : version_D2Client >= V111 ? caller_DontPrintSkillPointsRemaining_111 : caller_DontPrintSkillPointsRemaining);
 		//6FB17080  /$ B9 83100000    MOV ECX,1083
 		//6FAC6294  |. B9 83100000    MOV ECX,1083
 		//6FB3AC74  |. B9 83100000    MOV ECX,1083
 		//6FB2ECF4  |. B9 83100000    MOV ECX,1083
 		//6FB28334  |. B9 83100000    MOV ECX,1083
 		//6FADF7E4  |. B9 83100000    MOV ECX,1083
+		//004AACE0  /$ B9 83100000    MOV ECX,1083
 	}
 
 	// Manage mouse down (Play sound)
-    mem_seek R8(D2Client, 7BBD1, 7BBD1, 780E4, 17BC2, 8C6E2, 808B2, 79C62, 31112, ABC1A);
-    memt_byte(0xC7, 0xE8);	// CALL caller_skillsPageMouseDown
-    MEMT_REF4(version_D2Client == V114d ? 0x00001846 : version_D2Client >= V111 ? 0x00001845 : 0x00001843, version_D2Client == V114d ? caller_skillsPageMouseDown_114 : version_D2Client >= V111 ? caller_skillsPageMouseDown_111 : caller_skillsPageMouseDown);
-    memt_byte(0x00, 0x90);	// NOP
-    memt_byte(0x00, 0x90);	// NOP
-
+	mem_seek R8(D2Client, 7BBD1, 7BBD1, 780E4, 17BC2, 8C6E2, 808B2, 79C62, 31112, ABC1A);
+	memt_byte( 0xC7, 0xE8 );	// CALL caller_skillsPageMouseDown
+	MEMT_REF4( version_D2Client >= V114d ? 0x00001846 : version_D2Client >= V111 ? 0x00001845 : 0x00001843, version_D2Client == V114d ? caller_skillsPageMouseDown_114 : version_D2Client >= V111 ? caller_skillsPageMouseDown_111 : caller_skillsPageMouseDown);
+	memt_byte( 0x00, 0x90 );	// NOP
+	memt_byte( 0x00, 0x90 );	// NOP
 	//6FB180E4   > C743 18 00000000     MOV DWORD PTR DS:[EBX+18],0
 	//6FAC7BC2   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
 	//6FB3C6E2   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
 	//6FB308B2   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
 	//6FB29C62   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
 	//6FAE1112   > C745 18 00000000     MOV DWORD PTR SS:[EBP+18],0
+	//004ABC1A  |> C746 18 00000000     MOV DWORD PTR DS:[ESI+18],0
 
 	// Manage mouse up
-	mem_seek R8(D2Client, 7BC40, 7BC40, 78466, 17558, 8C078, 80248, 795F8, 30AA8, ABC96/*ABE38*/);
-    if (version_D2Client == V114d) {
-        MEMT_REF4(/*0xFFFFFE45*/0xFFF745F6, caller_skillsPageMouseUp);
-    } else {
-        MEMJ_REF4(D2FreeWinMessage, caller_skillsPageMouseUp);//0xFFF93B0A
-    }
+	mem_seek R8(D2Client, 7BC40, 7BC40, 78466, 17558, 8C078, 80248, 795F8, 30AA8, ABC96);
+	MEMJ_REF4( D2FreeWinMessage, caller_skillsPageMouseUp);//0xFFF93B0A
 	//6FB18465   . E8 C07D0400    CALL <JMP.&Storm.#511>
 	//6FAC7557   .^E9 4248FFFF    JMP <JMP.&Storm.#511>
 	//6FB3C077   .^E9 16FDF7FF    JMP <JMP.&Storm.#511>
 	//6FB30247   .^E9 2CBCF8FF    JMP <JMP.&Storm.#511>
 	//6FB295F7   .^E9 8828F9FF    JMP <JMP.&Storm.#511>
 	//6FAE0AA7   .^E9 E0B2FDFF    JMP <JMP.&Storm.#511>
+	//004ABC95  |. E8 F645F7FF    CALL Game.00420290
 
 	log_msg("\n");
 

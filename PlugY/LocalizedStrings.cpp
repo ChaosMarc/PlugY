@@ -2,13 +2,15 @@
 	File created by Yohann NICOLAS.
 
 	Localized strings functions.
- 
+
 =================================================================*/
 
 #include "INIfile.h"
 #include "LocalizedStrings.h"
 #include "common.h"
 #include <stdio.h>
+
+const char* LOCALIZED_STRINGS_FILENAME = "PlugY\\LocalizedStrings.ini";
 
 LPWSTR StripGender(LPWSTR text)
 {
@@ -32,11 +34,14 @@ struct LocalizedTypeString
 	LPSTR itemStr;
 	LPWSTR typeLocalizedString;
 } *sLocalizedTypeStrings;
-LPWSTR sLocalizedStrings[60];
+
+LPWSTR sLocalizedStrings[100];
 int nbLocalizedTypeString = 0;
 
 LPWSTR getLocalString(int stringId)
 {
+	if (stringId < 0 || stringId >= 100)
+		return L"";
 	return sLocalizedStrings[stringId];
 }
 
@@ -93,19 +98,29 @@ void loadLocalString(INIFileW *iniFile, int id, LPCWSTR section, LPCWSTR key)
 		sLocalizedStrings[id] = new WCHAR[len + 1];
 		wcsncpy(sLocalizedStrings[id], section, len);
 		sLocalizedStrings[id][len] = NULL;
+		return;
 	}
+
+	int j = 0;
+	int i = 0;
 	if (buffer[0] == L'"' && buffer[len-1] == L'"')
 	{
-		sLocalizedStrings[id] = new WCHAR[len - 1];
-		wcsncpy(sLocalizedStrings[id], buffer + 1, len - 2);
-		sLocalizedStrings[id][len - 2] = NULL;
+		buffer[len-1] = NULL;
+		i++;
+		len -= 2;
 	}
-	else
+	sLocalizedStrings[id] = new WCHAR[len + 1];
+	for (; i<len; i++)
 	{
-		sLocalizedStrings[id] = new WCHAR[len + 1];
-		wcsncpy(sLocalizedStrings[id], buffer, len);
-		sLocalizedStrings[id][len] = NULL;
+		if (buffer[i] == L'\\' && buffer[i+1] == L'n')
+		{
+			sLocalizedStrings[id][j++] = L'\n';
+			i++;
+		}
+		else
+			sLocalizedStrings[id][j++] = buffer[i];
 	}
+	sLocalizedStrings[id][j] = NULL;
 }
 
 int GetPrivateProfileStringList(LPCWCHAR m_cache, LPCWSTR section, LPCWSTR key)
@@ -143,7 +158,7 @@ int GetPrivateProfileStringList(LPCWCHAR m_cache, LPCWSTR section, LPCWSTR key)
 
 	// Treat next section
 	int i = 0;
-	while (nextHeader)
+	while (nextHeader && i < nb)
 	{
 		cur = nextHeader + wcslen(sectionString);
 		end = wcsstr(cur, L"]");
@@ -227,12 +242,20 @@ int GetPrivateProfileStringList(LPCWCHAR m_cache, LPCWSTR section, LPCWSTR key)
 
 void loadLocalizedStrings(int language)
 {
+	if (sLocalizedTypeStrings)
+		return;
+
 	INIFileW *iniFile = new INIFileW;
 
 	log_msg("***** Load localized Strings *****\n");
-	if (!iniFile->InitReadWrite("PlugY\\LocalizedStrings.ini", INIFILE_MPQREAD, 0))//C:\\Jeux\\Blizzard\\D2\\-
+	if (iniFile->InitReadWrite(LOCALIZED_STRINGS_FILENAME, INIFILE_MPQREAD, 0))//C:\\Jeux\\Blizzard\\D2\\-
+		log_msg("File %s loaded from MPQ.\n\n", LOCALIZED_STRINGS_FILENAME);
+	else if (iniFile->InitReadWrite(LOCALIZED_STRINGS_FILENAME, INIFILE_READ, 0))//C:\\Jeux\\Blizzard\\D2\\-
+		log_msg("File %s loaded from PlugY folder.\n\n", LOCALIZED_STRINGS_FILENAME);
+	else
 	{
-		log_msg("Failed to load LocalizedStrings, default values used.\n\n");
+		log_msg("Failed to load %s.\n\n", LOCALIZED_STRINGS_FILENAME);
+		return;
 	}
 
 	LPCWSTR key;
@@ -266,6 +289,7 @@ void loadLocalizedStrings(int language)
 	LOAD(STR_STASH_NEXT_PAGE);
 	LOAD(STR_TOGGLE_TO_PERSONAL);
 	LOAD(STR_TOGGLE_TO_SHARED);
+	LOAD(STR_TOGGLE_MULTI_DISABLED);
 	LOAD(STR_STASH_PREVIOUS_INDEX);
 	LOAD(STR_STASH_NEXT_INDEX);
 	LOAD(STR_PUT_GOLD);
@@ -277,6 +301,7 @@ void loadLocalizedStrings(int language)
 	LOAD(STR_PREVIOUS_PAGE);
 	LOAD(STR_NEXT_PAGE);
 	LOAD(STR_ITEM_LEVEL);
+	LOAD(STR_PAGE_TYPE_CHANGE);
 
 	// Cube receipt :
 	LOAD(STR_COW_PORTAL);
@@ -315,6 +340,27 @@ void loadLocalizedStrings(int language)
 	LOAD(STR_ONLY_N_H);
 	LOAD(STR_ONLY_HELL);
 	LOAD(STR_ONLY_CLASS);
+
+	// Breakpoints :
+	LOAD(STR_MERCENARIES);
+	LOAD(STR_MERC_ACT_1);
+	LOAD(STR_MERC_ACT_2);
+	LOAD(STR_MERC_ACT_3);
+	LOAD(STR_MERC_ACT_5);
+	LOAD(STR_BREAKPOINT);
+	LOAD(STR_BREAKPOINTS);
+	LOAD(STR_BLOCK_FRAMES);
+	LOAD(STR_CASTING_FRAMES);
+	LOAD(STR_HIT_RECOVERY_FRAMES);
+	LOAD(STR_1H_SWINGING_WEAPON);
+	LOAD(STR_OTHER_WEAPONS);
+	LOAD(STR_HUMAN_FORM);
+	LOAD(STR_BEAR_FORM);
+	LOAD(STR_WOLF_FORM);
+	LOAD(STR_VAMPIRE_FORM);
+	LOAD(STR_SPEARS_AND_STAVES);
+	LOAD(STR_LIGHTNING_CHAIN_LIGHTNING);
+	LOAD(STR_OTHER_SPELLS);
 
 	iniFile->close();
 	delete iniFile;

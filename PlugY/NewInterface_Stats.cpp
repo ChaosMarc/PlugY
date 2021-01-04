@@ -117,7 +117,7 @@ void print2Lines(WORD id, LPWSTR lpText, DWORD x, DWORD l, DWORD y)
 {
 	wcsncpy(lpText, D2GetStringFromIndex(id), 0x63);
 	lpText[0x64]= L'\0';
-	
+
 	LPWSTR lptmp = lpText;
 	while (*lptmp)
 	{
@@ -145,7 +145,7 @@ void print2Lines(WORD id, LPWSTR lpText, DWORD x, DWORD l, DWORD y)
 void STDCALL printNewStatsPage()
 {
 	if (!D2isLODGame() || !D2GetResolution()) return D2PrintStatsPage();
-	
+
 	WCHAR text[BUFSIZE];
 	LPWSTR lpText;
 	DWORD nbPixel;
@@ -347,7 +347,7 @@ if (version_D2Client <= V110)
 
 	//print Hit Point
 	curValue = D2GetPlayerStat(ptChar, STATS_HP, 0) / 256;
-	if ((ptChar->CurrentAnim != 0x11) && !curValue) curValue=1;
+	if ((ptChar->mode != UNIT_MODE_DEAD) && !curValue) curValue=UNIT_MODE_NEUTRAL;
 
 	swprintf(text,L"%ld",curValue);
 
@@ -523,7 +523,7 @@ if (version_D2Client <= V110)
 		D2PrintImage(&data, getXAssVITBtn(), getYAssVITBtn(), -1, 5, 0);
 		D2PrintImage(&data, getXAssENEBtn(), getYAssENEBtn(), -1, 5, 0);
 	}
-	
+
 	if (active_StatsPoints && !onRealm)
 	{
 		setImage(&data, D2AssignStatsPointsBoxImages);
@@ -584,9 +584,9 @@ if (version_D2Client <= V110)
 if ( version_D2Client <= V110 )
 {
 		DWORD avgChanceMonsterWillHitYou=53;//TODO
-		if (avgChanceMonsterWillHitYou<5) 		avgChanceMonsterWillHitYou = 5;
+		if (avgChanceMonsterWillHitYou<5)		avgChanceMonsterWillHitYou = 5;
 		else if (avgChanceMonsterWillHitYou>95) avgChanceMonsterWillHitYou = 95;
-		
+
 		int chanceToBlock = D2GetChanceToBlock(ptChar, D2isLODGame());
 		if (chanceToBlock <= 0)
 		{
@@ -700,8 +700,8 @@ DWORD STDCALL mouseNewStatsPageLeftDown(sWinMessage* msg)
 void sendAssignStats(DWORD code, DWORD nbStatPointsRemaining)
 {
 	DWORD nbPoints = GetKeyState(VK_SHIFT)<0? nbStatPointsRemaining : 1;
-	if (active_StatsShiftClickLimit && (nbPoints>limitValueToShiftClick)) 
-		 nbPoints = limitValueToShiftClick;
+	if (active_StatsShiftClickLimit && (nbPoints>limitValueToShiftClick))
+		nbPoints = limitValueToShiftClick;
 	while ( nbPoints>0 )
 	{
 		DWORD nbTemp = nbPoints > 0x20 ? 0x20 : nbPoints;
@@ -744,7 +744,7 @@ DWORD STDCALL mouseNewStatsPageLeftUp(sWinMessage* msg)
 		}
 	}
 	else if (nbStatPointsRemaining)
-	{		
+	{
 		if (isOnAssSTRBtn(msg->x,msg->y))
 		{
 			log_msg("push up left button assign strengh\n");

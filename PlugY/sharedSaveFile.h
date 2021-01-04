@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Add an extra save file shared by all own characters.
+	Add an extra save file shared by all own characters.
 
 =================================================================*/
 #pragma once

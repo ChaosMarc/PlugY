@@ -8,17 +8,17 @@
 #include "windowed.h"
 #include "common.h"
 
-int active_Windowed = true;
+int active_Windowed = false;
 int setWindowedOptionsDone = false;
-int active_RemoveBorder = true;
-int active_WindowOnTop = true;
-int active_Maximized = true;
-int active_SetWindowPos = true;
-int windowedX = 240;
+int active_RemoveBorder = false;
+int active_WindowOnTop = false;
+int active_Maximized = false;
+int active_SetWindowPos = false;
+int windowedX = 0;
 int windowedY = 0;
-int windowedWidth = 1440;
-int windowedHeight = 1080;
-int active_LockMouseOnStartup = true;
+int windowedWidth = 800;
+int windowedHeight = 600;
+int active_LockMouseOnStartup = false;
 
 void unlockMouseCursor()
 {

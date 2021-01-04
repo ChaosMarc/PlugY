@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d and DoNotCloseNihlathakPortal by haxifix.
 
     @file D2wrapper.cpp
     @brief Main Diablo II extra DLL handler.
@@ -10,6 +10,7 @@
 
 =================================================================*/
 
+#include "plugYFiles.h"			// Install_PlugYFiles()
 #include "globalVariable.h"		// Install_VariableOnRealm()
 #include "commands.h"			// Install_Commands()
 #include "othersFeatures.h"		// Install_ChangeResolution()
@@ -27,10 +28,10 @@
 #include "extraOptions.h"		// Install_AlwaysRegenMapInSP()
 #include "language.h"			// Install_LanguageManagement()
 #include "windowed.h"			// installed with Install_PrintPlugYVersion()
+#include "savePlayerData.h"		// Install_SavePlayerData()
 #include "customLibraries.h"
 #include "common.h"
 
-#include "interface_Stash.h"
 
 int version_Game = UNKNOWN;
 //int version_binkw32 = UNKNOWN;
@@ -175,21 +176,22 @@ void hookLibraries()
 {
 	log_msg("***** Unprotect Libraries *****\n");
 
-    if (version_Game == V114d) {
-        hookLibrary(S_Game, offset_Game);
-    } else {
-        hookLibrary(S_D2Client, offset_D2Client);
-        //	hookLibrary(S_D2CMP,	offset_D2CMP);
-        hookLibrary(S_D2Common, offset_D2Common);
-        hookLibrary(S_D2Game, offset_D2Game);
-        hookLibrary(S_D2gfx, offset_D2gfx);
-        hookLibrary(S_D2Lang, offset_D2Lang);
-        hookLibrary(S_D2Launch, offset_D2Launch);
-        //	hookLibrary(S_D2Net,	offset_D2Net);
-        //	hookLibrary(S_D2Win,	offset_D2Win);
-        hookLibrary(S_Fog, offset_Fog);
-        hookLibrary(S_Storm, offset_Storm);
-    }
+	if (version_Game >= V114a)
+		hookLibrary(S_Game, offset_Game);
+	else
+	{
+		hookLibrary(S_D2Client,	offset_D2Client);
+	//	hookLibrary(S_D2CMP,	offset_D2CMP);
+		hookLibrary(S_D2Common,	offset_D2Common);
+		hookLibrary(S_D2Game,	offset_D2Game);
+		hookLibrary(S_D2gfx,	offset_D2gfx);
+		hookLibrary(S_D2Lang,	offset_D2Lang);
+		hookLibrary(S_D2Launch,	offset_D2Launch);
+	//	hookLibrary(S_D2Net,	offset_D2Net);
+	//	hookLibrary(S_D2Win,	offset_D2Win);
+		hookLibrary(S_Fog,		offset_Fog);
+		hookLibrary(S_Storm,	offset_Storm);
+	}
 
 	log_msg("\n\n");
 }
@@ -198,21 +200,22 @@ void unhookLibraries()
 {
 	log_msg("***** Reprotect Libraries *****\n");
 
-    if (version_Game == V114d) {
-        unhookLibrary(S_Game, offset_Game);
-    } else {
-        unhookLibrary(S_D2Client, offset_D2Client);
-        //	unhookLibrary(S_D2CMP,		offset_D2CMP);
-        unhookLibrary(S_D2Common, offset_D2Common);
-        unhookLibrary(S_D2Game, offset_D2Game);
-        unhookLibrary(S_D2gfx, offset_D2gfx);
-        unhookLibrary(S_D2Lang, offset_D2Lang);
-        unhookLibrary(S_D2Launch, offset_D2Launch);
-        //	unhookLibrary(S_D2Net,		offset_D2Net);
-        //	unhookLibrary(S_D2Win,		offset_D2Win);
-        unhookLibrary(S_Fog, offset_Fog);
-        unhookLibrary(S_Storm, offset_Storm);
-    }
+	if (version_Game >= V114a)
+		unhookLibrary(S_Game,	offset_Game);
+	else
+	{
+		unhookLibrary(S_D2Client,	offset_D2Client);
+	//	unhookLibrary(S_D2CMP,		offset_D2CMP);
+		unhookLibrary(S_D2Common,	offset_D2Common);
+		unhookLibrary(S_D2Game,		offset_D2Game);
+		unhookLibrary(S_D2gfx,		offset_D2gfx);
+		unhookLibrary(S_D2Lang,		offset_D2Lang);
+		unhookLibrary(S_D2Launch,	offset_D2Launch);
+	//	unhookLibrary(S_D2Net,		offset_D2Net);
+	//	unhookLibrary(S_D2Win,		offset_D2Win);
+		unhookLibrary(S_Fog,		offset_Fog);
+		unhookLibrary(S_Storm,		offset_Storm);
+	}
 
 	log_msg("\n\n");
 }
@@ -231,14 +234,7 @@ void freeCustomLibraries()
 		dll->release();
 		freeLibrary(dll->offset);
 		nextDll = dll->nextDll;
-		if (version_D2Game == V114d)
-		{
-			delete dll;
-		}
-		else
-		{
-			D2FogMemDeAlloc(dll, __FILE__, __LINE__, 0);
-		}
+		delete(dll);
 		dll = nextDll;
 	}
 }
@@ -270,15 +266,15 @@ void loadCustomLibraries()
 		log_msg("No custom libraries to load.\n");
 	else
 	{
-		log_msg("Load custom libraries :\n");
 		while (curString)
 		{
 			if (curString[0])
 			{
+				log_msg("Load custom library : %s\n", curString);
 				offset_currentDll = (DWORD)LoadLibrary(curString);
 				if (!offset_currentDll)
 				{
-					log_msg("Load library %s failed:\n", curString);
+					log_msg("Load library %s failed !\n", curString);
 					exit(0);
 				}
 				nextDll = customDlls;
@@ -289,8 +285,8 @@ void loadCustomLibraries()
 			curString=strtok(NULL,"|");
 		}
 	}
-  if (dllFilenames)
-    D2FogMemDeAlloc(dllFilenames, __FILE__, __LINE__, 0);
+	if(dllFilenames)
+		D2FogMemDeAlloc(dllFilenames,__FILE__,__LINE__,0);
 
 	log_msg("\n\n");
 }
@@ -339,7 +335,7 @@ void initD2modules()
 
 	if (version_Game >= V114a)
 	{
-//		offset_Bnclient		= offset_Game;	version_Bnclient	= version_Game; 
+//		offset_Bnclient		= offset_Game;	version_Bnclient	= version_Game;
 		offset_D2Client		= offset_Game;	version_D2Client	= version_Game;
 		offset_D2CMP		= offset_Game;	version_D2CMP		= version_Game;
 		offset_D2Common		= offset_Game;	version_D2Common	= version_Game;
@@ -376,13 +372,13 @@ void initD2modules()
 		GET_VERSION(D2Launch,	109A,	81E8526F, 01E8526F, 85E8526F, 247C8B00, 00FC6583, 15FF0424, E850E045);	//0x20000	0x6FA10000 Already Loaded	0x1E000
 //		GET_VERSION(D2MCPClient	000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0x6000	0x6F9F0000 Already Loaded	-
 //		GET_VERSION(D2Multi		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0x1000	0x6F9A0000					?
-		GET_VERSION(D2Net,		16E1,	78B8A73C, 68B8A73C, 10244C8B, 5349E808, 5EA9E808, 105D8B72, 53B9E808);	//0x6000	0x6FC00000 Already Loaded	-	
+		GET_VERSION(D2Net,		16E1,	78B8A73C, 68B8A73C, 10244C8B, 5349E808, 5EA9E808, 105D8B72, 53B9E808);	//0x6000	0x6FC00000 Already Loaded	-
 //		GET_VERSION(D2sound		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0xC000	0x6F980000 Already Loaded	0xD000
 		GET_VERSION(D2Win,		1699,	88686F8C, 84686F8C, D094686F, F0030000, 001435E8, 8B088F44, 0013F5E8);	//0x19000	0x6F8A0000 Already Loaded	0x1C000
 		GET_VERSION(Fog,		102,	D0000006, 10000001, 00000006, 000042E6, 00004302, 0000483C, 00004B95);	//0x20000	0x6FF50000 Already Loaded	0x1F000
 		GET_VERSION(Storm,		1190,	19E85082, 59E85082, 13C103F6, 0474F685, 8B000321, 3B1074C9, 0D896404);	//0x30000	0x6FFB0000 Already Loaded	-
 		if (version_Game == UNKNOWN)
-			 version_Game = version_D2gfx;
+			version_Game = version_D2gfx;
 	}
 //	GET_VERSION(binkw32		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//
 //	GET_VERSION(ijl11		000,	00000000, 00000000, 00000000, 00000000, 00000000, 00000000, 00000000);	//0x24000	0x60000000 Already Loaded	-
@@ -395,10 +391,12 @@ void initD2modules()
 
 extern "C" __declspec(dllexport) bool __stdcall Release()
 {
-	log_msg("\n***** ENDING DIABLO II *****\n\n" );
+	log_msg("\n***** FREE LIBRARIES *****\n\n" );
 
 	freeCustomLibraries();
 	freeD2Libraries();
+	log_msg("***** END DIABLO II *****\n" );
+	log_close();
 	return true;
 }
 
@@ -412,7 +410,7 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	initD2modules();
 
-	if (version_Game < V109 || version_Game > V114d)
+	if (version_Game < V109 || version_Game > V113d && version_Game != V114d)
 	{
 		log_box("PlugY isn't compatible with this version : %s", GetVersionString(version_Game));
 		Release();
@@ -431,6 +429,7 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	log_msg("***** INSTALL FUNCTIONS *****\n");
 
+	Install_PlugYFiles();
 	Install_VariableOnRealm();
 
 	if (active_Commands)
@@ -455,6 +454,9 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	if (active_changingSavePath)
 		Install_ChangingSavePath();
+
+	if (active_AutoBackup)
+		Install_SavePlayerData();
 
 	if (active_StatsShiftClickLimit)
 		Install_StatsLimitShiftClick();
@@ -507,8 +509,14 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 	if (active_EnabledCowPortalWhenCowKingWasKill)
 		Install_EnabledCowPortalWhenCowKingWasKill();
 
-    if (active_DoNotCloseNihlathakPortal)
-      Install_DoNotCloseNihlathakPortal();
+	if (active_DoNotCloseNihlathakPortal)
+		Install_DoNotCloseNihlathakPortal();
+
+	if (active_MoveCainNearHarrogathWaypoint)
+		Install_MoveCainNearHarrogathWaypoint();
+
+	if (active_RemoveExperienceDiminushingReturn)
+		Install_RemoveExperienceDiminushingReturn();
 
 	log_msg("\nDLL patched sucessfully.\n\n\n");
 
@@ -516,11 +524,13 @@ extern "C" __declspec(dllexport) void* __stdcall Init(LPSTR IniName)
 
 	initCustomLibraries();
 
-	loadLocalizedStrings(D2GetLang());
+	//loadLocalizedStrings(D2GetLang());
 
 	log_msg("***** ENTERING DIABLO II *****\n\n" );
 
-	active_logFile = active_logFile - 1;
+	active_logFile--;
+	if (active_logFile < 1)
+		log_close();
 
 	return NULL;
 }

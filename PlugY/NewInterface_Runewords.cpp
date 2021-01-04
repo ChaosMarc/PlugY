@@ -124,7 +124,7 @@ void printRuneword(RunesBIN* runesData, DWORD pos)
 void STDCALL printRunewordsPage()
 {
 	if (!D2isLODGame() || !D2GetResolution()) return D2PrintStatsPage();
-	
+
 	LPWSTR lpText;
 	bDontPrintBorder = true;
 
@@ -153,7 +153,7 @@ void STDCALL printRunewordsPage()
 	setImage(&data, D2LoadBuySelBtn());
 	setFrame(&data, 10 + isDownBtn.close);
 	D2PrintImage(&data, getXCloseBtn(), getYCloseBtn(), -1, 5, 0);
-	
+
 	//print next page button
 	setFrame(&data, isDownBtn.nextPage);
 	D2PrintImage(&data, getXNextPageBtn(), getYNextPageBtn(), -1, 5, 0);
@@ -174,7 +174,7 @@ void STDCALL printRunewordsPage()
 	RunesBIN* runesFirst = nbRunes>1 ? D2GetRunesBIN(1)-1 : NULL;
 	RunesBIN* runesLast = runesFirst? runesFirst + nbRunes : NULL;
 //	log_msg("nbRunes(%d,%d) runesFirst(%08X, %08X) runesLast(%08X, %08X)",nbRunes,SgptDataTables->nbRunes,runesFirst, SgptDataTables->runes,runesLast,SgptDataTables->runes + SgptDataTables->nbRunes);
- 
+
 	int nbRunesCompleted=0;
 	DWORD curNbRunes=0;
 	for ( RunesBIN* runesData = runesFirst; runesData < runesLast; runesData++)
@@ -210,27 +210,30 @@ DWORD STDCALL mouseRunewordsPageLeftDown(sWinMessage* msg)
 {
 	if (!D2isLODGame() || !D2GetResolution()) return -1;
 
-	if (!isOnStatsPage(msg->x,msg->y)) return 1;
+	DWORD x = D2GetMouseX();
+	DWORD y = D2GetMouseY();
+	if (!isOnStatsPage(x,y))
+		return 1;
 
-	if (isOnCloseBtn(msg->x,msg->y))
+	if (isOnCloseBtn(x,y))
 	{
 		log_msg("push down left button close\n");
 		isDownBtn.close = 1;
 		D2PlaySound(4,0,0,0,0);
 	}
-	else if (isOnNextPageBtn(msg->x,msg->y))
+	else if (isOnNextPageBtn(x,y))
 	{
 		log_msg("push down left button next page\n");
 		isDownBtn.nextPage = 1;
 		D2PlaySound(4,0,0,0,0);
 	}
-	else if (isOnPrevRunesBtn(msg->x,msg->y))
+	else if (isOnPrevRunesBtn(x,y))
 	{
 		log_msg("push down left button prev page\n");
 		isDownBtn.prevRunes = 1;
 		D2PlaySound(4,0,0,0,0);
 	}
-	else if (isOnNextRunesBtn(msg->x,msg->y))
+	else if (isOnNextRunesBtn(x,y))
 	{
 		log_msg("push down left button next runes\n");
 		isDownBtn.nextRunes = 1;
@@ -246,24 +249,30 @@ DWORD STDCALL mouseRunewordsPageLeftUp(sWinMessage* msg)
 {
 	if (!D2isLODGame() || !D2GetResolution()) return -1;
 
-	if (!isOnStatsPage(msg->x,msg->y)) return 1;
+	DWORD x = D2GetMouseX();
+	DWORD y = D2GetMouseY();
+	if (!isOnStatsPage(x,y))
+		return 1;
 
-	if (isOnCloseBtn(msg->x,msg->y))
+	if (isOnCloseBtn(x,y))
 	{
 		log_msg("push up left button close\n");
 		if (isDownBtn.close)
 			D2TogglePage(2,1,0);
 	}
-	else if (isOnNextPageBtn(msg->x,msg->y))
+	else if (isOnNextPageBtn(x,y))
 	{
 		log_msg("push up left button next page\n");
 		if (isDownBtn.nextPage)
 		{
-			GoStatPage(GetCurrentPage()+1);
+			if (extraHiddenPage>1)
+				GoStatPage(GetCurrentPage()+1);
+			else
+				GoStatPage(0);
 			log_msg("next page press\n");
 		}
 	}
-	else if (isOnPrevRunesBtn(msg->x,msg->y))
+	else if (isOnPrevRunesBtn(x,y))
 	{
 		log_msg("push up left button prev runes\n");
 		if (isDownBtn.prevRunes)
@@ -271,7 +280,7 @@ DWORD STDCALL mouseRunewordsPageLeftUp(sWinMessage* msg)
 			if (curRunesPage) curRunesPage--;
 		}
 	}
-	else if (isOnNextRunesBtn(msg->x,msg->y))
+	else if (isOnNextRunesBtn(x,y))
 	{
 		log_msg("push up left button next runes\n");
 		if (isDownBtn.nextRunes)

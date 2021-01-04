@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
 	Updating server.
 
@@ -15,6 +15,8 @@
 #include "extraOptions.h"
 #include "windowed.h"
 #include "common.h"
+#include "savePlayerData.h"
+#include <stdio.h>
 
 bool active_Commands=true;
 
@@ -35,14 +37,19 @@ const char * CMD_UNLOCK_MOUSE2 = "/unlock";
 
 const char * CMD_RENAME_CHAR="/renamechar";
 
-const char * CMD_REPAGE_NAME = "/renamepage";
+const char * CMD_RENAME_PAGE = "/renamepage";
+const char * CMD_SHORT_RENAME_PAGE = "/rp";
 const char * CMD_SET_INDEX = "/setindex";
 const char * CMD_SET_MAIN_INDEX = "/setmainindex";
 const char * CMD_RESET_INDEX = "/resetindex";
 const char * CMD_INSERT_PAGE = "/insertpage";
+const char * CMD_SHORT_INSERT_PAGE = "/ip";
 const char * CMD_DELETE_PAGE = "/deletepage";
-const char * CMD_SWAP = "/swap";
-const char * CMD_TOGGLE = "/toggle";
+const char * CMD_SHORT_DELETE_PAGE = "/dp";
+const char * CMD_SWAP_PAGE = "/swappage";
+const char * CMD_SHORT_SWAP_PAGE = "/sp";
+const char * CMD_TOGGLE_PAGE = "/togglepage";
+const char * CMD_SHORT_TOGGLE_PAGE = "/tp";
 
 const char * CMD_DISPLAY_MANA_LIFE = "/dml";
 const char * CMD_DISPLAY_LIFE_MANA = "/dlm";
@@ -173,29 +180,29 @@ void gambleReload(Unit* ptChar)
 */
 
 
-void gambleReload(Unit* ptChar)
+/*void gambleReload(Unit* ptChar)
 {
 	Unit* ptNPC = D2GetCurrentNPC();
 	if (ptNPC)
 	{
 		D2TogglePage(0xC,1,0);
-		__asm {
-			NOP
-			NOP
-			NOP
-			NOP
-			NOP
-			NOP
-			NOP
-			NOP
-			NOP
-			NOP
-		}
-//		D2OpenNPCMenu(ptNPC);
+		//Game* ptGame = ptChar->ptGame;
+		//DWORD caller = offset_D2Game + 0x74900;
+		//__asm {
+		//	PUSH 0
+		//	PUSH 6
+		//	PUSH 2
+		//	PUSH ptGame
+		//	MOV ECX, ptChar
+		//	CALL caller
+		//}
+		//0330CD70   . 837C24 08 0D   CMP DWORD PTR SS:[ESP+8],0D
+		D2OpenNPCMenu(ptNPC);
 		D2ReloadGambleScreen();
 	}
 }
 //6FACFFD4  |. E8 77F90000    CALL D2Client.6FADF950
+*/
 
 void savePlayers(Unit* ptChar)
 {
@@ -207,15 +214,15 @@ void maxGold(Unit* ptChar)
 {
 	log_msg("maxGold\n");
 
-	DWORD maxGold =     D2GetMaxGold(ptChar);
+	DWORD maxGold = D2GetMaxGold(ptChar);
 	DWORD maxGoldBank = D2GetMaxGoldBank(ptChar);
 	DWORD playerGold = D2GetPlayerStat(ptChar, STATS_GOLD, 0);
 	DWORD playerGoldBank = D2GetPlayerStat(ptChar, STATS_GOLDBANK, 0);
 	if ( (playerGold < maxGold) || (playerGoldBank < maxGoldBank) ) {
-		D2AddPlayerStat( ptChar, STATS_GOLD,	 maxGold-playerGold, 0 );
+		D2AddPlayerStat( ptChar, STATS_GOLD, maxGold-playerGold, 0 );
 		D2AddPlayerStat( ptChar, STATS_GOLDBANK, maxGoldBank-playerGoldBank, 0 );
 	} else {
-		D2AddPlayerStat( ptChar, STATS_GOLD,	 100000, 0 );
+		D2AddPlayerStat( ptChar, STATS_GOLD, 100000, 0 );
 	}
 	if (active_sharedGold)
 	{
@@ -263,7 +270,57 @@ void updateSharedGold(DWORD goldAmount)
 	PCPY->sharedGold = goldAmount;
 }
 
-bool renameCharacter(Unit* ptChar, const char* newName)
+bool renamePage(Unit* ptChar, char* newName)
+{
+	Stash* ptStash = PCPY->currentStash;
+	if (!ptStash)
+		return 0;
+
+	log_msg("Rename current page on Client : '%s' -> '%s'\n", ptStash->name, newName);
+	int len = strlen(newName);
+	// trim text
+	while (newName[0] == ' ')
+	{
+		newName++;
+		len--;
+	}
+	while (len > 0 && newName[len-1] == ' ')
+	{
+		newName[len-1] = NULL;
+		len--;
+	}
+	// Fix max length
+	if (len > 20)
+	{
+		newName[20] = NULL;
+		len = 20;
+	}
+
+	// Check if new name is default name
+	char defautText[50];
+	wcstombs(defautText, getDefaultStashName(ptChar), 50);
+	if (!strcmp(newName, defautText))
+	{
+		newName[0] = NULL;
+		len = 0;
+	}
+
+	// Check if the name change
+	if (newName[0] == NULL && (ptStash->name == NULL || ptStash->name[0] == NULL))
+		return 0;
+
+	if (ptStash->name && !strcmp(newName, ptStash->name))
+		return 0;
+
+	// Rename the page
+	log_msg("Rename current page valid : '%s' (%s)\n", newName, defautText);
+	renameCurrentStash(ptChar, newName);
+	for (int i = 0; i <= len; i++)
+		updateServer(US_PAGENAME + (newName[i] << 8));
+	return 0;
+}
+
+bool renameCharacter(Unit* ptChar, char* newName)
 {
 	int len = strlen(newName);
 	if (len < 2 || len > 15)
@@ -274,7 +331,10 @@ bool renameCharacter(Unit* ptChar, const char* newName)
 		if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == '_')))
 			return 1;
 	}
+	log_msg("Rename Character : %s -> %s\n", PCPlayerData->name, newName);
+
 	// Move current save file
+	backupSaveFiles(PCPlayerData->name, -1);
 	{
 		char szCurrentFile[MAX_PATH];
 		char szNewFile[MAX_PATH];
@@ -282,7 +342,7 @@ bool renameCharacter(Unit* ptChar, const char* newName)
 		//Get temporary savefile name.
 		D2FogGetSavePath(szCurrentFile, MAX_PATH);
 		D2FogGetSavePath(szNewFile, MAX_PATH);
-		strcat(szCurrentFile, ptChar->ptPlayerData->name);
+		strcat(szCurrentFile, PCPlayerData->name);
 		strcat(szNewFile, newName);
 		strcat(szCurrentFile, ".");
 		strcat(szNewFile, ".");
@@ -290,7 +350,8 @@ bool renameCharacter(Unit* ptChar, const char* newName)
 		int newLen = strlen(szNewFile);
 		strcpy(&szCurrentFile[curLen], "d2s");
 		strcpy(&szNewFile[newLen], "d2s");
-		MoveFile(szCurrentFile, szNewFile);
+		if (!MoveFile(szCurrentFile, szNewFile))
+			return 0;
 		strcpy(&szCurrentFile[curLen], "d2x");
 		strcpy(&szNewFile[newLen], "d2x");
 		MoveFile(szCurrentFile, szNewFile);
@@ -316,16 +377,19 @@ bool renameCharacter(Unit* ptChar, const char* newName)
 		strcpy(&szNewFile[newLen], "map");
 		MoveFile(szCurrentFile, szNewFile);
 	}
+
 	// Update server
 	for (int i = 0; i <= len; i++)
 		updateServer(US_RENAME + (newName[i] << 8));
 
 	// Update client
-	log_msg("Rename on Client : %s -> %s\n", ptChar->ptPlayerData->name, newName);
-	strcpy(ptChar->ptPlayerData->name, newName);
+	log_msg("Rename on Client : %s -> %s\n", PCPlayerData->name, newName);
+	strcpy(PCPlayerData->name, newName);
+
 	updateServer(US_SAVE);
 	return 0;
 }
+
 /****************************************************************************************************/
 
 int STDCALL commands (char* ptText)
@@ -376,41 +440,25 @@ int STDCALL commands (char* ptText)
 
 	if (!strncmp(command, CMD_RENAME_CHAR, strlen(CMD_RENAME_CHAR)))
 	{
-		const char* param = &ptText[strlen(CMD_RENAME_CHAR)];
+		char* param = &ptText[strlen(CMD_RENAME_CHAR)];
 		if (param[0] != ' ')
 			return 1;
 		param++;
 		return renameCharacter(ptChar, param);
 	}
 
-	if (!strncmp(command, CMD_REPAGE_NAME,strlen(CMD_REPAGE_NAME)))
+	if (!strncmp(command, CMD_RENAME_PAGE, strlen(CMD_RENAME_PAGE)))
 	{
 		if (!active_multiPageStash) return 1;
-		char* param = &ptText[strlen(CMD_REPAGE_NAME)];
-		Stash* ptStash = PCPY->currentStash;
-		if (!ptStash)
-			return 0;
+		char* param = &ptText[strlen(CMD_RENAME_PAGE)];
+		return renamePage(ptChar, param);
+	}
 
-		int len = strlen(param);
-		while (len > 0 && param[0] == ' ')
-		{
-			param++;
-			len--;
-		}
-		if (len > 0 && len <= 15)
-		{
-			log_msg("Rename current page on Client : %s -> %s\n", ptStash->name, param);
-			renameCurrentStash(ptChar, param);
-			for (int i = 0; i <= len; i++)
-				updateServer(US_PAGENAME + (param[i] << 8));
-		}
-		else if (len == 0)
-		{
-			log_msg("Rename current page on Client: %s\n", ptStash->name);
-			renameCurrentStash(ptChar, NULL);
-			updateServer(US_PAGENAME);
-		}
-		return 0;
+	if (!strncmp(command, CMD_SHORT_RENAME_PAGE, strlen(CMD_SHORT_RENAME_PAGE)))
+	{
+		if (!active_multiPageStash) return 1;
+		char* param = &ptText[strlen(CMD_SHORT_RENAME_PAGE)];
+		return renamePage(ptChar, param);
 	}
 
 	if (!strcmp(command, CMD_SET_INDEX))
@@ -442,6 +490,14 @@ int STDCALL commands (char* ptText)
 		return 0;
 	}
 
+	if (!strcmp(command, CMD_SHORT_INSERT_PAGE))
+	{
+		if (!active_multiPageStash) return 1;
+		insertStash(ptChar);
+		updateServer(US_INSERT_PAGE);
+		return 0;
+	}
+
 	if (!strcmp(command, CMD_DELETE_PAGE))
 	{
 		if (!active_multiPageStash) return 1;
@@ -450,10 +506,18 @@ int STDCALL commands (char* ptText)
 		return 0;
 	}
 
-	if (!strncmp(command, CMD_SWAP, strlen(CMD_SWAP)))
+	if (!strcmp(command, CMD_SHORT_DELETE_PAGE))
 	{
 		if (!active_multiPageStash) return 1;
-		int page = atoi(&command[strlen(CMD_SWAP)]) - 1;
+		if (deleteStash(ptChar, true))
+			updateServer(US_DELETE_PAGE);
+		return 0;
+	}
+
+	if (!strncmp(command, CMD_SWAP_PAGE, strlen(CMD_SWAP_PAGE)))
+	{
+		if (!active_multiPageStash) return 1;
+		int page = atoi(&command[strlen(CMD_SWAP_PAGE)]) - 1;
 		if (page < 0 && PCPY->currentStash->nextStash)
 			page = PCPY->currentStash->nextStash->id;
 		if (page < 0)
@@ -465,10 +529,38 @@ int STDCALL commands (char* ptText)
 		return 0;
 	}
 
-	if (!strncmp(command, CMD_TOGGLE, strlen(CMD_TOGGLE)))
+	if (!strncmp(command, CMD_SHORT_SWAP_PAGE, strlen(CMD_SHORT_SWAP_PAGE)))
+	{
+		if (!active_multiPageStash) return 1;
+		int page = atoi(&command[strlen(CMD_SHORT_SWAP_PAGE)]) - 1;
+		if (page < 0 && PCPY->currentStash->nextStash)
+			page = PCPY->currentStash->nextStash->id;
+		if (page < 0)
+			return 1;
+		updateServer(US_SWAP3 + ((page & 0xFF000000) >> 16));
+		updateServer(US_SWAP2 + ((page & 0xFF0000) >> 8));
+		updateServer(US_SWAP1 + (page & 0xFF00));
+		updateServer(US_SWAP0 + ((page & 0xFF) << 8));
+		return 0;
+	}
+
+	if (!strncmp(command, CMD_TOGGLE_PAGE, strlen(CMD_TOGGLE_PAGE)))
 	{
 		if (!active_sharedStash) return 1;
-		int page = atoi(&command[strlen(CMD_TOGGLE)]) - 1;
+		int page = atoi(&command[strlen(CMD_TOGGLE_PAGE)]) - 1;
+		if (page < 0)
+			return 1;
+		updateServer(US_SWAP3 + ((page & 0xFF000000) >> 16));
+		updateServer(US_SWAP2 + ((page & 0xFF0000) >> 8));
+		updateServer(US_SWAP1 + (page & 0xFF00));
+		updateServer(US_SWAP0_TOGGLE + ((page & 0xFF) << 8));
+		return 0;
+	}
+
+	if (!strncmp(command, CMD_SHORT_TOGGLE_PAGE, strlen(CMD_SHORT_TOGGLE_PAGE)))
+	{
+		if (!active_sharedStash) return 1;
+		int page = atoi(&command[strlen(CMD_SHORT_TOGGLE_PAGE)]) - 1;
 		if (page < 0)
 			return 1;
 		updateServer(US_SWAP3 + ((page & 0xFF000000) >> 16));
@@ -516,6 +608,45 @@ int STDCALL commands (char* ptText)
 	//	updateServer(US_MAXGOLD);
 	//	return 0;
 	//}
+
+	//if (!strcmp(command,"t"))
+	//{
+	//	//test();
+	//	FILE* file = fopen("D:\\tmp.txt", "wb+");
+	//	for (int i = 0; i<= 0xFFFF; i++)
+	//	{
+	//		fwprintf( file, L"== %04X ===================================\n%s\n", i, D2GetStringFromIndex(i) );
+	//	}
+	//	fclose(file);
+	//	return 0;
+	//}
+
+	if (!strcmp(command,"aa"))
+	{
+		#pragma pack(1)
+		struct {
+			BYTE displayType;//0x15 main msg;  0x14: char popup
+			BYTE un;
+			BYTE zero;
+			char string[0xFF];
+			char null;
+			char u1[0x100];
+			char u2[0x100];
+			char u3[0x100];
+		} data;
+		#pragma pack()
+
+		//D2SetNbPlayers(nbPlayersCommand);
+
+		memset(&data,0,sizeof(data));
+		data.displayType=0x15;
+		data.un=1;
+		data.zero=0;//*(BYTE*)(offset_D2Client+0x112CFC); in 1.10
+		data.null=NULL;
+		sprintf(data.string, "players %u", nbPlayersCommand);
+		D2SendMsgToAll((BYTE*)&data);
+		return 0;
+	}
 
 	return 1;
 }
@@ -571,7 +702,7 @@ void Install_Commands()
 
 	// Run custom commmand
 	mem_seek R8(D2Client, 2C120, 2C110, 32BDD, C1EE6, 91C16, 86926, 70AE6, B1FD6, 7C548);
-	memt_byte( 0x83, 0xE8 );	// CALL 
+	memt_byte( 0x83, 0xE8 );	// CALL
 	MEMT_REF4( 0xC08508C4 , version_D2Client >= V113d ? caller_Commands_113d : version_D2Client >= V111 ? caller_Commands_111 : caller_Commands);
 	//6FB71EE6   . 83C4 08        ADD ESP,8
 	//6FB71EE7   . 85C0           TEST EAX,EAX
@@ -585,6 +716,8 @@ void Install_Commands()
 	//6FB20AE9  |. 85C0           TEST EAX,EAX
 	//6FB61FD6  |. 83C4 08        ADD ESP,8
 	//6FB61FD9  |. 85C0           TEST EAX,EAX
+	//0047C548  |. 83C4 08        ADD ESP,8
+	//0047C54B  |. 85C0           TEST EAX,EAX
 
 	log_msg("\n");
 

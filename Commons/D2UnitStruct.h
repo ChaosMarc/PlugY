@@ -1,10 +1,10 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-   @brief Diablo II Unit Structures definitions.
+	@brief Diablo II Unit Structures definitions.
 
-   NOT TESTED IN 1.10 (1.09b)
- 
+	NOT TESTED IN 1.10 (1.09b)
+
 =================================================================*/
 
 #pragma once
@@ -16,6 +16,14 @@ struct Unit;
 struct SkillsBIN;
 struct SkillData;
 struct ObjectsBIN;
+struct NetClient;
+
+struct Game;
+struct ActMap;
+struct ActData;
+struct Level;
+struct RoomEx;
+struct Room;
 
 /*=================================================================*/
 /*  Skill Structure.                                               */
@@ -59,7 +67,7 @@ struct Position
 	DWORD y;
 };
 
-struct Room//size=0x80
+/*struct Room//size=0x80
 {
 //ptRoom +48 0 = spawn new units (monster, objects e.tc), 1 = don't spawn any new units
 	DWORD	seed1;						//+00
@@ -79,23 +87,113 @@ struct Room//size=0x80
 			BYTE isGenerated2:1;//???
 		};
 	};
-};
+};*/
 
-struct ActMap//ptGame+BC size=0x60
+struct RoomEx //size=5C
 {
-	DWORD	isNotManaged;
-	DWORD	uk4;
-	DWORD	uk8;//size = 0x488
-	Room*	ptFirstRoom;
+	DWORD		__00[2];		//0x00
+	RoomEx**	roomExNear;		//0x08
+	DWORD		__0C[5];		//0x0C
+	struct {
+		INT32	roomNumber;		//0x00
+		void*	__04;			//0x04
+		PINT32	subNumber;		//0x08
+	} *pType2Info;				//0x20
+	RoomEx*		ptNextRoomEx;	//0x24
+	UINT32		roomFlags;		//0x28
+	UINT32		roomsNearCount;	//0x2C
+	Room*		ptRoom;			//0x30
+	INT32		posX;			//0x34
+	INT32		posY;			//0x38
+	INT32		sizeX;			//0x3C
+	INT32		sizeY;			//0x40
+	DWORD		__44;			//0x44
+	UINT32		presetType;		//0x48
+	void*		ptWarpTiles;	//0x4C
+	DWORD		__50[2];		//0x50
+	Level*		ptLevel;		//0x58
 };
 
-struct NetClient;
+struct Room //size=0x80
+{
+	Room**		ptNearRooms;		//0x00
+	DWORD		__04[3];			//0x04
+	RoomEx*		ptRoomEx;			//0x10
+	DWORD		__14[3];			//0x14
+	void*		coll;				//0x20
+	INT32		nbNearRooms;		//0x24
+	DWORD		__28[9];			//0x28
+	DWORD		startX;				//0x4C
+	DWORD		startY;				//0x50
+	DWORD		sizeX;				//0x54
+	DWORD		sizeY;				//0x58
+	DWORD		__5C[6];			//0x5C
+	Unit*		ptFirstUnit;		//0x74
+	DWORD		__78;				//0x78
+	Room*		ptNextRoom;			//0x7C
+};
+
+struct Level //size=0x234
+{
+	DWORD		type;				//+000
+	DWORD		flags;				//+004
+	DWORD		__004_010[2];		//+008
+	RoomEx*		ptFirstRoomEx;		//+010
+	DWORD		__014_01C[2];		//+014
+	INT32		posX;				//+01C
+	INT32		posY;				//+020
+	INT32		sizeX;				//+024
+	INT32		sizeY;				//+028
+	DWORD		__0C2_1AC[96];		//+02C
+	Level*		ptNextLevel;		//+1AC
+	DWORD		__1B0;				//+1B0
+	ActData*	ptActData;			//+1B4
+	DWORD		__1B8_1C0[2];		//+1B8
+	DWORD		levelType;			//+1C0
+	DWORD		seed1;				//+1C4
+	DWORD		seed2;				//+1C8
+	DWORD		uk_1CC;				//+1CC
+	UINT32		levelNo;			//+1D0
+	DWORD		__1D4_234[96];		//+1D4
+};
+
+struct ActData //size=0x488
+{
+	DWORD		seed1;				//+000
+	DWORD		seed2;				//+004
+	DWORD		nbRooms;			//+008
+	DWORD		__00C_0094[34];		//+00C
+	DWORD		nTalRashaTombLevel;	//094
+	DWORD		__098;				//+098
+	Game*		ptGame;				//+09C
+	DWORD		__0A0_450[237];		//+0A0
+	BYTE		difficulty;			//+450
+	BYTE		__451_46C[27];		//+451
+	ActMap*		ptActMap;			//+46C
+	DWORD		__470_484[5];		//+470
+	DWORD		nBossMummyTombLevel;//+484
+};
+
+struct ActMap //size=0x60
+{
+	DWORD		isNotManaged;		//+00
+	DWORD		__04;				//+04
+	DWORD		townLevel;			//+08
+	DWORD		seed;				//+0C
+	Room*		ptFirstRoom;		//+10
+	DWORD		actNumber;			//+14
+	DWORD		__18_48[12];		//+18
+	ActData*	ptActData;			//+48
+	DWORD		__50_5C[4];			//+4C
+	void*		ptMemoryPool;		//+5C
+};
+
 //ptGame : 04E4007C
 struct Game
-{                              			//Offset from Code.
+{										//Offset from Code.
 	BYTE	uk1[0x18];					//+00
-	DWORD	_ptLock;					//+18 Unknown  
-	DWORD	memoryPool;					//+1C Memory Pool (??)  
+	DWORD	_ptLock;					//+18 Unknown
+	DWORD	memoryPool;					//+1C Memory Pool (??)
 	BYTE	uk2[0x4D];					//+20
 	BYTE	difficultyLevel;			//+6D (Difficulty 0,1 or 2)
 	WORD	unknown1;					//+6E Cube puts 4 here
@@ -104,7 +202,9 @@ struct Game
 	WORD	unknown2;					//+78
 	BYTE	uk4[0x0E];					//+7A
 	NetClient*	ptClient;				//+88
-	BYTE	uk8C[0x30];					//+8C
+	BYTE	__8C[0x1C];					//+8C
+	DWORD	gameFrame;					//+A8
+	BYTE	__AC[0x10];					//+AC
 	ActMap*	mapAct[5];					//+BC
 	BYTE	ukD0[0x1024];				//+D0
 	DWORD*	game10F4;					//+10F4
@@ -117,7 +217,7 @@ struct Game
 
 
 struct Path //(8 dword)
-{                              			//Offset from Code.		Size: 20
+{										//Offset from Code.		Size: 20
 	WORD	uk1;						//+00
 	WORD	mapx;						//+02
 	WORD	uk2;						//+04
@@ -132,7 +232,7 @@ struct Path //(8 dword)
 
 
 struct Inventory
-{                               		//Offset from Code.		Size: 30 � 40
+{										//Offset from Code.		Size: 30 to 40
 	DWORD	tag;						//+00	= 0x01020304
 	BYTE	uk1[0x04];					//+04	=? 0
 	Unit*	ptChar;						//+08
@@ -200,24 +300,49 @@ struct Stats				//sizeof(Stats)=0x64
 	DWORD	unknow2;				//+60 (=0)
 };
 
+struct AIControl
+{
+	DWORD	specialState;		// +00 SpecialState - stuff like terror, confusion goes here
+	void*	aiFunction;			// +04 fpAiFunction(); - the primary ai function to call (void * __fastcall)(pGame,pUnit,pAiTickArgs);
+	DWORD	aiFlags;		    // +08 AiFlags
+	DWORD	ownerGUID;			// +0C OwnerGUID - the global unique identifier of the boss or minion owner
+	DWORD	ownerType;			// +10 eOwnerType - the unit type of the boss or minion owner
+	DWORD	args[3];			// +14 dwArgs[3] - three dwords holding custom data used by ai func to store counters (etc)
+	void*	cmdCurrent;			// +20 pCmdCurrents
+	void*	cmdLast;			// +24 pCmdLast
+	Game*	ptGame;				// +28 pGame
+	DWORD	ownerGUID2;			// +2C OwnerGUID - the same as +008
+	DWORD	ownerType2;			// +30 eOwnerType - the same as +00C
+	void*	minionList;			// +34 pMinionList - list of all minions, for boss units (SetBoss in MonStats, Unique, SuperUnique etc)
+	DWORD	trapNo;				// +3C eTrapNo - used by shadows for summoning traps (so they stick to one type usually)
+};
 
 struct MonsterData					// sizeof(MonsterData)=0x60
 {										//Offset from Code.
-    BYTE	uk[0x16];					//+00
- 	union {
-		WORD	flags;					//+16
-		struct {
-			WORD	fuk1:1;
-			WORD	isSuperUnique:1;
-			WORD	isChampion:1;
-			WORD	isUnique:1;
-			WORD	fuk2:13;
+	MonStatsBIN*	ptMonStats;			//+000 - pMonStats - record in monstats.txt
+	BYTE			components[0x10];	//+004 - Components[16] - bytes holding the component Ids for each component; Order: HD, TR, LG, RA, LA, RH, LH, SH, S1, S2, S3, S4, S5, S6, S7, S8
+	WORD			seed;				//+014 - NameSeed
+	union
+	{
+		BYTE		flags;				//+016 - TypeFlags
+		struct
+		{
+			BYTE	isOther:1;			// MONTYPE_OTHER(set for some champs, uniques)
+			BYTE	isSuperUnique:1;	// MONTYPE_SUPERUNIQUE
+			BYTE	isChampion:1;		// MONTYPE_CHAMPION
+			BYTE	isUnique:1;			// MONTYPE_UNIQUE
+			BYTE	isMinion:1;			// MONTYPE_MINION
+			BYTE	isPossessed:1;		// MONTYPE_POSSESSED
+			BYTE	isGhostly:1;		// MONTYPE_GHOSTLY
+			BYTE	isMultishot:1;		// MONTYPE_MULTISHOT
 		};
 	};
-   BYTE		uk1[0x0E];					//+18
-   WORD		superUniqueID;				//+26
-   void*	unknow1;					//+28
-   BYTE		uk2[0x38];					//+28
+	BYTE			lastMode;			//+017 - eLastMode
+	DWORD			duriel;				//+018 - dwDuriel - set only for duriel
+	BYTE			monUModList[10];	//+01C - MonUModList[9] - nine bytes holding the Ids for each MonUMod assigned to the unit
+	DWORD			superUniqueID;		//+026
+	AIControl*		ptAiGeneral;		//+02A
+	BYTE			uk2[0x32];			//+02E
 };
 
 struct ObjectData
@@ -226,15 +351,15 @@ struct ObjectData
 	BYTE		levelID;
 };
 /*
-Kingpin: struct MonsterData   
-{  
-     BYTE     uk1[0x13];          // +00  
-     DWORD     Flags;               // +14  
-     DWORD     uk2;               // +18  
-     DWORD     MinionOwnerID;     // +1C  
-     BYTE     uk3[0x5];          // +20  
-     WORD     SuperUniqueID;     // +26 Superunique ID of monster  
-     D2Game*     ptGame;               // +28 ptGame  
+Kingpin: struct MonsterData
+{
+     BYTE     uk1[0x13];          // +00
+     DWORD     Flags;               // +14
+     DWORD     uk2;               // +18
+     DWORD     MinionOwnerID;     // +1C
+     BYTE     uk3[0x5];          // +20
+     WORD     SuperUniqueID;     // +26 Superunique ID of monster
+     D2Game*     ptGame;               // +28 ptGame
 };
 */
 
@@ -269,27 +394,27 @@ struct ItemData//size=0x74
 		};
 	};
 /*
-ITEMFLAG_NEWITEM               = 0x00000001,  
-ITEMFLAG_TAGETING               = 0x00000004,  
-ITEMFLAG_UNIDENTIFIED               = 0x00000010,  
-ITEMFLAG_QUANTITY               = 0x00000020,  
-ITEMFLAG_Durability               = 0x00000100,  
+ITEMFLAG_NEWITEM               = 0x00000001,
+ITEMFLAG_TAGETING               = 0x00000004,
+ITEMFLAG_UNIDENTIFIED               = 0x00000010,
+ITEMFLAG_QUANTITY               = 0x00000020,
+ITEMFLAG_Durability               = 0x00000100,
 ITEMFLAG_UNKNOWN2               = 0x00000400,
-ITEMFLAG_SOCKETED               = 0x00000800,  
-ITEMFLAG_NON_SELLABLE               = 0x00001000,  
-ITEMFLAG_NEWITEM2               = 0x00002000,  
+ITEMFLAG_SOCKETED               = 0x00000800,
+ITEMFLAG_NON_SELLABLE               = 0x00001000,
+ITEMFLAG_NEWITEM2               = 0x00002000,
 ITEMFLAG_UNKNOWN3               = 0x00004000,
-ITEMFLAG_CHECKSECPRICE               = 0x00010000,  
-ITEMFLAG_CHECKGAMBLEPRICE          = 0x00020000,  
+ITEMFLAG_CHECKSECPRICE               = 0x00010000,
+ITEMFLAG_CHECKGAMBLEPRICE          = 0x00020000,
 ITEMFLAG_UNKNOWN4               = 0x00080000,
-ITEMFLAG_INDESTRUCTIBLE(ETHERAL) = 0x00400000,  
+ITEMFLAG_INDESTRUCTIBLE(ETHERAL) = 0x00400000,
 ITEMFLAG_UNKNOWN5               = 0x00800000,
-ITEMFLAG_FROMPLAYER               = 0x01000000,  
+ITEMFLAG_FROMPLAYER               = 0x01000000,
 ITEMFLAG_RUNEWORD               = 0x04000000
 */
-	DWORD	guid1;						//+1C Global Unique ID 1  
-	DWORD	guid2;						//+20 Global Unique ID 2  
-	DWORD	guid3;						//+24 Global Unique ID 3  
+	DWORD	guid1;						//+1C Global Unique ID 1
+	DWORD	guid2;						//+20 Global Unique ID 2
+	DWORD	guid3;						//+24 Global Unique ID 3
 	DWORD	uniqueID;					//+28
 	BYTE	ilvl;						//+2C
 	BYTE	uk1[0x03];					//+2D
@@ -300,7 +425,7 @@ ITEMFLAG_RUNEWORD               = 0x04000000
 	WORD	prefix[3];					//+38
 	WORD	suffix[3];					//+3E
 	BYTE	equipLoc;					//+44
-    /*	emplacement si �quip�
+    /*	location if equipped
 	*	00 = noequip/inBelt
 	*   01 = head
 	*	02 = neck
@@ -326,7 +451,7 @@ ITEMFLAG_RUNEWORD               = 0x04000000
 	BYTE	ItemData3;					//+47 //D2Common10854 D2Common10853
 	BYTE	pEarLevel;					//+48
 	BYTE	varGfx;						//+49
-	char	IName[0x12];				//+4A //inscribed/ear name  
+	char	IName[0x12];				//+4A //inscribed/ear name
 	Inventory*	ptInventory;			//+5C
 	Unit*	ptPrevItem;					//+60
 	Unit*	ptNextItem;					//+64
@@ -360,12 +485,12 @@ struct NetClient
 	//+1A8 is ptGame
 	//+4A8 ptNextClient
 /*
-Kingpin: ptPclient  
-+16C is either act or unit type 
-+170 Active UniqueID for player 
-+174 Active ptPlayer on Client 
-+1a8 ptGame 
-+1b4 Current or next ptRoom  
+Kingpin: ptPclient
++16C is either act or unit type
++170 Active UniqueID for player
++174 Active ptPlayer on Client
++1a8 ptGame
++1b4 Current or next ptRoom
 */
 };
 /*
@@ -376,20 +501,20 @@ struct PlayerData
 	NetClient*	ptNetClient;			//+9C
 };
 */
-struct PlayerData   
-{  
-	char		name[0x10];				//+00	Player Name  
-	void*		ptQuest[3];				//+10	Quest Pointers for each difficulty  
+struct PlayerData
+{
+	char		name[0x10];				//+00	Player Name
+	void*		ptQuest[3];				//+10	Quest Pointers for each difficulty
 	BYTE		uk1[0x18];				//+1C		//before : 0x14
-	void*		ptArenaUnit;			//+34	ptArena for the Unit  
+	void*		ptArenaUnit;			//+34	ptArena for the Unit
 	BYTE		uk2[0x4];				//+38		//before : 0x7
-	WORD		MPSourcePortalUniqueID;	//+3C	Source Portal Unique_ID  
+	WORD		MPSourcePortalUniqueID;	//+3C	Source Portal Unique_ID
 	BYTE		uk3[0x2];				//+3E
-	WORD		MPDestPortalUniqueID;	//+40	Destination Portal Unique_ID  
-	BYTE		uk4[0x06];				//+42  
-	BYTE		ptObjectUnID;			//+48	Object UniqueID for TownPortals       
-	BYTE		uk5[0x53];				//+49  
-	NetClient*	ptNetClient;			//+9C	ptClient  
+	WORD		MPDestPortalUniqueID;	//+40	Destination Portal Unique_ID
+	BYTE		uk4[0x06];				//+42
+	BYTE		ptObjectUnID;			//+48	Object UniqueID for TownPortals
+	BYTE		uk5[0x53];				//+49
+	NetClient*	ptNetClient;			//+9C	ptClient
 };
 
 
@@ -400,11 +525,11 @@ struct Unit
 	DWORD		nUnitType;				//+00
 	union{
 		DWORD			nPlayerClass;
-		DWORD			nTxtFileNo;         
+		DWORD			nTxtFileNo;
     };									//+04
 	DWORD		nUnitId;				//+08
 	DWORD		nItemNum;				//+0C
-	DWORD		CurrentAnim;			//+10
+	DWORD		mode;					//+10
 	union{
 		MonsterData*	ptMonsterData;
 		ObjectData*		ptObjectData;
@@ -452,7 +577,7 @@ struct Unit
 	BYTE		uk10[0x0C];				//+D4
 	Unit*		ptFirstMonster;			//+E0
 	Unit*		Unit1;					//+E4
-	Unit*		Unit2;					//+E8
+	Unit*		ptNextUnitInRoom;		//+E8
 	BYTE		uk11[0x08];				//+EC
 	union{
 		CBPlayerData*	ptCBPlayerData;
@@ -480,60 +605,60 @@ struct ItemMod
 
 struct AIStruct
 {
-    DWORD mSpawn;       // +00
-    void* mAIFunc;      // +04
-    DWORD mUnknown1[8]; // +08
-    D2Game* mGame;      // +28
-    DWORD mMinionOwner; // +2C
-    DWORD mOwnerType;   // +30
+	DWORD mSpawn;       // +00
+	void* mAIFunc;      // +04
+	DWORD mUnknown1[8]; // +08
+	D2Game* mGame;      // +28
+	DWORD mMinionOwner; // +2C
+	DWORD mOwnerType;   // +30
 };
 
 
 struct LocInfo
 {                       //Offset from Code
-    Unit* noneLoc;      //+00
-    Unit* headLoc;      //+04
-    Unit* neckLoc;      //+08
-    Unit* torsoLoc;     //+0c
-    Unit* rightArmLoc;  //+10
-    Unit* leftArmLoc;   //+14
-    Unit* rightRingLoc; //+18
-    Unit* leftRingLoc;  //+1c
-    Unit* beltLoc;      //+20
-    Unit* feetLoc;      //+24
-    Unit* glovesLoc;    //+28
+	Unit* noneLoc;      //+00
+	Unit* headLoc;      //+04
+	Unit* neckLoc;      //+08
+	Unit* torsoLoc;     //+0c
+	Unit* rightArmLoc;  //+10
+	Unit* leftArmLoc;   //+14
+	Unit* rightRingLoc; //+18
+	Unit* leftRingLoc;  //+1c
+	Unit* beltLoc;      //+20
+	Unit* feetLoc;      //+24
+	Unit* glovesLoc;    //+28
 };
 
-struct ItemData 
+struct ItemData
 {                        // Offset from Code
 	DWORD quality;       // +00.
-    DWORD lowSeed;       // +04.
-    DWORD highSeed;      // +08.
-    DWORD unknown1;      // +0c.
-    DWORD startLowSeed;  // +10.
-    DWORD cmdFlags;      // +14.
-    DWORD flags;         // +18.
-    DWORD unknown2[2];   // +1C
-    DWORD originID;      // +24.
-    DWORD iLvl;          // +28.
-    WORD  version;       // +2C.
-    WORD  prefix;        // +2E.
-    WORD  suffix;        // +30.
-    WORD  autoPrefix;    // +32.
-    WORD  prefix1;       // +34.
-    WORD  prefix2;       // +36.
-    WORD  prefix3;       // +38.
-    WORD  suffix1;       // +3A.
-    WORD  suffix2;       // +3C.
-    WORD  suffix3;       // +3E.
-    BYTE  bodyLoc;       // +40.	// 0=inv/stash 4=gaucheS 5=droiteS
-    BYTE  inPage;        // +41.	// FF=equip 00=inv 04=stash
-    BYTE  unknown3[3];   // +42
-    BYTE  picture[8];    // +45
-    DWORD ilvl;          // +4C
+	DWORD lowSeed;       // +04.
+	DWORD highSeed;      // +08.
+	DWORD unknown1;      // +0c.
+	DWORD startLowSeed;  // +10.
+	DWORD cmdFlags;      // +14.
+	DWORD flags;         // +18.
+	DWORD unknown2[2];   // +1C
+	DWORD originID;      // +24.
+	DWORD iLvl;          // +28.
+	WORD  version;       // +2C.
+	WORD  prefix;        // +2E.
+	WORD  suffix;        // +30.
+	WORD  autoPrefix;    // +32.
+	WORD  prefix1;       // +34.
+	WORD  prefix2;       // +36.
+	WORD  prefix3;       // +38.
+	WORD  suffix1;       // +3A.
+	WORD  suffix2;       // +3C.
+	WORD  suffix3;       // +3E.
+	BYTE  bodyLoc;       // +40.	// 0=inv/stash 4=gaucheS 5=droiteS
+	BYTE  inPage;        // +41.	// FF=equip 00=inv 04=stash
+	BYTE  unknown3[3];   // +42
+	BYTE  picture[8];    // +45
+	DWORD ilvl;          // +4C
 };
 
-struct PresetUnit 
+struct PresetUnit
 {                                   //Offset from Code
 	DWORD           unitType;       //+00
 	DWORD           txtFileNo;      //+04
@@ -546,128 +671,128 @@ struct PresetUnit
 
 struct MissileData
 {
-+04 flags 
-+08 0 on start 
-+0c -1 on start 
-+20 nDirection 
-+28 range? 
-+2c range? 
-+30 level 
-+34 number of pierces (byte) 
-+35 (byte) 
-+36 (byte) 
-+37 (byte) 
-+38 range-activate 
++04 flags
++08 0 on start
++0c -1 on start
++20 nDirection
++28 range?
++2c range?
++30 level
++34 number of pierces (byte)
++35 (byte)
++36 (byte)
++37 (byte)
++38 range-activate
 };
 
 
-struct Combat 
+struct Combat
 {
-	DWORD mHeader;		// +00 : Always 0x32 
+	DWORD mHeader;		// +00 : Always 0x32
 	DWORD mDisplayFlag;	// +04 : Affect critical hit etc ...
 	DWORD mPhysicalDmg; // +08 : Values are << 8
 	DWORD mUnknown1;    // +0C
 	DWORD mFireDmg;		// +10 : Values are << 8
 	DWORD mUnknown2;    // +14
-    DWORD mBurnLeng;    // +18
-    DWORD mLtngDmg;     // +1C : values are << 8
-    DWORD mMagDmg;      // +20 : values are << 8
-    DWORD mColdDmg;     // +24 : values are << 8
-    DWORD mPoisDmg;     // +28 : ??
-    DWORD mPoisLeng;    // +2C
-    DWORD mColdLeng;    // +30
-    DWORD mFreezeLeng;  // +34
-    DWORD mLifeSteal;   // +38
-    DWORD mManaSteal;   // +3C
-    DWORD mUnknwon3;    // +40
-    DWORD mStunLeng;    // +44
-    DWORD mUnknown4;    // +48
-    DWORD mTotalDamage; // +4C
-    DWORD mUnknown5[6]; // +50
-    DWORD mOverlay;     // +68
-    DWORD mUnknwon6;    // +6C
+	DWORD mBurnLeng;    // +18
+	DWORD mLtngDmg;     // +1C : values are << 8
+	DWORD mMagDmg;      // +20 : values are << 8
+	DWORD mColdDmg;     // +24 : values are << 8
+	DWORD mPoisDmg;     // +28 : ??
+	DWORD mPoisLeng;    // +2C
+	DWORD mColdLeng;    // +30
+	DWORD mFreezeLeng;  // +34
+	DWORD mLifeSteal;   // +38
+	DWORD mManaSteal;   // +3C
+	DWORD mUnknwon3;    // +40
+	DWORD mStunLeng;    // +44
+	DWORD mUnknown4;    // +48
+	DWORD mTotalDamage; // +4C
+	DWORD mUnknown5[6]; // +50
+	DWORD mOverlay;     // +68
+	DWORD mUnknwon6;    // +6C
 };
 
 
 struct Node
 {                       //Offset from Code.
-    DWORD flag;         //+00 //Yoh : null->flag
-    Unit* ptItem;  		//+04 //Yoh : ItemData=>Unit
-    DWORD unID;         //+08
-    DWORD page;         //+0c //Yoh plutot etat : inventory/stash=1; inv-belt=2; equip=3
-    Node* nextNode;     //+10
+	DWORD flag;         //+00 //Yoh : null->flag
+	Unit* ptItem;		//+04 //Yoh : ItemData=>Unit
+	DWORD unID;         //+08
+	DWORD page;         //+0c //Yoh plutot etat : inventory/stash=1; inv-belt=2; equip=3
+	Node* nextNode;     //+10
 };
 
 
 
 struct MonsterData				// size110 : 60
 {
-    AIStruct*     AIPtr;
-    void*         unkonwPtr1;
-    void*         uniqueInfo;
-    void*         spawnInfo;
-    void*         unknownPtr2;
-    DWORD         unkown[8];
-    void*         lvlPtr;
-    MonStatTxt*   monstatPtr;
+	AIStruct*     AIPtr;
+	void*         unkonwPtr1;
+	void*         uniqueInfo;
+	void*         spawnInfo;
+	void*         unknownPtr2;
+	DWORD         unkown[8];
+	void*         lvlPtr;
+	MonStatTxt*   monstatPtr;
 };
 
 
-struct Unit 
+struct Unit
 {                               //Offset from Code.
 	DWORD   nUnitType;          //+00
-    union 
-    {
-	    DWORD   nTxtFileNo;         
-        DWORD   nPlayerClass;
-    };                          //+04
+	union
+	{
+		DWORD   nTxtFileNo;
+		DWORD   nPlayerClass;
+	};                          //+04
 
 	DWORD   nUnitId;            //+08
 	DWORD   eMode;              //+0c
-    DWORD*  unknow1;            //+10
-    DWORD   nAct;               //+14
-    DWORD   pActRelated;        //+18
-    DWORD   unknown2[4];        //Unknown Data at +1C
-    D2Seed  nSeed;              //+2C
-    DWORD   startSeed;          //+34
-    Path*   pPos;               //+38
+	DWORD*  unknow1;            //+10
+	DWORD   nAct;               //+14
+	DWORD   pActRelated;        //+18
+	DWORD   unknown2[4];        //Unknown Data at +1C
+	D2Seed  nSeed;              //+2C
+	DWORD   startSeed;          //+34
+	Path*   pPos;               //+38
 	DWORD   unknown3[6];        //Unknown Data at +3C
-    DWORD   animSpeed;          //+54
-    DWORD   unknown32[2];       //+58
-    BYTE    COFString[12];      //+60
-    Stats*  ptStats;            //+6C
-	
-    union 
-    {
+	DWORD   animSpeed;          //+54
+	DWORD   unknown32[2];       //+58
+	BYTE    COFString[12];      //+60
+	Stats*  ptStats;            //+6C
+
+	union
+	{
 		PlayerData*     pPlayerData;
 		MonsterData*    pMonsterData;
 		ItemData*       pItemData;
-        MissileData*    pMissile;
+		MissileData*    pMissile;
 		ObjectData*     pObjectData;
 	};                          //+70
 
 	DWORD   unknown5[2];        //+74
-    BYTE    unknown6[2];        //+7C
-    BYTE    rndDmg[2];          //+7e
-    DWORD   unknown7;           //+80
+	BYTE    unknown6[2];        //+7C
+	BYTE    rndDmg[2];          //+7e
+	DWORD   unknown7;           //+80
 	Inventory*  ptInventory;    //+84
 	DWORD   unknown8[4];        //+88
-    DWORD   startNull;          //+98
-    DWORD   unknown9[2];        //+9c
-    D2Game* ptGame;             //+a4
-    DWORD   unknown10[4];       //+a8
+	DWORD   startNull;          //+98
+	DWORD   unknown9[2];        //+9c
+	D2Game* ptGame;             //+a4
+	DWORD   unknown10[4];       //+a8
 	DWORD   nOwnerType;         //+b8
 	DWORD   nOwnerId;           //+bc
-    DWORD   unknown11[3];       //+c0
-    D2Info* ptInfo;             //+cc
-    Combat* ptCombat;           //+d0
-    DWORD   unknown12[5];       //+d4
-    DWORD   flags;              //+e8
-    DWORD   LODflag;            //+ec
+	DWORD   unknown11[3];       //+c0
+	D2Info* ptInfo;             //+cc
+	Combat* ptCombat;           //+d0
+	DWORD   unknown12[5];       //+d4
+	DWORD   flags;              //+e8
+	DWORD   LODflag;            //+ec
 	DWORD   unknown13[7];       //+f0
 	Unit*   pNext;              //+10c
 	DWORD	unknown14[2];		//+110	//YOH
-    union 
+    union
     {
 		ItemData*       ptItemData;
 		void*            ptData;

@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
 	Changing the current save path.
 
@@ -51,43 +51,47 @@ END_CHANGESP:
 }}
 
 FCT_ASM( changeSavePath_114 )
-    PUSH EAX
-    PUSH EDI
-    PUSH EDX
-    PUSH ESI
-    MOV ESI, EBX
-    MOV EDI, DWORD PTR DS : [savePath]
-    XOR AL, AL
-    CLD
-    OR ECX, 0xFFFFFFFF
-    REPNE SCAS BYTE PTR ES : [EDI]
-    NOT ECX
-    SUB EDI, ECX
-    XCHG EDI, ESI
-    CMP BYTE PTR[ESI + 1], ':'
-    JE END_CHANGESP
-    //RELATIVE_PATH:
-    MOV EDX, ECX
-    OR ECX, 0xFFFFFFFF
-    REPNE SCAS BYTE PTR ES : [EDI]
-    DEC EDI
-    CMP BYTE PTR[EDI - 1], '\\'
-    JE NEXT
-    MOV BYTE PTR[EDI], '\\'
-    INC EDI
-    NEXT :
-    MOV ECX, EDX
-    END_CHANGESP :
-    REP MOVS BYTE PTR ES : [EDI], BYTE PTR DS : [ESI]
-    POP ESI
-    POP EDX
-    POP EDI
-    POP EAX
-    CMP EAX, -1
-    JE DONOT_JMP
-    ADD DWORD PTR SS : [ESP], 5
-DONOT_JMP :
-    RETN
+	PUSH EAX
+	PUSH EDI
+	PUSH EDX
+	PUSH ESI
+	MOV ESI, EBX
+	MOV EDI,DWORD PTR DS:[savePath]
+	XOR AL,AL
+	CLD
+	OR ECX,0xFFFFFFFF
+	REPNE SCAS BYTE PTR ES:[EDI]
+	NOT ECX
+	SUB EDI,ECX
+	XCHG EDI,ESI
+	CMP BYTE PTR [ESI+1],':'
+	JE END_CHANGESP
+//RELATIVE_PATH:
+	MOV EDX,ECX
+	OR ECX,0xFFFFFFFF
+	REPNE SCAS BYTE PTR ES:[EDI]
+	DEC EDI
+	CMP BYTE PTR [EDI-1],'\\'
+	JE NEXT
+	MOV BYTE PTR [EDI],'\\'
+	INC EDI
+NEXT:
+	MOV ECX,EDX
+END_CHANGESP:
+	REP MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI]
+	POP ESI
+	POP EDX
+	POP EDI
+	POP EAX
+	PUSH EBX
+	CALL DWORD PTR[GetFileAttributesA]
+	CMP EAX,-1
+	JE DONOT_JMP
+	ADD DWORD PTR SS:[ESP],0x5
+	RETN
+DONOT_JMP:
+	ADD DWORD PTR SS:[ESP],0x1D
+	RETN
 }}
 
 FCT_ASM( changeSavePath_111 )
@@ -129,28 +133,6 @@ DONOT_JMP:
 	RETN
 }}
 
-FCT_ASM( forCreateSavePath_114 )
-    PUSH EDI
-    MOV ESI, EBX
-    MOV EDI, DWORD PTR DS : [savePath]
-    MOV ECX, EDI
-    CMP BYTE PTR DS : [EDI + 1], ':'
-    JNZ END_CREATESP
-    PUSH ESI
-    XOR AL, AL
-    CLD
-    OR ECX, 0xFFFFFFFF
-    REPNE SCAS BYTE PTR ES : [EDI]
-    NOT ECX
-    SUB EDI, ECX
-    XCHG EDI, ESI
-    REP MOVS BYTE PTR ES : [EDI], BYTE PTR DS : [ESI]
-    POP ESI
-END_CREATESP :
-    POP EDI
-    MOV DWORD PTR SS : [ESP + 8], ECX
-    JMP D2Storm503
-}}
 
 FCT_ASM ( forCreateSavePath )
 	PUSH EDI
@@ -175,7 +157,6 @@ END_CREATESP:
 }}
 
 
-
 void Install_ChangingSavePath()
 {
 	static int isInstalled = false;
@@ -185,7 +166,7 @@ void Install_ChangingSavePath()
 
 	if (version_Fog >= V111)
 	{
-		// Appel de notre fct d'ajout d'un sous-r�pertoire
+		// Call funtion to manage subfolder
 		mem_seek R8(Fog, 000, 000, 000, 185F6, 1C106, 1F086, 17F86, 1E146, 71A6);
 		memt_byte( 0x83 ,0xE8);				// CALL changeSavePath
 		MEMT_REF4( 0x0575FFF8, version_Fog == V114d ? changeSavePath_114 : changeSavePath_111);
@@ -199,24 +180,25 @@ void Install_ChangingSavePath()
 		//6FF67F89   . 75 05          JNZ SHORT Fog.6FF67F90
 		//6FF6E146   . 83F8 FF        CMP EAX,-1
 		//6FF6E149   . 75 05          JNZ SHORT Fog.6FF50F64
+		//004071A6  |. 83F8 FF        CMP EAX,-1
+		//004071A9  |. 75 05          JNZ SHORT Game.004071B0
 
-		// Pour cr�er le bon chemin de sauvegarde
-		mem_seek R8(Fog, 000, 000, 000, 18616, 1C126, 1F0A6, 17FA6, 1E166, 71CA);
-        if (version_Fog == V114d) {
-            MEMT_REF4(0x0000C582, forCreateSavePath_114);
-        } else {
-            MEMJ_REF4(D2Storm503, forCreateSavePath);
-        }
-		//6FF68615   . E8 A246FFFF    CALL <JMP.&Storm.#503>
-		//6FF6C125   . E8 C20BFFFF    CALL <JMP.&Storm.#503>
-		//6FF6F0A5   . E8 34DDFEFF    CALL <JMP.&Storm.#503>
-		//6FF67FA5   . E8 504EFFFF    CALL <JMP.&Storm.#503>
-		//6FF6E165   . E8 6AEBFEFF    CALL <JMP.&Storm.#503>
-
+		// Create the right save path
+		if (version_Fog < V114a)
+		{
+			mem_seek R8(Fog, 000, 000, 000, 18616, 1C126, 1F0A6, 17FA6, 1E166, 71CA);
+			MEMJ_REF4( D2Storm503, forCreateSavePath);
+			//6FF68615   . E8 A246FFFF    CALL <JMP.&Storm.#503>
+			//6FF6C125   . E8 C20BFFFF    CALL <JMP.&Storm.#503>
+			//6FF6F0A5   . E8 34DDFEFF    CALL <JMP.&Storm.#503>
+			//6FF67FA5   . E8 504EFFFF    CALL <JMP.&Storm.#503>
+			//6FF6E165   . E8 6AEBFEFF    CALL <JMP.&Storm.#503>
+			//004071C9  |. E8 82C50000    CALL Game.00413750                       ; \Game.00413750
+		}
 
 		// Remove registry update
 		mem_seek R8(Fog, 000, 000, 000, 1861A, 1C12A, 1F0AA, 17FAA, 1E16A, 71E9);
-		memt_byte( version_Fog == V114d ? 0x53 : 0x56 ,0xEB); 			// JMP SHORT fog.6FF6862C
+		memt_byte( version_Fog == V114d ? 0x53 : 0x56 ,0xEB);			// JMP SHORT fog.6FF6862C
 		memt_byte( 0x6A ,0x10);				//
 		memt_byte( version_Fog == V114d ? 0x01 : 0x00 ,0x90);				// NOP
 		//6FF6861A   . 56             PUSH ESI
@@ -238,10 +220,10 @@ void Install_ChangingSavePath()
 		//6FF67FAB   . 6A 00          PUSH 0
 		//6FF6E16A   . 56             PUSH ESI
 		//6FF6E16B   . 6A 00          PUSH 0
-
+		//004071E9  |> 53             PUSH EBX                                 ; /Arg4
+		//004071EA  |. 6A 01          PUSH 1                                   ; |Arg3 = 00000001
 	} else {
-
-		// Appel de notre fct d'ajout d'un sous-r�pertoire
+		// Call funtion to manage subfolder
 		mem_seek( (DWORD)D2FogGetSavePath + 0x28);//6FF61928-6FF50000
 		memt_byte( 0x56 ,0x90);				// NOP
 		memt_byte( 0xFF ,0xE8);				// CALL changeSavePath
@@ -250,14 +232,14 @@ void Install_ChangingSavePath()
 		//6FF61929   FFD5             CALL EBP
 		//6FF6192B   83F8 FF          CMP EAX,-1
 
-		// Pour cr�er le bon chemin de sauvegarde
+		// Create the right save path
 		mem_seek( (DWORD)D2FogGetSavePath + 0xBD);//6FF619BC
 		MEMJ_REF4( D2Storm503, forCreateSavePath);
 		//6FF619BC   . E8 5D2A0000    CALL <JMP.&Storm.#503>
 
 		// Remove registry update
 		mem_seek( (DWORD)D2FogGetSavePath + 0xC1);//6FF619C1-6FF50000
-		memt_byte( 0x56 ,0xEB); 			// JMP SHORT FOG.6FF619D2
+		memt_byte( 0x56 ,0xEB);				// JMP SHORT FOG.6FF619D2
 		memt_byte( 0x53 ,0x0F);				//6FF619C3-6FF619D2
 		//6FF619C1   56               PUSH ESI
 		//6FF619C2   53               PUSH EBX

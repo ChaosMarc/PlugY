@@ -1,11 +1,11 @@
-//Script de ressources gï¿½nï¿½rï¿½ par Microsoft Visual C++.
+//Script de ressources généré par Microsoft Visual C++.
 //
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
 //
-// Gï¿½nï¿½rï¿½ ï¿½ partir de la ressource TEXTINCLUDE 2.
+// Généré à partir de la ressource TEXTINCLUDE 2.
 //
 #ifndef APSTUDIO_INVOKED
 #include "targetver.h"
@@ -50,7 +50,7 @@ BEGIN
             VALUE "LegalCopyright", "Copyright (C) 2017"
             VALUE "OriginalFilename", "PlugYInstall.exe"
             VALUE "ProductName", "PlugY, The Survival Kit"
-            VALUE "ProductVersion", "12.00"
+            VALUE "ProductVersion", "14.00"
         END
     END
     BLOCK "VarFileInfo"

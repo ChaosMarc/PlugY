@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 	Add support 1.13d by L'Autour.
-    Add support 1.14d by haxifix.
+	Add support 1.14d by haxifix.
 
 	World Event Management.
 
@@ -28,7 +28,7 @@ DWORD WEactive = 0;
 DWORD DCloneSpawned = 0;
 
 DWORD nbSOJSold = 0;
-DWORD nbNeedSOJSold = 100;
+DWORD nbNeedSOJSold = 0;
 DWORD nbManagedSOJSold = 0;
 
 DWORD nbTicksForNextSOJSold = 0;
@@ -80,21 +80,26 @@ Game* STDCALL WEManagement(DWORD clientID)
 	if (!ptGame) return ptGame;
 
 	if (active_AutomaticSell)
-	while (GetTickCount() - prevTicks >= nbTicksForNextSOJSold)
 	{
-		nbSOJSold++;
-		prevTicks = prevTicks + nbTicksForNextSOJSold;
-		nbTicksForNextSOJSold = getTicksForNextSOJSold();
+		while (GetTickCount() - prevTicks >= nbTicksForNextSOJSold)
+		{
+			nbSOJSold++;
+			prevTicks = prevTicks + nbTicksForNextSOJSold;
+			nbTicksForNextSOJSold = getTicksForNextSOJSold();
+		}
 	}
 
-	if (nbSOJSold == nbManagedSOJSold) return ptGame;
+	if (nbSOJSold == nbManagedSOJSold)
+		return ptGame;
 
 	DWORD newWE;
 	if (!WEactive && (ptGame->difficultyLevel == D2DM_HELL) && (nbSOJSold >= nbNeedSOJSold))
 	{
 		newWE = 1;
 		WEactive = 1;
-	} else newWE = 0;
+	}
+	else
+		newWE = 0;
 
 	if ( showSOJSoldCounterInAllDiff || (ptGame->difficultyLevel == D2DM_HELL))
 		worldEventBroadcast(ptGame, newWE, nbSOJSold);
@@ -109,10 +114,11 @@ DWORD FASTCALL spawnDClone(Game* ptGame, Room* ptRoom, DWORD p3, DWORD p4, DWORD
 	if (WEactive && (ptGame->difficultyLevel == D2DM_HELL) && !DCloneSpawned)
 	{
 		DCloneSpawned=1;
-		D2SpawnMonster(ptGame,ptRoom,p3,p4,p5,p6,worldEventmonsterID,p8);
+		D2SpawnSuperUnique(ptGame,ptRoom,p3,p4,p5,p6,worldEventmonsterID,p8);
 		return 0;//no minions
 	}
-	else return D2SpawnMonster(ptGame,ptRoom,p3,p4,p5,p6,monsterID,p8);
+	else
+		return D2SpawnSuperUnique(ptGame,ptRoom,p3,p4,p5,p6,monsterID,p8);
 }
 
 DWORD STDCALL verifIfWEItem (Unit* ptItem, DWORD flags, DWORD line, const char* filename)
@@ -120,27 +126,22 @@ DWORD STDCALL verifIfWEItem (Unit* ptItem, DWORD flags, DWORD line, const char* 
 	ItemsBIN* ptItemStats = D2GetItemsBIN(ptItem->nTxtFileNo);
 	ItemsBIN* ptWantedItemStats = D2GetItemsBIN(itemNeeded.ID);
 
-    log_msg("D2CheckItemType() = %u\n\n", D2CheckItemType(ptItem, itemNeeded.ID));
-    log_msg("D2GetUniqueID() = %u\n\n", D2GetUniqueID(ptItem));
-    log_msg("D2isEtheral() = %u\n\n", D2isEtheral2(ptItem, 0, 0, 0, 0, 0, 0));
-    log_msg("itemNeeded.ID = %u\n\n", itemNeeded.ID);
-
 	if((itemNeeded.byItemTypeID && D2CheckItemType(ptItem,itemNeeded.ID))
 	|| (itemNeeded.byItemID && (itemNeeded.ID == 0xFFFF))
 	|| (itemNeeded.byItemID && !itemNeeded.includeUpgradedVersions && ((DWORD)itemNeeded.ID == ptItem->nTxtFileNo))
 	|| (itemNeeded.byItemID && itemNeeded.includeUpgradedVersions) && (
-		  (ptItemStats->ItemCode == ptItemStats->NormCode) && (ptItemStats->ItemCode == ptWantedItemStats->NormCode)
-	   || (ptItemStats->ItemCode == ptItemStats->UberCode) && (ptItemStats->ItemCode == ptWantedItemStats->NormCode)
-	   || (ptItemStats->ItemCode == ptItemStats->UberCode) && (ptItemStats->ItemCode == ptWantedItemStats->UberCode)
-	   || (ptItemStats->ItemCode == ptItemStats->HellCode) && (ptItemStats->ItemCode == ptWantedItemStats->NormCode)
-	   || (ptItemStats->ItemCode == ptItemStats->HellCode) && (ptItemStats->ItemCode == ptWantedItemStats->UberCode)
-	   || (ptItemStats->ItemCode == ptItemStats->HellCode) && (ptItemStats->ItemCode == ptWantedItemStats->HellCode)
-	  ))
+		   (ptItemStats->ItemCode == ptItemStats->NormCode) && (ptItemStats->ItemCode == ptWantedItemStats->NormCode)
+		|| (ptItemStats->ItemCode == ptItemStats->UberCode) && (ptItemStats->ItemCode == ptWantedItemStats->NormCode)
+		|| (ptItemStats->ItemCode == ptItemStats->UberCode) && (ptItemStats->ItemCode == ptWantedItemStats->UberCode)
+		|| (ptItemStats->ItemCode == ptItemStats->HellCode) && (ptItemStats->ItemCode == ptWantedItemStats->NormCode)
+		|| (ptItemStats->ItemCode == ptItemStats->HellCode) && (ptItemStats->ItemCode == ptWantedItemStats->UberCode)
+		|| (ptItemStats->ItemCode == ptItemStats->HellCode) && (ptItemStats->ItemCode == ptWantedItemStats->HellCode)
+		))
 	if(!(itemNeeded.isSpecificItem && (D2GetUniqueID(ptItem) != itemNeeded.specificID-1))
 	&& !(itemNeeded.haveNoSocket && (D2GetPlayerStat(ptItem, STATS_ITEM_NUMSOCKETS, 0) > 0))
 	&& !(itemNeeded.haveSockets && (D2GetPlayerStat(ptItem, STATS_ITEM_NUMSOCKETS, 0) == 0))
-	&& !(itemNeeded.isNotEthereal && D2isEtheral(ptItem))
-	&& !(itemNeeded.isEthereal && !D2isEtheral(ptItem))
+	&& !(itemNeeded.isNotEthereal && ptItem->ptItemData->isEtheral)
+	&& !(itemNeeded.isEthereal && !ptItem->ptItemData->isEtheral)
 	&& !(itemNeeded.isBasic && (ptItemStats->ItemCode != ptWantedItemStats->NormCode))
 	&& !(itemNeeded.isExceptional && (ptItemStats->ItemCode != ptWantedItemStats->UberCode))
 	&& !(itemNeeded.isElite && (ptItemStats->ItemCode != ptWantedItemStats->HellCode))
@@ -166,9 +167,16 @@ void initWorldEventVariables()
 	WEactive = 0;
 
 	while (nbSOJSold >= nbNeedSOJSold)
-		nbNeedSOJSold += (DWORD)(rand()/(RAND_MAX+1.0)*triggerAtSolJSoldDelta+triggerAtSolJSoldMin);
+		nbNeedSOJSold += (DWORD)(rand()/(RAND_MAX+1.0)*triggerAtSolJSoldDelta + triggerAtSolJSoldMin);
+
+	log_msg("initWorldEventVariables - nbSOJSold = %d, nbNeedSOJSold = %d\n", nbSOJSold, nbNeedSOJSold);
 }
 
+FCT_ASM ( caller_WEManagement_114 )
+	PUSH ECX
+	CALL WEManagement
+	RETN
+}}
 
 FCT_ASM ( caller_WEManagement_1XX )
 	POP EAX
@@ -204,31 +212,29 @@ FCT_ASM ( caller_spawnDClone_111b )
 }}
 
 FCT_ASM( caller_spawnDClone_114 )
-    PUSH EBX
-    PUSH ECX
-    PUSH EDX
-    PUSH EDI
-    PUSH ESI
+  PUSH EBX
+  PUSH ECX
+  PUSH EDX
+  PUSH EDI
+  PUSH ESI
 
-    PUSH 0
-    PUSH EBX
-    PUSH 0xFFFFFFFF
-    PUSH DWORD PTR SS : [ESP + 0x30]
-    PUSH DWORD PTR SS : [ESP + 0x30]
-    PUSH DWORD PTR SS : [ESP + 0x30]
-    MOV ECX, EDI
-    MOV EDX, EAX
-    CALL spawnDClone
+  PUSH 0
+  PUSH EBX
+  PUSH 0xFFFFFFFF
+  PUSH DWORD PTR SS : [ESP + 0x30]
+  PUSH DWORD PTR SS : [ESP + 0x30]
+  PUSH DWORD PTR SS : [ESP + 0x30]
+  MOV ECX, EDI
+  MOV EDX, EAX
+  CALL spawnDClone
 
-    POP ESI
-    POP EDI
-    POP EDX
-    POP ECX
-    POP EBX
-    RETN 0x18
+  POP ESI
+  POP EDI
+  POP EDX
+  POP ECX
+  POP EBX
+  RETN 0x18
 }}
-
-
 FCT_ASM( caller_addClientForWE_111 )
 	PUSH EAX
 	CALL initWorldEventVariables
@@ -253,7 +259,7 @@ void Install_WorldEvent()
 	if ( version_D2Game < V110 )
 		return;
 
-	nbSOJSold = (DWORD)(rand()/(RAND_MAX+1.0)*valueInitSOJSoldDelta+valueInitSOJSoldMin);
+	nbSOJSold = (DWORD)(rand()/(RAND_MAX+1.0)*valueInitSOJSoldDelta + valueInitSOJSoldMin);
 	if (active_AutomaticSell)
 	{
 		prevTicks = GetTickCount();
@@ -264,60 +270,48 @@ void Install_WorldEvent()
 
 	// spawn DClone
 	mem_seek R8(D2Game, 0000, 0000, 3F720, 4BCB1, ECF10, 41570, 25280, CFBD0, 1A4A4F);
-    if (version_D2Client == V114d) {
-        MEMT_REF4(0xFFFFBF8D, caller_spawnDClone_114);
-    } else {
-        MEMC_REF4(V2SpawnMonster, version_D2Game >= V111b ? (DWORD)caller_spawnDClone_111b : version_D2Game == V111 ? (DWORD)caller_spawnDClone_111 : (DWORD)spawnDClone);
-    }
-    //6FC6F71F  |. E8 FCFAFFFF    CALL D2Game.6FC6F220
+	MEMC_REF4( V2SpawnSuperUnique , version_D2Game >= V114a ? (DWORD)caller_spawnDClone_114 : version_D2Game >= V111b ? (DWORD)caller_spawnDClone_111b : version_D2Game == V111 ? (DWORD)caller_spawnDClone_111 : (DWORD)spawnDClone);
+	//6FC6F71F  |. E8 FCFAFFFF    CALL D2Game.6FC6F220
 	//01FCBCB0  |. E8 2BEFFFFF    CALL D2Game.01FCABE0                     ; \D2Game.01FCABE0
 	//0205CF0F  |. E8 CCF8FFFF    CALL D2Game.0205C7E0                     ; \D2Game.0205C7E0
 	//6FC6156F  |. E8 1CF6FFFF    CALL D2Game.6FC60B90                     ; \D2Game.6FC60B90
 	//6FC4527F  |. E8 CCF6FFFF    CALL D2Game.6FC44950                     ; \D2Game.6FC44950
 	//6FCEFBCF  |. E8 4CE2FFFF    CALL D2Game.6FCEDE20                     ; \D2Game.6FCEDE20
+	//005A4A4E  |. E8 8DBFFFFF    CALL Game.005A09E0                       ; \Game.005A09E0
 
 	// verify if the item sold is a trigger of WE
 	mem_seek R8(D2Game, 0000, 0000, 977D0, 8E799, 92859, 84499, BFB29, 72BE9, 179667);
-    if (version_D2Game == V114d) {
-        MEMT_REF4(0x000AEA35, verifIfWEItem);
-    } else {
-        MEMJ_REF4(D2TestFlags, verifIfWEItem);
-    }
+	MEMJ_REF4( D2TestFlags , verifIfWEItem);
 	//6FCC77CF  |. E8 32400500    CALL <JMP.&D2Common.#10707>
 	//0200E798  |. E8 E9BDF7FF    CALL <JMP.&D2Common.#10911>
 	//02002858  |. E8 E57DF7FF    CALL <JMP.&D2Common.#10303>
 	//6FCA4498  |. E8 3B62F8FF    CALL <JMP.&D2Common.#10989>
 	//6FCDFB28  |. E8 77ADF4FF    CALL <JMP.&D2Common.#10202>
 	//6FC92BE8  |. E8 DD7AF9FF    CALL <JMP.&D2Common.#10458>
+	//00579666  |. E8 35EA0A00    CALL Game.006280A0                       ; \Game.006280A0
 
 	// management of the WorldEvent
-	mem_seek R8(D2Game, 0000, 0000, 3CE0, 51F01, C5681, EBF41, 4A791, E5F51, 1389B1);
-    if (version_D2Game == V114d) {
-        MEMT_REF4(0xFFFF752B, caller_WEManagement_1XX);
-    } else {
-        MEMC_REF4(V2GetGameByClientID, version_D2Game >= V111 ? (DWORD)WEManagement : (DWORD)caller_WEManagement_1XX);
-    }
+	mem_seek R8(D2Game, 0000, 0000, 3CE0, 51F01, C5681, EBF41, 4A791, E5F51, 12FEED);
+	MEMC_REF4( V2GetGameByClientID , version_D2Game >= V114a ? (DWORD)caller_WEManagement_114 : version_D2Game >= V111 ? (DWORD)WEManagement : (DWORD)caller_WEManagement_1XX);
 	//6FC33CDF   . E8 FC570000    CALL D2Game.6FC394E0
 	//01FD1F00  |. E8 1BE60800    CALL D2Game.02060520
 	//02035680  |. E8 1BF30100    CALL D2Game.020549A0
 	//6FD0BF40  |. E8 1BA4FBFF    CALL D2Game.6FCC6360
 	//6FC6A790  |. E8 4B03FEFF    CALL D2Game.6FC4AAE0
 	//6FD05F50  |. E8 AB67FDFF    CALL D2Game.6FCDC700
+	//0052FEEC  |. E8 6FE9FFFF    CALL Game.0052E860
+		//to check : 005389B0  |. E8 2B75FFFF    CALL Game.0052FEE0
 
 	// add client for the WorldEvent
 	mem_seek R8(D2Game, 0000, 0000, 1AEF, 3786A, 7055A, 6265F, CB0BF, D556F, 13F2D2);
-    if (version_D2Game == V114d) {
-        MEMT_REF4(0xFFFED27A, caller_addClientForWE);
-    }
-    else {
-        MEMC_REF4(D2AddClient, version_D2Game >= V111 ? caller_addClientForWE_111 : caller_addClientForWE);
-    }
+	MEMC_REF4( D2AddClient , version_D2Game >= V111 && version_D2Game <= V113d ? caller_addClientForWE_111 : caller_addClientForWE);
 	//6FC31AEE  |. E8 6D510000    CALL D2Game.6FC36C60
 	//01FB7869  |. E8 32C50A00    CALL D2Game.02063DA0
 	//01FE0559  |. E8 B27C0700    CALL D2Game.02058210
 	//6FC8265E  |. E8 FD890800    CALL D2Game.6FD0B060
 	//6FCEB0BE  |. E8 6DE8F7FF    CALL D2Game.6FC69930
 	//6FCF556E  |. E8 FDFA0000    CALL D2Game.6FD05070
+	//0053F2D1  |. E8 7AD2FEFF    CALL Game.0052C550
 
 	log_msg("\n");
 

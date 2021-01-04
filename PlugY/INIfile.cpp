@@ -98,7 +98,7 @@ INIFile::INIFile()
 	m_cache			= NULL;
 	m_sectionStart	= NULL;
 	m_sectionEnd	= NULL;
-	 
+
 	ZeroMemory((void *)m_path, sizeof(m_path));
 	ZeroMemory((void *)m_currentSection, sizeof(m_currentSection));
 }
@@ -165,7 +165,7 @@ BOOL INIFile::InitReadWrite(const char *path, int readWrite, DWORD writeCacheSiz
 				return TRUE;
 		}
 	}
-		
+
 //		if((m_readWrite == INIFILE_MPQREAD) || (m_readWrite == INIFILE_READ))
 	if(m_readWrite == INIFILE_READ)
 	{

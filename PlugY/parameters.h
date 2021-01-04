@@ -1,12 +1,12 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Loading parameters from ini file.
+	Loading parameters from ini file.
 
 =================================================================*/
 #pragma once
 
-#define PLUGY_VERSION "12.00"
+#define PLUGY_VERSION "14.00"
 
 enum TargetMod
 {

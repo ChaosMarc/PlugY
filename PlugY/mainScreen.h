@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Add "plugY v1.00" on screen.
+	Print PlugY version on screen.
 
 =================================================================*/
 #pragma once

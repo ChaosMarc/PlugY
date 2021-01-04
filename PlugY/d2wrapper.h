@@ -1,19 +1,10 @@
 /******************************************************************************
-File modified by Yohann NICOLAS.
+	File created by Yohann NICOLAS.
 
-NAME
-inifile.h
-
-DESCRIPTION
-Memory cached INI file read/write class to replace legacy MS code
-
-COPYRIGHT
-©1999-2004 Ultrafunk (www.ultrafunk.com) - info@ultrafunk.com
+	Main Diablo II extra DLL handler.
 
 ******************************************************************************/
 #pragma once
-
-#include <windows.h>
 
 extern int version_Game;
 //extern int version_binkw32;

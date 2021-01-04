@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Stucture of binary file
+	Stucture of binary file
 
 =================================================================*/
 
@@ -9,24 +9,24 @@
 
 #include <windows.h>
 /*
-struct D2ShrinesTXT 
-{ 
-      BYTE     Code;                         //+00 
-     BYTE     NotUsed1[3];               //+01 
-     DWORD     Arg1;                         //+04 
+struct D2ShrinesTXT
+{
+      BYTE     Code;                         //+00
+     BYTE     NotUsed1[3];               //+01
+     DWORD     Arg1;                         //+04
     DWORD     Arg2;                         //+08
     DWORD     DurInFrames;               //+0C
       BYTE     ResetTimeInMinutes;          //+10
-     BYTE     Rarity;                         //+11 
-     char     ViewName[0x1F];               //+12 
-     char     NiftyPhrase[0x7F];          //+32 
+     BYTE     Rarity;                         //+11
+     char     ViewName[0x1F];               //+12
+     char     NiftyPhrase[0x7F];          //+32
      BYTE     EffectClass;               //+B2
      BYTE     NotUsed2;                    //+B3
       DWORD     LevelMin;                    //+B4
  };*/
-  
-enum D2CubeItemFlag  
-{  
+
+enum D2CubeItemFlag
+{
 	CUBE_COWPORTAL		=1,
 	CUBE_USEITEM		=0xFF,
 	CUBE_USETYPE		=0xFE,
@@ -154,9 +154,20 @@ struct ObjectsBIN
 
 };
 
+struct ExperienceBIN//size=0x20
+{
+	DWORD Amazon;
+	DWORD Sorceress;
+	DWORD Necromancer;
+	DWORD Paladin;
+	DWORD Barbarian;
+	DWORD Druid;
+	DWORD Assassin;
+	DWORD ExpRatio;
+};
+
 struct LevelsBIN//size=0x220
 {
-
 };
 
 struct GemsBIN //size: 0xC0=192 (source : fct of dll)
@@ -206,130 +217,130 @@ struct GemsBIN //size: 0xC0=192 (source : fct of dll)
 	DWORD	shieldmod3max;	//+BC
 };
 
-struct ItemsBIN //size: 0x1A8=424 (source : fct of dll) (nblines : 134 CA 8B) Gold:20B
-{  
-	char	FlippyFile[0x20];		//+00  
-	char	InvFile[0x20];			//+20  
-	char	UniqueInvFile[0x20];	//+40  
-	char	SetInvFile[0x20];		//+60  
-	DWORD	ItemCode;				//+80  
-	DWORD	NormCode;				//+84  
-	DWORD	UberCode;				//+88  
-	DWORD	HellCode;				//+8C  
-	DWORD	AlternateGfx;			//+90  
-	DWORD	pSpell;					//+94  
-	WORD	State;					//+98  
-	WORD	cState1;				//+9A  
-	WORD	cState2;				//+9C  
-	WORD	Stat1;					//+9E  
-	WORD	Stat2;					//+A0  
-	WORD	Stat3;					//+A2  
-	DWORD	Calc1;					//+A4  
-	DWORD	Calc2;					//+A8  
-	DWORD	Calc3;					//+AC  
-	DWORD	Len;					//+B0  
-	WORD	SpellDesc;				//+B4  
-	WORD	SpellDescStr;			//+B6  
-	DWORD	SpellDescCalc;			//+B8  
-	DWORD	BetterGem;				//+BC  
-	DWORD	WClass;					//+C0  
-	DWORD	TwoHandedWClass;		//+C4  
-	DWORD	TMogType;				//+C8  
-	DWORD	MinAC;					//+CC  
-	DWORD	MaxAC;					//+D0  
-	DWORD	GambleCost;				//+D4  
-	DWORD	Speed;					//+D8  
-	DWORD	BitField;				//+DC  
-	DWORD	Cost;					//+E0  
-	DWORD	MinStack;				//+E4  
-	DWORD	MaxStack;				//+E8  
-	DWORD	SpawnStack;				//+EC  
-	DWORD	GemOffset;				//+F0  
-	WORD	NameStr;				//+F4  
-	WORD	Version;				//+F6  
-	WORD	AutoPrefix;				//+F8  
-	WORD	MissileType;			//+FA  
-	BYTE	Rarity;					//+FC  
-	BYTE	Level;					//+FD  
-	BYTE	MinDam;					//+FE  
-	BYTE	MaxDam;					//+FF  
-	BYTE	MinMisDam;				//+100  
-	BYTE	MaxMisDam;				//+101  
-	BYTE	TwoHandMinDam;			//+102  
-	BYTE	TwoHandMaxDam;			//+103  
-	BYTE	RangeAdder;				//+104  
-	BYTE	NotUsed1;				//+105  
-	WORD	StrBonus;				//+106  
-	WORD	DexBonus;				//+108  
-	WORD	RegStr;					//+10A  
-	WORD	RegDex;					//+10C  
-	BYTE	Absorbs;				//+10E  
-	BYTE	InvWidth;				//+10F  
-	BYTE	InvHeight;				//+110  
-	BYTE	Block;					//+111  
-	BYTE	Durability;				//+112  
+struct ItemsBIN //size: 0x1A8=424 (source : fct of dll)
+{
+	char	FlippyFile[0x20];		//+00
+	char	InvFile[0x20];			//+20
+	char	UniqueInvFile[0x20];	//+40
+	char	SetInvFile[0x20];		//+60
+	DWORD	ItemCode;				//+80
+	DWORD	NormCode;				//+84
+	DWORD	UberCode;				//+88
+	DWORD	HellCode;				//+8C
+	DWORD	AlternateGfx;			//+90
+	DWORD	pSpell;					//+94
+	WORD	State;					//+98
+	WORD	cState1;				//+9A
+	WORD	cState2;				//+9C
+	WORD	Stat1;					//+9E
+	WORD	Stat2;					//+A0
+	WORD	Stat3;					//+A2
+	DWORD	Calc1;					//+A4
+	DWORD	Calc2;					//+A8
+	DWORD	Calc3;					//+AC
+	DWORD	Len;					//+B0
+	WORD	SpellDesc;				//+B4
+	WORD	SpellDescStr;			//+B6
+	DWORD	SpellDescCalc;			//+B8
+	DWORD	BetterGem;				//+BC
+	DWORD	WClass;					//+C0
+	DWORD	TwoHandedWClass;		//+C4
+	DWORD	TMogType;				//+C8
+	DWORD	MinAC;					//+CC
+	DWORD	MaxAC;					//+D0
+	DWORD	GambleCost;				//+D4
+	DWORD	Speed;					//+D8
+	DWORD	BitField;				//+DC
+	DWORD	Cost;					//+E0
+	DWORD	MinStack;				//+E4
+	DWORD	MaxStack;				//+E8
+	DWORD	SpawnStack;				//+EC
+	DWORD	GemOffset;				//+F0
+	WORD	NameStr;				//+F4
+	WORD	Version;				//+F6
+	WORD	AutoPrefix;				//+F8
+	WORD	MissileType;			//+FA
+	BYTE	Rarity;					//+FC
+	BYTE	Level;					//+FD
+	BYTE	MinDam;					//+FE
+	BYTE	MaxDam;					//+FF
+	BYTE	MinMisDam;				//+100
+	BYTE	MaxMisDam;				//+101
+	BYTE	TwoHandMinDam;			//+102
+	BYTE	TwoHandMaxDam;			//+103
+	BYTE	RangeAdder;				//+104
+	BYTE	NotUsed1;				//+105
+	WORD	StrBonus;				//+106
+	WORD	DexBonus;				//+108
+	WORD	RegStr;					//+10A
+	WORD	RegDex;					//+10C
+	BYTE	Absorbs;				//+10E
+	BYTE	InvWidth;				//+10F
+	BYTE	InvHeight;				//+110
+	BYTE	Block;					//+111
+	BYTE	Durability;				//+112
 	BYTE	NoDurability;			//+113
-	BYTE	Missile;				//+114  
-	BYTE	Component;				//+115  
-	BYTE	RArm;					//+116  
-	BYTE	LArm;					//+117  
-	BYTE	Torso;					//+118  
-	BYTE	Legs;					//+119  
-	BYTE	RSpad;					//+11A  
-	BYTE	LSpad;					//+11B  
-	BYTE	TwoHanded;				//+11C  
-	BYTE	Usable;					//+11D  
-	WORD	Type;					//+11E  
-	WORD	Type2;					//+120  
-	BYTE	SubType;				//+122  
-	BYTE	NotUsed2;				//+123  
+	BYTE	Missile;				//+114
+	BYTE	Component;				//+115
+	BYTE	RArm;					//+116
+	BYTE	LArm;					//+117
+	BYTE	Torso;					//+118
+	BYTE	Legs;					//+119
+	BYTE	RSpad;					//+11A
+	BYTE	LSpad;					//+11B
+	BYTE	TwoHanded;				//+11C
+	BYTE	Usable;					//+11D
+	WORD	Type;					//+11E
+	WORD	Type2;					//+120
+	BYTE	SubType;				//+122
+	BYTE	NotUsed2;				//+123
 	WORD	DropSound;				//+124
 	WORD	UseSound;				//+126
 	BYTE	DropSfxFrame;			//+128
 	BYTE	Unique;					//+129
 	BYTE	Quest;					//+12A
-	BYTE	QuestDiffCheck;			//+12B  
-	BYTE	Transparent;			//+12C  
-	BYTE	TransTbl;				//+12D  
-	BYTE	NotUsed3;				//+12E  
-	BYTE	LightRadius;			//+12F  
-	BYTE	Belt;					//+130  
-	BYTE	AutoBelt;				//+131  
-	BYTE	Stackable;				//+132  
-	BYTE	Spawnable;				//+133  
-	BYTE	SpellIcon;				//+134  
-	BYTE	DurWarning;				//+135  
-	BYTE	QntWaning;				//+136  
-	BYTE	HasInv;					//+137  
-	BYTE	GemSockets;				//+138  
-	BYTE	TransmoGrify;			//+139  
-	BYTE	TMogMin;				//+13A  
-	BYTE	TMogMax;				//+13B  
-	BYTE	HitClass;				//+13C  
-	BYTE	OneOrTwoHanded;			//+13D  
-	BYTE	GemApplyType;			//+13E  
-	BYTE	LevelReq;				//+13F  
-	BYTE	MagicLvl;				//+140  
-	BYTE	Transform;				//+141  
-	BYTE	InvTrans;				//+142  
-	BYTE	CompactSave;			//+143  
-	BYTE	SkipName;				//+144  
-	BYTE	NotUsed4;				//+145  
-	BYTE	VendorMin[17];			//+146  
-	BYTE	VendorMax[17];			//+157  
-	BYTE	VendorMagicMin[17];		//+168  
-	BYTE	VendorMagicMax[17];		//+179  
-	BYTE	VendorMagicLvl[17];		//+18A  
-	BYTE	NotUsed5;				//+19B  
-	DWORD	NightmareUpgrade;		//+19C  
-	DWORD	HellUpgrade;			//+1A0  
-	BYTE	PermStoreItem;			//+1A4  
-	BYTE	Multibuy;				//+1A5  
+	BYTE	QuestDiffCheck;			//+12B
+	BYTE	Transparent;			//+12C
+	BYTE	TransTbl;				//+12D
+	BYTE	NotUsed3;				//+12E
+	BYTE	LightRadius;			//+12F
+	BYTE	Belt;					//+130
+	BYTE	AutoBelt;				//+131
+	BYTE	Stackable;				//+132
+	BYTE	Spawnable;				//+133
+	BYTE	SpellIcon;				//+134
+	BYTE	DurWarning;				//+135
+	BYTE	QntWaning;				//+136
+	BYTE	HasInv;					//+137
+	BYTE	GemSockets;				//+138
+	BYTE	TransmoGrify;			//+139
+	BYTE	TMogMin;				//+13A
+	BYTE	TMogMax;				//+13B
+	BYTE	HitClass;				//+13C
+	BYTE	OneOrTwoHanded;			//+13D
+	BYTE	GemApplyType;			//+13E
+	BYTE	LevelReq;				//+13F
+	BYTE	MagicLvl;				//+140
+	BYTE	Transform;				//+141
+	BYTE	InvTrans;				//+142
+	BYTE	CompactSave;			//+143
+	BYTE	SkipName;				//+144
+	BYTE	NotUsed4;				//+145
+	BYTE	VendorMin[17];			//+146
+	BYTE	VendorMax[17];			//+157
+	BYTE	VendorMagicMin[17];		//+168
+	BYTE	VendorMagicMax[17];		//+179
+	BYTE	VendorMagicLvl[17];		//+18A
+	BYTE	NotUsed5;				//+19B
+	DWORD	NightmareUpgrade;		//+19C
+	DWORD	HellUpgrade;			//+1A0
+	BYTE	PermStoreItem;			//+1A4
+	BYTE	Multibuy;				//+1A5
 	WORD	zeros;					//+1A6
 };
 
 struct RunesBIN	//size: 0x120=288 (1.10 ok)
-{  
+{
 	char	Name[0x40];		//+00
 	char	RuneName[0x40];	//+40
 	BYTE	Complete;		//+80
@@ -372,7 +383,7 @@ struct RunesBIN	//size: 0x120=288 (1.10 ok)
 /*struct ItemStatsBIN	//size: 0x234=564
 {
 	BYTE	uk1[0x80];			//+00
-	DWORD	code;				//+80 		// ou 0x90
+	DWORD	code;				//+80		// ou 0x90
 	BYTE	uk2[0xB3];			//+84
 	BYTE	itemStat137;		//+137
 };*/
@@ -380,33 +391,40 @@ struct RunesBIN	//size: 0x120=288 (1.10 ok)
 
 struct CharStatsBIN //size= 0xC4=196
 {
-	WCHAR	nameU[0x10];
-	char	name[0x10];
-	BYTE	baseSTR;	//+20
-	BYTE	baseDEX;
-	BYTE	baseENE;
-	BYTE	baseVIT;
-	BYTE	baseStamina;
-	BYTE	HPAdd;
-	BYTE	percentStr;
-	BYTE	percentDex;
-	BYTE	percentInt;
-	BYTE	percentVit;      
-	WORD	manaRegen;
-	DWORD	toHitFactor;
-	BYTE	walkVelocity;//+30
-	BYTE	runVelocity;
-	BYTE	runDrain;
-	BYTE	lifePerLevel;
-	BYTE	staminaPerLevel;
-	BYTE	manaPerLevel;
-	BYTE	lifePerVitality;
-	BYTE	staminaPerVitality;
-	BYTE	manaPerMagic;
-    BYTE	blockFactor;
-	WORD	startSkill;
-	DWORD	baseWClass;
-	DWORD	unknown1[3];
+	WCHAR	nameU[0x10];		//+00
+	char	name[0x10];			//+20
+	BYTE	baseSTR;			//+30
+	BYTE	baseDEX;			//+31
+	BYTE	baseENE;			//+32
+	BYTE	baseVIT;			//+33
+	BYTE	baseStamina;		//+34
+	BYTE	hpadd;				//+35
+	BYTE	percentStr;			//+36
+	BYTE	percentInt;			//+37
+	BYTE	percentDex;			//+38
+	BYTE	percentVit;			//+39
+	BYTE	manaRegen;			//+3A
+	BYTE	__3B;				//+3B
+	DWORD	toHitFactor;		//+3C
+	BYTE	walkVelocity;		//+40
+	BYTE	runVelocity;		//+41
+	BYTE	runDrain;			//+42
+	BYTE	lifePerLevel;		//+43
+	BYTE	staminaPerLevel;	//+44
+	BYTE	manaPerLevel;		//+45
+	BYTE	lifePerVitality;	//+46
+	BYTE	staminaPerVitality;	//+47
+	BYTE	manaPerMagic;		//+48
+	BYTE	blockFactor;		//+49
+	WORD	__4A_startSkill;	//+4A
+	DWORD	baseWClass;			//+4C
+	BYTE	StatPerLevel;		//+50
+	BYTE	__51;				//+51
+	WORD	StrAllSkills;		//+52
+	WORD	StrSkillTab1;		//+54
+	WORD	StrSkillTab2;		//+56
+	WORD	StrSkillTab3;		//+58
+	WORD	StrClassOnly;		//+5A
 	DWORD	item1;
 	BYTE	item1Loc;
 	BYTE	item1Count;
@@ -447,97 +465,97 @@ struct CharStatsBIN //size= 0xC4=196
 	BYTE	item10Loc;
 	BYTE	item10Count;
 	WORD	item10Unknown;
-	BYTE	unknown2[0x18]; 
+	BYTE	unknown2[0x18];
 };
 /*
-struct D2CharStats  
-{  
-     wchar_t     Class_t[0x10];               //+00  
-     char     Class[0x10];               //+20  
-     BYTE     Str;                         //+30  
-     BYTE     Dex;                         //+31  
-     BYTE     Int;                         //+32  
-     BYTE     Vit;                         //+33  
-     BYTE     Stamina;                    //+34  
-     BYTE     HpAdd;                         //+35  
-     BYTE     PercentStr;                    //+36  
-     BYTE     PercentInt;                    //+37  
-     BYTE     PercentDex;                    //+38  
-     BYTE     PercentVit;                    //+39  
-     BYTE     ManaRegen;                    //+3A  
-     BYTE     NotUsed1;                    //+3B  
-     DWORD     ToHitFactor;               //+3C  
-     BYTE     WalkVelocity;               //+40  
-     BYTE     RunVelocity;               //+41  
-     BYTE     RunDrain;                    //+42  
-     BYTE     LifePerLevel;               //+43  
-     BYTE     StamianPerLevel;          //+44  
-     BYTE     ManaPerLevel;               //+45  
-     BYTE     LifePerVitality;          //+46  
-     BYTE     StaminaPerVitality;          //+47  
-     BYTE     ManaPerMagic;               //+48  
-     BYTE     BlockFactor;               //+49  
-     BYTE     NotUsed2[2];               //+4A  
-     DWORD     BaseWClass;                    //+4C  
-     BYTE     StatPerLevel;               //+50  
-     BYTE     NotUsed3;                    //+51  
-     WORD     StrAllSkills;               //+52  
-     WORD     StrSkillTab1;               //+54  
-     WORD     StrSkillTab2;               //+56  
-     WORD     StrSkillTab3;               //+58  
-     WORD     StrClassOnly;               //+5A  
-     DWORD     Item1;                         //+5C  
-     BYTE     Item1Loc;                    //+60  
-     BYTE     Item1Count;                    //+61  
-     BYTE     NotUsed4[2];               //+62  
-     DWORD     Item2;                         //+64  
-     BYTE     Item2Loc;                    //+68  
-     BYTE     Item2Count;                    //+69  
-     BYTE     NotUsed5[2];               //+6A  
-     DWORD     Item3;                         //+6C  
-     BYTE     Item3Loc;                    //+70  
-     BYTE     Item3Count;                    //+71  
-     BYTE     NotUsed6[2];               //+72  
-     DWORD     Item4;                         //+74  
-     BYTE     Item4Loc;                    //+78  
-     BYTE     Item4Count;                    //+79  
-     BYTE     NotUsed7[2];               //+7A  
-     DWORD     Item5;                         //+7C  
-     BYTE     Item5Loc;                    //+80  
-     BYTE     Item5Count;                    //+81  
-     BYTE     NotUsed8[2];               //+82  
-     DWORD     Item6;                         //+84  
-     BYTE     Item6Loc;                    //+88  
-     BYTE     Item6Count;                    //+89  
-     BYTE     NotUsed9[2];               //+8A  
-     DWORD     Item7;                         //+8C  
-     BYTE     Item7Loc;                    //+90  
-     BYTE     Item7Count;                    //+91  
-     BYTE     NotUsed10[2];               //+92  
-     DWORD     Item8;                         //+94  
-     BYTE     Item8Loc;                    //+98  
-     BYTE     Item8Count;                    //+99  
-     BYTE     NotUsed11[2];               //+9A  
-     DWORD     Item9;                         //+9C  
-     BYTE     Item9Loc;                    //+A0  
-     BYTE     Item9Count;                    //+A1  
-     BYTE     NotUsed12[2];               //+A2  
-     DWORD     Item10;                         //+A4  
-     BYTE     Item10Loc;                    //+A8  
-     BYTE     Item10Count;               //+A9  
-     BYTE     NotUsed13[2];               //+AA  
-     WORD     StartSkill;                    //+AC  
-     WORD     Skill1;                         //+AE  
-     WORD     Skill2;                         //+B0  
-     WORD     Skill3;                         //+B2  
-     WORD     Skill4;                         //+B4  
-     WORD     Skill5;                         //+B6  
-     WORD     Skill6;                         //+B8  
-     WORD     Skill7;                         //+BA  
-     WORD     Skill8;                         //+BC  
-     WORD     Skill9;                         //+BE  
-     WORD     Skill10;                    //+C0  
-     BYTE     NotUSed14[2];               //+C2  
+struct D2CharStats
+{
+     wchar_t     Class_t[0x10];               //+00
+     char     Class[0x10];               //+20
+     BYTE     Str;                         //+30
+     BYTE     Dex;                         //+31
+     BYTE     Int;                         //+32
+     BYTE     Vit;                         //+33
+     BYTE     Stamina;                    //+34
+     BYTE     HpAdd;                         //+35
+     BYTE     PercentStr;                    //+36
+     BYTE     PercentInt;                    //+37
+     BYTE     PercentDex;                    //+38
+     BYTE     PercentVit;                    //+39
+     BYTE     ManaRegen;                    //+3A
+     BYTE     NotUsed1;                    //+3B
+     DWORD     ToHitFactor;               //+3C
+     BYTE     WalkVelocity;               //+40
+     BYTE     RunVelocity;               //+41
+     BYTE     RunDrain;                    //+42
+     BYTE     LifePerLevel;               //+43
+     BYTE     StamianPerLevel;          //+44
+     BYTE     ManaPerLevel;               //+45
+     BYTE     LifePerVitality;          //+46
+     BYTE     StaminaPerVitality;          //+47
+     BYTE     ManaPerMagic;               //+48
+     BYTE     BlockFactor;               //+49
+     BYTE     NotUsed2[2];               //+4A
+     DWORD     BaseWClass;                    //+4C
+     BYTE     StatPerLevel;               //+50
+     BYTE     NotUsed3;                    //+51
+     WORD     StrAllSkills;               //+52
+     WORD     StrSkillTab1;               //+54
+     WORD     StrSkillTab2;               //+56
+     WORD     StrSkillTab3;               //+58
+     WORD     StrClassOnly;               //+5A
+     DWORD     Item1;                         //+5C
+     BYTE     Item1Loc;                    //+60
+     BYTE     Item1Count;                    //+61
+     BYTE     NotUsed4[2];               //+62
+     DWORD     Item2;                         //+64
+     BYTE     Item2Loc;                    //+68
+     BYTE     Item2Count;                    //+69
+     BYTE     NotUsed5[2];               //+6A
+     DWORD     Item3;                         //+6C
+     BYTE     Item3Loc;                    //+70
+     BYTE     Item3Count;                    //+71
+     BYTE     NotUsed6[2];               //+72
+     DWORD     Item4;                         //+74
+     BYTE     Item4Loc;                    //+78
+     BYTE     Item4Count;                    //+79
+     BYTE     NotUsed7[2];               //+7A
+     DWORD     Item5;                         //+7C
+     BYTE     Item5Loc;                    //+80
+     BYTE     Item5Count;                    //+81
+     BYTE     NotUsed8[2];               //+82
+     DWORD     Item6;                         //+84
+     BYTE     Item6Loc;                    //+88
+     BYTE     Item6Count;                    //+89
+     BYTE     NotUsed9[2];               //+8A
+     DWORD     Item7;                         //+8C
+     BYTE     Item7Loc;                    //+90
+     BYTE     Item7Count;                    //+91
+     BYTE     NotUsed10[2];               //+92
+     DWORD     Item8;                         //+94
+     BYTE     Item8Loc;                    //+98
+     BYTE     Item8Count;                    //+99
+     BYTE     NotUsed11[2];               //+9A
+     DWORD     Item9;                         //+9C
+     BYTE     Item9Loc;                    //+A0
+     BYTE     Item9Count;                    //+A1
+     BYTE     NotUsed12[2];               //+A2
+     DWORD     Item10;                         //+A4
+     BYTE     Item10Loc;                    //+A8
+     BYTE     Item10Count;               //+A9
+     BYTE     NotUsed13[2];               //+AA
+     WORD     StartSkill;                    //+AC
+     WORD     Skill1;                         //+AE
+     WORD     Skill2;                         //+B0
+     WORD     Skill3;                         //+B2
+     WORD     Skill4;                         //+B4
+     WORD     Skill5;                         //+B6
+     WORD     Skill6;                         //+B8
+     WORD     Skill7;                         //+BA
+     WORD     Skill8;                         //+BC
+     WORD     Skill9;                         //+BE
+     WORD     Skill10;                    //+C0
+     BYTE     NotUSed14[2];               //+C2
 };
 
 */
@@ -553,19 +571,28 @@ struct UniqueItemsBIN //size=0x14C (332)
 		struct {
 			BYTE ukf:2;
 			BYTE carry1:1;
+			BYTE ladder:1;
 		};
 	};
 	BYTE	uk3[0x11F];		//+2D
 };
 
+struct SetsBIN //size=0x128 (source : fct of dll)
+{
+	WORD	setNum;			//+00
+	WORD	setNameIndex;	//+02
+	BYTE	uk3[0x124];		//+04
+};
 
 struct SetItemsBIN //size=0x1B8 (source : fct of dll)
 {
-	WORD	setId;			//+00
+	WORD	setNum;			//+00
 	char	index[0x20];	//+02
 	BYTE	uk1;			//+04
 	WORD	setNameId;		//+24
-	BYTE	uk2[0x192];		//+26
+	BYTE	uk2[0x6];		//+26
+	WORD	setId;			//+2C
+	BYTE	uk3[0x18A];		//+2E
 };
 
 
@@ -607,276 +634,276 @@ struct SkillsBIN //size=0x23C (572)
 };
 
 /*
-struct D2SkillsTXT  
-{  
-     WORD     SkillID;               //+000  
-     BYTE     Mask1;                    //+002  
-     BYTE     Mask2;                    //+003  
-     BYTE     Unknown[8];               //+004  
-     BYTE     CharClass;               //+00C  
-     BYTE     unknown_1[0x17D];     //+00D  
-     WORD     Mana;                    //+18A  
-     short     LvlMana;               //+18C  
-     BYTE     Attackrank;               //+18E  
-     BYTE     LineOfSight;          //+18F  
-     DWORD     Delay;                    //+190  
-     WORD     SkillDesc;               //+194  
-     BYTE     unknown_2[0xA6];     //+196  
+struct D2SkillsTXT
+{
+     WORD     SkillID;               //+000
+     BYTE     Mask1;                    //+002
+     BYTE     Mask2;                    //+003
+     BYTE     Unknown[8];               //+004
+     BYTE     CharClass;               //+00C
+     BYTE     unknown_1[0x17D];     //+00D
+     WORD     Mana;                    //+18A
+     short     LvlMana;               //+18C
+     BYTE     Attackrank;               //+18E
+     BYTE     LineOfSight;          //+18F
+     DWORD     Delay;                    //+190
+     WORD     SkillDesc;               //+194
+     BYTE     unknown_2[0xA6];     //+196
 };
 
-struct D2SkillsTXT  
-{  
-     WORD     SkillID;               //+000  
-     BYTE     Mask1;                    //+002  
-     BYTE     Mask2;                    //+003  
-     BYTE     Unknown[8];               //+004  
-     BYTE     CharClass;               //+00C  
-     BYTE    Unknown2[3];          //+00D  
-     BYTE     anim;                    //+010  
-     BYTE     monanim;               //+011  
-     BYTE     seqtrans;               //+012  
-     BYTE     seqnum;                    //+013 
-	 BYTE     Unknown7;               //+014  
-     BYTE     SelectProc;               //+015  
-     BYTE     seqinput;               //+016  
-     BYTE     Unknown3;               //+017  
-     WORD     itypea1;               //+018  
-     WORD     itypea2;               //+01A  
-     WORD     itypea3;               //+01C  
-     WORD     itypeb1;               //+01E  
-     WORD     itypeb2;               //+020  
-     WORD     itypeb3;               //+022  
-     WORD     etypea1;               //+024  
-     WORD     etypea2;               //+026  
-     WORD     etypeb1;               //+028  
-     WORD     etypeb2;               //+02A  
-     WORD     srvstfunc;               //+02C  
-     WORD     srvdofunc;               //+02E  
-     WORD     srvprgfunc1;          //+030  
-     WORD     srvprgfunc2;          //+032  
-     WORD     srvprgfunc3;          //+034
-     WORD     Unknown8;               //+036  
-     DWORD     prgcalc1;               //+038  
-     DWORD     prgcalc2;               //+03C  
-     DWORD     prgcalc3;               //+040  
-     WORD     prgdam;                    //+044  
-     WORD     srvmissile;               //+046  
-     WORD     srvmissilea;          //+048  
-     WORD     srvmissileb;          //+04A  
-     WORD     srvmissilec;          //+04C  
-     WORD     srvoverlay;               //+04E  
-     DWORD     aurafilter;               //+050  
-     WORD     aurastat1;               //+054  
-     WORD     aurastat2;               //+056  
-     WORD     aurastat3;               //+058  
-     WORD     aurastat4;               //+05A  
-     WORD     aurastat5;               //+05C  
-     WORD     aurastat6;               //+05E  
-     DWORD     auralencalc;          //+060  
-     DWORD     aurarangecalc;          //+064  
-     DWORD     aurastatcalc1;          //+068  
-     DWORD     aurastatcalc2;          //+06C  
-     DWORD     aurastatcalc3;          //+070  
-     DWORD     aurastatcalc4;          //+074  
-     DWORD     aurastatcalc5;          //+078  
-     DWORD     aurastatcalc6;          //+07C  
-     WORD     aurastate;               //+080  
-     WORD     auratargetstate;     //+082  
-     WORD     auraevent1;               //+084  
-     WORD     auraevent2;               //+086  
-     WORD     auraevent3;               //+088  
-     WORD     auraeventfunc1;          //+08A  
-     WORD     auraeventfunc2;          //+08C  
-     WORD     auraeventfunc3;          //+08E  
-     WORD     auratgtevent;          //+090  
-     WORD     auratgteventfunc;     //+092  
-     WORD     passivestate;          //+094  
-     WORD     passiveitype;          //+096  
-     WORD     passivestat1;          //+098  
-     WORD     passivestat2;          //+09A  
-     WORD     passivestat3;          //+09C  
-     WORD     passivestat4;          //+09E  
-     WORD     passivestat5;          //+0A0  
-     DWORD     passivecalc1;          //+0A4  
-     DWORD     passivecalc2;          //+0A8  
-     DWORD     passivecalc3;          //+0AC  
-     DWORD     passivecalc4;          //+0B0  
-     DWORD     passivecalc5;          //+0B4  
-     WORD     passiveevent;          //+0B8  
-     WORD     passiveeventfunc;     //+0BA  
-     WORD     summon;                    //+0BC  
-     BYTE     pettype;               //+0BE  
-     BYTE     summode;               //+0BF  
-     DWORD     petmax;                    //+0C0  
-     WORD     sumskill1;               //+0C4  
-     WORD     sumskill2;               //+0C6  
-     WORD     sumskill3;               //+0C8  
-     WORD     sumskill4;               //+0CA  
-     WORD     sumskill5;               //+0CC  
-     DWORD     sumskcalc1;               //+0D0  
-     DWORD     sumskcalc2;               //+0D4  
-     DWORD     sumskcalc3;               //+0D8  
-     DWORD     sumskcalc4;               //+0DC  
-     DWORD     sumskcalc5;               //+0E0  
-     WORD     sumumod;               //+0E4  
-     WORD     sumoverlay;               //+0E6  
-     WORD     cltmissile;               //+0E8  
-     WORD     cltmissilea;          //+0EA  
-     WORD     cltmissileb;          //+0EC  
-     WORD     cltmissilec;          //+0EE  
-     WORD     cltmissiled;          //+0F0  
-     WORD     cltstfunc;               //+0F2  
-     WORD     cltdofunc;               //+0F4  
-     WORD     cltprgfunc1;          //+0F6  
-     WORD     cltprgfunc2;          //+0F8  
-     WORD     cltprgfunc3;          //+0FA  
-     WORD     stsound;               //+0FC  
-     WORD     stsoundclass;          //+0FE
-     WORD     dosound;               //+100  
-     WORD     dosounda;               //+102  
-     WORD     dosoundb;               //+104  
-     WORD     castoverlay;          //+106  
-     WORD     tgtoverlay;               //+108  
-     WORD     tgtsound;               //+10A  
-     WORD     prgoverlay;               //+10C  
-     WORD     prgsound;               //+10E  
-     WORD     cltoverlaya;          //+110  
-     WORD     cltoverlayb;          //+112  
-     DWORD     cltcalc1;               //+114  
-     DWORD     cltcalc2;               //+118  
-     DWORD     cltcalc3;               //+11C  
-     WORD     ItemTarget;               //+120  
-     WORD     ItemCastSound;          //+122  
-     WORD     ItemCastOverlay;     //+124  
-     WORD     Unknown4;               //+126  
-     DWORD     perdelay;               //+128  
-     WORD     maxlvl;                    //+12C  
-     WORD     ResultFlags;          //+12E  
-     DWORD     HitFlags;               //+130  
-     DWORD     HitClass;               //+134  
-     DWORD     calc1;                    //+138  
-     DWORD     calc2;                    //+13C  
-     DWORD     calc3;                    //+140  
-     DWORD     calc4;                    //+144  
-     DWORD     Param1;                    //+148  
-     DWORD     Param2;                    //+14C  
-     DWORD     Param3;                    //+150  
-     DWORD     Param4;                    //+154  
-     DWORD     Param5;                    //+158  
-     DWORD     Param6;                    //+15C  
-     DWORD     Param7;                    //+160  
-     DWORD     Param8;                    //+164  
-     WORD     weapsel;               //+168  
-     WORD     ItemEffect;               //+16A  
-     BYTE     ItemCltEffect;          //+16C  
-     BYTE     ItemTgtDo;               //+16D  
-     BYTE     ItemCheckStart;          //+16E  
-     BYTE     ItemCltCheckStart;     //+16F  
-     DWORD     skpoints;               //+170  
-     WORD     reqlevel;               //+174  
-     WORD     reqstr;                    //+176  
-     WORD     reqdex;                    //+178  
-     WORD     reqint;                    //+17A  
-     WORD     reqvit;                    //+17C  
-     WORD     reqskill1;               //+17E  
-     WORD     reqskill2;               //+180  
-     WORD     reqskill3;               //+182  
-     WORD     startmana;               //+184  
-     WORD     minmana;               //+186  
-     WORD     manashift;               //+188  
-     WORD     Mana;                    //+18A  
-     short     LvlMana;               //+18C  
-     BYTE     Attackrank;               //+18E  
-     BYTE     LineOfSight;          //+18F  
-     DWORD     Delay;                    //+190  
-     WORD     SkillDesc;               //+194  
-     WORD     Unknown5;               //+196  
-     DWORD     ToHit;                    //+198  
-     DWORD     LevToHit;               //+19C  
-     DWORD     ToHitCalc;               //+1A0  
-     BYTE     HitShift;               //+1A4  
-     WORD     SrcDam;                    //+1A5  
-     BYTE     Unknown6;               //+1A7  
-     DWORD     MinDam;                    //+1A8  
-     DWORD     MaxDam;                    //+1AC  
-     DWORD     MinLevDam1;               //+1B0  
-     DWORD     MinLevDam2;               //+1B4  
-     DWORD     MinLevDam3;               //+1B8  
-     DWORD     MinLevDam4;               //+1BC  
-     DWORD     MinLevDam5;               //+1C0  
-     DWORD     MaxLevDam1;               //+1C4  
-     DWORD     MaxLevDam2;               //+1C8  
-     DWORD     MaxLevDam3;               //+1CC  
-     DWORD     MaxLevDam4;               //+1D0  
-     DWORD     MaxLevDam5;               //+1D4  
-     DWORD     DmgSymPerCalc;          //+1D8  
-     DWORD     EType;                    //+1DC  
-     DWORD     Emin;                    //+1E0  
-     DWORD     Emax;                    //+1E4  
-     DWORD     EMinLev1;               //+1E8  
-     DWORD     EMinLev2;               //+1EC  
-     DWORD     EMinLev3;               //+1F0  
-     DWORD     EMinLev4;               //+1F4  
-     DWORD     EMinLev5;               //+1F8  
-     DWORD     EMaxLev1;               //+1FC
-     DWORD     EMaxLev2;               //+200  
-     DWORD     EMaxLev3;               //+204  
-     DWORD     EMaxLev4;               //+208  
-     DWORD     EMaxLev5;               //+20C  
-     DWORD     EDmgSymPerCalc;          //+210  
-     DWORD     ELen;                    //+214  
-     DWORD     ELevLen1;               //+218  
-     DWORD     ELevLen2;               //+21C  
-     DWORD     ELevLen3;               //+220  
-     DWORD     ELenSymPerCalc;          //+224  
-     WORD     restrict;               //+228  
-     WORD     state1;                    //+22A  
-     WORD     state2;                    //+22C  
-     WORD     state3;                    //+22E  
-     WORD     aitype;                    //+230  
-     WORD     aibonus;               //+232  
-     DWORD     CostMult;               //+234  
-     DWORD     CostAdd;               //+238  
+struct D2SkillsTXT
+{
+	WORD     SkillID;               //+000
+	BYTE     Mask1;                    //+002
+	BYTE     Mask2;                    //+003
+	BYTE     Unknown[8];               //+004
+	BYTE     CharClass;               //+00C
+	BYTE    Unknown2[3];          //+00D
+	BYTE     anim;                    //+010
+	BYTE     monanim;               //+011
+	BYTE     seqtrans;               //+012
+	BYTE     seqnum;                    //+013
+	BYTE     Unknown7;               //+014
+	BYTE     SelectProc;               //+015
+	BYTE     seqinput;               //+016
+	BYTE     Unknown3;               //+017
+	WORD     itypea1;               //+018
+	WORD     itypea2;               //+01A
+	WORD     itypea3;               //+01C
+	WORD     itypeb1;               //+01E
+	WORD     itypeb2;               //+020
+	WORD     itypeb3;               //+022
+	WORD     etypea1;               //+024
+	WORD     etypea2;               //+026
+	WORD     etypeb1;               //+028
+	WORD     etypeb2;               //+02A
+	WORD     srvstfunc;               //+02C
+	WORD     srvdofunc;               //+02E
+	WORD     srvprgfunc1;          //+030
+	WORD     srvprgfunc2;          //+032
+	WORD     srvprgfunc3;          //+034
+	WORD     Unknown8;               //+036
+	DWORD     prgcalc1;               //+038
+	DWORD     prgcalc2;               //+03C
+	DWORD     prgcalc3;               //+040
+	WORD     prgdam;                    //+044
+	WORD     srvmissile;               //+046
+	WORD     srvmissilea;          //+048
+	WORD     srvmissileb;          //+04A
+	WORD     srvmissilec;          //+04C
+	WORD     srvoverlay;               //+04E
+	DWORD     aurafilter;               //+050
+	WORD     aurastat1;               //+054
+	WORD     aurastat2;               //+056
+	WORD     aurastat3;               //+058
+	WORD     aurastat4;               //+05A
+	WORD     aurastat5;               //+05C
+	WORD     aurastat6;               //+05E
+	DWORD     auralencalc;          //+060
+	DWORD     aurarangecalc;          //+064
+	DWORD     aurastatcalc1;          //+068
+	DWORD     aurastatcalc2;          //+06C
+	DWORD     aurastatcalc3;          //+070
+	DWORD     aurastatcalc4;          //+074
+	DWORD     aurastatcalc5;          //+078
+	DWORD     aurastatcalc6;          //+07C
+	WORD     aurastate;               //+080
+	WORD     auratargetstate;     //+082
+	WORD     auraevent1;               //+084
+	WORD     auraevent2;               //+086
+	WORD     auraevent3;               //+088
+	WORD     auraeventfunc1;          //+08A
+	WORD     auraeventfunc2;          //+08C
+	WORD     auraeventfunc3;          //+08E
+	WORD     auratgtevent;          //+090
+	WORD     auratgteventfunc;     //+092
+	WORD     passivestate;          //+094
+	WORD     passiveitype;          //+096
+	WORD     passivestat1;          //+098
+	WORD     passivestat2;          //+09A
+	WORD     passivestat3;          //+09C
+	WORD     passivestat4;          //+09E
+	WORD     passivestat5;          //+0A0
+	DWORD     passivecalc1;          //+0A4
+	DWORD     passivecalc2;          //+0A8
+	DWORD     passivecalc3;          //+0AC
+	DWORD     passivecalc4;          //+0B0
+	DWORD     passivecalc5;          //+0B4
+	WORD     passiveevent;          //+0B8
+	WORD     passiveeventfunc;     //+0BA
+	WORD     summon;                    //+0BC
+	BYTE     pettype;               //+0BE
+	BYTE     summode;               //+0BF
+	DWORD     petmax;                    //+0C0
+	WORD     sumskill1;               //+0C4
+	WORD     sumskill2;               //+0C6
+	WORD     sumskill3;               //+0C8
+	WORD     sumskill4;               //+0CA
+	WORD     sumskill5;               //+0CC
+	DWORD     sumskcalc1;               //+0D0
+	DWORD     sumskcalc2;               //+0D4
+	DWORD     sumskcalc3;               //+0D8
+	DWORD     sumskcalc4;               //+0DC
+	DWORD     sumskcalc5;               //+0E0
+	WORD     sumumod;               //+0E4
+	WORD     sumoverlay;               //+0E6
+	WORD     cltmissile;               //+0E8
+	WORD     cltmissilea;          //+0EA
+	WORD     cltmissileb;          //+0EC
+	WORD     cltmissilec;          //+0EE
+	WORD     cltmissiled;          //+0F0
+	WORD     cltstfunc;               //+0F2
+	WORD     cltdofunc;               //+0F4
+	WORD     cltprgfunc1;          //+0F6
+	WORD     cltprgfunc2;          //+0F8
+	WORD     cltprgfunc3;          //+0FA
+	WORD     stsound;               //+0FC
+	WORD     stsoundclass;          //+0FE
+	WORD     dosound;               //+100
+	WORD     dosounda;               //+102
+	WORD     dosoundb;               //+104
+	WORD     castoverlay;          //+106
+	WORD     tgtoverlay;               //+108
+	WORD     tgtsound;               //+10A
+	WORD     prgoverlay;               //+10C
+	WORD     prgsound;               //+10E
+	WORD     cltoverlaya;          //+110
+	WORD     cltoverlayb;          //+112
+	DWORD     cltcalc1;               //+114
+	DWORD     cltcalc2;               //+118
+	DWORD     cltcalc3;               //+11C
+	WORD     ItemTarget;               //+120
+	WORD     ItemCastSound;          //+122
+	WORD     ItemCastOverlay;     //+124
+	WORD     Unknown4;               //+126
+	DWORD     perdelay;               //+128
+	WORD     maxlvl;                    //+12C
+	WORD     ResultFlags;          //+12E
+	DWORD     HitFlags;               //+130
+	DWORD     HitClass;               //+134
+	DWORD     calc1;                    //+138
+	DWORD     calc2;                    //+13C
+	DWORD     calc3;                    //+140
+	DWORD     calc4;                    //+144
+	DWORD     Param1;                    //+148
+	DWORD     Param2;                    //+14C
+	DWORD     Param3;                    //+150
+	DWORD     Param4;                    //+154
+	DWORD     Param5;                    //+158
+	DWORD     Param6;                    //+15C
+	DWORD     Param7;                    //+160
+	DWORD     Param8;                    //+164
+	WORD     weapsel;               //+168
+	WORD     ItemEffect;               //+16A
+	BYTE     ItemCltEffect;          //+16C
+	BYTE     ItemTgtDo;               //+16D
+	BYTE     ItemCheckStart;          //+16E
+	BYTE     ItemCltCheckStart;     //+16F
+	DWORD     skpoints;               //+170
+	WORD     reqlevel;               //+174
+	WORD     reqstr;                    //+176
+	WORD     reqdex;                    //+178
+	WORD     reqint;                    //+17A
+	WORD     reqvit;                    //+17C
+	WORD     reqskill1;               //+17E
+	WORD     reqskill2;               //+180
+	WORD     reqskill3;               //+182
+	WORD     startmana;               //+184
+	WORD     minmana;               //+186
+	WORD     manashift;               //+188
+	WORD     Mana;                    //+18A
+	short     LvlMana;               //+18C
+	BYTE     Attackrank;               //+18E
+	BYTE     LineOfSight;          //+18F
+	DWORD     Delay;                    //+190
+	WORD     SkillDesc;               //+194
+	WORD     Unknown5;               //+196
+	DWORD     ToHit;                    //+198
+	DWORD     LevToHit;               //+19C
+	DWORD     ToHitCalc;               //+1A0
+	BYTE     HitShift;               //+1A4
+	WORD     SrcDam;                    //+1A5
+	BYTE     Unknown6;               //+1A7
+	DWORD     MinDam;                    //+1A8
+	DWORD     MaxDam;                    //+1AC
+	DWORD     MinLevDam1;               //+1B0
+	DWORD     MinLevDam2;               //+1B4
+	DWORD     MinLevDam3;               //+1B8
+	DWORD     MinLevDam4;               //+1BC
+	DWORD     MinLevDam5;               //+1C0
+	DWORD     MaxLevDam1;               //+1C4
+	DWORD     MaxLevDam2;               //+1C8
+	DWORD     MaxLevDam3;               //+1CC
+	DWORD     MaxLevDam4;               //+1D0
+	DWORD     MaxLevDam5;               //+1D4
+	DWORD     DmgSymPerCalc;          //+1D8
+	DWORD     EType;                    //+1DC
+	DWORD     Emin;                    //+1E0
+	DWORD     Emax;                    //+1E4
+	DWORD     EMinLev1;               //+1E8
+	DWORD     EMinLev2;               //+1EC
+	DWORD     EMinLev3;               //+1F0
+	DWORD     EMinLev4;               //+1F4
+	DWORD     EMinLev5;               //+1F8
+	DWORD     EMaxLev1;               //+1FC
+	DWORD     EMaxLev2;               //+200
+	DWORD     EMaxLev3;               //+204
+	DWORD     EMaxLev4;               //+208
+	DWORD     EMaxLev5;               //+20C
+	DWORD     EDmgSymPerCalc;          //+210
+	DWORD     ELen;                    //+214
+	DWORD     ELevLen1;               //+218
+	DWORD     ELevLen2;               //+21C
+	DWORD     ELevLen3;               //+220
+	DWORD     ELenSymPerCalc;          //+224
+	WORD     restrict;               //+228
+	WORD     state1;                    //+22A
+	WORD     state2;                    //+22C
+	WORD     state3;                    //+22E
+	WORD     aitype;                    //+230
+	WORD     aibonus;               //+232
+	DWORD     CostMult;               //+234
+	DWORD     CostAdd;               //+238
 };
 Yohann: thx
-Kingpin: /*  
-usemanaondo  
-repeat  
-TgtPlaceCheck  
-interrupt  
-leftskill  
-AttackNoMana  
-TargetItem  
-TargetAlly  
-TargetPet  
-TargetCorpse  
-SearchOpenXY  
-SearchEnemyNear  
-SearchEnemyXY  
-TargetableOnly  
-UseAttackRate  
-durability  
-enhanceable  
-noammo  
-InGame  
-scroll  
-general  
-periodic  
-aura  
-passive  
-Kick  
-InTown  
-prgstack  
-finishing  
-progressive  
-range  
-warp   
-weaponsnd  
-stsounddelay  
-stsuccessonly   
-lob  
-decquant  
-immediate  
+Kingpin: /*
+usemanaondo
+repeat
+TgtPlaceCheck
+interrupt
+leftskill
+AttackNoMana
+TargetItem
+TargetAlly
+TargetPet
+TargetCorpse
+SearchOpenXY
+SearchEnemyNear
+SearchEnemyXY
+TargetableOnly
+UseAttackRate
+durability
+enhanceable
+noammo
+InGame
+scroll
+general
+periodic
+aura
+passive
+Kick
+InTown
+prgstack
+finishing
+progressive
+range
+warp
+weaponsnd
+stsounddelay
+stsuccessonly
+lob
+decquant
+immediate
 
 Kingpin: those columns should be there also
 */
@@ -895,7 +922,10 @@ struct MonStatsBIN	//size=0x1A8 (424)
 {
 	BYTE	uk1[0x6];		//+00
 	WORD	monsterNameID;	//+06
-	BYTE	uk2[0x1A0];		//+08
+	BYTE	uk2[0x168];		//+08
+	WORD	skill[8];		//+170
+	BYTE	skillArg[8];	//+180
+	BYTE	uk3[0x20];		//+188
 };							//+1A8
 
 struct ItemTypesBIN //size=0xE4 (228) (source : fct of dll)
@@ -1179,7 +1209,10 @@ struct DataTables//01EE6A20 * 01FDA2D0 //second comments=1.11
 	BYTE			uk8[0x18];			//+BE0
 	ItemTypesBIN*	itemTypes;			//+BF8
 	DWORD			nbItemTypes;		//+BFC
-	BYTE			uk9[0x18];			//+C00
+	BYTE			uk9[0x0C];			//+C00
+	SetsBIN*		sets;				//+C0C //1.11 and 1.10
+	DWORD			nbSets;				//+C10 //1.11 and 1.10
+	BYTE			uk9b[0x4];			//+C14
 	SetItemsBIN*	setItems;			//+C18 //1.11 and 1.10
 	DWORD			nbSetItems;			//+C1C //1.11 and 1.10
 	BYTE			uk10[0x4];			//+C20

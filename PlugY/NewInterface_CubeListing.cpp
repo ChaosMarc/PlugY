@@ -42,7 +42,7 @@ void printOutputItem(CubeOutput* output, LPWSTR buf, LPINT len, LPINT nbOutputs)
 
 	if ((output->quantityOrNbSockets>1) && !output->haveSockets)
 	{
-		if (output->quantityOrNbSockets = 255)
+		if (output->quantityOrNbSockets == 255)
 			PRINT(BUF, L"%s ", getLocalString(STR_FULL));
 		else
 			PRINT(BUF, L"%u ", output->quantityOrNbSockets);
@@ -305,6 +305,7 @@ void listAllCubeFormula()
 
 	int len = 0;
 	int nbCubeReceipt = 0;
+	int line = 0;
 	for (int i=0; i<nbLines; i++)
 	{
 		DWORD res = 1;
@@ -315,7 +316,7 @@ void listAllCubeFormula()
 		if (res)
 		{
 			nbCubeReceipt++;
-			fwprintf(file, L"%3u: %s\n", i, buf);
+			fwprintf(file, L"%3u: %s\n", ++line, buf);
 		}
 	}
 

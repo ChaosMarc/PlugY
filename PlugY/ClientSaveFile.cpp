@@ -1,7 +1,7 @@
 /*=================================================================
 	File created by Yohann NICOLAS.
 
-  Add an extra save file for each characters.
+	Add an extra save file for each characters.
 
 =================================================================*/
 /*
@@ -23,7 +23,7 @@ BYTE * openClientSaveFile(char* name, DWORD* size)
 	strcat(filename, ".clt");
 
 	log_msg("Client file to read : %s\n",filename);
-	
+
 	FILE* file = fopen(filename, "rb");
 	if (file)
 	{
@@ -55,7 +55,7 @@ DWORD loadClientSaveFile()
 	if (!data) return 0;
 
 	DWORD curSize = 0;
-	
+
 	log_msg("Load client file.\n");
 	if (*(DWORD*)&data[curSize] != FILE_SAVETYPE)
 	{
@@ -103,7 +103,7 @@ DWORD saveClientSaveFile()
 	D2FogGetSavePath( (char*)data, BUFFER_SIZE);
 	sprintf( szSaveName, "%s%s.clt", data, PCPlayerData->name );
 	log_msg("Client save file for saving : %s\n",szSaveName);
-//	if (!MoveFileEx(szTempName, szSaveName, MOVEFILE_WRITE_THROUGH|MOVEFILE_REPLACE_EXISTING)) 
+//	if (!MoveFileEx(szTempName, szSaveName, MOVEFILE_WRITE_THROUGH|MOVEFILE_REPLACE_EXISTING))
 	DeleteFile(szSaveName);
 	if (!MoveFile(szTempName, szSaveName))
 		log_box("Could not create the client save file.");
