@@ -1160,7 +1160,8 @@ FCT_ASM ( caller_carry1OutOfStash_114 )
 	CALL D2ItemGetPage
 	CMP AL,4
 	JNZ continue_carry1OutOfStash
-	SUB DWORD PTR SS:[ESP],0xC
+	//SUB DWORD PTR SS:[ESP],0xC
+	ADD DWORD PTR SS:[ESP],0x17D
 	RETN
 continue_carry1OutOfStash:
 	MOV EDI,DWORD PTR SS:[EBP-4]

@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  von Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 14.01                                    ;
+;                                     version 14.02                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -74,6 +74,9 @@ Jedes Feature kann via PlugY.ini an/ausgeschaltet werden (siehe "Kommentare aus 
 	/save: (Beta) Speichert das Spiel ohne es zu beenden.
 	/listcube: (Beta) Erstellt eine "cube.txt" Datei im Savegame-Verzeichnis mit allen Würfelrezepten.
 	/renamechar newname: (Beta) Speichert und benennt den Char um.
+
+v14.02 Änderungen :
+- Behebt Fehler, durch den mehrere identische, einzigartige Charms im Inventar gespeichert werden können. 
 
 v14.01 Änderungen :
 - Fehler behoben, der das Löschen von Truhen-Items hervorgerufen hat, wenn der Character zum ersten Mal geladen wurde.

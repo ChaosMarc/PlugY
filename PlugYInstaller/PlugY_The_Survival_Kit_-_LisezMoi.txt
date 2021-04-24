@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  par Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 14.01                                    ;
+;                                     version 14.02                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -75,11 +75,14 @@ Toutes ces fonctions peuvent être activé/désactivé via PlugY.ini (voir "COMM
 	/listcube : (beta) Crée un fichier "cube.txt" dans le répertoire de sauvegarde contenant toutes les formules du cube.
 	/renamechar newname : (beta) Renomme la personnage et le sauvegarde.
 
+Changements apportés par la v14.02 :
+- Corrige un bug permettant d'avoir plusieurs charmes uniques identiques dans l'inventaire.
+
 Changements apportés par la v14.01 :
 - Corrige la perte des objets du coffre lors du chargement d'un personnage pour la première fois.
 
 Changements apportés par la v14.00:
-- Ajout de la compatibilité avec la version 1.13d de LOD. (merci à Haxifix)
+- Ajout de la compatibilité avec la version 1.14d de LOD. (merci à Haxifix)
 - Crée un backup des fichiers de sauvegardes avant de sauvegarder.
 - Empéche la fermeture du portail de Nihlathak.
 - Déplace Deckar Cain à coté du portail d'Harrogath.

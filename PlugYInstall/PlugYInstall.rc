@@ -50,7 +50,7 @@ BEGIN
             VALUE "LegalCopyright", "Copyright (C) 2017"
             VALUE "OriginalFilename", "PlugYInstall.exe"
             VALUE "ProductName", "PlugY, The Survival Kit"
-            VALUE "ProductVersion", "14.01"
+            VALUE "ProductVersion", "14.02"
         END
     END
     BLOCK "VarFileInfo"

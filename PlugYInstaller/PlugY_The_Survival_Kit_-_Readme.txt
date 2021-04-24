@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  by Yohann Nicolas                                   ;
 ;                                                                                      ;
-;                                     version 14.01                                    ;
+;                                     version 14.02                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -74,6 +74,9 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 	/save : (beta) Save game without exit.
 	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
 	/renamechar newname : (beta) Rename your character and save it.
+
+v14.02 changes :
+- Fix a bug allowing multiple identical unique charms to be in inventory.
 
 v14.01 changes :
 - Fix stash items lost on loading a character for the first time.

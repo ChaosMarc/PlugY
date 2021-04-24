@@ -6,7 +6,7 @@
 =================================================================*/
 #pragma once
 
-#define PLUGY_VERSION "14.01"
+#define PLUGY_VERSION "14.02"
 
 enum TargetMod
 {
