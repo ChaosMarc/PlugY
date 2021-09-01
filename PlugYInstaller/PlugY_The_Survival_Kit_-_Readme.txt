@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  by Yohann Nicolas                                   ;
 ;                                                                                      ;
-;                                     version 14.02                                    ;
+;                                     version 14.03                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -75,6 +75,10 @@ Each features can be turn on/off via PlugY.ini (see "COMMENTS ON THE CONFIGURATI
 	/listcube : (beta) Create a "cube.txt" file in save directory containing all cube's receipts.
 	/renamechar newname : (beta) Rename your character and save it.
 
+v14.03 changes :
+- Fix a items diplay bug when only one stash page is filled.
+- Add Korean Translation.
+
 v14.02 changes :
 - Fix a bug allowing multiple identical unique charms to be in inventory.
 
@@ -120,7 +124,7 @@ v14.00 changes :
 - Update Chinese transalation. (Thanks to Nagahaku)
 - Fix some translations in different languages.
 
-v12.00 changes : 
+v12.00 changes :
 - Unofficial version supporting LOD 1.14d
 
 v11.02 changes :
@@ -141,7 +145,7 @@ v11.01 changes :
 - Rename command /rename to /renamechar.
 - Remove unfinished command /reload.
 
-v11.00 changes : 
+v11.00 changes :
 - Unofficial version supporting LOD 1.13d
 
 v10.01 changes :
@@ -283,7 +287,7 @@ v4.02 changes :
 - Added data in the extra stats page.
 
 v4.01 changes :
-- Fixed : NbPlayers always set to 8 when active. 
+- Fixed : NbPlayers always set to 8 when active.
 - Added data in the extra stats page.
 
 v4.00b changes :
@@ -340,7 +344,7 @@ v2.03b changes :
 v2.03 changes :
 - Major fix : Correct and secure the saving procedure.
 - No more crash of the host game when a character is unable to enter the game.
-- Unassign stats points button greyed when base stat is above 255 fixed. 
+- Unassign stats points button greyed when base stat is above 255 fixed.
 - Change version printing on main screen (change color & PlugY version in right corner)
 - Character without PlugY can join game host with PlugY enabled.
 
@@ -384,14 +388,14 @@ v1.02 changes :
 - Re-changed name files due to an IE bug with colon in zip file.
 - Ability to change the version text print in the main menu (see ini file).
 
-v1.01 changes : 
-- Localized for french version (wait for an french readme.txt) 
-- Changed filename from "PlugY, The Survival Kit.ini" to "PlugY,The_Survival_Kit". 
-- Added example for installation in the readme. 
-- Detection of bad installation on starting plugY. 
-- Removed from the ini default file the [GENERAL]PlugYDirectory=PlugY\ 
-(you can add it if you want but need to know what are you doing...) 
-- Released in .zip file instead of .rar 
+v1.01 changes :
+- Localized for french version (wait for an french readme.txt)
+- Changed filename from "PlugY, The Survival Kit.ini" to "PlugY,The_Survival_Kit".
+- Added example for installation in the readme.
+- Detection of bad installation on starting plugY.
+- Removed from the ini default file the [GENERAL]PlugYDirectory=PlugY\
+(you can add it if you want but need to know what are you doing...)
+- Released in .zip file instead of .rar
 
 v1.00 features (can all be easily enabled or disabled) :
 - You can change the save path directory.
@@ -478,7 +482,7 @@ So the new installation is :
 
 Uninstallation : Use the uninstaller or simply remove all PlugY files.
 Note : You can also move PlugY.dll in the mod folder but you must remove any on in D2 folder.
-Note : PlugY directory and its contents can be put in a mpq. 
+Note : PlugY directory and its contents can be put in a mpq.
 
 ------- D2File Patcher
 
@@ -491,24 +495,24 @@ If you have problem when you run PlugY.exe then use PatchD2File.exe. (It happend
 
 ******************** FAQ ******************
 
-=> I can't find PlugY.ini file, where is it ? 
+=> I can't find PlugY.ini file, where is it ?
 In Windows Explorer, selecting Tools->Folder Options->View.
 Mark "Show Hidden files and Folders".
 Unmark "Hide extensions for know file types".
-Then you will for sure see the ini file. 
+Then you will for sure see the ini file.
 
 
 => How do I Play sometimes on Battle.net when PlugY is installed ?
 PlugY disable the connection to Battle.net.
 
-=> What do I do if I have an error like "Bad Generic File" on loading a new Character ? 
-This can appear when you have bad item in the shared stash file. 
+=> What do I do if I have an error like "Bad Generic File" on loading a new Character ?
+This can appear when you have bad item in the shared stash file.
 A possible cause is to use same save folder for different mod.
-In this case, just change the save folder in PlugY.ini. 
+In this case, just change the save folder in PlugY.ini.
 You can also move the _LOD_SharedStashSave.sss and _LOD_HC_SharedStashSave.sss to another directory.
 
-=> I get "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" in D2YYMMDD.txt, what I should do ? 
-It's just a warning, it causes no problem in game. 
+=> I get "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" in D2YYMMDD.txt, what I should do ?
+It's just a warning, it causes no problem in game.
 
 
 ******** CONFIGURATION ********
@@ -924,5 +928,6 @@ Move Cain near Harrogath waypoint.
 	* Russian: L'Autour
 	* Chinese (Traditional): Nagahaku
 	* Japanase : CaiMiao
+	* Korean : Woodlac
 
 ;--------------------------------------------------------------------------------------;

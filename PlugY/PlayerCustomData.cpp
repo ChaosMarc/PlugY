@@ -63,6 +63,7 @@ Unit* FASTCALL updateItem(Game* ptGame, DWORD type, DWORD itemNum, Unit* ptChar)
 	if (ptGame->isLODGame && (D2ItemGetPage(ptItem) == 4))
 	{
 		Stash* ptStash = getStashFromItem(ptChar, ptItem);
+		//log_msg("- updateItem PCPY->currentStash->id : %d // ptStash->id : %d\n", PCPY->currentStash?PCPY->currentStash->id:-1, ptStash?ptStash->id:-1);
 		if (!ptStash) return NULL;
 		selectStash(ptChar, ptStash, ptStash->id == 0);
 	}

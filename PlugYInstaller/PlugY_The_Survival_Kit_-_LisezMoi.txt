@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  par Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 14.02                                    ;
+;                                     version 14.03                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -74,6 +74,10 @@ Toutes ces fonctions peuvent être activé/désactivé via PlugY.ini (voir "COMM
 	/save : (beta) Sauvegarde la partie sans quitter.
 	/listcube : (beta) Crée un fichier "cube.txt" dans le répertoire de sauvegarde contenant toutes les formules du cube.
 	/renamechar newname : (beta) Renomme la personnage et le sauvegarde.
+
+Changements apportés par la v14.03 :
+- Corrige un bug d'affichage d'objects quand une seule page du coffre est remplit.
+- Ajout de la traduction en coréen.
 
 Changements apportés par la v14.02 :
 - Corrige un bug permettant d'avoir plusieurs charmes uniques identiques dans l'inventaire.
@@ -185,7 +189,7 @@ Changements apportés par la v7.01 :
 - Active les mots runiques du ladder en dehors des royaumes.
 - Corrige le bug avec l'IA de Uber Baal.
 - Retire les options de paramètres mis par defaut dans PlugY.ini (comme le mode fenêtré)
-- Affiche la valeur courante des caracs (sans les bonus magiques) même quand la désallocation des caracs est désactivée. 
+- Affiche la valeur courante des caracs (sans les bonus magiques) même quand la désallocation des caracs est désactivée.
 - Ajout d'un exécutable pour lancer Plugy (plus aucun fichier de LoD modifié). (RAPPEL)
 - Traduction en espagnol et polonais.
 
@@ -378,7 +382,7 @@ Installation normale :
 
 note : Vous pouvez choisir le répertoire de "Diablo II" comme répertoire d'installation.
 
-Installation dans un autre mod 
+Installation dans un autre mod
 - Copier PlugY.ini, PlugY.exe et le répertoire PlugY\ (+son sontenu) dans le répertoire du mod ciblé.
 - Editer PlugY.ini pour configurer les options (voir section plus bas).
 - Lancer le jeu PlugY.exe.
@@ -435,7 +439,7 @@ Si vous avez des problème pour éxécuter PlugY.exe alors utiliser PatchD2File.
 
 ******************** FAQ ******************
 
-=> Je ne trouve pas le fichier PlugY.ini, où est-il ? 
+=> Je ne trouve pas le fichier PlugY.ini, où est-il ?
 Dans l'explorateur Windows, aller dans outils->Options des dossiers->affichage.
 Cocher "Afficher les fichiers et répertoires cachés"
 Décocher "Masquer les extensions des fichiers dont le type est connu".
@@ -451,7 +455,7 @@ Une cause possible est l'utilisation du même répertoire de sauvegarde pour des
 Si c'est le cas, il suffit de changer ce répertoire dans PlugY.ini.
 Vous pouvez aussi déplacer _LOD_SharedStashSave.sss et _LOD_HC_SharedStashSave.sss dans un autre répertoire.
 
-=> IL y a "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" dans D2YYMMDD.txt, que dois-je faire ? 
+=> IL y a "sUnitItemInsertItemInvGridBase failed at 1046 in C:\projects\D2\head\Diablo2\Source\D2Client\UNIT\Item.cpp" dans D2YYMMDD.txt, que dois-je faire ?
 Ceci est juste un avertissement sans conséquence sur le jeu.
 
 
@@ -500,7 +504,7 @@ Library=			{PlugY.dll: Charger PlugY.dll}
 
 [GENERAL]
 Active ou désactive PlugY
-Les dll des champs "DllToLoad" ne sont plus chargés quand ActivePlugin=0. 
+Les dll des champs "DllToLoad" ne sont plus chargés quand ActivePlugin=0.
 Ci-dessous, les valeurs par défauts et entre {} des exemples avec leurs significations :
 - ActivePlugin=0		{0:Charge aucunes fonctions; 1:Plugin activé}
 
@@ -838,5 +842,6 @@ Déplace Deckar Cain à coté du portail d'Harrogath.
 	* Russe : L'Autour
 	* Chinois (Traditionnel): Nagahaku
 	* Japanase : CaiMiao
+	* Coréen : Woodlac
 
 ;--------------------------------------------------------------------------------------;

@@ -4,7 +4,7 @@
 ;                                                                                      ;
 ;                                  von Yohann Nicolas                                  ;
 ;                                                                                      ;
-;                                     version 14.02                                    ;
+;                                     version 14.03                                    ;
 ;                                                                                      ;
 ;--------------------------------------------------------------------------------------;
 
@@ -24,7 +24,7 @@ Jedes Feature kann via PlugY.ini an/ausgeschaltet werden (siehe "Kommentare aus 
 - Battle.net LogIn via Hauptmenü deaktiviert.
 - Nahezu unbegrenzter Speicherplatz im Goldschatz.
 - Gemeinsam genutzter Speicherplatz im Goldschatz.
-- Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden. 
+- Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden.
 - Lokales World Event und Überquest im Singleplayer und via TCP/IP
 - Das Portal zum Kuh-Level bleibt geöffnet, wenn der Kuhkönig in dieser Schwierigkeit getötet wurde.
 - Das Portal zu Nihlathak bleibt geöffnet, wenn der Wegpunkt in dieser Schwierigkeit aktiviert wurde.
@@ -75,8 +75,12 @@ Jedes Feature kann via PlugY.ini an/ausgeschaltet werden (siehe "Kommentare aus 
 	/listcube: (Beta) Erstellt eine "cube.txt" Datei im Savegame-Verzeichnis mit allen Würfelrezepten.
 	/renamechar newname: (Beta) Speichert und benennt den Char um.
 
+v14.03 Änderungen :
+- Behebung eines Fehlers bei der Anzeige von Gegenständen, wenn nur eine Stash-Seite gefüllt ist.
+- Koreanische Übersetzung hinzugefügt.
+
 v14.02 Änderungen :
-- Behebt Fehler, durch den mehrere identische, einzigartige Charms im Inventar gespeichert werden können. 
+- Behebt Fehler, durch den mehrere identische, einzigartige Charms im Inventar gespeichert werden können.
 
 v14.01 Änderungen :
 - Fehler behoben, der das Löschen von Truhen-Items hervorgerufen hat, wenn der Character zum ersten Mal geladen wurde.
@@ -178,18 +182,18 @@ v7.01b Änderungen :
 - Behoben: Die Ladder-only Runenwort Features in den LoD-Versionen 1.11 und 1.10.
 - Behoben : Seltsame Zeichen in manchen Texten.
 
-v7.01 Änderungen :  
-- Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden. 
+v7.01 Änderungen :
+- Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden.
 - Fehler bei der AI des Überbaals behoben
-- Die Parameter in der PlugY.ini standardmäßig entfernt (wie -w um im Fenster zu starten) 
-- Die Basiswerte der Statuspunkte werden angezeigt (ohne magische Boni) auch wenn die Statneuverteilung deaktiviert ist 
+- Die Parameter in der PlugY.ini standardmäßig entfernt (wie -w um im Fenster zu starten)
+- Die Basiswerte der Statuspunkte werden angezeigt (ohne magische Boni) auch wenn die Statneuverteilung deaktiviert ist
 - Eine eigene EXE wurde hinzugefügt um PlugY zu starten (es werden keine LoD-Dateien mehr verändert)
 - Spanische und Polnische Übersetzung hinzugefügt.
 
 V7.00 Änderungen :
 - PlugY funktioniert nun auch mit LoD 1.11b Versionen.
 - Den Basiswert für jeden Stat im Mausübertext hinzugefügt.
-- Behoben: Unendliche Statuspunkte bei der Neuverteilung 
+- Behoben: Unendliche Statuspunkte bei der Neuverteilung
 - Behoben: Einige Features blieben auch im Battle.net aktiviert
 - Italienische Übersetzung hinzugefügt.
 
@@ -197,7 +201,7 @@ v6.01b Änderungen :
 - Fehler mit dem Popups der Statuspunktvergabe-Buttons behoben.
 
 v6.01 Änderungen :
-- Behoben : unique carry1 items verschwinden nicht wenn sie in LoD 1.10 gecubt werden 
+- Behoben : unique carry1 items verschwinden nicht wenn sie in LoD 1.10 gecubt werden
 - Schlüssel und Uber-Organe werden nicht mehr entfernt wenn man das rote Portal außerhalb von Harrogath öffnen wollte.
 - Fehler in der Versionsanzeige wegen einem Konflikt mit D2Mod behoben.
 
@@ -220,7 +224,7 @@ v5.05 Änderungen :
 - Kommando "/DisplayLifeAndMana" ist nun "/DisplayLifeMana".
 - Möglichkeit die Namen von Setgegenständen in Grün bei Mouseover in der gemeinsamen Kiste anzuzeigen
 - Multiplayer Fehler behoben, indem der gesamte Prozess neu programmiert wurde
- 
+
 v5.04 Änderungen :
 - Behoben : Status/Skill Punkte per Levelup bug.
 - Behoben : Multiplayer bugs.
@@ -274,11 +278,11 @@ v4.02b Änderungen :
 - Behoben : Alle Funktionen bleiben im offenen Battle.net eingeschaltet.
 
 v4.02 Änderungen :
-- Behoben : Das vergessene "d" in "SeparateHardcoreStash=1" in der PlugY.ini ergänzt 
-- Behoben: Standardmäßig wird die Sprache in der PlugY.ini nicht geändert. 
-- Behoben : Item Level sollte nun in allen Konfigurationen von PlugY korrekt angezeigt werden.  
-- Behoben : No more conflict with Battle.net (BigStash disabled on realms) 
-- Weitere Daten auf der zusätzlichen Statusseite eingefügt.  
+- Behoben : Das vergessene "d" in "SeparateHardcoreStash=1" in der PlugY.ini ergänzt
+- Behoben: Standardmäßig wird die Sprache in der PlugY.ini nicht geändert.
+- Behoben : Item Level sollte nun in allen Konfigurationen von PlugY korrekt angezeigt werden.
+- Behoben : No more conflict with Battle.net (BigStash disabled on realms)
+- Weitere Daten auf der zusätzlichen Statusseite eingefügt.
 
 v4.01 Änderungen :
 - Behoben: NbPlayers Schalter stellte immer 8 Spieler ein.
@@ -344,7 +348,7 @@ v2.02 Änderungen :
 - Die Goldkistenerweiterung wird bei Realm Spielen automatisch abgeschaltet.
 - Index Button Fehler behoben.
 
-v.2.01 Änderungen 
+v.2.01 Änderungen
 - Fertigkeitsfehler beim LevelUp behoben.
 - Anzeigefehler im Hauptbildschirm behoben.
 
@@ -374,13 +378,13 @@ v1.02 Änderungen :
 - Dateinamen geändert wegen eines Fehlers mit dem IE und ZIP-Files
 - Man kann die Versions-Information im Hauptbildschirm ändern (siehe Ini-Datei).
 
-v1.01 Änderungen : 
-- Französische Lokalisierung hinzugefügt (Französisches Liesmich.txt folgt) 
+v1.01 Änderungen :
+- Französische Lokalisierung hinzugefügt (Französisches Liesmich.txt folgt)
 - Dateinamen von "PlugY, The Survival Kit.ini" in "PlugY,The_Survival_Kit" geändert.
 - Installationsbeispiele im Liesmich hinzugefügt.
-- Fehlerhafte Installation beim PlugY-Aufruf eingebaut. 
+- Fehlerhafte Installation beim PlugY-Aufruf eingebaut.
 - Den Eintrag "[GENERAL]PlugYDirectory=PlugY\" aus der Ini-Datei entfernt
-  (Man kann ihn weiterhin hinzufügen, sollte aber wissen, was man tut...) 
+  (Man kann ihn weiterhin hinzufügen, sollte aber wissen, was man tut...)
 - Paket von .rar auf .zip umgestellt
 
 v1.00 Funktionen (es können alle einfach ein- und ausgeschaltet werden) :
@@ -418,17 +422,17 @@ v1.00 Funktionen (es können alle einfach ein- und ausgeschaltet werden) :
 
 
 ******** INSTALLATION ********
-Installation : 
-- Entpacke alle Dateien in dein Diablo Verzeichnis. 
-- Kopiere die PlugY.ini und die PlugY.exe in das Verzeichnis in dem dein Mod ist. 
-- Bearbeite die PlugY.ini um die gewünschten Features zu de/aktivieren (dazu weiter unten). 
-- Run PlugY.exe and enjoy :-) 
+Installation :
+- Entpacke alle Dateien in dein Diablo Verzeichnis.
+- Kopiere die PlugY.ini und die PlugY.exe in das Verzeichnis in dem dein Mod ist.
+- Bearbeite die PlugY.ini um die gewünschten Features zu de/aktivieren (dazu weiter unten).
+- Run PlugY.exe and enjoy :-)
 
-Beispiel : 
-Du hast LoD in folgendem Verzeichnis installiert :  C:\Games\Diablo II\ 
-Der Mod und PlugY befindet sich hier : D:\D2Mod\MyMod\ 
+Beispiel :
+Du hast LoD in folgendem Verzeichnis installiert :  C:\Games\Diablo II\
+Der Mod und PlugY befindet sich hier : D:\D2Mod\MyMod\
 And the second mod is in : D:\D2Mod\MyMod2\
-Dann müssen die Einstellungen wie folgt lauten : 
+Dann müssen die Einstellungen wie folgt lauten :
    C:\Games\Diablo II\PlugY.dll
    D:\D2Mod\MyMod\PlugY\SharedGoldBtns.dc6
    D:\D2Mod\MyMod\PlugY\PlugYFixed.ini
@@ -462,7 +466,7 @@ Dann müssen die Einstellungen wie folgt lauten :
 Deinstallation : Einfach alle PlugY-Dateien löschen
 
 
-Wenn Probleme auftreten beim Ausführen der PlugY.exe benutze einfach die alte Installation (PlugY_Installer.exe). 
+Wenn Probleme auftreten beim Ausführen der PlugY.exe benutze einfach die alte Installation (PlugY_Installer.exe).
 Wenn das Spiel unter Windows 2000 nicht startet nimm auch die alte Installation.
 1. Entpacke das Paket in einen temporären Ordner
 2. Entpacke das Manual_Installer.zip in das selbe Verzeichnis
@@ -476,16 +480,16 @@ Hinweis: Man kann ebenfalls die PlugY.dll in das Mod Verzeichnis installieren un
 
 
 ******************** FAQ ******************
-Ich kann die PlugY.ini nicht finden ? 
+Ich kann die PlugY.ini nicht finden ?
 Öffne im Explorer Extras/Ordneroptionen/Anzeige und nimm den Haken raus bei Erweiterung bekannter Dateien ausblenden
 Generell sehr sinnvoll, da man so leichter Viren identifiziert (zB virus.txt.exe da würde man sonst nur txt statt auch das exe sehen..) !
 
-Wie kann ich gelegentlich im Battle.net spielen, wenn PlugY aktiviert ist ? 
-2 Möglichkeiten:  
-1) Starte PlugY_Uninstall.bat bevor Du Diablo2 startest und starte PlugY_Install.exe danach wenn Du wieder Einzelspieler spielen willst 
+Wie kann ich gelegentlich im Battle.net spielen, wenn PlugY aktiviert ist ?
+2 Möglichkeiten:
+1) Starte PlugY_Uninstall.bat bevor Du Diablo2 startest und starte PlugY_Install.exe danach wenn Du wieder Einzelspieler spielen willst
 2) Nutze die klassische Installation. (Vergiss nicht die PlugY.ini im Diablo2 Verzeichnis zu entfernen)
 
-Tips: Erzeuge eine Verknüpfung und füge -skiptobnet im "Ziel" Feld mit einem Leerzeichen hinter dem Anführungszeichen hinzu, um direkt ins Battle.Net zu gelangen ohne die Videos. 
+Tips: Erzeuge eine Verknüpfung und füge -skiptobnet im "Ziel" Feld mit einem Leerzeichen hinter dem Anführungszeichen hinzu, um direkt ins Battle.Net zu gelangen ohne die Videos.
 
 Was tun wenn man "Bad Generic File" mit einem neuen Charakter bekommt ?
 Dies passiert wenn man einen "schlechten" Gegenstand in der gemeinsamen Kiste hat
@@ -522,7 +526,7 @@ Ihr könnt die Version des D2Mod-System (v1.02 und Folgende) nutzen um PlugY zu 
 - Startet PlugY_Uninstall.bat um alles zu deinstallieren
 - Fügt die Zeile "PlugY=PlugY.dll" in den [D2MOD] Abschnitt der D2Mod.ini ein.
 
-Achtung, 
+Achtung,
 - Gegenstände im Horadrim-Würfel werden immer im Spieler-Profil gespeichert. Wenn Ihr diese Gegenstände weitergeben wollt, müsst Ihr sie in den Goldschatz umpacken.
 
 Warnung :
@@ -561,16 +565,16 @@ Anmerkung:
 
 Modder können mich erreichen, wenn sie Hilfe brauchen oder mehr Details über das Konfigurations-System haben möchten.
 
-WARNUNG : Vergesst nicht, dass wenn Konfigurations-System missbraucht wird werden die Benutzer auf alte PlugY Versionen zurückgreifen und ich werde kein andere Möglichkeit haben als es zu deaktivieren. 
+WARNUNG : Vergesst nicht, dass wenn Konfigurations-System missbraucht wird werden die Benutzer auf alte PlugY Versionen zurückgreifen und ich werde kein andere Möglichkeit haben als es zu deaktivieren.
 
 
 ******** Kommentare aus der Konfigurationsdatei ********
 Standardwerte bedeuten, das sie auch benutzt werden, wenn Ihr die Zeilen in der PlugY.ini löscht.
 Die Werte in der PlugY.ini (die dem ZIP beiliegt) sind ein Beispiel einer Konfiguration, nicht die Standardwerte.value.
 
-[LAUNCHING] 
+[LAUNCHING]
 Dieser Abschnitt beinhaltet Informationen für die PlugY.exe und funktioniert nicht in der PlugYDefault.ini und PlugYFixed.ini
- 
+
 Füge Parameter hinzu um LoD mit der gewünschten Einstellung zu starten
 Parameter die der PlugY.exe hinzugefügt wurden werden auch an LoD weitergeleitet
 Standardmäßig werden keine Parameter ausgeführt
@@ -584,7 +588,7 @@ Param=                    {-direct -txt -w: Diese 3 Befehle werden an das Spiel 
 Wähle die Dll aus die geladen werden soll.
 Das gewählte Verzeichnis wird von LoD benutzt (wie die "Ausführen in"-Zeile in einer Verknüpfung).
 Wenn keine Dll angegeben ist startet LoD ohne PlugY
-Library=PlugY.dll 
+Library=PlugY.dll
 
 
 [GENERAL]
@@ -727,7 +731,7 @@ Es gibt zwei Goldschatzkisten mit Mehrfach-Seiten :
 - eine persönliche die nur der Spieler sieht ;
 - eine gemeinsame die jeder Spieler sieht.
 Benutzt den "Goldschatz"-Knopf um zwischen den beiden Kisten zu wechseln (unten links).
-Benutze die Pfeiltasten am unteren Rand der Kiste (und die Shift Taste) um zwischen den Seiten umzuschalten 
+Benutze die Pfeiltasten am unteren Rand der Kiste (und die Shift Taste) um zwischen den Seiten umzuschalten
 Definition: Die letzte Seite, ist die letzte Seite die einen Gegenstand enthält
 Die Mehrfach-Seiten sind deaktiviert für Diablo2 Classic Charaktere.
 Startet NIEMALS mehrere Spiele auf einem PC die den gleichen Speicherort für den gemeinsamen Goldschatz benutzen und in Realm Spielen.
@@ -820,11 +824,11 @@ Beispiel :
 
 
 [WORLD EVENT]
-Aktiviert den lokalen World Event 
+Aktiviert den lokalen World Event
 World Event  kann nur in Hölle und nur einmal pro Spiel aktiviert werden.
-WorldEvent  wird alle 75-125  verkauften  SOJ  aktivert 
-Der Verkauf eines echten SOJ  erhöht den Zähler um 100 
-Bei Start eines D2 Spiels ist der SOJ  Zähler  zwischen 200-3000  
+WorldEvent  wird alle 75-125  verkauften  SOJ  aktivert
+Der Verkauf eines echten SOJ  erhöht den Zähler um 100
+Bei Start eines D2 Spiels ist der SOJ  Zähler  zwischen 200-3000
 Der SOJ  Zähler wird alle 10-20 Minuten um 1  erhöht, auch wenn man nicht in einem Spiel ist.
 When der World Event ausgelöst wird, und man nicht in einem Spiel ist, verliert man ihn.
 Hinweis 1:  Es besteht eine Chance von 1/12  einen WE in der ersten Spielstunde zu erhalten
@@ -872,12 +876,12 @@ UberBaalChillingArmorTimer=6000		{6000:Timer between Uber Baal casting Chilling 
 
 [INTERFACE]
 Fügt eine zusätzliche Charakter Info Seite hinzu
-Man kann auswählen, ob die zuletzt angezeigte Seite erscheint, oder die Hauptseite 
+Man kann auswählen, ob die zuletzt angezeigte Seite erscheint, oder die Hauptseite
 Die Eigenschaften die in den Extraseiten angezeigt werden können in der PlugY\statsinterface.txt verändert werden (Mit MS Excel öffnen)
 Es gibt kein Seitenlimit.
-Unterdrückt den Hintergrund von Schaltflächen, wenn der MOD diese bereits ändert 
+Unterdrückt den Hintergrund von Schaltflächen, wenn der MOD diese bereits ändert
 - ActiveNewStatsInterface=0	 {0:Deaktiviert ; 1: Aktiviert}
-- SelectMainPageOnOpenning=1 {0:Zuletzt ausgewählte Seite wird angezeigt; 1: Hauptseite wird angezeigt} 
+- SelectMainPageOnOpenning=1 {0:Zuletzt ausgewählte Seite wird angezeigt; 1: Hauptseite wird angezeigt}
 - PrintButtonsBackgroundOnMainStatsPage=1 {0: Zeigt nicht den Hintergrund an ; 1: Zeigt ihn an }
 
 
@@ -885,7 +889,7 @@ Unterdrückt den Hintergrund von Schaltflächen, wenn der MOD diese bereits änd
 [EXTRA]
 Man kann LOD beliebig oft auf einem Computer starten.
 Zum Beispiel können Modder Multiplayer-Spiele auf einem PC testen.
-Warnung : 
+Warnung :
 Startet keine Spiele mit dem gleichen Speicherort (SavePath), wenn Ihr den gemeinsamen Goldschatz aktiviert habt.
 Benutzt nicht zweimal den gleichen Charakter zur gleichen Zeit.
 - ActiveLaunchAnyNumberOfLOD=0		{0:Deaktiviert ; 1: Aktiviert}
@@ -906,7 +910,7 @@ Behebt den Bug der verhindert das von Microsoft Excel geöffnete Text-Dateien ni
 - EnabledTXTFilesWhenMSExcelOpenIt=0	{0:Deaktiviert; 1:Aktiviert}
 
 Die Ladder-Only Runenwörter können für den Singleplayer aktiviert werden.
-Das wird ermöglicht indem die Spalte "Server" in der runes.txt deaktiviert wird. 
+Das wird ermöglicht indem die Spalte "Server" in der runes.txt deaktiviert wird.
 Benutze diese Spalte also nicht in deinem Mod wenn diese Funktion aktiviert ist.
 - ActiveLadderRunewords=0     {0:Deaktiviert; 1:Aktiviert}
 
@@ -963,5 +967,6 @@ Zur Korrektur der deutschen Übersetzung bitte eine eMail an ChaosEnergy@planetd
 	* Polnisch: Serdel
 	* Russisch: L'Autour
 	* Chinesisch: Nagahaku
+	* Koreanisch: Woodlac
 
 ;--------------------------------------------------------------------------------------;

@@ -355,11 +355,7 @@ DWORD loadStashList(Unit* ptChar, BYTE* data, DWORD maxSize, DWORD* curSize, boo
 		}
 	}
 
-	if (nbStash == 1)
-	{
-		newStash = addStash(ptChar, isShared, true, newStash);
-		changeToSelectedStash(ptChar, newStash, 0, false);
-	}
+	changeToSelectedStash(ptChar, isShared?PCPY->sharedStash:PCPY->selfStash, 0, false);
 
 	return 0;
 }

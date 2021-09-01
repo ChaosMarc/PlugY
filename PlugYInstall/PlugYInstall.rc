@@ -47,10 +47,10 @@ BEGIN
             VALUE "CompanyName", "Yohann Nicolas"
             VALUE "FileDescription", "PlugY patcher"
             VALUE "FileVersion", "1.0.6.0"
-            VALUE "LegalCopyright", "Copyright (C) 2017"
+            VALUE "LegalCopyright", "Copyright (C) 2021"
             VALUE "OriginalFilename", "PlugYInstall.exe"
             VALUE "ProductName", "PlugY, The Survival Kit"
-            VALUE "ProductVersion", "14.02"
+            VALUE "ProductVersion", "14.03"
         END
     END
     BLOCK "VarFileInfo"
