@@ -283,7 +283,7 @@ void listAllCubeFormula()
 	D2FogGetSavePath(filename, MAX_PATH);
 	strcat(filename, CUBEFORMULA_FILE);
 
-	FILE* file = fopen(filename, "w");
+	FILE* file = fopen(filename, "wt, ccs=UTF-8");
 	if (!file)
 	{
 		log_msg("Failed to open save file.\n");
